@@ -1,0 +1,27 @@
+2025-07-30 13:31:54.975 +08:00 [INF] Checking database connection...
+2025-07-30 13:31:55.610 +08:00 [INF] Database connection successful.
+2025-07-30 13:31:55.610 +08:00 [INF] Attempting to apply migrations...
+2025-07-30 13:31:55.694 +08:00 [INF] Executed DbCommand (11ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2025-07-30 13:31:55.948 +08:00 [WRN] Migration failed. This might be due to pending model changes. Continuing anyway...
+System.InvalidOperationException: An error was generated for warning 'Microsoft.EntityFrameworkCore.Migrations.PendingModelChangesWarning': The model for context 'ApplicationDbContext' has pending changes. Add a new migration before updating the database. See https://aka.ms/efcore-docs-pending-changes. This exception can be suppressed or logged by passing event ID 'RelationalEventId.PendingModelChangesWarning' to the 'ConfigureWarnings' method in 'DbContext.OnConfiguring' or 'AddDbContext'.
+   at Microsoft.EntityFrameworkCore.Diagnostics.EventDefinition`1.Log[TLoggerCategory](IDiagnosticsLogger`1 logger, TParam arg)
+   at Microsoft.EntityFrameworkCore.Diagnostics.RelationalLoggerExtensions.PendingModelChangesWarning(IDiagnosticsLogger`1 diagnostics, Type contextType)
+   at Microsoft.EntityFrameworkCore.Migrations.Internal.Migrator.ValidateMigrations(Boolean useTransaction, String targetMigration)
+   at Microsoft.EntityFrameworkCore.Migrations.Internal.Migrator.MigrateAsync(String targetMigration, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Migrations.Internal.NpgsqlMigrator.MigrateAsync(String targetMigration, CancellationToken cancellationToken)
+   at Program.<Main>$(String[] args) in D:\ProductDevelopment\Cece\CeceLearningPortal.Backend\CeceLearningPortal.Api\Program.cs:line 222
+2025-07-30 13:31:55.960 +08:00 [INF] Starting data seeding...
+2025-07-30 13:31:55.978 +08:00 [INF] User profile is available. Using 'C:\Users\User\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-07-30 13:31:56.101 +08:00 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Courses" AS c)
+2025-07-30 13:31:56.103 +08:00 [INF] Database already contains data. Skipping seed.
+2025-07-30 13:31:56.103 +08:00 [INF] Data seeding completed.
+2025-07-30 13:31:56.145 +08:00 [INF] Now listening on: http://localhost:5295
+2025-07-30 13:31:56.145 +08:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-07-30 13:31:56.145 +08:00 [INF] Hosting environment: Development
+2025-07-30 13:31:56.145 +08:00 [INF] Content root path: D:\ProductDevelopment\Cece\CeceLearningPortal.Backend\CeceLearningPortal.Api

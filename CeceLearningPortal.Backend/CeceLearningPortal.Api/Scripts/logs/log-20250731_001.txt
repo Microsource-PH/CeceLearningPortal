@@ -1,0 +1,676 @@
+2025-07-31 09:24:31.968 +08:00 [FTL] Application start-up failed
+Microsoft.Extensions.Hosting.HostAbortedException: The host was aborted.
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.ThrowHostAborted()
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.OnNext(KeyValuePair`2 value)
+   at System.Diagnostics.DiagnosticListener.Write(String name, Object value)
+   at Microsoft.Extensions.Hosting.HostBuilder.ResolveHost(IServiceProvider serviceProvider, DiagnosticListener diagnosticListener)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at Program.<Main>$(String[] args) in D:\ProductDevelopment\Cece\CeceLearningPortal.Backend\CeceLearningPortal.Api\Program.cs:line 186
+2025-07-31 09:24:40.514 +08:00 [FTL] Application start-up failed
+Microsoft.Extensions.Hosting.HostAbortedException: The host was aborted.
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.ThrowHostAborted()
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.OnNext(KeyValuePair`2 value)
+   at System.Diagnostics.DiagnosticListener.Write(String name, Object value)
+   at Microsoft.Extensions.Hosting.HostBuilder.ResolveHost(IServiceProvider serviceProvider, DiagnosticListener diagnosticListener)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at Program.<Main>$(String[] args) in D:\ProductDevelopment\Cece\CeceLearningPortal.Backend\CeceLearningPortal.Api\Program.cs:line 186
+2025-07-31 09:24:51.346 +08:00 [FTL] Application start-up failed
+Microsoft.Extensions.Hosting.HostAbortedException: The host was aborted.
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.ThrowHostAborted()
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.OnNext(KeyValuePair`2 value)
+   at System.Diagnostics.DiagnosticListener.Write(String name, Object value)
+   at Microsoft.Extensions.Hosting.HostBuilder.ResolveHost(IServiceProvider serviceProvider, DiagnosticListener diagnosticListener)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at Program.<Main>$(String[] args) in D:\ProductDevelopment\Cece\CeceLearningPortal.Backend\CeceLearningPortal.Api\Program.cs:line 186
+2025-07-31 09:31:10.762 +08:00 [FTL] Application start-up failed
+Microsoft.Extensions.Hosting.HostAbortedException: The host was aborted.
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.ThrowHostAborted()
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.OnNext(KeyValuePair`2 value)
+   at System.Diagnostics.DiagnosticListener.Write(String name, Object value)
+   at Microsoft.Extensions.Hosting.HostBuilder.ResolveHost(IServiceProvider serviceProvider, DiagnosticListener diagnosticListener)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at Program.<Main>$(String[] args) in D:\ProductDevelopment\Cece\CeceLearningPortal.Backend\CeceLearningPortal.Api\Program.cs:line 186
+2025-07-31 10:42:50.110 +08:00 [INF] Checking database connection...
+2025-07-31 10:42:50.551 +08:00 [ERR] Error during database initialization
+System.InvalidOperationException: Cannot use table 'course_approvals' for entity type 'InstructorApproval' since it is being used for entity type 'CourseApproval' and potentially other entity types, but there is no linking relationship. Add a foreign key to 'InstructorApproval' on the primary key properties and pointing to the primary key on another entity type mapped to 'course_approvals'.
+   at Microsoft.EntityFrameworkCore.Infrastructure.RelationalModelValidator.ValidateSharedTableCompatibility(IReadOnlyList`1 mappedTypes, StoreObjectIdentifier& storeObject, IDiagnosticsLogger`1 logger)
+   at Microsoft.EntityFrameworkCore.Infrastructure.RelationalModelValidator.ValidateSharedTableCompatibility(IModel model, IDiagnosticsLogger`1 logger)
+   at Microsoft.EntityFrameworkCore.Infrastructure.RelationalModelValidator.Validate(IModel model, IDiagnosticsLogger`1 logger)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Infrastructure.Internal.NpgsqlModelValidator.Validate(IModel model, IDiagnosticsLogger`1 logger)
+   at Microsoft.EntityFrameworkCore.Infrastructure.ModelRuntimeInitializer.Initialize(IModel model, Boolean designTime, IDiagnosticsLogger`1 validationLogger)
+   at Microsoft.EntityFrameworkCore.Infrastructure.ModelSource.CreateModel(DbContext context, ModelCreationDependencies modelCreationDependencies, Boolean designTime)
+   at Microsoft.EntityFrameworkCore.Infrastructure.ModelSource.GetModel(DbContext context, ModelCreationDependencies modelCreationDependencies, Boolean designTime)
+   at Microsoft.EntityFrameworkCore.Internal.DbContextServices.CreateModel(Boolean designTime)
+   at Microsoft.EntityFrameworkCore.Internal.DbContextServices.get_Model()
+   at Microsoft.EntityFrameworkCore.Infrastructure.EntityFrameworkServicesBuilder.<>c.<TryAddCoreServices>b__8_4(IServiceProvider p)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.Resolve(ServiceCallSite callSite, ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.DynamicServiceProviderEngine.<>c__DisplayClass2_0.<RealizeService>b__0(ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.GetService(ServiceIdentifier serviceIdentifier, ServiceProviderEngineScope serviceProviderEngineScope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.GetService(Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at Microsoft.EntityFrameworkCore.DbContext.get_DbContextDependencies()
+   at Microsoft.EntityFrameworkCore.DbContext.get_ContextServices()
+   at Microsoft.EntityFrameworkCore.DbContext.get_InternalServiceProvider()
+   at Microsoft.EntityFrameworkCore.DbContext.Microsoft.EntityFrameworkCore.Infrastructure.IInfrastructure<System.IServiceProvider>.get_Instance()
+   at Microsoft.EntityFrameworkCore.Infrastructure.Internal.InfrastructureExtensions.GetService(IInfrastructure`1 accessor, Type serviceType)
+   at Microsoft.EntityFrameworkCore.Infrastructure.Internal.InfrastructureExtensions.GetService[TService](IInfrastructure`1 accessor)
+   at Microsoft.EntityFrameworkCore.Infrastructure.AccessorExtensions.GetService[TService](IInfrastructure`1 accessor)
+   at Microsoft.EntityFrameworkCore.Infrastructure.DatabaseFacade.get_Dependencies()
+   at Microsoft.EntityFrameworkCore.Infrastructure.DatabaseFacade.CanConnectAsync(CancellationToken cancellationToken)
+   at Program.<Main>$(String[] args) in D:\ProductDevelopment\Cece\CeceLearningPortal.Backend\CeceLearningPortal.Api\Program.cs:line 218
+2025-07-31 10:42:50.604 +08:00 [INF] User profile is available. Using 'C:\Users\User\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-07-31 10:42:50.648 +08:00 [INF] Now listening on: http://localhost:5295
+2025-07-31 10:42:50.649 +08:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-07-31 10:42:50.650 +08:00 [INF] Hosting environment: Development
+2025-07-31 10:42:50.650 +08:00 [INF] Content root path: D:\ProductDevelopment\Cece\CeceLearningPortal.Backend\CeceLearningPortal.Api
+2025-07-31 10:44:11.496 +08:00 [INF] Checking database connection...
+2025-07-31 10:44:11.928 +08:00 [ERR] Error during database initialization
+System.InvalidOperationException: Cannot use table 'course_approvals' for entity type 'InstructorApproval' since it is being used for entity type 'CourseApproval' and potentially other entity types, but there is no linking relationship. Add a foreign key to 'InstructorApproval' on the primary key properties and pointing to the primary key on another entity type mapped to 'course_approvals'.
+   at Microsoft.EntityFrameworkCore.Infrastructure.RelationalModelValidator.ValidateSharedTableCompatibility(IReadOnlyList`1 mappedTypes, StoreObjectIdentifier& storeObject, IDiagnosticsLogger`1 logger)
+   at Microsoft.EntityFrameworkCore.Infrastructure.RelationalModelValidator.ValidateSharedTableCompatibility(IModel model, IDiagnosticsLogger`1 logger)
+   at Microsoft.EntityFrameworkCore.Infrastructure.RelationalModelValidator.Validate(IModel model, IDiagnosticsLogger`1 logger)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Infrastructure.Internal.NpgsqlModelValidator.Validate(IModel model, IDiagnosticsLogger`1 logger)
+   at Microsoft.EntityFrameworkCore.Infrastructure.ModelRuntimeInitializer.Initialize(IModel model, Boolean designTime, IDiagnosticsLogger`1 validationLogger)
+   at Microsoft.EntityFrameworkCore.Infrastructure.ModelSource.CreateModel(DbContext context, ModelCreationDependencies modelCreationDependencies, Boolean designTime)
+   at Microsoft.EntityFrameworkCore.Infrastructure.ModelSource.GetModel(DbContext context, ModelCreationDependencies modelCreationDependencies, Boolean designTime)
+   at Microsoft.EntityFrameworkCore.Internal.DbContextServices.CreateModel(Boolean designTime)
+   at Microsoft.EntityFrameworkCore.Internal.DbContextServices.get_Model()
+   at Microsoft.EntityFrameworkCore.Infrastructure.EntityFrameworkServicesBuilder.<>c.<TryAddCoreServices>b__8_4(IServiceProvider p)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.Resolve(ServiceCallSite callSite, ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.DynamicServiceProviderEngine.<>c__DisplayClass2_0.<RealizeService>b__0(ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.GetService(ServiceIdentifier serviceIdentifier, ServiceProviderEngineScope serviceProviderEngineScope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.GetService(Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at Microsoft.EntityFrameworkCore.DbContext.get_DbContextDependencies()
+   at Microsoft.EntityFrameworkCore.DbContext.get_ContextServices()
+   at Microsoft.EntityFrameworkCore.DbContext.get_InternalServiceProvider()
+   at Microsoft.EntityFrameworkCore.DbContext.Microsoft.EntityFrameworkCore.Infrastructure.IInfrastructure<System.IServiceProvider>.get_Instance()
+   at Microsoft.EntityFrameworkCore.Infrastructure.Internal.InfrastructureExtensions.GetService(IInfrastructure`1 accessor, Type serviceType)
+   at Microsoft.EntityFrameworkCore.Infrastructure.Internal.InfrastructureExtensions.GetService[TService](IInfrastructure`1 accessor)
+   at Microsoft.EntityFrameworkCore.Infrastructure.AccessorExtensions.GetService[TService](IInfrastructure`1 accessor)
+   at Microsoft.EntityFrameworkCore.Infrastructure.DatabaseFacade.get_Dependencies()
+   at Microsoft.EntityFrameworkCore.Infrastructure.DatabaseFacade.CanConnectAsync(CancellationToken cancellationToken)
+   at Program.<Main>$(String[] args) in D:\ProductDevelopment\Cece\CeceLearningPortal.Backend\CeceLearningPortal.Api\Program.cs:line 218
+2025-07-31 10:44:11.958 +08:00 [INF] User profile is available. Using 'C:\Users\User\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-07-31 10:44:11.996 +08:00 [INF] Now listening on: http://localhost:5295
+2025-07-31 10:44:11.997 +08:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-07-31 10:44:11.998 +08:00 [INF] Hosting environment: Development
+2025-07-31 10:44:11.998 +08:00 [INF] Content root path: D:\ProductDevelopment\Cece\CeceLearningPortal.Backend\CeceLearningPortal.Api
+2025-07-31 10:47:21.587 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5295/WeatherForecast - null null
+2025-07-31 10:47:21.614 +08:00 [WRN] Failed to determine the https port for redirect.
+2025-07-31 10:47:21.636 +08:00 [INF] Executing endpoint 'CeceLearningPortal.Api.Controllers.WeatherForecastController.Get (CeceLearningPortal.Api)'
+2025-07-31 10:47:21.640 +08:00 [INF] Route matched with {action = "Get", controller = "WeatherForecast"}. Executing controller action with signature System.Collections.Generic.IEnumerable`1[CeceLearningPortal.Api.WeatherForecast] Get() on controller CeceLearningPortal.Api.Controllers.WeatherForecastController (CeceLearningPortal.Api).
+2025-07-31 10:47:21.645 +08:00 [INF] Executing ObjectResult, writing value of type 'CeceLearningPortal.Api.WeatherForecast[]'.
+2025-07-31 10:47:21.662 +08:00 [INF] Executed action CeceLearningPortal.Api.Controllers.WeatherForecastController.Get (CeceLearningPortal.Api) in 19.2839ms
+2025-07-31 10:47:21.669 +08:00 [INF] Executed endpoint 'CeceLearningPortal.Api.Controllers.WeatherForecastController.Get (CeceLearningPortal.Api)'
+2025-07-31 10:47:21.670 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost:5295/WeatherForecast - 200 null application/json; charset=utf-8 84.511ms
+2025-07-31 10:47:28.082 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5295/api/courses - null null
+2025-07-31 10:47:28.086 +08:00 [INF] Executing endpoint 'CeceLearningPortal.Api.Controllers.CoursesController.GetCourses (CeceLearningPortal.Api)'
+2025-07-31 10:47:28.094 +08:00 [INF] Route matched with {action = "GetCourses", controller = "Courses"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetCourses(CeceLearningPortal.Api.DTOs.CourseFilterDto) on controller CeceLearningPortal.Api.Controllers.CoursesController (CeceLearningPortal.Api).
+2025-07-31 10:47:28.219 +08:00 [ERR] Error retrieving courses
+System.InvalidOperationException: Cannot use table 'course_approvals' for entity type 'InstructorApproval' since it is being used for entity type 'CourseApproval' and potentially other entity types, but there is no linking relationship. Add a foreign key to 'InstructorApproval' on the primary key properties and pointing to the primary key on another entity type mapped to 'course_approvals'.
+   at Microsoft.EntityFrameworkCore.Infrastructure.RelationalModelValidator.ValidateSharedTableCompatibility(IReadOnlyList`1 mappedTypes, StoreObjectIdentifier& storeObject, IDiagnosticsLogger`1 logger)
+   at Microsoft.EntityFrameworkCore.Infrastructure.RelationalModelValidator.ValidateSharedTableCompatibility(IModel model, IDiagnosticsLogger`1 logger)
+   at Microsoft.EntityFrameworkCore.Infrastructure.RelationalModelValidator.Validate(IModel model, IDiagnosticsLogger`1 logger)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Infrastructure.Internal.NpgsqlModelValidator.Validate(IModel model, IDiagnosticsLogger`1 logger)
+   at Microsoft.EntityFrameworkCore.Infrastructure.ModelRuntimeInitializer.Initialize(IModel model, Boolean designTime, IDiagnosticsLogger`1 validationLogger)
+   at Microsoft.EntityFrameworkCore.Infrastructure.ModelSource.CreateModel(DbContext context, ModelCreationDependencies modelCreationDependencies, Boolean designTime)
+   at Microsoft.EntityFrameworkCore.Infrastructure.ModelSource.GetModel(DbContext context, ModelCreationDependencies modelCreationDependencies, Boolean designTime)
+   at Microsoft.EntityFrameworkCore.Internal.DbContextServices.CreateModel(Boolean designTime)
+   at Microsoft.EntityFrameworkCore.Internal.DbContextServices.get_Model()
+   at Microsoft.EntityFrameworkCore.Infrastructure.EntityFrameworkServicesBuilder.<>c.<TryAddCoreServices>b__8_4(IServiceProvider p)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.Resolve(ServiceCallSite callSite, ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.DynamicServiceProviderEngine.<>c__DisplayClass2_0.<RealizeService>b__0(ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.GetService(ServiceIdentifier serviceIdentifier, ServiceProviderEngineScope serviceProviderEngineScope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.GetService(Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at Microsoft.EntityFrameworkCore.DbContext.get_DbContextDependencies()
+   at Microsoft.EntityFrameworkCore.DbContext.get_ContextServices()
+   at Microsoft.EntityFrameworkCore.DbContext.get_Model()
+   at Microsoft.EntityFrameworkCore.Internal.InternalDbSet`1.get_EntityType()
+   at Microsoft.EntityFrameworkCore.Internal.InternalDbSet`1.CheckState()
+   at Microsoft.EntityFrameworkCore.Internal.InternalDbSet`1.get_EntityQueryable()
+   at Microsoft.EntityFrameworkCore.Internal.InternalDbSet`1.System.Linq.IQueryable.get_Provider()
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.Include[TEntity,TProperty](IQueryable`1 source, Expression`1 navigationPropertyPath)
+   at CeceLearningPortal.Api.Services.CourseService.GetAllCoursesAsync(CourseFilterDto filter) in D:\ProductDevelopment\Cece\CeceLearningPortal.Backend\CeceLearningPortal.Api\Services\CourseService.cs:line 39
+   at CeceLearningPortal.Api.Controllers.CoursesController.GetCourses(CourseFilterDto filter) in D:\ProductDevelopment\Cece\CeceLearningPortal.Backend\CeceLearningPortal.Api\Controllers\CoursesController.cs:line 26
+2025-07-31 10:47:28.227 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType0`1[[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-31 10:47:28.231 +08:00 [INF] Executed action CeceLearningPortal.Api.Controllers.CoursesController.GetCourses (CeceLearningPortal.Api) in 136.3736ms
+2025-07-31 10:47:28.232 +08:00 [INF] Executed endpoint 'CeceLearningPortal.Api.Controllers.CoursesController.GetCourses (CeceLearningPortal.Api)'
+2025-07-31 10:47:28.234 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost:5295/api/courses - 500 null application/json; charset=utf-8 152.2616ms
+2025-07-31 10:48:28.276 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5295/api/courses - null null
+2025-07-31 10:48:28.279 +08:00 [INF] Executing endpoint 'CeceLearningPortal.Api.Controllers.CoursesController.GetCourses (CeceLearningPortal.Api)'
+2025-07-31 10:48:28.280 +08:00 [INF] Route matched with {action = "GetCourses", controller = "Courses"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetCourses(CeceLearningPortal.Api.DTOs.CourseFilterDto) on controller CeceLearningPortal.Api.Controllers.CoursesController (CeceLearningPortal.Api).
+2025-07-31 10:48:28.388 +08:00 [ERR] Error retrieving courses
+System.InvalidOperationException: Cannot use table 'course_approvals' for entity type 'InstructorApproval' since it is being used for entity type 'CourseApproval' and potentially other entity types, but there is no linking relationship. Add a foreign key to 'InstructorApproval' on the primary key properties and pointing to the primary key on another entity type mapped to 'course_approvals'.
+   at Microsoft.EntityFrameworkCore.Infrastructure.RelationalModelValidator.ValidateSharedTableCompatibility(IReadOnlyList`1 mappedTypes, StoreObjectIdentifier& storeObject, IDiagnosticsLogger`1 logger)
+   at Microsoft.EntityFrameworkCore.Infrastructure.RelationalModelValidator.ValidateSharedTableCompatibility(IModel model, IDiagnosticsLogger`1 logger)
+   at Microsoft.EntityFrameworkCore.Infrastructure.RelationalModelValidator.Validate(IModel model, IDiagnosticsLogger`1 logger)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Infrastructure.Internal.NpgsqlModelValidator.Validate(IModel model, IDiagnosticsLogger`1 logger)
+   at Microsoft.EntityFrameworkCore.Infrastructure.ModelRuntimeInitializer.Initialize(IModel model, Boolean designTime, IDiagnosticsLogger`1 validationLogger)
+   at Microsoft.EntityFrameworkCore.Infrastructure.ModelSource.CreateModel(DbContext context, ModelCreationDependencies modelCreationDependencies, Boolean designTime)
+   at Microsoft.EntityFrameworkCore.Infrastructure.ModelSource.GetModel(DbContext context, ModelCreationDependencies modelCreationDependencies, Boolean designTime)
+   at Microsoft.EntityFrameworkCore.Internal.DbContextServices.CreateModel(Boolean designTime)
+   at Microsoft.EntityFrameworkCore.Internal.DbContextServices.get_Model()
+   at Microsoft.EntityFrameworkCore.Infrastructure.EntityFrameworkServicesBuilder.<>c.<TryAddCoreServices>b__8_4(IServiceProvider p)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.Resolve(ServiceCallSite callSite, ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.DynamicServiceProviderEngine.<>c__DisplayClass2_0.<RealizeService>b__0(ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.GetService(Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at Microsoft.EntityFrameworkCore.DbContext.get_DbContextDependencies()
+   at Microsoft.EntityFrameworkCore.DbContext.get_ContextServices()
+   at Microsoft.EntityFrameworkCore.DbContext.get_Model()
+   at Microsoft.EntityFrameworkCore.Internal.InternalDbSet`1.get_EntityType()
+   at Microsoft.EntityFrameworkCore.Internal.InternalDbSet`1.CheckState()
+   at Microsoft.EntityFrameworkCore.Internal.InternalDbSet`1.get_EntityQueryable()
+   at Microsoft.EntityFrameworkCore.Internal.InternalDbSet`1.System.Linq.IQueryable.get_Provider()
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.Include[TEntity,TProperty](IQueryable`1 source, Expression`1 navigationPropertyPath)
+   at CeceLearningPortal.Api.Services.CourseService.GetAllCoursesAsync(CourseFilterDto filter) in D:\ProductDevelopment\Cece\CeceLearningPortal.Backend\CeceLearningPortal.Api\Services\CourseService.cs:line 39
+   at CeceLearningPortal.Api.Controllers.CoursesController.GetCourses(CourseFilterDto filter) in D:\ProductDevelopment\Cece\CeceLearningPortal.Backend\CeceLearningPortal.Api\Controllers\CoursesController.cs:line 26
+2025-07-31 10:48:28.393 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType0`1[[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-31 10:48:28.394 +08:00 [INF] Executed action CeceLearningPortal.Api.Controllers.CoursesController.GetCourses (CeceLearningPortal.Api) in 113.3297ms
+2025-07-31 10:48:28.394 +08:00 [INF] Executed endpoint 'CeceLearningPortal.Api.Controllers.CoursesController.GetCourses (CeceLearningPortal.Api)'
+2025-07-31 10:48:28.395 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost:5295/api/courses - 500 null application/json; charset=utf-8 118.9213ms
+2025-07-31 10:49:36.101 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5295/api/courses - null null
+2025-07-31 10:49:36.102 +08:00 [INF] Executing endpoint 'CeceLearningPortal.Api.Controllers.CoursesController.GetCourses (CeceLearningPortal.Api)'
+2025-07-31 10:49:36.103 +08:00 [INF] Route matched with {action = "GetCourses", controller = "Courses"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetCourses(CeceLearningPortal.Api.DTOs.CourseFilterDto) on controller CeceLearningPortal.Api.Controllers.CoursesController (CeceLearningPortal.Api).
+2025-07-31 10:49:36.135 +08:00 [ERR] Error retrieving courses
+System.InvalidOperationException: Cannot use table 'course_approvals' for entity type 'InstructorApproval' since it is being used for entity type 'CourseApproval' and potentially other entity types, but there is no linking relationship. Add a foreign key to 'InstructorApproval' on the primary key properties and pointing to the primary key on another entity type mapped to 'course_approvals'.
+   at Microsoft.EntityFrameworkCore.Infrastructure.RelationalModelValidator.ValidateSharedTableCompatibility(IReadOnlyList`1 mappedTypes, StoreObjectIdentifier& storeObject, IDiagnosticsLogger`1 logger)
+   at Microsoft.EntityFrameworkCore.Infrastructure.RelationalModelValidator.ValidateSharedTableCompatibility(IModel model, IDiagnosticsLogger`1 logger)
+   at Microsoft.EntityFrameworkCore.Infrastructure.RelationalModelValidator.Validate(IModel model, IDiagnosticsLogger`1 logger)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Infrastructure.Internal.NpgsqlModelValidator.Validate(IModel model, IDiagnosticsLogger`1 logger)
+   at Microsoft.EntityFrameworkCore.Infrastructure.ModelRuntimeInitializer.Initialize(IModel model, Boolean designTime, IDiagnosticsLogger`1 validationLogger)
+   at Microsoft.EntityFrameworkCore.Infrastructure.ModelSource.CreateModel(DbContext context, ModelCreationDependencies modelCreationDependencies, Boolean designTime)
+   at Microsoft.EntityFrameworkCore.Infrastructure.ModelSource.GetModel(DbContext context, ModelCreationDependencies modelCreationDependencies, Boolean designTime)
+   at Microsoft.EntityFrameworkCore.Internal.DbContextServices.CreateModel(Boolean designTime)
+   at Microsoft.EntityFrameworkCore.Internal.DbContextServices.get_Model()
+   at Microsoft.EntityFrameworkCore.Infrastructure.EntityFrameworkServicesBuilder.<>c.<TryAddCoreServices>b__8_4(IServiceProvider p)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.Resolve(ServiceCallSite callSite, ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.DynamicServiceProviderEngine.<>c__DisplayClass2_0.<RealizeService>b__0(ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.GetService(Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at Microsoft.EntityFrameworkCore.DbContext.get_DbContextDependencies()
+   at Microsoft.EntityFrameworkCore.DbContext.get_ContextServices()
+   at Microsoft.EntityFrameworkCore.DbContext.get_Model()
+   at Microsoft.EntityFrameworkCore.Internal.InternalDbSet`1.get_EntityType()
+   at Microsoft.EntityFrameworkCore.Internal.InternalDbSet`1.CheckState()
+   at Microsoft.EntityFrameworkCore.Internal.InternalDbSet`1.get_EntityQueryable()
+   at Microsoft.EntityFrameworkCore.Internal.InternalDbSet`1.System.Linq.IQueryable.get_Provider()
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.Include[TEntity,TProperty](IQueryable`1 source, Expression`1 navigationPropertyPath)
+   at CeceLearningPortal.Api.Services.CourseService.GetAllCoursesAsync(CourseFilterDto filter) in D:\ProductDevelopment\Cece\CeceLearningPortal.Backend\CeceLearningPortal.Api\Services\CourseService.cs:line 39
+   at CeceLearningPortal.Api.Controllers.CoursesController.GetCourses(CourseFilterDto filter) in D:\ProductDevelopment\Cece\CeceLearningPortal.Backend\CeceLearningPortal.Api\Controllers\CoursesController.cs:line 26
+2025-07-31 10:49:36.141 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType0`1[[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-31 10:49:36.141 +08:00 [INF] Executed action CeceLearningPortal.Api.Controllers.CoursesController.GetCourses (CeceLearningPortal.Api) in 37.6611ms
+2025-07-31 10:49:36.142 +08:00 [INF] Executed endpoint 'CeceLearningPortal.Api.Controllers.CoursesController.GetCourses (CeceLearningPortal.Api)'
+2025-07-31 10:49:36.143 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost:5295/api/courses - 500 null application/json; charset=utf-8 41.9807ms
+2025-07-31 11:02:28.042 +08:00 [INF] Checking database connection...
+2025-07-31 11:02:28.700 +08:00 [INF] Database connection successful.
+2025-07-31 11:02:28.701 +08:00 [INF] Attempting to apply migrations...
+2025-07-31 11:02:28.787 +08:00 [INF] Executed DbCommand (11ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2025-07-31 11:02:29.024 +08:00 [WRN] Migration failed. This might be due to pending model changes. Continuing anyway...
+System.InvalidOperationException: An error was generated for warning 'Microsoft.EntityFrameworkCore.Migrations.PendingModelChangesWarning': The model for context 'ApplicationDbContext' has pending changes. Add a new migration before updating the database. See https://aka.ms/efcore-docs-pending-changes. This exception can be suppressed or logged by passing event ID 'RelationalEventId.PendingModelChangesWarning' to the 'ConfigureWarnings' method in 'DbContext.OnConfiguring' or 'AddDbContext'.
+   at Microsoft.EntityFrameworkCore.Diagnostics.EventDefinition`1.Log[TLoggerCategory](IDiagnosticsLogger`1 logger, TParam arg)
+   at Microsoft.EntityFrameworkCore.Diagnostics.RelationalLoggerExtensions.PendingModelChangesWarning(IDiagnosticsLogger`1 diagnostics, Type contextType)
+   at Microsoft.EntityFrameworkCore.Migrations.Internal.Migrator.ValidateMigrations(Boolean useTransaction, String targetMigration)
+   at Microsoft.EntityFrameworkCore.Migrations.Internal.Migrator.MigrateAsync(String targetMigration, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Migrations.Internal.NpgsqlMigrator.MigrateAsync(String targetMigration, CancellationToken cancellationToken)
+   at Program.<Main>$(String[] args) in D:\ProductDevelopment\Cece\CeceLearningPortal.Backend\CeceLearningPortal.Api\Program.cs:line 226
+2025-07-31 11:02:29.033 +08:00 [INF] Starting data seeding...
+2025-07-31 11:02:29.046 +08:00 [INF] User profile is available. Using 'C:\Users\User\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-07-31 11:02:29.169 +08:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM courses AS c)
+2025-07-31 11:02:29.171 +08:00 [INF] Database already contains data. Skipping seed.
+2025-07-31 11:02:29.171 +08:00 [INF] Data seeding completed.
+2025-07-31 11:02:29.210 +08:00 [INF] Now listening on: http://localhost:5295
+2025-07-31 11:02:29.210 +08:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-07-31 11:02:29.210 +08:00 [INF] Hosting environment: Development
+2025-07-31 11:02:29.210 +08:00 [INF] Content root path: D:\ProductDevelopment\Cece\CeceLearningPortal.Backend\CeceLearningPortal.Api
+2025-07-31 11:03:02.024 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5295/api/courses - null null
+2025-07-31 11:03:02.053 +08:00 [WRN] Failed to determine the https port for redirect.
+2025-07-31 11:03:02.074 +08:00 [INF] Executing endpoint 'CeceLearningPortal.Api.Controllers.CoursesController.GetCourses (CeceLearningPortal.Api)'
+2025-07-31 11:03:02.084 +08:00 [INF] Route matched with {action = "GetCourses", controller = "Courses"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetCourses(CeceLearningPortal.Api.DTOs.CourseFilterDto) on controller CeceLearningPortal.Api.Controllers.CoursesController (CeceLearningPortal.Api).
+2025-07-31 11:03:02.192 +08:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2025-07-31 11:03:02.233 +08:00 [ERR] Failed executing DbCommand (6ms) [Parameters=[@__p_1='?' (DbType = Int32), @__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT c0.id, c0.access_duration, c0.access_type, c0.automation_abandonment_sequence, c0.automation_completion_certificate, c0.automation_progress_reminders, c0.automation_welcome_email, c0.category, c0.course_type, c0.created_at, c0.currency, c0.description, c0.discount, c0.drip_content, c0.drip_schedule_json, c0.duration, c0.enrollment_limit, c0.enrollment_type, c0.features, c0.has_assignments, c0.has_certificate, c0.has_community, c0.has_downloadable_resources, c0.has_live_sessions, c0.has_quizzes, c0.instructor_id, c0.is_bestseller, c0.is_published, c0.language, c0.level, c0.original_price, c0.payment_plan_details_json, c0.preview_url, c0.price, c0.pricing_model, c0.promo_video_url, c0.published_at, c0.short_description, c0.status, c0.subscription_period, c0.thumbnail, c0.thumbnail_url, c0.title, c0.updated_at, a.id, a.access_failed_count, a.avatar, a.concurrency_stamp, a.created_at, a.email, a.email_confirmed, a.full_name, a.last_login_at, a.lockout_enabled, a.lockout_end, a.normalized_email, a.normalized_user_name, a.notification_preferences, a.password_hash, a.phone_number, a.phone_number_confirmed, a.refresh_token, a.refresh_token_expiry_time, a.role, a.security_stamp, a.status, a.two_factor_enabled, a.user_name, s.id, s.course_id, s.created_at, s.description, s."order", s.title, s.updated_at, s.id0, s.content, s.created_at0, s.duration, s.module_id, s.order0, s.title0, s.type, s.updated_at0, s.video_url, c3.id, c3.approved_at, c3.approved_by, c3.comment, c3.course_id, c3.created_at, c3.is_flagged, c3.rating, c3.status, c3.student_id, e.id, e.average_quiz_score, e.certificate_issued, e.certificate_url, e.completed_at, e.completed_lessons, e.course_id, e.enrolled_at, e.last_accessed_date, e.progress_percentage, e.quiz_count, e.student_id, e.total_time_spent
+FROM (
+    SELECT c.id, c.access_duration, c.access_type, c.automation_abandonment_sequence, c.automation_completion_certificate, c.automation_progress_reminders, c.automation_welcome_email, c.category, c.course_type, c.created_at, c.currency, c.description, c.discount, c.drip_content, c.drip_schedule_json, c.duration, c.enrollment_limit, c.enrollment_type, c.features, c.has_assignments, c.has_certificate, c.has_community, c.has_downloadable_resources, c.has_live_sessions, c.has_quizzes, c.instructor_id, c.is_bestseller, c.is_published, c.language, c.level, c.original_price, c.payment_plan_details_json, c.preview_url, c.price, c.pricing_model, c.promo_video_url, c.published_at, c.short_description, c.status, c.subscription_period, c.thumbnail, c.thumbnail_url, c.title, c.updated_at
+    FROM courses AS c
+    ORDER BY c.created_at DESC
+    LIMIT @__p_1 OFFSET @__p_0
+) AS c0
+INNER JOIN asp_net_users AS a ON c0.instructor_id = a.id
+LEFT JOIN (
+    SELECT c1.id, c1.course_id, c1.created_at, c1.description, c1."order", c1.title, c1.updated_at, c2.id AS id0, c2.content, c2.created_at AS created_at0, c2.duration, c2.module_id, c2."order" AS order0, c2.title AS title0, c2.type, c2.updated_at AS updated_at0, c2.video_url
+    FROM course_modules AS c1
+    LEFT JOIN course_lessons AS c2 ON c1.id = c2.module_id
+) AS s ON c0.id = s.course_id
+LEFT JOIN course_reviews AS c3 ON c0.id = c3.course_id
+LEFT JOIN enrollments AS e ON c0.id = e.course_id
+ORDER BY c0.created_at DESC, c0.id, a.id, s.id, s.id0, c3.id
+2025-07-31 11:03:02.239 +08:00 [ERR] An exception occurred while iterating over the results of a query for context type 'CeceLearningPortal.Api.Data.ApplicationDbContext'.
+Npgsql.PostgresException (0x80004005): 42703: column c.access_duration does not exist
+
+POSITION: 1822
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+  Exception data:
+    Severity: ERROR
+    SqlState: 42703
+    MessageText: column c.access_duration does not exist
+    Hint: Perhaps you meant to reference the column "c.AccessDuration".
+    Position: 1822
+    File: parse_relation.c
+    Line: 3732
+    Routine: errorMissingColumn
+Npgsql.PostgresException (0x80004005): 42703: column c.access_duration does not exist
+
+POSITION: 1822
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+  Exception data:
+    Severity: ERROR
+    SqlState: 42703
+    MessageText: column c.access_duration does not exist
+    Hint: Perhaps you meant to reference the column "c.AccessDuration".
+    Position: 1822
+    File: parse_relation.c
+    Line: 3732
+    Routine: errorMissingColumn
+2025-07-31 11:03:02.241 +08:00 [ERR] Error retrieving courses
+Npgsql.PostgresException (0x80004005): 42703: column c.access_duration does not exist
+
+POSITION: 1822
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at CeceLearningPortal.Api.Services.CourseService.GetAllCoursesAsync(CourseFilterDto filter) in D:\ProductDevelopment\Cece\CeceLearningPortal.Backend\CeceLearningPortal.Api\Services\CourseService.cs:line 95
+   at CeceLearningPortal.Api.Controllers.CoursesController.GetCourses(CourseFilterDto filter) in D:\ProductDevelopment\Cece\CeceLearningPortal.Backend\CeceLearningPortal.Api\Controllers\CoursesController.cs:line 26
+  Exception data:
+    Severity: ERROR
+    SqlState: 42703
+    MessageText: column c.access_duration does not exist
+    Hint: Perhaps you meant to reference the column "c.AccessDuration".
+    Position: 1822
+    File: parse_relation.c
+    Line: 3732
+    Routine: errorMissingColumn
+2025-07-31 11:03:02.246 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType0`1[[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-31 11:03:02.257 +08:00 [INF] Executed action CeceLearningPortal.Api.Controllers.CoursesController.GetCourses (CeceLearningPortal.Api) in 170.8673ms
+2025-07-31 11:03:02.259 +08:00 [INF] Executed endpoint 'CeceLearningPortal.Api.Controllers.CoursesController.GetCourses (CeceLearningPortal.Api)'
+2025-07-31 11:03:02.262 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost:5295/api/courses - 500 null application/json; charset=utf-8 239.7829ms
+2025-07-31 11:04:01.684 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5295/courses - null null
+2025-07-31 11:04:01.687 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost:5295/courses - 404 0 null 3.0288ms
+2025-07-31 11:04:01.688 +08:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5295/courses, Response status code: 404
+2025-07-31 11:04:32.457 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5295/api/courses - null null
+2025-07-31 11:04:32.459 +08:00 [INF] Executing endpoint 'CeceLearningPortal.Api.Controllers.CoursesController.GetCourses (CeceLearningPortal.Api)'
+2025-07-31 11:04:32.459 +08:00 [INF] Route matched with {action = "GetCourses", controller = "Courses"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetCourses(CeceLearningPortal.Api.DTOs.CourseFilterDto) on controller CeceLearningPortal.Api.Controllers.CoursesController (CeceLearningPortal.Api).
+2025-07-31 11:04:32.492 +08:00 [ERR] Failed executing DbCommand (1ms) [Parameters=[@__p_1='?' (DbType = Int32), @__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT c0.id, c0.access_duration, c0.access_type, c0.automation_abandonment_sequence, c0.automation_completion_certificate, c0.automation_progress_reminders, c0.automation_welcome_email, c0.category, c0.course_type, c0.created_at, c0.currency, c0.description, c0.discount, c0.drip_content, c0.drip_schedule_json, c0.duration, c0.enrollment_limit, c0.enrollment_type, c0.features, c0.has_assignments, c0.has_certificate, c0.has_community, c0.has_downloadable_resources, c0.has_live_sessions, c0.has_quizzes, c0.instructor_id, c0.is_bestseller, c0.is_published, c0.language, c0.level, c0.original_price, c0.payment_plan_details_json, c0.preview_url, c0.price, c0.pricing_model, c0.promo_video_url, c0.published_at, c0.short_description, c0.status, c0.subscription_period, c0.thumbnail, c0.thumbnail_url, c0.title, c0.updated_at, a.id, a.access_failed_count, a.avatar, a.concurrency_stamp, a.created_at, a.email, a.email_confirmed, a.full_name, a.last_login_at, a.lockout_enabled, a.lockout_end, a.normalized_email, a.normalized_user_name, a.notification_preferences, a.password_hash, a.phone_number, a.phone_number_confirmed, a.refresh_token, a.refresh_token_expiry_time, a.role, a.security_stamp, a.status, a.two_factor_enabled, a.user_name, s.id, s.course_id, s.created_at, s.description, s."order", s.title, s.updated_at, s.id0, s.content, s.created_at0, s.duration, s.module_id, s.order0, s.title0, s.type, s.updated_at0, s.video_url, c3.id, c3.approved_at, c3.approved_by, c3.comment, c3.course_id, c3.created_at, c3.is_flagged, c3.rating, c3.status, c3.student_id, e.id, e.average_quiz_score, e.certificate_issued, e.certificate_url, e.completed_at, e.completed_lessons, e.course_id, e.enrolled_at, e.last_accessed_date, e.progress_percentage, e.quiz_count, e.student_id, e.total_time_spent
+FROM (
+    SELECT c.id, c.access_duration, c.access_type, c.automation_abandonment_sequence, c.automation_completion_certificate, c.automation_progress_reminders, c.automation_welcome_email, c.category, c.course_type, c.created_at, c.currency, c.description, c.discount, c.drip_content, c.drip_schedule_json, c.duration, c.enrollment_limit, c.enrollment_type, c.features, c.has_assignments, c.has_certificate, c.has_community, c.has_downloadable_resources, c.has_live_sessions, c.has_quizzes, c.instructor_id, c.is_bestseller, c.is_published, c.language, c.level, c.original_price, c.payment_plan_details_json, c.preview_url, c.price, c.pricing_model, c.promo_video_url, c.published_at, c.short_description, c.status, c.subscription_period, c.thumbnail, c.thumbnail_url, c.title, c.updated_at
+    FROM courses AS c
+    ORDER BY c.created_at DESC
+    LIMIT @__p_1 OFFSET @__p_0
+) AS c0
+INNER JOIN asp_net_users AS a ON c0.instructor_id = a.id
+LEFT JOIN (
+    SELECT c1.id, c1.course_id, c1.created_at, c1.description, c1."order", c1.title, c1.updated_at, c2.id AS id0, c2.content, c2.created_at AS created_at0, c2.duration, c2.module_id, c2."order" AS order0, c2.title AS title0, c2.type, c2.updated_at AS updated_at0, c2.video_url
+    FROM course_modules AS c1
+    LEFT JOIN course_lessons AS c2 ON c1.id = c2.module_id
+) AS s ON c0.id = s.course_id
+LEFT JOIN course_reviews AS c3 ON c0.id = c3.course_id
+LEFT JOIN enrollments AS e ON c0.id = e.course_id
+ORDER BY c0.created_at DESC, c0.id, a.id, s.id, s.id0, c3.id
+2025-07-31 11:04:32.493 +08:00 [ERR] An exception occurred while iterating over the results of a query for context type 'CeceLearningPortal.Api.Data.ApplicationDbContext'.
+Npgsql.PostgresException (0x80004005): 42703: column c.access_duration does not exist
+
+POSITION: 1822
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+  Exception data:
+    Severity: ERROR
+    SqlState: 42703
+    MessageText: column c.access_duration does not exist
+    Hint: Perhaps you meant to reference the column "c.AccessDuration".
+    Position: 1822
+    File: parse_relation.c
+    Line: 3732
+    Routine: errorMissingColumn
+Npgsql.PostgresException (0x80004005): 42703: column c.access_duration does not exist
+
+POSITION: 1822
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+  Exception data:
+    Severity: ERROR
+    SqlState: 42703
+    MessageText: column c.access_duration does not exist
+    Hint: Perhaps you meant to reference the column "c.AccessDuration".
+    Position: 1822
+    File: parse_relation.c
+    Line: 3732
+    Routine: errorMissingColumn
+2025-07-31 11:04:32.495 +08:00 [ERR] Error retrieving courses
+Npgsql.PostgresException (0x80004005): 42703: column c.access_duration does not exist
+
+POSITION: 1822
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at CeceLearningPortal.Api.Services.CourseService.GetAllCoursesAsync(CourseFilterDto filter) in D:\ProductDevelopment\Cece\CeceLearningPortal.Backend\CeceLearningPortal.Api\Services\CourseService.cs:line 95
+   at CeceLearningPortal.Api.Controllers.CoursesController.GetCourses(CourseFilterDto filter) in D:\ProductDevelopment\Cece\CeceLearningPortal.Backend\CeceLearningPortal.Api\Controllers\CoursesController.cs:line 26
+  Exception data:
+    Severity: ERROR
+    SqlState: 42703
+    MessageText: column c.access_duration does not exist
+    Hint: Perhaps you meant to reference the column "c.AccessDuration".
+    Position: 1822
+    File: parse_relation.c
+    Line: 3732
+    Routine: errorMissingColumn
+2025-07-31 11:04:32.497 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType0`1[[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-31 11:04:32.498 +08:00 [INF] Executed action CeceLearningPortal.Api.Controllers.CoursesController.GetCourses (CeceLearningPortal.Api) in 38.2547ms
+2025-07-31 11:04:32.498 +08:00 [INF] Executed endpoint 'CeceLearningPortal.Api.Controllers.CoursesController.GetCourses (CeceLearningPortal.Api)'
+2025-07-31 11:04:32.498 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost:5295/api/courses - 500 null application/json; charset=utf-8 41.4334ms
+2025-07-31 11:05:27.367 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5295/courses - null null
+2025-07-31 11:05:27.367 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost:5295/courses - 404 0 null 0.4714ms
+2025-07-31 11:05:27.367 +08:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5295/courses, Response status code: 404
+2025-07-31 11:05:37.857 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5295/courses - null null
+2025-07-31 11:05:37.858 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost:5295/courses - 404 0 null 0.3774ms
+2025-07-31 11:05:37.858 +08:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5295/courses, Response status code: 404
+2025-07-31 11:14:43.736 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5295/api/courses - null null
+2025-07-31 11:14:43.737 +08:00 [INF] Executing endpoint 'CeceLearningPortal.Api.Controllers.CoursesController.GetCourses (CeceLearningPortal.Api)'
+2025-07-31 11:14:43.737 +08:00 [INF] Route matched with {action = "GetCourses", controller = "Courses"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetCourses(CeceLearningPortal.Api.DTOs.CourseFilterDto) on controller CeceLearningPortal.Api.Controllers.CoursesController (CeceLearningPortal.Api).
+2025-07-31 11:14:43.780 +08:00 [ERR] Failed executing DbCommand (1ms) [Parameters=[@__p_1='?' (DbType = Int32), @__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT c0.id, c0.access_duration, c0.access_type, c0.automation_abandonment_sequence, c0.automation_completion_certificate, c0.automation_progress_reminders, c0.automation_welcome_email, c0.category, c0.course_type, c0.created_at, c0.currency, c0.description, c0.discount, c0.drip_content, c0.drip_schedule_json, c0.duration, c0.enrollment_limit, c0.enrollment_type, c0.features, c0.has_assignments, c0.has_certificate, c0.has_community, c0.has_downloadable_resources, c0.has_live_sessions, c0.has_quizzes, c0.instructor_id, c0.is_bestseller, c0.is_published, c0.language, c0.level, c0.original_price, c0.payment_plan_details_json, c0.preview_url, c0.price, c0.pricing_model, c0.promo_video_url, c0.published_at, c0.short_description, c0.status, c0.subscription_period, c0.thumbnail, c0.thumbnail_url, c0.title, c0.updated_at, a.id, a.access_failed_count, a.avatar, a.concurrency_stamp, a.created_at, a.email, a.email_confirmed, a.full_name, a.last_login_at, a.lockout_enabled, a.lockout_end, a.normalized_email, a.normalized_user_name, a.notification_preferences, a.password_hash, a.phone_number, a.phone_number_confirmed, a.refresh_token, a.refresh_token_expiry_time, a.role, a.security_stamp, a.status, a.two_factor_enabled, a.user_name, s.id, s.course_id, s.created_at, s.description, s."order", s.title, s.updated_at, s.id0, s.content, s.created_at0, s.duration, s.module_id, s.order0, s.title0, s.type, s.updated_at0, s.video_url, c3.id, c3.approved_at, c3.approved_by, c3.comment, c3.course_id, c3.created_at, c3.is_flagged, c3.rating, c3.status, c3.student_id, e.id, e.average_quiz_score, e.certificate_issued, e.certificate_url, e.completed_at, e.completed_lessons, e.course_id, e.enrolled_at, e.last_accessed_date, e.progress_percentage, e.quiz_count, e.student_id, e.total_time_spent
+FROM (
+    SELECT c.id, c.access_duration, c.access_type, c.automation_abandonment_sequence, c.automation_completion_certificate, c.automation_progress_reminders, c.automation_welcome_email, c.category, c.course_type, c.created_at, c.currency, c.description, c.discount, c.drip_content, c.drip_schedule_json, c.duration, c.enrollment_limit, c.enrollment_type, c.features, c.has_assignments, c.has_certificate, c.has_community, c.has_downloadable_resources, c.has_live_sessions, c.has_quizzes, c.instructor_id, c.is_bestseller, c.is_published, c.language, c.level, c.original_price, c.payment_plan_details_json, c.preview_url, c.price, c.pricing_model, c.promo_video_url, c.published_at, c.short_description, c.status, c.subscription_period, c.thumbnail, c.thumbnail_url, c.title, c.updated_at
+    FROM courses AS c
+    ORDER BY c.created_at DESC
+    LIMIT @__p_1 OFFSET @__p_0
+) AS c0
+INNER JOIN asp_net_users AS a ON c0.instructor_id = a.id
+LEFT JOIN (
+    SELECT c1.id, c1.course_id, c1.created_at, c1.description, c1."order", c1.title, c1.updated_at, c2.id AS id0, c2.content, c2.created_at AS created_at0, c2.duration, c2.module_id, c2."order" AS order0, c2.title AS title0, c2.type, c2.updated_at AS updated_at0, c2.video_url
+    FROM course_modules AS c1
+    LEFT JOIN course_lessons AS c2 ON c1.id = c2.module_id
+) AS s ON c0.id = s.course_id
+LEFT JOIN course_reviews AS c3 ON c0.id = c3.course_id
+LEFT JOIN enrollments AS e ON c0.id = e.course_id
+ORDER BY c0.created_at DESC, c0.id, a.id, s.id, s.id0, c3.id
+2025-07-31 11:14:43.780 +08:00 [ERR] An exception occurred while iterating over the results of a query for context type 'CeceLearningPortal.Api.Data.ApplicationDbContext'.
+Npgsql.PostgresException (0x80004005): 42703: column c.access_duration does not exist
+
+POSITION: 1822
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+  Exception data:
+    Severity: ERROR
+    SqlState: 42703
+    MessageText: column c.access_duration does not exist
+    Hint: Perhaps you meant to reference the column "c.AccessDuration".
+    Position: 1822
+    File: parse_relation.c
+    Line: 3732
+    Routine: errorMissingColumn
+Npgsql.PostgresException (0x80004005): 42703: column c.access_duration does not exist
+
+POSITION: 1822
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+  Exception data:
+    Severity: ERROR
+    SqlState: 42703
+    MessageText: column c.access_duration does not exist
+    Hint: Perhaps you meant to reference the column "c.AccessDuration".
+    Position: 1822
+    File: parse_relation.c
+    Line: 3732
+    Routine: errorMissingColumn
+2025-07-31 11:14:43.781 +08:00 [ERR] Error retrieving courses
+Npgsql.PostgresException (0x80004005): 42703: column c.access_duration does not exist
+
+POSITION: 1822
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at CeceLearningPortal.Api.Services.CourseService.GetAllCoursesAsync(CourseFilterDto filter) in D:\ProductDevelopment\Cece\CeceLearningPortal.Backend\CeceLearningPortal.Api\Services\CourseService.cs:line 95
+   at CeceLearningPortal.Api.Controllers.CoursesController.GetCourses(CourseFilterDto filter) in D:\ProductDevelopment\Cece\CeceLearningPortal.Backend\CeceLearningPortal.Api\Controllers\CoursesController.cs:line 26
+  Exception data:
+    Severity: ERROR
+    SqlState: 42703
+    MessageText: column c.access_duration does not exist
+    Hint: Perhaps you meant to reference the column "c.AccessDuration".
+    Position: 1822
+    File: parse_relation.c
+    Line: 3732
+    Routine: errorMissingColumn
+2025-07-31 11:14:43.783 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType0`1[[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-31 11:14:43.783 +08:00 [INF] Executed action CeceLearningPortal.Api.Controllers.CoursesController.GetCourses (CeceLearningPortal.Api) in 46.1917ms
+2025-07-31 11:14:43.783 +08:00 [INF] Executed endpoint 'CeceLearningPortal.Api.Controllers.CoursesController.GetCourses (CeceLearningPortal.Api)'
+2025-07-31 11:14:43.783 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost:5295/api/courses - 500 null application/json; charset=utf-8 47.0884ms

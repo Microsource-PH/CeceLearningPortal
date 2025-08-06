@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Frontend-Backend Connection</title>
+</head>
+<body>
+    <h1>Frontend-Backend Connection Test</h1>
+    <button onclick="testDirect()">Test Direct Backend (5295)</button>
+    <button onclick="testProxy()">Test Via Frontend Proxy (8080)</button>
+    <pre id="result"></pre>
+
+    <script>
+        async function testDirect() {
+            try {
+                const response = await fetch('http://localhost:5295/api/WeatherForecast');
+                const data = await response.json();
+                document.getElementById('result').textContent = 'Direct Backend Response:\n' + JSON.stringify(data, null, 2);
+            } catch (error) {
+                document.getElementById('result').textContent = 'Direct Backend Error:\n' + error.message;
+            }
+        }
+
+        async function testProxy() {
+            try {
+                const response = await fetch('http://localhost:8080/api/WeatherForecast');
+                const data = await response.json();
+                document.getElementById('result').textContent = 'Proxy Response:\n' + JSON.stringify(data, null, 2);
+            } catch (error) {
+                document.getElementById('result').textContent = 'Proxy Error:\n' + error.message;
+            }
+        }
+    </script>
+</body>
+</html>

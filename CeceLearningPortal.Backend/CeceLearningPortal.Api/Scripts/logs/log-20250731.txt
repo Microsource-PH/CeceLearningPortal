@@ -1,0 +1,1475 @@
+2025-07-31 09:13:58.676 +08:00 [INF] Checking database connection...
+2025-07-31 09:13:59.314 +08:00 [INF] Database connection successful.
+2025-07-31 09:13:59.315 +08:00 [INF] Attempting to apply migrations...
+2025-07-31 09:13:59.398 +08:00 [INF] Executed DbCommand (11ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2025-07-31 09:13:59.714 +08:00 [INF] Executed DbCommand (13ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE IF NOT EXISTS "__EFMigrationsHistory" (
+    "MigrationId" character varying(150) NOT NULL,
+    "ProductVersion" character varying(32) NOT NULL,
+    CONSTRAINT "PK___EFMigrationsHistory" PRIMARY KEY ("MigrationId")
+);
+2025-07-31 09:13:59.723 +08:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+LOCK TABLE "__EFMigrationsHistory" IN ACCESS EXCLUSIVE MODE
+2025-07-31 09:13:59.725 +08:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2025-07-31 09:13:59.730 +08:00 [INF] Applying migration '20250725044538_InitialCreate'.
+2025-07-31 09:13:59.781 +08:00 [INF] Executed DbCommand (11ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "AspNetRoles" (
+    "Id" text NOT NULL,
+    "Name" character varying(256),
+    "NormalizedName" character varying(256),
+    "ConcurrencyStamp" text,
+    CONSTRAINT "PK_AspNetRoles" PRIMARY KEY ("Id")
+);
+2025-07-31 09:13:59.785 +08:00 [ERR] Failed executing DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "AspNetUsers" (
+    "Id" text NOT NULL,
+    "FullName" text NOT NULL,
+    "Avatar" text,
+    "Role" text NOT NULL,
+    "Status" text NOT NULL,
+    "CreatedAt" timestamp with time zone NOT NULL,
+    "LastLoginAt" timestamp with time zone,
+    "RefreshToken" text,
+    "RefreshTokenExpiryTime" timestamp with time zone,
+    "NotificationPreferences" text NOT NULL,
+    "UserName" character varying(256),
+    "NormalizedUserName" character varying(256),
+    "Email" character varying(256),
+    "NormalizedEmail" character varying(256),
+    "EmailConfirmed" boolean NOT NULL,
+    "PasswordHash" text,
+    "SecurityStamp" text,
+    "ConcurrencyStamp" text,
+    "PhoneNumber" text,
+    "PhoneNumberConfirmed" boolean NOT NULL,
+    "TwoFactorEnabled" boolean NOT NULL,
+    "LockoutEnd" timestamp with time zone,
+    "LockoutEnabled" boolean NOT NULL,
+    "AccessFailedCount" integer NOT NULL,
+    CONSTRAINT "PK_AspNetUsers" PRIMARY KEY ("Id")
+);
+2025-07-31 09:13:59.792 +08:00 [WRN] Migration failed. This might be due to pending model changes. Continuing anyway...
+Npgsql.PostgresException (0x80004005): 42P07: relation "AspNetUsers" already exists
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteNonQuery(Boolean async, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteNonQueryAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteNonQueryAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteNonQueryAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Migrations.Internal.MigrationCommandExecutor.ExecuteAsync(IReadOnlyList`1 migrationCommands, IRelationalConnection connection, MigrationExecutionState executionState, Boolean beginTransaction, Boolean commitTransaction, Nullable`1 isolationLevel, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Migrations.Internal.MigrationCommandExecutor.ExecuteAsync(IReadOnlyList`1 migrationCommands, IRelationalConnection connection, MigrationExecutionState executionState, Boolean beginTransaction, Boolean commitTransaction, Nullable`1 isolationLevel, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Migrations.Internal.MigrationCommandExecutor.ExecuteNonQueryAsync(IReadOnlyList`1 migrationCommands, IRelationalConnection connection, MigrationExecutionState executionState, Boolean commitTransaction, Nullable`1 isolationLevel, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Migrations.Internal.Migrator.MigrateImplementationAsync(DbContext context, String targetMigration, MigrationExecutionState state, Boolean useTransaction, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Migrations.Internal.Migrator.MigrateImplementationAsync(DbContext context, String targetMigration, MigrationExecutionState state, Boolean useTransaction, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Migrations.Internal.Migrator.<>c.<<MigrateAsync>b__22_1>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Migrations.Internal.Migrator.MigrateAsync(String targetMigration, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Migrations.Internal.Migrator.MigrateAsync(String targetMigration, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Migrations.Internal.NpgsqlMigrator.MigrateAsync(String targetMigration, CancellationToken cancellationToken)
+   at Program.<Main>$(String[] args) in D:\ProductDevelopment\Cece\CeceLearningPortal.Backend\CeceLearningPortal.Api\Program.cs:line 226
+  Exception data:
+    Severity: ERROR
+    SqlState: 42P07
+    MessageText: relation "AspNetUsers" already exists
+    File: heap.c
+    Line: 1162
+    Routine: heap_create_with_catalog
+2025-07-31 09:13:59.807 +08:00 [INF] Starting data seeding...
+2025-07-31 09:13:59.818 +08:00 [INF] User profile is available. Using 'C:\Users\User\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-07-31 09:13:59.947 +08:00 [INF] Database already contains data. Skipping seed.
+2025-07-31 09:13:59.947 +08:00 [INF] Data seeding completed.
+2025-07-31 09:13:59.986 +08:00 [INF] Now listening on: http://localhost:5295
+2025-07-31 09:13:59.987 +08:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-07-31 09:13:59.987 +08:00 [INF] Hosting environment: Development
+2025-07-31 09:13:59.988 +08:00 [INF] Content root path: D:\ProductDevelopment\Cece\CeceLearningPortal.Backend\CeceLearningPortal.Api
+2025-07-31 09:24:04.143 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5295/api/courses - null null
+2025-07-31 09:24:04.496 +08:00 [WRN] Failed to determine the https port for redirect.
+2025-07-31 09:24:04.579 +08:00 [INF] Executing endpoint 'CeceLearningPortal.Api.Controllers.CoursesController.GetCourses (CeceLearningPortal.Api)'
+2025-07-31 09:24:04.604 +08:00 [INF] Route matched with {action = "GetCourses", controller = "Courses"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetCourses(CeceLearningPortal.Api.DTOs.CourseFilterDto) on controller CeceLearningPortal.Api.Controllers.CoursesController (CeceLearningPortal.Api).
+2025-07-31 09:24:04.747 +08:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2025-07-31 09:24:04.839 +08:00 [ERR] Failed executing DbCommand (16ms) [Parameters=[@__p_1='?' (DbType = Int32), @__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT c0."Id", c0."AccessDuration", c0."AccessType", c0."AutomationAbandonmentSequence", c0."AutomationCompletionCertificate", c0."AutomationProgressReminders", c0."AutomationWelcomeEmail", c0."Category", c0."CourseType", c0."CreatedAt", c0."Currency", c0."Description", c0."Discount", c0."DripContent", c0."DripScheduleJson", c0."Duration", c0."EnrollmentLimit", c0."EnrollmentType", c0."Features", c0."HasAssignments", c0."HasCertificate", c0."HasCommunity", c0."HasDownloadableResources", c0."HasLiveSessions", c0."HasQuizzes", c0."InstructorId", c0."IsBestseller", c0."IsPublished", c0."Language", c0."Level", c0."OriginalPrice", c0."PaymentPlanDetailsJson", c0."PreviewUrl", c0."Price", c0."PricingModel", c0."PromoVideoUrl", c0."PublishedAt", c0."ShortDescription", c0."Status", c0."SubscriptionPeriod", c0."Thumbnail", c0."ThumbnailUrl", c0."Title", c0."UpdatedAt", a."Id", a."AccessFailedCount", a."Avatar", a."ConcurrencyStamp", a."CreatedAt", a."Email", a."EmailConfirmed", a."FullName", a."LastLoginAt", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."NotificationPreferences", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."RefreshToken", a."RefreshTokenExpiryTime", a."Role", a."SecurityStamp", a."Status", a."TwoFactorEnabled", a."UserName", s."Id", s."CourseId", s."CreatedAt", s."Description", s."Order", s."Title", s."UpdatedAt", s."Id0", s."Content", s."CreatedAt0", s."Duration", s."ModuleId", s."Order0", s."Title0", s."Type", s."UpdatedAt0", s."VideoUrl", r."Id", r."ApprovedAt", r."ApprovedBy", r."Comment", r."CourseId", r."CreatedAt", r."IsFlagged", r."Rating", r."Status", r."StudentId", e."Id", e."AverageQuizScore", e."CertificateIssued", e."CertificateUrl", e."CompletedAt", e."CompletedLessons", e."CourseId", e."EnrolledAt", e."LastAccessedDate", e."ProgressPercentage", e."QuizCount", e."StudentId", e."TotalTimeSpent"
+FROM (
+    SELECT c."Id", c."AccessDuration", c."AccessType", c."AutomationAbandonmentSequence", c."AutomationCompletionCertificate", c."AutomationProgressReminders", c."AutomationWelcomeEmail", c."Category", c."CourseType", c."CreatedAt", c."Currency", c."Description", c."Discount", c."DripContent", c."DripScheduleJson", c."Duration", c."EnrollmentLimit", c."EnrollmentType", c."Features", c."HasAssignments", c."HasCertificate", c."HasCommunity", c."HasDownloadableResources", c."HasLiveSessions", c."HasQuizzes", c."InstructorId", c."IsBestseller", c."IsPublished", c."Language", c."Level", c."OriginalPrice", c."PaymentPlanDetailsJson", c."PreviewUrl", c."Price", c."PricingModel", c."PromoVideoUrl", c."PublishedAt", c."ShortDescription", c."Status", c."SubscriptionPeriod", c."Thumbnail", c."ThumbnailUrl", c."Title", c."UpdatedAt"
+    FROM "Courses" AS c
+    ORDER BY c."CreatedAt" DESC
+    LIMIT @__p_1 OFFSET @__p_0
+) AS c0
+INNER JOIN "AspNetUsers" AS a ON c0."InstructorId" = a."Id"
+LEFT JOIN (
+    SELECT c1."Id", c1."CourseId", c1."CreatedAt", c1."Description", c1."Order", c1."Title", c1."UpdatedAt", l."Id" AS "Id0", l."Content", l."CreatedAt" AS "CreatedAt0", l."Duration", l."ModuleId", l."Order" AS "Order0", l."Title" AS "Title0", l."Type", l."UpdatedAt" AS "UpdatedAt0", l."VideoUrl"
+    FROM "CourseModules" AS c1
+    LEFT JOIN "Lessons" AS l ON c1."Id" = l."ModuleId"
+) AS s ON c0."Id" = s."CourseId"
+LEFT JOIN "Reviews" AS r ON c0."Id" = r."CourseId"
+LEFT JOIN "Enrollments" AS e ON c0."Id" = e."CourseId"
+ORDER BY c0."CreatedAt" DESC, c0."Id", a."Id", s."Id", s."Id0", r."Id"
+2025-07-31 09:24:04.853 +08:00 [ERR] An exception occurred while iterating over the results of a query for context type 'CeceLearningPortal.Api.Data.ApplicationDbContext'.
+Npgsql.PostgresException (0x80004005): 42703: column c.AccessDuration does not exist
+
+POSITION: 1933
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+  Exception data:
+    Severity: ERROR
+    SqlState: 42703
+    MessageText: column c.AccessDuration does not exist
+    Position: 1933
+    File: parse_relation.c
+    Line: 3721
+    Routine: errorMissingColumn
+Npgsql.PostgresException (0x80004005): 42703: column c.AccessDuration does not exist
+
+POSITION: 1933
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+  Exception data:
+    Severity: ERROR
+    SqlState: 42703
+    MessageText: column c.AccessDuration does not exist
+    Position: 1933
+    File: parse_relation.c
+    Line: 3721
+    Routine: errorMissingColumn
+2025-07-31 09:24:04.858 +08:00 [ERR] Error retrieving courses
+Npgsql.PostgresException (0x80004005): 42703: column c.AccessDuration does not exist
+
+POSITION: 1933
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at CeceLearningPortal.Api.Services.CourseService.GetAllCoursesAsync(CourseFilterDto filter) in D:\ProductDevelopment\Cece\CeceLearningPortal.Backend\CeceLearningPortal.Api\Services\CourseService.cs:line 95
+   at CeceLearningPortal.Api.Controllers.CoursesController.GetCourses(CourseFilterDto filter) in D:\ProductDevelopment\Cece\CeceLearningPortal.Backend\CeceLearningPortal.Api\Controllers\CoursesController.cs:line 26
+  Exception data:
+    Severity: ERROR
+    SqlState: 42703
+    MessageText: column c.AccessDuration does not exist
+    Position: 1933
+    File: parse_relation.c
+    Line: 3721
+    Routine: errorMissingColumn
+2025-07-31 09:24:04.869 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType0`1[[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-31 09:24:04.881 +08:00 [INF] Executed action CeceLearningPortal.Api.Controllers.CoursesController.GetCourses (CeceLearningPortal.Api) in 274.8951ms
+2025-07-31 09:24:04.885 +08:00 [INF] Executed endpoint 'CeceLearningPortal.Api.Controllers.CoursesController.GetCourses (CeceLearningPortal.Api)'
+2025-07-31 09:24:04.888 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost:5295/api/courses - 500 null application/json; charset=utf-8 745.6525ms
+2025-07-31 09:32:46.512 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5295/api/courses - null null
+2025-07-31 09:32:46.517 +08:00 [INF] Executing endpoint 'CeceLearningPortal.Api.Controllers.CoursesController.GetCourses (CeceLearningPortal.Api)'
+2025-07-31 09:32:46.517 +08:00 [INF] Route matched with {action = "GetCourses", controller = "Courses"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetCourses(CeceLearningPortal.Api.DTOs.CourseFilterDto) on controller CeceLearningPortal.Api.Controllers.CoursesController (CeceLearningPortal.Api).
+2025-07-31 09:32:46.648 +08:00 [ERR] Failed executing DbCommand (1ms) [Parameters=[@__p_1='?' (DbType = Int32), @__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT c0."Id", c0."AccessDuration", c0."AccessType", c0."AutomationAbandonmentSequence", c0."AutomationCompletionCertificate", c0."AutomationProgressReminders", c0."AutomationWelcomeEmail", c0."Category", c0."CourseType", c0."CreatedAt", c0."Currency", c0."Description", c0."Discount", c0."DripContent", c0."DripScheduleJson", c0."Duration", c0."EnrollmentLimit", c0."EnrollmentType", c0."Features", c0."HasAssignments", c0."HasCertificate", c0."HasCommunity", c0."HasDownloadableResources", c0."HasLiveSessions", c0."HasQuizzes", c0."InstructorId", c0."IsBestseller", c0."IsPublished", c0."Language", c0."Level", c0."OriginalPrice", c0."PaymentPlanDetailsJson", c0."PreviewUrl", c0."Price", c0."PricingModel", c0."PromoVideoUrl", c0."PublishedAt", c0."ShortDescription", c0."Status", c0."SubscriptionPeriod", c0."Thumbnail", c0."ThumbnailUrl", c0."Title", c0."UpdatedAt", a."Id", a."AccessFailedCount", a."Avatar", a."ConcurrencyStamp", a."CreatedAt", a."Email", a."EmailConfirmed", a."FullName", a."LastLoginAt", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."NotificationPreferences", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."RefreshToken", a."RefreshTokenExpiryTime", a."Role", a."SecurityStamp", a."Status", a."TwoFactorEnabled", a."UserName", s."Id", s."CourseId", s."CreatedAt", s."Description", s."Order", s."Title", s."UpdatedAt", s."Id0", s."Content", s."CreatedAt0", s."Duration", s."ModuleId", s."Order0", s."Title0", s."Type", s."UpdatedAt0", s."VideoUrl", r."Id", r."ApprovedAt", r."ApprovedBy", r."Comment", r."CourseId", r."CreatedAt", r."IsFlagged", r."Rating", r."Status", r."StudentId", e."Id", e."AverageQuizScore", e."CertificateIssued", e."CertificateUrl", e."CompletedAt", e."CompletedLessons", e."CourseId", e."EnrolledAt", e."LastAccessedDate", e."ProgressPercentage", e."QuizCount", e."StudentId", e."TotalTimeSpent"
+FROM (
+    SELECT c."Id", c."AccessDuration", c."AccessType", c."AutomationAbandonmentSequence", c."AutomationCompletionCertificate", c."AutomationProgressReminders", c."AutomationWelcomeEmail", c."Category", c."CourseType", c."CreatedAt", c."Currency", c."Description", c."Discount", c."DripContent", c."DripScheduleJson", c."Duration", c."EnrollmentLimit", c."EnrollmentType", c."Features", c."HasAssignments", c."HasCertificate", c."HasCommunity", c."HasDownloadableResources", c."HasLiveSessions", c."HasQuizzes", c."InstructorId", c."IsBestseller", c."IsPublished", c."Language", c."Level", c."OriginalPrice", c."PaymentPlanDetailsJson", c."PreviewUrl", c."Price", c."PricingModel", c."PromoVideoUrl", c."PublishedAt", c."ShortDescription", c."Status", c."SubscriptionPeriod", c."Thumbnail", c."ThumbnailUrl", c."Title", c."UpdatedAt"
+    FROM "Courses" AS c
+    ORDER BY c."CreatedAt" DESC
+    LIMIT @__p_1 OFFSET @__p_0
+) AS c0
+INNER JOIN "AspNetUsers" AS a ON c0."InstructorId" = a."Id"
+LEFT JOIN (
+    SELECT c1."Id", c1."CourseId", c1."CreatedAt", c1."Description", c1."Order", c1."Title", c1."UpdatedAt", l."Id" AS "Id0", l."Content", l."CreatedAt" AS "CreatedAt0", l."Duration", l."ModuleId", l."Order" AS "Order0", l."Title" AS "Title0", l."Type", l."UpdatedAt" AS "UpdatedAt0", l."VideoUrl"
+    FROM "CourseModules" AS c1
+    LEFT JOIN "Lessons" AS l ON c1."Id" = l."ModuleId"
+) AS s ON c0."Id" = s."CourseId"
+LEFT JOIN "Reviews" AS r ON c0."Id" = r."CourseId"
+LEFT JOIN "Enrollments" AS e ON c0."Id" = e."CourseId"
+ORDER BY c0."CreatedAt" DESC, c0."Id", a."Id", s."Id", s."Id0", r."Id"
+2025-07-31 09:32:46.651 +08:00 [ERR] An exception occurred while iterating over the results of a query for context type 'CeceLearningPortal.Api.Data.ApplicationDbContext'.
+Npgsql.PostgresException (0x80004005): 42703: column c.AccessDuration does not exist
+
+POSITION: 1933
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+  Exception data:
+    Severity: ERROR
+    SqlState: 42703
+    MessageText: column c.AccessDuration does not exist
+    Position: 1933
+    File: parse_relation.c
+    Line: 3721
+    Routine: errorMissingColumn
+Npgsql.PostgresException (0x80004005): 42703: column c.AccessDuration does not exist
+
+POSITION: 1933
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+  Exception data:
+    Severity: ERROR
+    SqlState: 42703
+    MessageText: column c.AccessDuration does not exist
+    Position: 1933
+    File: parse_relation.c
+    Line: 3721
+    Routine: errorMissingColumn
+2025-07-31 09:32:46.656 +08:00 [ERR] Error retrieving courses
+Npgsql.PostgresException (0x80004005): 42703: column c.AccessDuration does not exist
+
+POSITION: 1933
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at CeceLearningPortal.Api.Services.CourseService.GetAllCoursesAsync(CourseFilterDto filter) in D:\ProductDevelopment\Cece\CeceLearningPortal.Backend\CeceLearningPortal.Api\Services\CourseService.cs:line 95
+   at CeceLearningPortal.Api.Controllers.CoursesController.GetCourses(CourseFilterDto filter) in D:\ProductDevelopment\Cece\CeceLearningPortal.Backend\CeceLearningPortal.Api\Controllers\CoursesController.cs:line 26
+  Exception data:
+    Severity: ERROR
+    SqlState: 42703
+    MessageText: column c.AccessDuration does not exist
+    Position: 1933
+    File: parse_relation.c
+    Line: 3721
+    Routine: errorMissingColumn
+2025-07-31 09:32:46.661 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType0`1[[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-31 09:32:46.663 +08:00 [INF] Executed action CeceLearningPortal.Api.Controllers.CoursesController.GetCourses (CeceLearningPortal.Api) in 144.3896ms
+2025-07-31 09:32:46.663 +08:00 [INF] Executed endpoint 'CeceLearningPortal.Api.Controllers.CoursesController.GetCourses (CeceLearningPortal.Api)'
+2025-07-31 09:32:46.664 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost:5295/api/courses - 500 null application/json; charset=utf-8 151.7982ms
+2025-07-31 09:35:00.848 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5295/api/courses - null null
+2025-07-31 09:35:00.851 +08:00 [INF] Executing endpoint 'CeceLearningPortal.Api.Controllers.CoursesController.GetCourses (CeceLearningPortal.Api)'
+2025-07-31 09:35:00.851 +08:00 [INF] Route matched with {action = "GetCourses", controller = "Courses"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetCourses(CeceLearningPortal.Api.DTOs.CourseFilterDto) on controller CeceLearningPortal.Api.Controllers.CoursesController (CeceLearningPortal.Api).
+2025-07-31 09:35:00.855 +08:00 [ERR] Failed executing DbCommand (1ms) [Parameters=[@__p_1='?' (DbType = Int32), @__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT c0."Id", c0."AccessDuration", c0."AccessType", c0."AutomationAbandonmentSequence", c0."AutomationCompletionCertificate", c0."AutomationProgressReminders", c0."AutomationWelcomeEmail", c0."Category", c0."CourseType", c0."CreatedAt", c0."Currency", c0."Description", c0."Discount", c0."DripContent", c0."DripScheduleJson", c0."Duration", c0."EnrollmentLimit", c0."EnrollmentType", c0."Features", c0."HasAssignments", c0."HasCertificate", c0."HasCommunity", c0."HasDownloadableResources", c0."HasLiveSessions", c0."HasQuizzes", c0."InstructorId", c0."IsBestseller", c0."IsPublished", c0."Language", c0."Level", c0."OriginalPrice", c0."PaymentPlanDetailsJson", c0."PreviewUrl", c0."Price", c0."PricingModel", c0."PromoVideoUrl", c0."PublishedAt", c0."ShortDescription", c0."Status", c0."SubscriptionPeriod", c0."Thumbnail", c0."ThumbnailUrl", c0."Title", c0."UpdatedAt", a."Id", a."AccessFailedCount", a."Avatar", a."ConcurrencyStamp", a."CreatedAt", a."Email", a."EmailConfirmed", a."FullName", a."LastLoginAt", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."NotificationPreferences", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."RefreshToken", a."RefreshTokenExpiryTime", a."Role", a."SecurityStamp", a."Status", a."TwoFactorEnabled", a."UserName", s."Id", s."CourseId", s."CreatedAt", s."Description", s."Order", s."Title", s."UpdatedAt", s."Id0", s."Content", s."CreatedAt0", s."Duration", s."ModuleId", s."Order0", s."Title0", s."Type", s."UpdatedAt0", s."VideoUrl", r."Id", r."ApprovedAt", r."ApprovedBy", r."Comment", r."CourseId", r."CreatedAt", r."IsFlagged", r."Rating", r."Status", r."StudentId", e."Id", e."AverageQuizScore", e."CertificateIssued", e."CertificateUrl", e."CompletedAt", e."CompletedLessons", e."CourseId", e."EnrolledAt", e."LastAccessedDate", e."ProgressPercentage", e."QuizCount", e."StudentId", e."TotalTimeSpent"
+FROM (
+    SELECT c."Id", c."AccessDuration", c."AccessType", c."AutomationAbandonmentSequence", c."AutomationCompletionCertificate", c."AutomationProgressReminders", c."AutomationWelcomeEmail", c."Category", c."CourseType", c."CreatedAt", c."Currency", c."Description", c."Discount", c."DripContent", c."DripScheduleJson", c."Duration", c."EnrollmentLimit", c."EnrollmentType", c."Features", c."HasAssignments", c."HasCertificate", c."HasCommunity", c."HasDownloadableResources", c."HasLiveSessions", c."HasQuizzes", c."InstructorId", c."IsBestseller", c."IsPublished", c."Language", c."Level", c."OriginalPrice", c."PaymentPlanDetailsJson", c."PreviewUrl", c."Price", c."PricingModel", c."PromoVideoUrl", c."PublishedAt", c."ShortDescription", c."Status", c."SubscriptionPeriod", c."Thumbnail", c."ThumbnailUrl", c."Title", c."UpdatedAt"
+    FROM "Courses" AS c
+    ORDER BY c."CreatedAt" DESC
+    LIMIT @__p_1 OFFSET @__p_0
+) AS c0
+INNER JOIN "AspNetUsers" AS a ON c0."InstructorId" = a."Id"
+LEFT JOIN (
+    SELECT c1."Id", c1."CourseId", c1."CreatedAt", c1."Description", c1."Order", c1."Title", c1."UpdatedAt", l."Id" AS "Id0", l."Content", l."CreatedAt" AS "CreatedAt0", l."Duration", l."ModuleId", l."Order" AS "Order0", l."Title" AS "Title0", l."Type", l."UpdatedAt" AS "UpdatedAt0", l."VideoUrl"
+    FROM "CourseModules" AS c1
+    LEFT JOIN "Lessons" AS l ON c1."Id" = l."ModuleId"
+) AS s ON c0."Id" = s."CourseId"
+LEFT JOIN "Reviews" AS r ON c0."Id" = r."CourseId"
+LEFT JOIN "Enrollments" AS e ON c0."Id" = e."CourseId"
+ORDER BY c0."CreatedAt" DESC, c0."Id", a."Id", s."Id", s."Id0", r."Id"
+2025-07-31 09:35:00.857 +08:00 [ERR] An exception occurred while iterating over the results of a query for context type 'CeceLearningPortal.Api.Data.ApplicationDbContext'.
+Npgsql.PostgresException (0x80004005): 42703: column c.Id does not exist
+
+POSITION: 1925
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+  Exception data:
+    Severity: ERROR
+    SqlState: 42703
+    MessageText: column c.Id does not exist
+    Hint: Perhaps you meant to reference the column "c.id".
+    Position: 1925
+    File: parse_relation.c
+    Line: 3732
+    Routine: errorMissingColumn
+Npgsql.PostgresException (0x80004005): 42703: column c.Id does not exist
+
+POSITION: 1925
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+  Exception data:
+    Severity: ERROR
+    SqlState: 42703
+    MessageText: column c.Id does not exist
+    Hint: Perhaps you meant to reference the column "c.id".
+    Position: 1925
+    File: parse_relation.c
+    Line: 3732
+    Routine: errorMissingColumn
+2025-07-31 09:35:00.862 +08:00 [ERR] Error retrieving courses
+Npgsql.PostgresException (0x80004005): 42703: column c.Id does not exist
+
+POSITION: 1925
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at CeceLearningPortal.Api.Services.CourseService.GetAllCoursesAsync(CourseFilterDto filter) in D:\ProductDevelopment\Cece\CeceLearningPortal.Backend\CeceLearningPortal.Api\Services\CourseService.cs:line 95
+   at CeceLearningPortal.Api.Controllers.CoursesController.GetCourses(CourseFilterDto filter) in D:\ProductDevelopment\Cece\CeceLearningPortal.Backend\CeceLearningPortal.Api\Controllers\CoursesController.cs:line 26
+  Exception data:
+    Severity: ERROR
+    SqlState: 42703
+    MessageText: column c.Id does not exist
+    Hint: Perhaps you meant to reference the column "c.id".
+    Position: 1925
+    File: parse_relation.c
+    Line: 3732
+    Routine: errorMissingColumn
+2025-07-31 09:35:00.866 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType0`1[[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-31 09:35:00.867 +08:00 [INF] Executed action CeceLearningPortal.Api.Controllers.CoursesController.GetCourses (CeceLearningPortal.Api) in 14.9548ms
+2025-07-31 09:35:00.868 +08:00 [INF] Executed endpoint 'CeceLearningPortal.Api.Controllers.CoursesController.GetCourses (CeceLearningPortal.Api)'
+2025-07-31 09:35:00.868 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost:5295/api/courses - 500 null application/json; charset=utf-8 20.1395ms
+2025-07-31 09:36:25.301 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5295/swagger/index.html - null null
+2025-07-31 09:36:25.674 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost:5295/swagger/index.html - 200 null text/html;charset=utf-8 372.9394ms
+2025-07-31 09:36:31.651 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5295/WeatherForecast - null null
+2025-07-31 09:36:31.652 +08:00 [INF] Executing endpoint 'CeceLearningPortal.Api.Controllers.WeatherForecastController.Get (CeceLearningPortal.Api)'
+2025-07-31 09:36:31.654 +08:00 [INF] Route matched with {action = "Get", controller = "WeatherForecast"}. Executing controller action with signature System.Collections.Generic.IEnumerable`1[CeceLearningPortal.Api.WeatherForecast] Get() on controller CeceLearningPortal.Api.Controllers.WeatherForecastController (CeceLearningPortal.Api).
+2025-07-31 09:36:31.665 +08:00 [INF] Executing ObjectResult, writing value of type 'CeceLearningPortal.Api.WeatherForecast[]'.
+2025-07-31 09:36:31.674 +08:00 [INF] Executed action CeceLearningPortal.Api.Controllers.WeatherForecastController.Get (CeceLearningPortal.Api) in 19.7236ms
+2025-07-31 09:36:31.675 +08:00 [INF] Executed endpoint 'CeceLearningPortal.Api.Controllers.WeatherForecastController.Get (CeceLearningPortal.Api)'
+2025-07-31 09:36:31.675 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost:5295/WeatherForecast - 200 null application/json; charset=utf-8 24.7791ms
+2025-07-31 09:36:54.541 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5295/api/courses - null null
+2025-07-31 09:36:54.542 +08:00 [INF] Executing endpoint 'CeceLearningPortal.Api.Controllers.CoursesController.GetCourses (CeceLearningPortal.Api)'
+2025-07-31 09:36:54.543 +08:00 [INF] Route matched with {action = "GetCourses", controller = "Courses"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetCourses(CeceLearningPortal.Api.DTOs.CourseFilterDto) on controller CeceLearningPortal.Api.Controllers.CoursesController (CeceLearningPortal.Api).
+2025-07-31 09:36:54.545 +08:00 [ERR] Failed executing DbCommand (1ms) [Parameters=[@__p_1='?' (DbType = Int32), @__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT c0."Id", c0."AccessDuration", c0."AccessType", c0."AutomationAbandonmentSequence", c0."AutomationCompletionCertificate", c0."AutomationProgressReminders", c0."AutomationWelcomeEmail", c0."Category", c0."CourseType", c0."CreatedAt", c0."Currency", c0."Description", c0."Discount", c0."DripContent", c0."DripScheduleJson", c0."Duration", c0."EnrollmentLimit", c0."EnrollmentType", c0."Features", c0."HasAssignments", c0."HasCertificate", c0."HasCommunity", c0."HasDownloadableResources", c0."HasLiveSessions", c0."HasQuizzes", c0."InstructorId", c0."IsBestseller", c0."IsPublished", c0."Language", c0."Level", c0."OriginalPrice", c0."PaymentPlanDetailsJson", c0."PreviewUrl", c0."Price", c0."PricingModel", c0."PromoVideoUrl", c0."PublishedAt", c0."ShortDescription", c0."Status", c0."SubscriptionPeriod", c0."Thumbnail", c0."ThumbnailUrl", c0."Title", c0."UpdatedAt", a."Id", a."AccessFailedCount", a."Avatar", a."ConcurrencyStamp", a."CreatedAt", a."Email", a."EmailConfirmed", a."FullName", a."LastLoginAt", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."NotificationPreferences", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."RefreshToken", a."RefreshTokenExpiryTime", a."Role", a."SecurityStamp", a."Status", a."TwoFactorEnabled", a."UserName", s."Id", s."CourseId", s."CreatedAt", s."Description", s."Order", s."Title", s."UpdatedAt", s."Id0", s."Content", s."CreatedAt0", s."Duration", s."ModuleId", s."Order0", s."Title0", s."Type", s."UpdatedAt0", s."VideoUrl", r."Id", r."ApprovedAt", r."ApprovedBy", r."Comment", r."CourseId", r."CreatedAt", r."IsFlagged", r."Rating", r."Status", r."StudentId", e."Id", e."AverageQuizScore", e."CertificateIssued", e."CertificateUrl", e."CompletedAt", e."CompletedLessons", e."CourseId", e."EnrolledAt", e."LastAccessedDate", e."ProgressPercentage", e."QuizCount", e."StudentId", e."TotalTimeSpent"
+FROM (
+    SELECT c."Id", c."AccessDuration", c."AccessType", c."AutomationAbandonmentSequence", c."AutomationCompletionCertificate", c."AutomationProgressReminders", c."AutomationWelcomeEmail", c."Category", c."CourseType", c."CreatedAt", c."Currency", c."Description", c."Discount", c."DripContent", c."DripScheduleJson", c."Duration", c."EnrollmentLimit", c."EnrollmentType", c."Features", c."HasAssignments", c."HasCertificate", c."HasCommunity", c."HasDownloadableResources", c."HasLiveSessions", c."HasQuizzes", c."InstructorId", c."IsBestseller", c."IsPublished", c."Language", c."Level", c."OriginalPrice", c."PaymentPlanDetailsJson", c."PreviewUrl", c."Price", c."PricingModel", c."PromoVideoUrl", c."PublishedAt", c."ShortDescription", c."Status", c."SubscriptionPeriod", c."Thumbnail", c."ThumbnailUrl", c."Title", c."UpdatedAt"
+    FROM "Courses" AS c
+    ORDER BY c."CreatedAt" DESC
+    LIMIT @__p_1 OFFSET @__p_0
+) AS c0
+INNER JOIN "AspNetUsers" AS a ON c0."InstructorId" = a."Id"
+LEFT JOIN (
+    SELECT c1."Id", c1."CourseId", c1."CreatedAt", c1."Description", c1."Order", c1."Title", c1."UpdatedAt", l."Id" AS "Id0", l."Content", l."CreatedAt" AS "CreatedAt0", l."Duration", l."ModuleId", l."Order" AS "Order0", l."Title" AS "Title0", l."Type", l."UpdatedAt" AS "UpdatedAt0", l."VideoUrl"
+    FROM "CourseModules" AS c1
+    LEFT JOIN "Lessons" AS l ON c1."Id" = l."ModuleId"
+) AS s ON c0."Id" = s."CourseId"
+LEFT JOIN "Reviews" AS r ON c0."Id" = r."CourseId"
+LEFT JOIN "Enrollments" AS e ON c0."Id" = e."CourseId"
+ORDER BY c0."CreatedAt" DESC, c0."Id", a."Id", s."Id", s."Id0", r."Id"
+2025-07-31 09:36:54.548 +08:00 [ERR] An exception occurred while iterating over the results of a query for context type 'CeceLearningPortal.Api.Data.ApplicationDbContext'.
+Npgsql.PostgresException (0x80004005): 42P01: relation "Courses" does not exist
+
+POSITION: 2757
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+  Exception data:
+    Severity: ERROR
+    SqlState: 42P01
+    MessageText: relation "Courses" does not exist
+    Position: 2757
+    File: parse_relation.c
+    Line: 1452
+    Routine: parserOpenTable
+Npgsql.PostgresException (0x80004005): 42P01: relation "Courses" does not exist
+
+POSITION: 2757
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+  Exception data:
+    Severity: ERROR
+    SqlState: 42P01
+    MessageText: relation "Courses" does not exist
+    Position: 2757
+    File: parse_relation.c
+    Line: 1452
+    Routine: parserOpenTable
+2025-07-31 09:36:54.552 +08:00 [ERR] Error retrieving courses
+Npgsql.PostgresException (0x80004005): 42P01: relation "Courses" does not exist
+
+POSITION: 2757
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at CeceLearningPortal.Api.Services.CourseService.GetAllCoursesAsync(CourseFilterDto filter) in D:\ProductDevelopment\Cece\CeceLearningPortal.Backend\CeceLearningPortal.Api\Services\CourseService.cs:line 95
+   at CeceLearningPortal.Api.Controllers.CoursesController.GetCourses(CourseFilterDto filter) in D:\ProductDevelopment\Cece\CeceLearningPortal.Backend\CeceLearningPortal.Api\Controllers\CoursesController.cs:line 26
+  Exception data:
+    Severity: ERROR
+    SqlState: 42P01
+    MessageText: relation "Courses" does not exist
+    Position: 2757
+    File: parse_relation.c
+    Line: 1452
+    Routine: parserOpenTable
+2025-07-31 09:36:54.557 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType0`1[[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-31 09:36:54.557 +08:00 [INF] Executed action CeceLearningPortal.Api.Controllers.CoursesController.GetCourses (CeceLearningPortal.Api) in 13.9365ms
+2025-07-31 09:36:54.558 +08:00 [INF] Executed endpoint 'CeceLearningPortal.Api.Controllers.CoursesController.GetCourses (CeceLearningPortal.Api)'
+2025-07-31 09:36:54.558 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost:5295/api/courses - 500 null application/json; charset=utf-8 17.8564ms
+2025-07-31 09:37:23.313 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5295/api/courses - null null
+2025-07-31 09:37:23.314 +08:00 [INF] Executing endpoint 'CeceLearningPortal.Api.Controllers.CoursesController.GetCourses (CeceLearningPortal.Api)'
+2025-07-31 09:37:23.315 +08:00 [INF] Route matched with {action = "GetCourses", controller = "Courses"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetCourses(CeceLearningPortal.Api.DTOs.CourseFilterDto) on controller CeceLearningPortal.Api.Controllers.CoursesController (CeceLearningPortal.Api).
+2025-07-31 09:37:23.330 +08:00 [ERR] Failed executing DbCommand (14ms) [Parameters=[@__p_1='?' (DbType = Int32), @__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT c0."Id", c0."AccessDuration", c0."AccessType", c0."AutomationAbandonmentSequence", c0."AutomationCompletionCertificate", c0."AutomationProgressReminders", c0."AutomationWelcomeEmail", c0."Category", c0."CourseType", c0."CreatedAt", c0."Currency", c0."Description", c0."Discount", c0."DripContent", c0."DripScheduleJson", c0."Duration", c0."EnrollmentLimit", c0."EnrollmentType", c0."Features", c0."HasAssignments", c0."HasCertificate", c0."HasCommunity", c0."HasDownloadableResources", c0."HasLiveSessions", c0."HasQuizzes", c0."InstructorId", c0."IsBestseller", c0."IsPublished", c0."Language", c0."Level", c0."OriginalPrice", c0."PaymentPlanDetailsJson", c0."PreviewUrl", c0."Price", c0."PricingModel", c0."PromoVideoUrl", c0."PublishedAt", c0."ShortDescription", c0."Status", c0."SubscriptionPeriod", c0."Thumbnail", c0."ThumbnailUrl", c0."Title", c0."UpdatedAt", a."Id", a."AccessFailedCount", a."Avatar", a."ConcurrencyStamp", a."CreatedAt", a."Email", a."EmailConfirmed", a."FullName", a."LastLoginAt", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."NotificationPreferences", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."RefreshToken", a."RefreshTokenExpiryTime", a."Role", a."SecurityStamp", a."Status", a."TwoFactorEnabled", a."UserName", s."Id", s."CourseId", s."CreatedAt", s."Description", s."Order", s."Title", s."UpdatedAt", s."Id0", s."Content", s."CreatedAt0", s."Duration", s."ModuleId", s."Order0", s."Title0", s."Type", s."UpdatedAt0", s."VideoUrl", r."Id", r."ApprovedAt", r."ApprovedBy", r."Comment", r."CourseId", r."CreatedAt", r."IsFlagged", r."Rating", r."Status", r."StudentId", e."Id", e."AverageQuizScore", e."CertificateIssued", e."CertificateUrl", e."CompletedAt", e."CompletedLessons", e."CourseId", e."EnrolledAt", e."LastAccessedDate", e."ProgressPercentage", e."QuizCount", e."StudentId", e."TotalTimeSpent"
+FROM (
+    SELECT c."Id", c."AccessDuration", c."AccessType", c."AutomationAbandonmentSequence", c."AutomationCompletionCertificate", c."AutomationProgressReminders", c."AutomationWelcomeEmail", c."Category", c."CourseType", c."CreatedAt", c."Currency", c."Description", c."Discount", c."DripContent", c."DripScheduleJson", c."Duration", c."EnrollmentLimit", c."EnrollmentType", c."Features", c."HasAssignments", c."HasCertificate", c."HasCommunity", c."HasDownloadableResources", c."HasLiveSessions", c."HasQuizzes", c."InstructorId", c."IsBestseller", c."IsPublished", c."Language", c."Level", c."OriginalPrice", c."PaymentPlanDetailsJson", c."PreviewUrl", c."Price", c."PricingModel", c."PromoVideoUrl", c."PublishedAt", c."ShortDescription", c."Status", c."SubscriptionPeriod", c."Thumbnail", c."ThumbnailUrl", c."Title", c."UpdatedAt"
+    FROM "Courses" AS c
+    ORDER BY c."CreatedAt" DESC
+    LIMIT @__p_1 OFFSET @__p_0
+) AS c0
+INNER JOIN "AspNetUsers" AS a ON c0."InstructorId" = a."Id"
+LEFT JOIN (
+    SELECT c1."Id", c1."CourseId", c1."CreatedAt", c1."Description", c1."Order", c1."Title", c1."UpdatedAt", l."Id" AS "Id0", l."Content", l."CreatedAt" AS "CreatedAt0", l."Duration", l."ModuleId", l."Order" AS "Order0", l."Title" AS "Title0", l."Type", l."UpdatedAt" AS "UpdatedAt0", l."VideoUrl"
+    FROM "CourseModules" AS c1
+    LEFT JOIN "Lessons" AS l ON c1."Id" = l."ModuleId"
+) AS s ON c0."Id" = s."CourseId"
+LEFT JOIN "Reviews" AS r ON c0."Id" = r."CourseId"
+LEFT JOIN "Enrollments" AS e ON c0."Id" = e."CourseId"
+ORDER BY c0."CreatedAt" DESC, c0."Id", a."Id", s."Id", s."Id0", r."Id"
+2025-07-31 09:37:23.333 +08:00 [ERR] An exception occurred while iterating over the results of a query for context type 'CeceLearningPortal.Api.Data.ApplicationDbContext'.
+Npgsql.PostgresException (0x80004005): 42P01: relation "Courses" does not exist
+
+POSITION: 2757
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+  Exception data:
+    Severity: ERROR
+    SqlState: 42P01
+    MessageText: relation "Courses" does not exist
+    Position: 2757
+    File: parse_relation.c
+    Line: 1452
+    Routine: parserOpenTable
+Npgsql.PostgresException (0x80004005): 42P01: relation "Courses" does not exist
+
+POSITION: 2757
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+  Exception data:
+    Severity: ERROR
+    SqlState: 42P01
+    MessageText: relation "Courses" does not exist
+    Position: 2757
+    File: parse_relation.c
+    Line: 1452
+    Routine: parserOpenTable
+2025-07-31 09:37:23.337 +08:00 [ERR] Error retrieving courses
+Npgsql.PostgresException (0x80004005): 42P01: relation "Courses" does not exist
+
+POSITION: 2757
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at CeceLearningPortal.Api.Services.CourseService.GetAllCoursesAsync(CourseFilterDto filter) in D:\ProductDevelopment\Cece\CeceLearningPortal.Backend\CeceLearningPortal.Api\Services\CourseService.cs:line 95
+   at CeceLearningPortal.Api.Controllers.CoursesController.GetCourses(CourseFilterDto filter) in D:\ProductDevelopment\Cece\CeceLearningPortal.Backend\CeceLearningPortal.Api\Controllers\CoursesController.cs:line 26
+  Exception data:
+    Severity: ERROR
+    SqlState: 42P01
+    MessageText: relation "Courses" does not exist
+    Position: 2757
+    File: parse_relation.c
+    Line: 1452
+    Routine: parserOpenTable
+2025-07-31 09:37:23.342 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType0`1[[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-31 09:37:23.342 +08:00 [INF] Executed action CeceLearningPortal.Api.Controllers.CoursesController.GetCourses (CeceLearningPortal.Api) in 26.8165ms
+2025-07-31 09:37:23.343 +08:00 [INF] Executed endpoint 'CeceLearningPortal.Api.Controllers.CoursesController.GetCourses (CeceLearningPortal.Api)'
+2025-07-31 09:37:23.343 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost:5295/api/courses - 500 null application/json; charset=utf-8 30.6069ms
+2025-07-31 09:40:40.931 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5295/api/courses - null null
+2025-07-31 09:40:40.932 +08:00 [INF] Executing endpoint 'CeceLearningPortal.Api.Controllers.CoursesController.GetCourses (CeceLearningPortal.Api)'
+2025-07-31 09:40:40.933 +08:00 [INF] Route matched with {action = "GetCourses", controller = "Courses"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetCourses(CeceLearningPortal.Api.DTOs.CourseFilterDto) on controller CeceLearningPortal.Api.Controllers.CoursesController (CeceLearningPortal.Api).
+2025-07-31 09:40:40.976 +08:00 [ERR] Failed executing DbCommand (1ms) [Parameters=[@__p_1='?' (DbType = Int32), @__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT c0."Id", c0."AccessDuration", c0."AccessType", c0."AutomationAbandonmentSequence", c0."AutomationCompletionCertificate", c0."AutomationProgressReminders", c0."AutomationWelcomeEmail", c0."Category", c0."CourseType", c0."CreatedAt", c0."Currency", c0."Description", c0."Discount", c0."DripContent", c0."DripScheduleJson", c0."Duration", c0."EnrollmentLimit", c0."EnrollmentType", c0."Features", c0."HasAssignments", c0."HasCertificate", c0."HasCommunity", c0."HasDownloadableResources", c0."HasLiveSessions", c0."HasQuizzes", c0."InstructorId", c0."IsBestseller", c0."IsPublished", c0."Language", c0."Level", c0."OriginalPrice", c0."PaymentPlanDetailsJson", c0."PreviewUrl", c0."Price", c0."PricingModel", c0."PromoVideoUrl", c0."PublishedAt", c0."ShortDescription", c0."Status", c0."SubscriptionPeriod", c0."Thumbnail", c0."ThumbnailUrl", c0."Title", c0."UpdatedAt", a."Id", a."AccessFailedCount", a."Avatar", a."ConcurrencyStamp", a."CreatedAt", a."Email", a."EmailConfirmed", a."FullName", a."LastLoginAt", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."NotificationPreferences", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."RefreshToken", a."RefreshTokenExpiryTime", a."Role", a."SecurityStamp", a."Status", a."TwoFactorEnabled", a."UserName", s."Id", s."CourseId", s."CreatedAt", s."Description", s."Order", s."Title", s."UpdatedAt", s."Id0", s."Content", s."CreatedAt0", s."Duration", s."ModuleId", s."Order0", s."Title0", s."Type", s."UpdatedAt0", s."VideoUrl", r."Id", r."ApprovedAt", r."ApprovedBy", r."Comment", r."CourseId", r."CreatedAt", r."IsFlagged", r."Rating", r."Status", r."StudentId", e."Id", e."AverageQuizScore", e."CertificateIssued", e."CertificateUrl", e."CompletedAt", e."CompletedLessons", e."CourseId", e."EnrolledAt", e."LastAccessedDate", e."ProgressPercentage", e."QuizCount", e."StudentId", e."TotalTimeSpent"
+FROM (
+    SELECT c."Id", c."AccessDuration", c."AccessType", c."AutomationAbandonmentSequence", c."AutomationCompletionCertificate", c."AutomationProgressReminders", c."AutomationWelcomeEmail", c."Category", c."CourseType", c."CreatedAt", c."Currency", c."Description", c."Discount", c."DripContent", c."DripScheduleJson", c."Duration", c."EnrollmentLimit", c."EnrollmentType", c."Features", c."HasAssignments", c."HasCertificate", c."HasCommunity", c."HasDownloadableResources", c."HasLiveSessions", c."HasQuizzes", c."InstructorId", c."IsBestseller", c."IsPublished", c."Language", c."Level", c."OriginalPrice", c."PaymentPlanDetailsJson", c."PreviewUrl", c."Price", c."PricingModel", c."PromoVideoUrl", c."PublishedAt", c."ShortDescription", c."Status", c."SubscriptionPeriod", c."Thumbnail", c."ThumbnailUrl", c."Title", c."UpdatedAt"
+    FROM "Courses" AS c
+    ORDER BY c."CreatedAt" DESC
+    LIMIT @__p_1 OFFSET @__p_0
+) AS c0
+INNER JOIN "AspNetUsers" AS a ON c0."InstructorId" = a."Id"
+LEFT JOIN (
+    SELECT c1."Id", c1."CourseId", c1."CreatedAt", c1."Description", c1."Order", c1."Title", c1."UpdatedAt", l."Id" AS "Id0", l."Content", l."CreatedAt" AS "CreatedAt0", l."Duration", l."ModuleId", l."Order" AS "Order0", l."Title" AS "Title0", l."Type", l."UpdatedAt" AS "UpdatedAt0", l."VideoUrl"
+    FROM "CourseModules" AS c1
+    LEFT JOIN "Lessons" AS l ON c1."Id" = l."ModuleId"
+) AS s ON c0."Id" = s."CourseId"
+LEFT JOIN "Reviews" AS r ON c0."Id" = r."CourseId"
+LEFT JOIN "Enrollments" AS e ON c0."Id" = e."CourseId"
+ORDER BY c0."CreatedAt" DESC, c0."Id", a."Id", s."Id", s."Id0", r."Id"
+2025-07-31 09:40:40.979 +08:00 [ERR] An exception occurred while iterating over the results of a query for context type 'CeceLearningPortal.Api.Data.ApplicationDbContext'.
+Npgsql.PostgresException (0x80004005): 42P01: relation "CourseModules" does not exist
+
+POSITION: 3221
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+  Exception data:
+    Severity: ERROR
+    SqlState: 42P01
+    MessageText: relation "CourseModules" does not exist
+    Position: 3221
+    File: parse_relation.c
+    Line: 1452
+    Routine: parserOpenTable
+Npgsql.PostgresException (0x80004005): 42P01: relation "CourseModules" does not exist
+
+POSITION: 3221
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+  Exception data:
+    Severity: ERROR
+    SqlState: 42P01
+    MessageText: relation "CourseModules" does not exist
+    Position: 3221
+    File: parse_relation.c
+    Line: 1452
+    Routine: parserOpenTable
+2025-07-31 09:40:40.993 +08:00 [ERR] Error retrieving courses
+Npgsql.PostgresException (0x80004005): 42P01: relation "CourseModules" does not exist
+
+POSITION: 3221
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at CeceLearningPortal.Api.Services.CourseService.GetAllCoursesAsync(CourseFilterDto filter) in D:\ProductDevelopment\Cece\CeceLearningPortal.Backend\CeceLearningPortal.Api\Services\CourseService.cs:line 95
+   at CeceLearningPortal.Api.Controllers.CoursesController.GetCourses(CourseFilterDto filter) in D:\ProductDevelopment\Cece\CeceLearningPortal.Backend\CeceLearningPortal.Api\Controllers\CoursesController.cs:line 26
+  Exception data:
+    Severity: ERROR
+    SqlState: 42P01
+    MessageText: relation "CourseModules" does not exist
+    Position: 3221
+    File: parse_relation.c
+    Line: 1452
+    Routine: parserOpenTable
+2025-07-31 09:40:40.998 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType0`1[[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-31 09:40:40.998 +08:00 [INF] Executed action CeceLearningPortal.Api.Controllers.CoursesController.GetCourses (CeceLearningPortal.Api) in 64.4142ms
+2025-07-31 09:40:40.999 +08:00 [INF] Executed endpoint 'CeceLearningPortal.Api.Controllers.CoursesController.GetCourses (CeceLearningPortal.Api)'
+2025-07-31 09:40:41.000 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost:5295/api/courses - 500 null application/json; charset=utf-8 68.5241ms
+2025-07-31 09:41:44.575 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5295/api/courses - null null
+2025-07-31 09:41:44.576 +08:00 [INF] Executing endpoint 'CeceLearningPortal.Api.Controllers.CoursesController.GetCourses (CeceLearningPortal.Api)'
+2025-07-31 09:41:44.577 +08:00 [INF] Route matched with {action = "GetCourses", controller = "Courses"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetCourses(CeceLearningPortal.Api.DTOs.CourseFilterDto) on controller CeceLearningPortal.Api.Controllers.CoursesController (CeceLearningPortal.Api).
+2025-07-31 09:41:44.579 +08:00 [ERR] Failed executing DbCommand (1ms) [Parameters=[@__p_1='?' (DbType = Int32), @__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT c0."Id", c0."AccessDuration", c0."AccessType", c0."AutomationAbandonmentSequence", c0."AutomationCompletionCertificate", c0."AutomationProgressReminders", c0."AutomationWelcomeEmail", c0."Category", c0."CourseType", c0."CreatedAt", c0."Currency", c0."Description", c0."Discount", c0."DripContent", c0."DripScheduleJson", c0."Duration", c0."EnrollmentLimit", c0."EnrollmentType", c0."Features", c0."HasAssignments", c0."HasCertificate", c0."HasCommunity", c0."HasDownloadableResources", c0."HasLiveSessions", c0."HasQuizzes", c0."InstructorId", c0."IsBestseller", c0."IsPublished", c0."Language", c0."Level", c0."OriginalPrice", c0."PaymentPlanDetailsJson", c0."PreviewUrl", c0."Price", c0."PricingModel", c0."PromoVideoUrl", c0."PublishedAt", c0."ShortDescription", c0."Status", c0."SubscriptionPeriod", c0."Thumbnail", c0."ThumbnailUrl", c0."Title", c0."UpdatedAt", a."Id", a."AccessFailedCount", a."Avatar", a."ConcurrencyStamp", a."CreatedAt", a."Email", a."EmailConfirmed", a."FullName", a."LastLoginAt", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."NotificationPreferences", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."RefreshToken", a."RefreshTokenExpiryTime", a."Role", a."SecurityStamp", a."Status", a."TwoFactorEnabled", a."UserName", s."Id", s."CourseId", s."CreatedAt", s."Description", s."Order", s."Title", s."UpdatedAt", s."Id0", s."Content", s."CreatedAt0", s."Duration", s."ModuleId", s."Order0", s."Title0", s."Type", s."UpdatedAt0", s."VideoUrl", r."Id", r."ApprovedAt", r."ApprovedBy", r."Comment", r."CourseId", r."CreatedAt", r."IsFlagged", r."Rating", r."Status", r."StudentId", e."Id", e."AverageQuizScore", e."CertificateIssued", e."CertificateUrl", e."CompletedAt", e."CompletedLessons", e."CourseId", e."EnrolledAt", e."LastAccessedDate", e."ProgressPercentage", e."QuizCount", e."StudentId", e."TotalTimeSpent"
+FROM (
+    SELECT c."Id", c."AccessDuration", c."AccessType", c."AutomationAbandonmentSequence", c."AutomationCompletionCertificate", c."AutomationProgressReminders", c."AutomationWelcomeEmail", c."Category", c."CourseType", c."CreatedAt", c."Currency", c."Description", c."Discount", c."DripContent", c."DripScheduleJson", c."Duration", c."EnrollmentLimit", c."EnrollmentType", c."Features", c."HasAssignments", c."HasCertificate", c."HasCommunity", c."HasDownloadableResources", c."HasLiveSessions", c."HasQuizzes", c."InstructorId", c."IsBestseller", c."IsPublished", c."Language", c."Level", c."OriginalPrice", c."PaymentPlanDetailsJson", c."PreviewUrl", c."Price", c."PricingModel", c."PromoVideoUrl", c."PublishedAt", c."ShortDescription", c."Status", c."SubscriptionPeriod", c."Thumbnail", c."ThumbnailUrl", c."Title", c."UpdatedAt"
+    FROM "Courses" AS c
+    ORDER BY c."CreatedAt" DESC
+    LIMIT @__p_1 OFFSET @__p_0
+) AS c0
+INNER JOIN "AspNetUsers" AS a ON c0."InstructorId" = a."Id"
+LEFT JOIN (
+    SELECT c1."Id", c1."CourseId", c1."CreatedAt", c1."Description", c1."Order", c1."Title", c1."UpdatedAt", l."Id" AS "Id0", l."Content", l."CreatedAt" AS "CreatedAt0", l."Duration", l."ModuleId", l."Order" AS "Order0", l."Title" AS "Title0", l."Type", l."UpdatedAt" AS "UpdatedAt0", l."VideoUrl"
+    FROM "CourseModules" AS c1
+    LEFT JOIN "Lessons" AS l ON c1."Id" = l."ModuleId"
+) AS s ON c0."Id" = s."CourseId"
+LEFT JOIN "Reviews" AS r ON c0."Id" = r."CourseId"
+LEFT JOIN "Enrollments" AS e ON c0."Id" = e."CourseId"
+ORDER BY c0."CreatedAt" DESC, c0."Id", a."Id", s."Id", s."Id0", r."Id"
+2025-07-31 09:41:44.582 +08:00 [ERR] An exception occurred while iterating over the results of a query for context type 'CeceLearningPortal.Api.Data.ApplicationDbContext'.
+Npgsql.PostgresException (0x80004005): 42703: column c1.Id does not exist
+
+POSITION: 3276
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+  Exception data:
+    Severity: ERROR
+    SqlState: 42703
+    MessageText: column c1.Id does not exist
+    Hint: Perhaps you meant to reference the column "c1.id" or the column "c0.Id".
+    Position: 3276
+    File: parse_relation.c
+    Line: 3749
+    Routine: errorMissingColumn
+Npgsql.PostgresException (0x80004005): 42703: column c1.Id does not exist
+
+POSITION: 3276
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+  Exception data:
+    Severity: ERROR
+    SqlState: 42703
+    MessageText: column c1.Id does not exist
+    Hint: Perhaps you meant to reference the column "c1.id" or the column "c0.Id".
+    Position: 3276
+    File: parse_relation.c
+    Line: 3749
+    Routine: errorMissingColumn
+2025-07-31 09:41:44.586 +08:00 [ERR] Error retrieving courses
+Npgsql.PostgresException (0x80004005): 42703: column c1.Id does not exist
+
+POSITION: 3276
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at CeceLearningPortal.Api.Services.CourseService.GetAllCoursesAsync(CourseFilterDto filter) in D:\ProductDevelopment\Cece\CeceLearningPortal.Backend\CeceLearningPortal.Api\Services\CourseService.cs:line 95
+   at CeceLearningPortal.Api.Controllers.CoursesController.GetCourses(CourseFilterDto filter) in D:\ProductDevelopment\Cece\CeceLearningPortal.Backend\CeceLearningPortal.Api\Controllers\CoursesController.cs:line 26
+  Exception data:
+    Severity: ERROR
+    SqlState: 42703
+    MessageText: column c1.Id does not exist
+    Hint: Perhaps you meant to reference the column "c1.id" or the column "c0.Id".
+    Position: 3276
+    File: parse_relation.c
+    Line: 3749
+    Routine: errorMissingColumn
+2025-07-31 09:41:44.591 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType0`1[[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-31 09:41:44.591 +08:00 [INF] Executed action CeceLearningPortal.Api.Controllers.CoursesController.GetCourses (CeceLearningPortal.Api) in 14.0031ms
+2025-07-31 09:41:44.592 +08:00 [INF] Executed endpoint 'CeceLearningPortal.Api.Controllers.CoursesController.GetCourses (CeceLearningPortal.Api)'
+2025-07-31 09:41:44.592 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost:5295/api/courses - 500 null application/json; charset=utf-8 17.7733ms
+2025-07-31 09:43:03.294 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5295/api/WeatherForecast - null null
+2025-07-31 09:43:03.296 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost:5295/api/WeatherForecast - 404 0 null 1.6961ms
+2025-07-31 09:43:03.298 +08:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5295/api/WeatherForecast, Response status code: 404
+2025-07-31 10:11:19.310 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5295/api/WeatherForecast - null null
+2025-07-31 10:11:19.312 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost:5295/api/WeatherForecast - 404 0 null 1.4795ms
+2025-07-31 10:11:19.313 +08:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5295/api/WeatherForecast, Response status code: 404
+2025-07-31 10:11:26.757 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5295/api/WeatherForecast - null null
+2025-07-31 10:11:26.759 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost:5295/api/WeatherForecast - 404 0 null 1.405ms
+2025-07-31 10:11:26.760 +08:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5295/api/WeatherForecast, Response status code: 404
+2025-07-31 10:11:32.461 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5295/WeatherForecast - null null
+2025-07-31 10:11:32.462 +08:00 [INF] Executing endpoint 'CeceLearningPortal.Api.Controllers.WeatherForecastController.Get (CeceLearningPortal.Api)'
+2025-07-31 10:11:32.463 +08:00 [INF] Route matched with {action = "Get", controller = "WeatherForecast"}. Executing controller action with signature System.Collections.Generic.IEnumerable`1[CeceLearningPortal.Api.WeatherForecast] Get() on controller CeceLearningPortal.Api.Controllers.WeatherForecastController (CeceLearningPortal.Api).
+2025-07-31 10:11:32.463 +08:00 [INF] Executing ObjectResult, writing value of type 'CeceLearningPortal.Api.WeatherForecast[]'.
+2025-07-31 10:11:32.464 +08:00 [INF] Executed action CeceLearningPortal.Api.Controllers.WeatherForecastController.Get (CeceLearningPortal.Api) in 0.8202ms
+2025-07-31 10:11:32.465 +08:00 [INF] Executed endpoint 'CeceLearningPortal.Api.Controllers.WeatherForecastController.Get (CeceLearningPortal.Api)'
+2025-07-31 10:11:32.465 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost:5295/WeatherForecast - 200 null application/json; charset=utf-8 4.5127ms
+2025-07-31 10:22:27.709 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5295/api/courses - null null
+2025-07-31 10:22:27.710 +08:00 [INF] Executing endpoint 'CeceLearningPortal.Api.Controllers.CoursesController.GetCourses (CeceLearningPortal.Api)'
+2025-07-31 10:22:27.711 +08:00 [INF] Route matched with {action = "GetCourses", controller = "Courses"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetCourses(CeceLearningPortal.Api.DTOs.CourseFilterDto) on controller CeceLearningPortal.Api.Controllers.CoursesController (CeceLearningPortal.Api).
+2025-07-31 10:22:27.755 +08:00 [ERR] Failed executing DbCommand (1ms) [Parameters=[@__p_1='?' (DbType = Int32), @__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT c0."Id", c0."AccessDuration", c0."AccessType", c0."AutomationAbandonmentSequence", c0."AutomationCompletionCertificate", c0."AutomationProgressReminders", c0."AutomationWelcomeEmail", c0."Category", c0."CourseType", c0."CreatedAt", c0."Currency", c0."Description", c0."Discount", c0."DripContent", c0."DripScheduleJson", c0."Duration", c0."EnrollmentLimit", c0."EnrollmentType", c0."Features", c0."HasAssignments", c0."HasCertificate", c0."HasCommunity", c0."HasDownloadableResources", c0."HasLiveSessions", c0."HasQuizzes", c0."InstructorId", c0."IsBestseller", c0."IsPublished", c0."Language", c0."Level", c0."OriginalPrice", c0."PaymentPlanDetailsJson", c0."PreviewUrl", c0."Price", c0."PricingModel", c0."PromoVideoUrl", c0."PublishedAt", c0."ShortDescription", c0."Status", c0."SubscriptionPeriod", c0."Thumbnail", c0."ThumbnailUrl", c0."Title", c0."UpdatedAt", a."Id", a."AccessFailedCount", a."Avatar", a."ConcurrencyStamp", a."CreatedAt", a."Email", a."EmailConfirmed", a."FullName", a."LastLoginAt", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."NotificationPreferences", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."RefreshToken", a."RefreshTokenExpiryTime", a."Role", a."SecurityStamp", a."Status", a."TwoFactorEnabled", a."UserName", s."Id", s."CourseId", s."CreatedAt", s."Description", s."Order", s."Title", s."UpdatedAt", s."Id0", s."Content", s."CreatedAt0", s."Duration", s."ModuleId", s."Order0", s."Title0", s."Type", s."UpdatedAt0", s."VideoUrl", r."Id", r."ApprovedAt", r."ApprovedBy", r."Comment", r."CourseId", r."CreatedAt", r."IsFlagged", r."Rating", r."Status", r."StudentId", e."Id", e."AverageQuizScore", e."CertificateIssued", e."CertificateUrl", e."CompletedAt", e."CompletedLessons", e."CourseId", e."EnrolledAt", e."LastAccessedDate", e."ProgressPercentage", e."QuizCount", e."StudentId", e."TotalTimeSpent"
+FROM (
+    SELECT c."Id", c."AccessDuration", c."AccessType", c."AutomationAbandonmentSequence", c."AutomationCompletionCertificate", c."AutomationProgressReminders", c."AutomationWelcomeEmail", c."Category", c."CourseType", c."CreatedAt", c."Currency", c."Description", c."Discount", c."DripContent", c."DripScheduleJson", c."Duration", c."EnrollmentLimit", c."EnrollmentType", c."Features", c."HasAssignments", c."HasCertificate", c."HasCommunity", c."HasDownloadableResources", c."HasLiveSessions", c."HasQuizzes", c."InstructorId", c."IsBestseller", c."IsPublished", c."Language", c."Level", c."OriginalPrice", c."PaymentPlanDetailsJson", c."PreviewUrl", c."Price", c."PricingModel", c."PromoVideoUrl", c."PublishedAt", c."ShortDescription", c."Status", c."SubscriptionPeriod", c."Thumbnail", c."ThumbnailUrl", c."Title", c."UpdatedAt"
+    FROM "Courses" AS c
+    ORDER BY c."CreatedAt" DESC
+    LIMIT @__p_1 OFFSET @__p_0
+) AS c0
+INNER JOIN "AspNetUsers" AS a ON c0."InstructorId" = a."Id"
+LEFT JOIN (
+    SELECT c1."Id", c1."CourseId", c1."CreatedAt", c1."Description", c1."Order", c1."Title", c1."UpdatedAt", l."Id" AS "Id0", l."Content", l."CreatedAt" AS "CreatedAt0", l."Duration", l."ModuleId", l."Order" AS "Order0", l."Title" AS "Title0", l."Type", l."UpdatedAt" AS "UpdatedAt0", l."VideoUrl"
+    FROM "CourseModules" AS c1
+    LEFT JOIN "Lessons" AS l ON c1."Id" = l."ModuleId"
+) AS s ON c0."Id" = s."CourseId"
+LEFT JOIN "Reviews" AS r ON c0."Id" = r."CourseId"
+LEFT JOIN "Enrollments" AS e ON c0."Id" = e."CourseId"
+ORDER BY c0."CreatedAt" DESC, c0."Id", a."Id", s."Id", s."Id0", r."Id"
+2025-07-31 10:22:27.758 +08:00 [ERR] An exception occurred while iterating over the results of a query for context type 'CeceLearningPortal.Api.Data.ApplicationDbContext'.
+Npgsql.PostgresException (0x80004005): 42P01: relation "Lessons" does not exist
+
+POSITION: 3258
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+  Exception data:
+    Severity: ERROR
+    SqlState: 42P01
+    MessageText: relation "Lessons" does not exist
+    Position: 3258
+    File: parse_relation.c
+    Line: 1452
+    Routine: parserOpenTable
+Npgsql.PostgresException (0x80004005): 42P01: relation "Lessons" does not exist
+
+POSITION: 3258
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+  Exception data:
+    Severity: ERROR
+    SqlState: 42P01
+    MessageText: relation "Lessons" does not exist
+    Position: 3258
+    File: parse_relation.c
+    Line: 1452
+    Routine: parserOpenTable
+2025-07-31 10:22:27.762 +08:00 [ERR] Error retrieving courses
+Npgsql.PostgresException (0x80004005): 42P01: relation "Lessons" does not exist
+
+POSITION: 3258
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at CeceLearningPortal.Api.Services.CourseService.GetAllCoursesAsync(CourseFilterDto filter) in D:\ProductDevelopment\Cece\CeceLearningPortal.Backend\CeceLearningPortal.Api\Services\CourseService.cs:line 95
+   at CeceLearningPortal.Api.Controllers.CoursesController.GetCourses(CourseFilterDto filter) in D:\ProductDevelopment\Cece\CeceLearningPortal.Backend\CeceLearningPortal.Api\Controllers\CoursesController.cs:line 26
+  Exception data:
+    Severity: ERROR
+    SqlState: 42P01
+    MessageText: relation "Lessons" does not exist
+    Position: 3258
+    File: parse_relation.c
+    Line: 1452
+    Routine: parserOpenTable
+2025-07-31 10:22:27.767 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType0`1[[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-31 10:22:27.767 +08:00 [INF] Executed action CeceLearningPortal.Api.Controllers.CoursesController.GetCourses (CeceLearningPortal.Api) in 55.5114ms
+2025-07-31 10:22:27.768 +08:00 [INF] Executed endpoint 'CeceLearningPortal.Api.Controllers.CoursesController.GetCourses (CeceLearningPortal.Api)'
+2025-07-31 10:22:27.769 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost:5295/api/courses - 500 null application/json; charset=utf-8 59.4659ms
+2025-07-31 10:22:47.596 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:5295/api/auth/login - application/json 49
+2025-07-31 10:22:47.597 +08:00 [INF] Executing endpoint 'CeceLearningPortal.Api.Controllers.AuthController.Login (CeceLearningPortal.Api)'
+2025-07-31 10:22:47.600 +08:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(CeceLearningPortal.Api.DTOs.LoginDto) on controller CeceLearningPortal.Api.Controllers.AuthController (CeceLearningPortal.Api).
+2025-07-31 10:22:47.729 +08:00 [ERR] Failed executing DbCommand (1ms) [Parameters=[@__normalizedEmail_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."Avatar", a."ConcurrencyStamp", a."CreatedAt", a."Email", a."EmailConfirmed", a."FullName", a."LastLoginAt", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."NotificationPreferences", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."RefreshToken", a."RefreshTokenExpiryTime", a."Role", a."SecurityStamp", a."Status", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedEmail" = @__normalizedEmail_0
+LIMIT 2
+2025-07-31 10:22:47.731 +08:00 [ERR] An exception occurred while iterating over the results of a query for context type 'CeceLearningPortal.Api.Data.ApplicationDbContext'.
+Npgsql.PostgresException (0x80004005): 42703: column a.LastLoginAt does not exist
+
+POSITION: 133
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+  Exception data:
+    Severity: ERROR
+    SqlState: 42703
+    MessageText: column a.LastLoginAt does not exist
+    Hint: Perhaps you meant to reference the column "a.LastLogin".
+    Position: 133
+    File: parse_relation.c
+    Line: 3732
+    Routine: errorMissingColumn
+Npgsql.PostgresException (0x80004005): 42703: column a.LastLoginAt does not exist
+
+POSITION: 133
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+  Exception data:
+    Severity: ERROR
+    SqlState: 42703
+    MessageText: column a.LastLoginAt does not exist
+    Hint: Perhaps you meant to reference the column "a.LastLogin".
+    Position: 133
+    File: parse_relation.c
+    Line: 3732
+    Routine: errorMissingColumn
+2025-07-31 10:22:47.736 +08:00 [ERR] Error during login
+Npgsql.PostgresException (0x80004005): 42703: column a.LastLoginAt does not exist
+
+POSITION: 133
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.Query.ShapedQueryCompilingExpressionVisitor.SingleOrDefaultAsync[TSource](IAsyncEnumerable`1 asyncEnumerable, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.ShapedQueryCompilingExpressionVisitor.SingleOrDefaultAsync[TSource](IAsyncEnumerable`1 asyncEnumerable, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Identity.UserManager`1.FindByEmailAsync(String email)
+   at CeceLearningPortal.Api.Services.AuthService.LoginAsync(LoginDto loginDto) in D:\ProductDevelopment\Cece\CeceLearningPortal.Backend\CeceLearningPortal.Api\Services\AuthService.cs:line 110
+   at CeceLearningPortal.Api.Controllers.AuthController.Login(LoginDto loginDto) in D:\ProductDevelopment\Cece\CeceLearningPortal.Backend\CeceLearningPortal.Api\Controllers\AuthController.cs:line 45
+  Exception data:
+    Severity: ERROR
+    SqlState: 42703
+    MessageText: column a.LastLoginAt does not exist
+    Hint: Perhaps you meant to reference the column "a.LastLogin".
+    Position: 133
+    File: parse_relation.c
+    Line: 3732
+    Routine: errorMissingColumn
+2025-07-31 10:22:47.834 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType0`1[[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-31 10:22:47.835 +08:00 [INF] Executed action CeceLearningPortal.Api.Controllers.AuthController.Login (CeceLearningPortal.Api) in 234.7362ms
+2025-07-31 10:22:47.836 +08:00 [INF] Executed endpoint 'CeceLearningPortal.Api.Controllers.AuthController.Login (CeceLearningPortal.Api)'
+2025-07-31 10:22:47.836 +08:00 [INF] Request finished HTTP/1.1 POST http://localhost:5295/api/auth/login - 500 null application/json; charset=utf-8 240.7388ms
+2025-07-31 10:23:27.800 +08:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5295/api/courses - null null
+2025-07-31 10:23:27.801 +08:00 [INF] CORS policy execution successful.
+2025-07-31 10:23:27.803 +08:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5295/api/courses - 204 null null 3.32ms
+2025-07-31 10:24:05.318 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5295/api/health - null null
+2025-07-31 10:24:05.319 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost:5295/api/health - 404 0 null 1.276ms
+2025-07-31 10:24:05.321 +08:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5295/api/health, Response status code: 404
+2025-07-31 10:34:58.426 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:5295/api/auth/login - application/json 51
+2025-07-31 10:34:58.428 +08:00 [INF] Executing endpoint 'CeceLearningPortal.Api.Controllers.AuthController.Login (CeceLearningPortal.Api)'
+2025-07-31 10:34:58.428 +08:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(CeceLearningPortal.Api.DTOs.LoginDto) on controller CeceLearningPortal.Api.Controllers.AuthController (CeceLearningPortal.Api).
+2025-07-31 10:34:58.472 +08:00 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedEmail_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."Avatar", a."ConcurrencyStamp", a."CreatedAt", a."Email", a."EmailConfirmed", a."FullName", a."LastLoginAt", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."NotificationPreferences", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."RefreshToken", a."RefreshTokenExpiryTime", a."Role", a."SecurityStamp", a."Status", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedEmail" = @__normalizedEmail_0
+LIMIT 2
+2025-07-31 10:34:58.521 +08:00 [ERR] An exception occurred while iterating over the results of a query for context type 'CeceLearningPortal.Api.Data.ApplicationDbContext'.
+System.Text.Json.JsonException: The JSON value could not be converted to System.Collections.Generic.List`1[System.String]. Path: $ | LineNumber: 0 | BytePositionInLine: 1.
+   at System.Text.Json.ThrowHelper.ThrowJsonException_DeserializeUnableToConvertValue(Type propertyType)
+   at System.Text.Json.Serialization.JsonCollectionConverter`2.OnTryRead(Utf8JsonReader& reader, Type typeToConvert, JsonSerializerOptions options, ReadStack& state, TCollection& value)
+   at System.Text.Json.Serialization.JsonConverter`1.TryRead(Utf8JsonReader& reader, Type typeToConvert, JsonSerializerOptions options, ReadStack& state, T& value, Boolean& isPopulatedValue)
+   at System.Text.Json.Serialization.JsonConverter`1.ReadCore(Utf8JsonReader& reader, T& value, JsonSerializerOptions options, ReadStack& state)
+   at System.Text.Json.Serialization.Metadata.JsonTypeInfo`1.Deserialize(Utf8JsonReader& reader, ReadStack& state)
+   at System.Text.Json.JsonSerializer.ReadFromSpan[TValue](ReadOnlySpan`1 utf8Json, JsonTypeInfo`1 jsonTypeInfo, Nullable`1 actualByteCount)
+   at System.Text.Json.JsonSerializer.ReadFromSpan[TValue](ReadOnlySpan`1 json, JsonTypeInfo`1 jsonTypeInfo)
+   at lambda_method383(Closure, String)
+   at lambda_method297(Closure, QueryContext, DbDataReader, ResultContext, SingleQueryResultCoordinator)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+System.Text.Json.JsonException: The JSON value could not be converted to System.Collections.Generic.List`1[System.String]. Path: $ | LineNumber: 0 | BytePositionInLine: 1.
+   at System.Text.Json.ThrowHelper.ThrowJsonException_DeserializeUnableToConvertValue(Type propertyType)
+   at System.Text.Json.Serialization.JsonCollectionConverter`2.OnTryRead(Utf8JsonReader& reader, Type typeToConvert, JsonSerializerOptions options, ReadStack& state, TCollection& value)
+   at System.Text.Json.Serialization.JsonConverter`1.TryRead(Utf8JsonReader& reader, Type typeToConvert, JsonSerializerOptions options, ReadStack& state, T& value, Boolean& isPopulatedValue)
+   at System.Text.Json.Serialization.JsonConverter`1.ReadCore(Utf8JsonReader& reader, T& value, JsonSerializerOptions options, ReadStack& state)
+   at System.Text.Json.Serialization.Metadata.JsonTypeInfo`1.Deserialize(Utf8JsonReader& reader, ReadStack& state)
+   at System.Text.Json.JsonSerializer.ReadFromSpan[TValue](ReadOnlySpan`1 utf8Json, JsonTypeInfo`1 jsonTypeInfo, Nullable`1 actualByteCount)
+   at System.Text.Json.JsonSerializer.ReadFromSpan[TValue](ReadOnlySpan`1 json, JsonTypeInfo`1 jsonTypeInfo)
+   at lambda_method383(Closure, String)
+   at lambda_method297(Closure, QueryContext, DbDataReader, ResultContext, SingleQueryResultCoordinator)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+2025-07-31 10:34:58.525 +08:00 [ERR] Error during login
+System.Text.Json.JsonException: The JSON value could not be converted to System.Collections.Generic.List`1[System.String]. Path: $ | LineNumber: 0 | BytePositionInLine: 1.
+   at System.Text.Json.ThrowHelper.ThrowJsonException_DeserializeUnableToConvertValue(Type propertyType)
+   at System.Text.Json.Serialization.JsonCollectionConverter`2.OnTryRead(Utf8JsonReader& reader, Type typeToConvert, JsonSerializerOptions options, ReadStack& state, TCollection& value)
+   at System.Text.Json.Serialization.JsonConverter`1.TryRead(Utf8JsonReader& reader, Type typeToConvert, JsonSerializerOptions options, ReadStack& state, T& value, Boolean& isPopulatedValue)
+   at System.Text.Json.Serialization.JsonConverter`1.ReadCore(Utf8JsonReader& reader, T& value, JsonSerializerOptions options, ReadStack& state)
+   at System.Text.Json.Serialization.Metadata.JsonTypeInfo`1.Deserialize(Utf8JsonReader& reader, ReadStack& state)
+   at System.Text.Json.JsonSerializer.ReadFromSpan[TValue](ReadOnlySpan`1 utf8Json, JsonTypeInfo`1 jsonTypeInfo, Nullable`1 actualByteCount)
+   at System.Text.Json.JsonSerializer.ReadFromSpan[TValue](ReadOnlySpan`1 json, JsonTypeInfo`1 jsonTypeInfo)
+   at lambda_method383(Closure, String)
+   at lambda_method297(Closure, QueryContext, DbDataReader, ResultContext, SingleQueryResultCoordinator)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.Query.ShapedQueryCompilingExpressionVisitor.SingleOrDefaultAsync[TSource](IAsyncEnumerable`1 asyncEnumerable, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.ShapedQueryCompilingExpressionVisitor.SingleOrDefaultAsync[TSource](IAsyncEnumerable`1 asyncEnumerable, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Identity.UserManager`1.FindByEmailAsync(String email)
+   at CeceLearningPortal.Api.Services.AuthService.LoginAsync(LoginDto loginDto) in D:\ProductDevelopment\Cece\CeceLearningPortal.Backend\CeceLearningPortal.Api\Services\AuthService.cs:line 110
+   at CeceLearningPortal.Api.Controllers.AuthController.Login(LoginDto loginDto) in D:\ProductDevelopment\Cece\CeceLearningPortal.Backend\CeceLearningPortal.Api\Controllers\AuthController.cs:line 45
+2025-07-31 10:34:58.528 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType0`1[[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-31 10:34:58.529 +08:00 [INF] Executed action CeceLearningPortal.Api.Controllers.AuthController.Login (CeceLearningPortal.Api) in 99.7977ms
+2025-07-31 10:34:58.529 +08:00 [INF] Executed endpoint 'CeceLearningPortal.Api.Controllers.AuthController.Login (CeceLearningPortal.Api)'
+2025-07-31 10:34:58.530 +08:00 [INF] Request finished HTTP/1.1 POST http://localhost:5295/api/auth/login - 500 null application/json; charset=utf-8 104.2356ms
+2025-07-31 10:35:04.207 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5295/api/courses - null null
+2025-07-31 10:35:04.208 +08:00 [INF] Executing endpoint 'CeceLearningPortal.Api.Controllers.CoursesController.GetCourses (CeceLearningPortal.Api)'
+2025-07-31 10:35:04.209 +08:00 [INF] Route matched with {action = "GetCourses", controller = "Courses"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetCourses(CeceLearningPortal.Api.DTOs.CourseFilterDto) on controller CeceLearningPortal.Api.Controllers.CoursesController (CeceLearningPortal.Api).
+2025-07-31 10:35:04.212 +08:00 [ERR] Failed executing DbCommand (1ms) [Parameters=[@__p_1='?' (DbType = Int32), @__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT c0."Id", c0."AccessDuration", c0."AccessType", c0."AutomationAbandonmentSequence", c0."AutomationCompletionCertificate", c0."AutomationProgressReminders", c0."AutomationWelcomeEmail", c0."Category", c0."CourseType", c0."CreatedAt", c0."Currency", c0."Description", c0."Discount", c0."DripContent", c0."DripScheduleJson", c0."Duration", c0."EnrollmentLimit", c0."EnrollmentType", c0."Features", c0."HasAssignments", c0."HasCertificate", c0."HasCommunity", c0."HasDownloadableResources", c0."HasLiveSessions", c0."HasQuizzes", c0."InstructorId", c0."IsBestseller", c0."IsPublished", c0."Language", c0."Level", c0."OriginalPrice", c0."PaymentPlanDetailsJson", c0."PreviewUrl", c0."Price", c0."PricingModel", c0."PromoVideoUrl", c0."PublishedAt", c0."ShortDescription", c0."Status", c0."SubscriptionPeriod", c0."Thumbnail", c0."ThumbnailUrl", c0."Title", c0."UpdatedAt", a."Id", a."AccessFailedCount", a."Avatar", a."ConcurrencyStamp", a."CreatedAt", a."Email", a."EmailConfirmed", a."FullName", a."LastLoginAt", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."NotificationPreferences", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."RefreshToken", a."RefreshTokenExpiryTime", a."Role", a."SecurityStamp", a."Status", a."TwoFactorEnabled", a."UserName", s."Id", s."CourseId", s."CreatedAt", s."Description", s."Order", s."Title", s."UpdatedAt", s."Id0", s."Content", s."CreatedAt0", s."Duration", s."ModuleId", s."Order0", s."Title0", s."Type", s."UpdatedAt0", s."VideoUrl", r."Id", r."ApprovedAt", r."ApprovedBy", r."Comment", r."CourseId", r."CreatedAt", r."IsFlagged", r."Rating", r."Status", r."StudentId", e."Id", e."AverageQuizScore", e."CertificateIssued", e."CertificateUrl", e."CompletedAt", e."CompletedLessons", e."CourseId", e."EnrolledAt", e."LastAccessedDate", e."ProgressPercentage", e."QuizCount", e."StudentId", e."TotalTimeSpent"
+FROM (
+    SELECT c."Id", c."AccessDuration", c."AccessType", c."AutomationAbandonmentSequence", c."AutomationCompletionCertificate", c."AutomationProgressReminders", c."AutomationWelcomeEmail", c."Category", c."CourseType", c."CreatedAt", c."Currency", c."Description", c."Discount", c."DripContent", c."DripScheduleJson", c."Duration", c."EnrollmentLimit", c."EnrollmentType", c."Features", c."HasAssignments", c."HasCertificate", c."HasCommunity", c."HasDownloadableResources", c."HasLiveSessions", c."HasQuizzes", c."InstructorId", c."IsBestseller", c."IsPublished", c."Language", c."Level", c."OriginalPrice", c."PaymentPlanDetailsJson", c."PreviewUrl", c."Price", c."PricingModel", c."PromoVideoUrl", c."PublishedAt", c."ShortDescription", c."Status", c."SubscriptionPeriod", c."Thumbnail", c."ThumbnailUrl", c."Title", c."UpdatedAt"
+    FROM "Courses" AS c
+    ORDER BY c."CreatedAt" DESC
+    LIMIT @__p_1 OFFSET @__p_0
+) AS c0
+INNER JOIN "AspNetUsers" AS a ON c0."InstructorId" = a."Id"
+LEFT JOIN (
+    SELECT c1."Id", c1."CourseId", c1."CreatedAt", c1."Description", c1."Order", c1."Title", c1."UpdatedAt", l."Id" AS "Id0", l."Content", l."CreatedAt" AS "CreatedAt0", l."Duration", l."ModuleId", l."Order" AS "Order0", l."Title" AS "Title0", l."Type", l."UpdatedAt" AS "UpdatedAt0", l."VideoUrl"
+    FROM "CourseModules" AS c1
+    LEFT JOIN "Lessons" AS l ON c1."Id" = l."ModuleId"
+) AS s ON c0."Id" = s."CourseId"
+LEFT JOIN "Reviews" AS r ON c0."Id" = r."CourseId"
+LEFT JOIN "Enrollments" AS e ON c0."Id" = e."CourseId"
+ORDER BY c0."CreatedAt" DESC, c0."Id", a."Id", s."Id", s."Id0", r."Id"
+2025-07-31 10:35:04.214 +08:00 [ERR] An exception occurred while iterating over the results of a query for context type 'CeceLearningPortal.Api.Data.ApplicationDbContext'.
+Npgsql.PostgresException (0x80004005): 42P01: relation "Courses" does not exist
+
+POSITION: 2757
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+  Exception data:
+    Severity: ERROR
+    SqlState: 42P01
+    MessageText: relation "Courses" does not exist
+    Position: 2757
+    File: parse_relation.c
+    Line: 1452
+    Routine: parserOpenTable
+Npgsql.PostgresException (0x80004005): 42P01: relation "Courses" does not exist
+
+POSITION: 2757
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+  Exception data:
+    Severity: ERROR
+    SqlState: 42P01
+    MessageText: relation "Courses" does not exist
+    Position: 2757
+    File: parse_relation.c
+    Line: 1452
+    Routine: parserOpenTable
+2025-07-31 10:35:04.218 +08:00 [ERR] Error retrieving courses
+Npgsql.PostgresException (0x80004005): 42P01: relation "Courses" does not exist
+
+POSITION: 2757
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at CeceLearningPortal.Api.Services.CourseService.GetAllCoursesAsync(CourseFilterDto filter) in D:\ProductDevelopment\Cece\CeceLearningPortal.Backend\CeceLearningPortal.Api\Services\CourseService.cs:line 95
+   at CeceLearningPortal.Api.Controllers.CoursesController.GetCourses(CourseFilterDto filter) in D:\ProductDevelopment\Cece\CeceLearningPortal.Backend\CeceLearningPortal.Api\Controllers\CoursesController.cs:line 26
+  Exception data:
+    Severity: ERROR
+    SqlState: 42P01
+    MessageText: relation "Courses" does not exist
+    Position: 2757
+    File: parse_relation.c
+    Line: 1452
+    Routine: parserOpenTable
+2025-07-31 10:35:04.223 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType0`1[[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-31 10:35:04.223 +08:00 [INF] Executed action CeceLearningPortal.Api.Controllers.CoursesController.GetCourses (CeceLearningPortal.Api) in 13.7368ms
+2025-07-31 10:35:04.224 +08:00 [INF] Executed endpoint 'CeceLearningPortal.Api.Controllers.CoursesController.GetCourses (CeceLearningPortal.Api)'
+2025-07-31 10:35:04.224 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost:5295/api/courses - 500 null application/json; charset=utf-8 17.4643ms
+2025-07-31 10:35:34.643 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5295/api/courses - null null
+2025-07-31 10:35:34.644 +08:00 [INF] Executing endpoint 'CeceLearningPortal.Api.Controllers.CoursesController.GetCourses (CeceLearningPortal.Api)'
+2025-07-31 10:35:34.645 +08:00 [INF] Route matched with {action = "GetCourses", controller = "Courses"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetCourses(CeceLearningPortal.Api.DTOs.CourseFilterDto) on controller CeceLearningPortal.Api.Controllers.CoursesController (CeceLearningPortal.Api).
+2025-07-31 10:35:34.647 +08:00 [ERR] Failed executing DbCommand (1ms) [Parameters=[@__p_1='?' (DbType = Int32), @__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT c0."Id", c0."AccessDuration", c0."AccessType", c0."AutomationAbandonmentSequence", c0."AutomationCompletionCertificate", c0."AutomationProgressReminders", c0."AutomationWelcomeEmail", c0."Category", c0."CourseType", c0."CreatedAt", c0."Currency", c0."Description", c0."Discount", c0."DripContent", c0."DripScheduleJson", c0."Duration", c0."EnrollmentLimit", c0."EnrollmentType", c0."Features", c0."HasAssignments", c0."HasCertificate", c0."HasCommunity", c0."HasDownloadableResources", c0."HasLiveSessions", c0."HasQuizzes", c0."InstructorId", c0."IsBestseller", c0."IsPublished", c0."Language", c0."Level", c0."OriginalPrice", c0."PaymentPlanDetailsJson", c0."PreviewUrl", c0."Price", c0."PricingModel", c0."PromoVideoUrl", c0."PublishedAt", c0."ShortDescription", c0."Status", c0."SubscriptionPeriod", c0."Thumbnail", c0."ThumbnailUrl", c0."Title", c0."UpdatedAt", a."Id", a."AccessFailedCount", a."Avatar", a."ConcurrencyStamp", a."CreatedAt", a."Email", a."EmailConfirmed", a."FullName", a."LastLoginAt", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."NotificationPreferences", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."RefreshToken", a."RefreshTokenExpiryTime", a."Role", a."SecurityStamp", a."Status", a."TwoFactorEnabled", a."UserName", s."Id", s."CourseId", s."CreatedAt", s."Description", s."Order", s."Title", s."UpdatedAt", s."Id0", s."Content", s."CreatedAt0", s."Duration", s."ModuleId", s."Order0", s."Title0", s."Type", s."UpdatedAt0", s."VideoUrl", r."Id", r."ApprovedAt", r."ApprovedBy", r."Comment", r."CourseId", r."CreatedAt", r."IsFlagged", r."Rating", r."Status", r."StudentId", e."Id", e."AverageQuizScore", e."CertificateIssued", e."CertificateUrl", e."CompletedAt", e."CompletedLessons", e."CourseId", e."EnrolledAt", e."LastAccessedDate", e."ProgressPercentage", e."QuizCount", e."StudentId", e."TotalTimeSpent"
+FROM (
+    SELECT c."Id", c."AccessDuration", c."AccessType", c."AutomationAbandonmentSequence", c."AutomationCompletionCertificate", c."AutomationProgressReminders", c."AutomationWelcomeEmail", c."Category", c."CourseType", c."CreatedAt", c."Currency", c."Description", c."Discount", c."DripContent", c."DripScheduleJson", c."Duration", c."EnrollmentLimit", c."EnrollmentType", c."Features", c."HasAssignments", c."HasCertificate", c."HasCommunity", c."HasDownloadableResources", c."HasLiveSessions", c."HasQuizzes", c."InstructorId", c."IsBestseller", c."IsPublished", c."Language", c."Level", c."OriginalPrice", c."PaymentPlanDetailsJson", c."PreviewUrl", c."Price", c."PricingModel", c."PromoVideoUrl", c."PublishedAt", c."ShortDescription", c."Status", c."SubscriptionPeriod", c."Thumbnail", c."ThumbnailUrl", c."Title", c."UpdatedAt"
+    FROM "Courses" AS c
+    ORDER BY c."CreatedAt" DESC
+    LIMIT @__p_1 OFFSET @__p_0
+) AS c0
+INNER JOIN "AspNetUsers" AS a ON c0."InstructorId" = a."Id"
+LEFT JOIN (
+    SELECT c1."Id", c1."CourseId", c1."CreatedAt", c1."Description", c1."Order", c1."Title", c1."UpdatedAt", l."Id" AS "Id0", l."Content", l."CreatedAt" AS "CreatedAt0", l."Duration", l."ModuleId", l."Order" AS "Order0", l."Title" AS "Title0", l."Type", l."UpdatedAt" AS "UpdatedAt0", l."VideoUrl"
+    FROM "CourseModules" AS c1
+    LEFT JOIN "Lessons" AS l ON c1."Id" = l."ModuleId"
+) AS s ON c0."Id" = s."CourseId"
+LEFT JOIN "Reviews" AS r ON c0."Id" = r."CourseId"
+LEFT JOIN "Enrollments" AS e ON c0."Id" = e."CourseId"
+ORDER BY c0."CreatedAt" DESC, c0."Id", a."Id", s."Id", s."Id0", r."Id"
+2025-07-31 10:35:34.649 +08:00 [ERR] An exception occurred while iterating over the results of a query for context type 'CeceLearningPortal.Api.Data.ApplicationDbContext'.
+Npgsql.PostgresException (0x80004005): 42P01: relation "Courses" does not exist
+
+POSITION: 2757
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+  Exception data:
+    Severity: ERROR
+    SqlState: 42P01
+    MessageText: relation "Courses" does not exist
+    Position: 2757
+    File: parse_relation.c
+    Line: 1452
+    Routine: parserOpenTable
+Npgsql.PostgresException (0x80004005): 42P01: relation "Courses" does not exist
+
+POSITION: 2757
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+  Exception data:
+    Severity: ERROR
+    SqlState: 42P01
+    MessageText: relation "Courses" does not exist
+    Position: 2757
+    File: parse_relation.c
+    Line: 1452
+    Routine: parserOpenTable
+2025-07-31 10:35:34.653 +08:00 [ERR] Error retrieving courses
+Npgsql.PostgresException (0x80004005): 42P01: relation "Courses" does not exist
+
+POSITION: 2757
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at CeceLearningPortal.Api.Services.CourseService.GetAllCoursesAsync(CourseFilterDto filter) in D:\ProductDevelopment\Cece\CeceLearningPortal.Backend\CeceLearningPortal.Api\Services\CourseService.cs:line 95
+   at CeceLearningPortal.Api.Controllers.CoursesController.GetCourses(CourseFilterDto filter) in D:\ProductDevelopment\Cece\CeceLearningPortal.Backend\CeceLearningPortal.Api\Controllers\CoursesController.cs:line 26
+  Exception data:
+    Severity: ERROR
+    SqlState: 42P01
+    MessageText: relation "Courses" does not exist
+    Position: 2757
+    File: parse_relation.c
+    Line: 1452
+    Routine: parserOpenTable
+2025-07-31 10:35:34.657 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType0`1[[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-31 10:35:34.658 +08:00 [INF] Executed action CeceLearningPortal.Api.Controllers.CoursesController.GetCourses (CeceLearningPortal.Api) in 12.4483ms
+2025-07-31 10:35:34.658 +08:00 [INF] Executed endpoint 'CeceLearningPortal.Api.Controllers.CoursesController.GetCourses (CeceLearningPortal.Api)'
+2025-07-31 10:35:34.659 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost:5295/api/courses - 500 null application/json; charset=utf-8 16.2041ms
+2025-07-31 10:36:09.538 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5295/api/courses - null null
+2025-07-31 10:36:09.539 +08:00 [INF] Executing endpoint 'CeceLearningPortal.Api.Controllers.CoursesController.GetCourses (CeceLearningPortal.Api)'
+2025-07-31 10:36:09.540 +08:00 [INF] Route matched with {action = "GetCourses", controller = "Courses"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetCourses(CeceLearningPortal.Api.DTOs.CourseFilterDto) on controller CeceLearningPortal.Api.Controllers.CoursesController (CeceLearningPortal.Api).
+2025-07-31 10:36:09.542 +08:00 [ERR] Failed executing DbCommand (1ms) [Parameters=[@__p_1='?' (DbType = Int32), @__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT c0."Id", c0."AccessDuration", c0."AccessType", c0."AutomationAbandonmentSequence", c0."AutomationCompletionCertificate", c0."AutomationProgressReminders", c0."AutomationWelcomeEmail", c0."Category", c0."CourseType", c0."CreatedAt", c0."Currency", c0."Description", c0."Discount", c0."DripContent", c0."DripScheduleJson", c0."Duration", c0."EnrollmentLimit", c0."EnrollmentType", c0."Features", c0."HasAssignments", c0."HasCertificate", c0."HasCommunity", c0."HasDownloadableResources", c0."HasLiveSessions", c0."HasQuizzes", c0."InstructorId", c0."IsBestseller", c0."IsPublished", c0."Language", c0."Level", c0."OriginalPrice", c0."PaymentPlanDetailsJson", c0."PreviewUrl", c0."Price", c0."PricingModel", c0."PromoVideoUrl", c0."PublishedAt", c0."ShortDescription", c0."Status", c0."SubscriptionPeriod", c0."Thumbnail", c0."ThumbnailUrl", c0."Title", c0."UpdatedAt", a."Id", a."AccessFailedCount", a."Avatar", a."ConcurrencyStamp", a."CreatedAt", a."Email", a."EmailConfirmed", a."FullName", a."LastLoginAt", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."NotificationPreferences", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."RefreshToken", a."RefreshTokenExpiryTime", a."Role", a."SecurityStamp", a."Status", a."TwoFactorEnabled", a."UserName", s."Id", s."CourseId", s."CreatedAt", s."Description", s."Order", s."Title", s."UpdatedAt", s."Id0", s."Content", s."CreatedAt0", s."Duration", s."ModuleId", s."Order0", s."Title0", s."Type", s."UpdatedAt0", s."VideoUrl", r."Id", r."ApprovedAt", r."ApprovedBy", r."Comment", r."CourseId", r."CreatedAt", r."IsFlagged", r."Rating", r."Status", r."StudentId", e."Id", e."AverageQuizScore", e."CertificateIssued", e."CertificateUrl", e."CompletedAt", e."CompletedLessons", e."CourseId", e."EnrolledAt", e."LastAccessedDate", e."ProgressPercentage", e."QuizCount", e."StudentId", e."TotalTimeSpent"
+FROM (
+    SELECT c."Id", c."AccessDuration", c."AccessType", c."AutomationAbandonmentSequence", c."AutomationCompletionCertificate", c."AutomationProgressReminders", c."AutomationWelcomeEmail", c."Category", c."CourseType", c."CreatedAt", c."Currency", c."Description", c."Discount", c."DripContent", c."DripScheduleJson", c."Duration", c."EnrollmentLimit", c."EnrollmentType", c."Features", c."HasAssignments", c."HasCertificate", c."HasCommunity", c."HasDownloadableResources", c."HasLiveSessions", c."HasQuizzes", c."InstructorId", c."IsBestseller", c."IsPublished", c."Language", c."Level", c."OriginalPrice", c."PaymentPlanDetailsJson", c."PreviewUrl", c."Price", c."PricingModel", c."PromoVideoUrl", c."PublishedAt", c."ShortDescription", c."Status", c."SubscriptionPeriod", c."Thumbnail", c."ThumbnailUrl", c."Title", c."UpdatedAt"
+    FROM "Courses" AS c
+    ORDER BY c."CreatedAt" DESC
+    LIMIT @__p_1 OFFSET @__p_0
+) AS c0
+INNER JOIN "AspNetUsers" AS a ON c0."InstructorId" = a."Id"
+LEFT JOIN (
+    SELECT c1."Id", c1."CourseId", c1."CreatedAt", c1."Description", c1."Order", c1."Title", c1."UpdatedAt", l."Id" AS "Id0", l."Content", l."CreatedAt" AS "CreatedAt0", l."Duration", l."ModuleId", l."Order" AS "Order0", l."Title" AS "Title0", l."Type", l."UpdatedAt" AS "UpdatedAt0", l."VideoUrl"
+    FROM "CourseModules" AS c1
+    LEFT JOIN "Lessons" AS l ON c1."Id" = l."ModuleId"
+) AS s ON c0."Id" = s."CourseId"
+LEFT JOIN "Reviews" AS r ON c0."Id" = r."CourseId"
+LEFT JOIN "Enrollments" AS e ON c0."Id" = e."CourseId"
+ORDER BY c0."CreatedAt" DESC, c0."Id", a."Id", s."Id", s."Id0", r."Id"
+2025-07-31 10:36:09.545 +08:00 [ERR] An exception occurred while iterating over the results of a query for context type 'CeceLearningPortal.Api.Data.ApplicationDbContext'.
+Npgsql.PostgresException (0x80004005): 42703: column c.Id does not exist
+
+POSITION: 1925
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+  Exception data:
+    Severity: ERROR
+    SqlState: 42703
+    MessageText: column c.Id does not exist
+    Hint: Perhaps you meant to reference the column "c.id".
+    Position: 1925
+    File: parse_relation.c
+    Line: 3732
+    Routine: errorMissingColumn
+Npgsql.PostgresException (0x80004005): 42703: column c.Id does not exist
+
+POSITION: 1925
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+  Exception data:
+    Severity: ERROR
+    SqlState: 42703
+    MessageText: column c.Id does not exist
+    Hint: Perhaps you meant to reference the column "c.id".
+    Position: 1925
+    File: parse_relation.c
+    Line: 3732
+    Routine: errorMissingColumn
+2025-07-31 10:36:09.549 +08:00 [ERR] Error retrieving courses
+Npgsql.PostgresException (0x80004005): 42703: column c.Id does not exist
+
+POSITION: 1925
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at CeceLearningPortal.Api.Services.CourseService.GetAllCoursesAsync(CourseFilterDto filter) in D:\ProductDevelopment\Cece\CeceLearningPortal.Backend\CeceLearningPortal.Api\Services\CourseService.cs:line 95
+   at CeceLearningPortal.Api.Controllers.CoursesController.GetCourses(CourseFilterDto filter) in D:\ProductDevelopment\Cece\CeceLearningPortal.Backend\CeceLearningPortal.Api\Controllers\CoursesController.cs:line 26
+  Exception data:
+    Severity: ERROR
+    SqlState: 42703
+    MessageText: column c.Id does not exist
+    Hint: Perhaps you meant to reference the column "c.id".
+    Position: 1925
+    File: parse_relation.c
+    Line: 3732
+    Routine: errorMissingColumn
+2025-07-31 10:36:09.553 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType0`1[[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-31 10:36:09.553 +08:00 [INF] Executed action CeceLearningPortal.Api.Controllers.CoursesController.GetCourses (CeceLearningPortal.Api) in 12.9197ms
+2025-07-31 10:36:09.554 +08:00 [INF] Executed endpoint 'CeceLearningPortal.Api.Controllers.CoursesController.GetCourses (CeceLearningPortal.Api)'
+2025-07-31 10:36:09.555 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost:5295/api/courses - 500 null application/json; charset=utf-8 16.7606ms
+2025-07-31 10:37:30.614 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5295/api/courses - null null
+2025-07-31 10:37:30.615 +08:00 [INF] Executing endpoint 'CeceLearningPortal.Api.Controllers.CoursesController.GetCourses (CeceLearningPortal.Api)'
+2025-07-31 10:37:30.616 +08:00 [INF] Route matched with {action = "GetCourses", controller = "Courses"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetCourses(CeceLearningPortal.Api.DTOs.CourseFilterDto) on controller CeceLearningPortal.Api.Controllers.CoursesController (CeceLearningPortal.Api).
+2025-07-31 10:37:30.618 +08:00 [ERR] Failed executing DbCommand (1ms) [Parameters=[@__p_1='?' (DbType = Int32), @__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT c0."Id", c0."AccessDuration", c0."AccessType", c0."AutomationAbandonmentSequence", c0."AutomationCompletionCertificate", c0."AutomationProgressReminders", c0."AutomationWelcomeEmail", c0."Category", c0."CourseType", c0."CreatedAt", c0."Currency", c0."Description", c0."Discount", c0."DripContent", c0."DripScheduleJson", c0."Duration", c0."EnrollmentLimit", c0."EnrollmentType", c0."Features", c0."HasAssignments", c0."HasCertificate", c0."HasCommunity", c0."HasDownloadableResources", c0."HasLiveSessions", c0."HasQuizzes", c0."InstructorId", c0."IsBestseller", c0."IsPublished", c0."Language", c0."Level", c0."OriginalPrice", c0."PaymentPlanDetailsJson", c0."PreviewUrl", c0."Price", c0."PricingModel", c0."PromoVideoUrl", c0."PublishedAt", c0."ShortDescription", c0."Status", c0."SubscriptionPeriod", c0."Thumbnail", c0."ThumbnailUrl", c0."Title", c0."UpdatedAt", a."Id", a."AccessFailedCount", a."Avatar", a."ConcurrencyStamp", a."CreatedAt", a."Email", a."EmailConfirmed", a."FullName", a."LastLoginAt", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."NotificationPreferences", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."RefreshToken", a."RefreshTokenExpiryTime", a."Role", a."SecurityStamp", a."Status", a."TwoFactorEnabled", a."UserName", s."Id", s."CourseId", s."CreatedAt", s."Description", s."Order", s."Title", s."UpdatedAt", s."Id0", s."Content", s."CreatedAt0", s."Duration", s."ModuleId", s."Order0", s."Title0", s."Type", s."UpdatedAt0", s."VideoUrl", r."Id", r."ApprovedAt", r."ApprovedBy", r."Comment", r."CourseId", r."CreatedAt", r."IsFlagged", r."Rating", r."Status", r."StudentId", e."Id", e."AverageQuizScore", e."CertificateIssued", e."CertificateUrl", e."CompletedAt", e."CompletedLessons", e."CourseId", e."EnrolledAt", e."LastAccessedDate", e."ProgressPercentage", e."QuizCount", e."StudentId", e."TotalTimeSpent"
+FROM (
+    SELECT c."Id", c."AccessDuration", c."AccessType", c."AutomationAbandonmentSequence", c."AutomationCompletionCertificate", c."AutomationProgressReminders", c."AutomationWelcomeEmail", c."Category", c."CourseType", c."CreatedAt", c."Currency", c."Description", c."Discount", c."DripContent", c."DripScheduleJson", c."Duration", c."EnrollmentLimit", c."EnrollmentType", c."Features", c."HasAssignments", c."HasCertificate", c."HasCommunity", c."HasDownloadableResources", c."HasLiveSessions", c."HasQuizzes", c."InstructorId", c."IsBestseller", c."IsPublished", c."Language", c."Level", c."OriginalPrice", c."PaymentPlanDetailsJson", c."PreviewUrl", c."Price", c."PricingModel", c."PromoVideoUrl", c."PublishedAt", c."ShortDescription", c."Status", c."SubscriptionPeriod", c."Thumbnail", c."ThumbnailUrl", c."Title", c."UpdatedAt"
+    FROM "Courses" AS c
+    ORDER BY c."CreatedAt" DESC
+    LIMIT @__p_1 OFFSET @__p_0
+) AS c0
+INNER JOIN "AspNetUsers" AS a ON c0."InstructorId" = a."Id"
+LEFT JOIN (
+    SELECT c1."Id", c1."CourseId", c1."CreatedAt", c1."Description", c1."Order", c1."Title", c1."UpdatedAt", l."Id" AS "Id0", l."Content", l."CreatedAt" AS "CreatedAt0", l."Duration", l."ModuleId", l."Order" AS "Order0", l."Title" AS "Title0", l."Type", l."UpdatedAt" AS "UpdatedAt0", l."VideoUrl"
+    FROM "CourseModules" AS c1
+    LEFT JOIN "Lessons" AS l ON c1."Id" = l."ModuleId"
+) AS s ON c0."Id" = s."CourseId"
+LEFT JOIN "Reviews" AS r ON c0."Id" = r."CourseId"
+LEFT JOIN "Enrollments" AS e ON c0."Id" = e."CourseId"
+ORDER BY c0."CreatedAt" DESC, c0."Id", a."Id", s."Id", s."Id0", r."Id"
+2025-07-31 10:37:30.620 +08:00 [ERR] An exception occurred while iterating over the results of a query for context type 'CeceLearningPortal.Api.Data.ApplicationDbContext'.
+Npgsql.PostgresException (0x80004005): 42703: column c.Id does not exist
+
+POSITION: 1925
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+  Exception data:
+    Severity: ERROR
+    SqlState: 42703
+    MessageText: column c.Id does not exist
+    Hint: Perhaps you meant to reference the column "c.id".
+    Position: 1925
+    File: parse_relation.c
+    Line: 3732
+    Routine: errorMissingColumn
+Npgsql.PostgresException (0x80004005): 42703: column c.Id does not exist
+
+POSITION: 1925
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+  Exception data:
+    Severity: ERROR
+    SqlState: 42703
+    MessageText: column c.Id does not exist
+    Hint: Perhaps you meant to reference the column "c.id".
+    Position: 1925
+    File: parse_relation.c
+    Line: 3732
+    Routine: errorMissingColumn
+2025-07-31 10:37:30.624 +08:00 [ERR] Error retrieving courses
+Npgsql.PostgresException (0x80004005): 42703: column c.Id does not exist
+
+POSITION: 1925
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at CeceLearningPortal.Api.Services.CourseService.GetAllCoursesAsync(CourseFilterDto filter) in D:\ProductDevelopment\Cece\CeceLearningPortal.Backend\CeceLearningPortal.Api\Services\CourseService.cs:line 95
+   at CeceLearningPortal.Api.Controllers.CoursesController.GetCourses(CourseFilterDto filter) in D:\ProductDevelopment\Cece\CeceLearningPortal.Backend\CeceLearningPortal.Api\Controllers\CoursesController.cs:line 26
+  Exception data:
+    Severity: ERROR
+    SqlState: 42703
+    MessageText: column c.Id does not exist
+    Hint: Perhaps you meant to reference the column "c.id".
+    Position: 1925
+    File: parse_relation.c
+    Line: 3732
+    Routine: errorMissingColumn
+2025-07-31 10:37:30.628 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType0`1[[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-31 10:37:30.629 +08:00 [INF] Executed action CeceLearningPortal.Api.Controllers.CoursesController.GetCourses (CeceLearningPortal.Api) in 12.2498ms
+2025-07-31 10:37:30.629 +08:00 [INF] Executed endpoint 'CeceLearningPortal.Api.Controllers.CoursesController.GetCourses (CeceLearningPortal.Api)'
+2025-07-31 10:37:30.630 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost:5295/api/courses - 500 null application/json; charset=utf-8 16.3717ms
+2025-07-31 10:37:38.769 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5295/courses - null null
+2025-07-31 10:37:38.770 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost:5295/courses - 404 0 null 1.3917ms
+2025-07-31 10:37:38.772 +08:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5295/courses, Response status code: 404

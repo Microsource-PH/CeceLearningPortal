@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Frontend-Backend Connection Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        button { margin: 5px; padding: 10px; cursor: pointer; }
+        .success { color: green; }
+        .error { color: red; }
+        pre { background: #f0f0f0; padding: 10px; overflow: auto; }
+    </style>
+</head>
+<body>
+    <h1>Testing Frontend-Backend Connection</h1>
+    
+    <h2>Test Endpoints:</h2>
+    <button onclick="testEndpoint('http://localhost:5295/WeatherForecast')">Backend: WeatherForecast</button>
+    <button onclick="testEndpoint('http://localhost:5295/api/courses')">Backend: Courses</button>
+    <button onclick="testEndpoint('http://localhost:5295/api/health')">Backend: Health</button>
+    <button onclick="testEndpoint('http://localhost:8080/api/courses')">Frontend Proxy: Courses</button>
+    
+    <h3>Results:</h3>
+    <div id="results"></div>
+
+    <script>
+        async function testEndpoint(url) {
+            const resultsDiv = document.getElementById('results');
+            const timestamp = new Date().toLocaleTimeString();
+            
+            try {
+                const response = await fetch(url, {
+                    method: 'GET',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    }
+                });
+                
+                const contentType = response.headers.get('content-type');
+                let data;
+                
+                if (contentType && contentType.includes('application/json')) {
+                    data = await response.json();
+                } else {
+                    data = await response.text();
+                }
+                
+                const status = response.ok ? 'success' : 'error';
+                
+                resultsDiv.innerHTML += `
+                    <div class="${status}">
+                        <strong>[${timestamp}] ${url}</strong>
+                        <pre>Status: ${response.status}
+Data: ${JSON.stringify(data, null, 2)}</pre>
+                    </div>
+                `;
+            } catch (error) {
+                resultsDiv.innerHTML += `
+                    <div class="error">
+                        <strong>[${timestamp}] ${url}</strong>
+                        <pre>Error: ${error.message}</pre>
+                    </div>
+                `;
+            }
+            
+            // Scroll to bottom
+            resultsDiv.scrollTop = resultsDiv.scrollHeight;
+        }
+        
+        // Test WeatherForecast on load
+        window.onload = () => {
+            testEndpoint('http://localhost:5295/WeatherForecast');
+        };
+    </script>
+</body>
+</html>

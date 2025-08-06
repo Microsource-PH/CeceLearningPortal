@@ -1,0 +1,74 @@
+[
+  {
+    "Id": 96,
+    "CourseId": 140,
+    "Title": "Day 1: PHP Fundamentals",
+    "Description": "Get started with PHP",
+    "Order": 1,
+    "CreatedAt": null,
+    "UpdatedAt": null
+  },
+  {
+    "Id": 97,
+    "CourseId": 141,
+    "Title": "Week 1: Web Fundamentals",
+    "Description": "HTML and CSS basics",
+    "Order": 1,
+    "CreatedAt": null,
+    "UpdatedAt": null
+  },
+  {
+    "Id": 98,
+    "CourseId": 142,
+    "Title": "Welcome to the Academy",
+    "Description": "Get oriented",
+    "Order": 1,
+    "CreatedAt": null,
+    "UpdatedAt": null
+  },
+  {
+    "Id": 99,
+    "CourseId": 143,
+    "Title": "Programming Fundamentals",
+    "Description": "Core concepts",
+    "Order": 1,
+    "CreatedAt": null,
+    "UpdatedAt": null
+  },
+  {
+    "Id": 100,
+    "CourseId": 144,
+    "Title": "Test Module",
+    "Description": "Test ModuleTest ModuleTest ModuleTest ModuleTest ModuleTest Module",
+    "Order": 1,
+    "CreatedAt": null,
+    "UpdatedAt": null
+  },
+  {
+    "Id": 101,
+    "CourseId": 145,
+    "Title": "Test Module",
+    "Description": "Test Module",
+    "Order": 1,
+    "CreatedAt": null,
+    "UpdatedAt": null
+  },
+  {
+    "Id": 102,
+    "CourseId": 145,
+    "Title": "Test Module1",
+    "Description": "Test Module1",
+    "Order": 2,
+    "CreatedAt": null,
+    "UpdatedAt": null
+  },
+  {
+    "Id": 103,
+    "CourseId": 145,
+    "Title": "Test Module2",
+    "Description": "Test Module",
+    "Order": 3,
+    "CreatedAt": null,
+    "UpdatedAt": null
+  }
+]

@@ -1,0 +1,98 @@
+[
+  {
+    "Id": 52,
+    "StudentId": "efead752-f0b3-48ab-93b8-7ba31e7574ba",
+    "CourseId": 62,
+    "Rating": 5,
+    "Comment": "Best investment in my career. Complete Web Development Bootcamp 2025 is amazing!",
+    "Status": "Approved",
+    "CreatedAt": "2025-07-14T11:56:47.465Z",
+    "ApprovedAt": "2025-07-18T11:56:47.516Z",
+    "ApprovedBy": "admin@example.com",
+    "IsFlagged": false
+  },
+  {
+    "Id": 53,
+    "StudentId": "efead752-f0b3-48ab-93b8-7ba31e7574ba",
+    "CourseId": 63,
+    "Rating": 5,
+    "Comment": "Best investment in my career. Advanced React & Redux Masterclass is amazing!",
+    "Status": "Approved",
+    "CreatedAt": "2025-04-12T11:56:47.465Z",
+    "ApprovedAt": "2025-07-18T11:56:47.516Z",
+    "ApprovedBy": "admin@example.com",
+    "IsFlagged": false
+  },
+  {
+    "Id": 54,
+    "StudentId": "efead752-f0b3-48ab-93b8-7ba31e7574ba",
+    "CourseId": 64,
+    "Rating": 5,
+    "Comment": "This course changed my career trajectory. Thank you!",
+    "Status": "Approved",
+    "CreatedAt": "2025-06-28T11:56:47.465Z",
+    "ApprovedAt": "2025-07-23T11:56:47.516Z",
+    "ApprovedBy": "admin@example.com",
+    "IsFlagged": false
+  },
+  {
+    "Id": 55,
+    "StudentId": "efead752-f0b3-48ab-93b8-7ba31e7574ba",
+    "CourseId": 65,
+    "Rating": 5,
+    "Comment": "The instructor explains everything so clearly. Highly recommended!",
+    "Status": "Approved",
+    "CreatedAt": "2025-06-04T11:56:47.465Z",
+    "ApprovedAt": "2025-07-23T11:56:47.516Z",
+    "ApprovedBy": "admin@example.com",
+    "IsFlagged": false
+  },
+  {
+    "Id": 56,
+    "StudentId": "efead752-f0b3-48ab-93b8-7ba31e7574ba",
+    "CourseId": 66,
+    "Rating": 5,
+    "Comment": "Comprehensive content and great practical examples throughout.",
+    "Status": "Approved",
+    "CreatedAt": "2025-03-29T11:56:47.465Z",
+    "ApprovedAt": "2025-07-17T11:56:47.516Z",
+    "ApprovedBy": "admin@example.com",
+    "IsFlagged": false
+  },
+  {
+    "Id": 57,
+    "StudentId": "efead752-f0b3-48ab-93b8-7ba31e7574ba",
+    "CourseId": 67,
+    "Rating": 5,
+    "Comment": "Comprehensive content and great practical examples throughout.",
+    "Status": "Approved",
+    "CreatedAt": "2025-07-20T11:56:47.465Z",
+    "ApprovedAt": "2025-07-14T11:56:47.516Z",
+    "ApprovedBy": "admin@example.com",
+    "IsFlagged": false
+  },
+  {
+    "Id": 58,
+    "StudentId": "efead752-f0b3-48ab-93b8-7ba31e7574ba",
+    "CourseId": 69,
+    "Rating": 5,
+    "Comment": "Best investment in my career. Flutter & Dart Complete Guide is amazing!",
+    "Status": "Approved",
+    "CreatedAt": "2025-04-18T11:56:47.465Z",
+    "ApprovedAt": "2025-07-25T11:56:47.516Z",
+    "ApprovedBy": "admin@example.com",
+    "IsFlagged": false
+  },
+  {
+    "Id": 59,
+    "StudentId": "efead752-f0b3-48ab-93b8-7ba31e7574ba",
+    "CourseId": 71,
+    "Rating": 5,
+    "Comment": "Best investment in my career. Digital Marketing Fundamentals is amazing!",
+    "Status": "Approved",
+    "CreatedAt": "2025-05-04T11:56:47.465Z",
+    "ApprovedAt": "2025-07-27T11:56:47.516Z",
+    "ApprovedBy": "admin@example.com",
+    "IsFlagged": false
+  }
+]

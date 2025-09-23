@@ -37,6 +37,10 @@ try
     builder.Services.AddDbContext<ApplicationDbContext>(options =>
         options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+    // Configure File Storage (folder-based)
+    builder.Services.Configure<FileStorageSettings>(builder.Configuration.GetSection("FileStorage"));
+    builder.Services.AddSingleton<IFileStorageService, FolderFileStorageService>();
+
     // Configure Identity
     builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
     {

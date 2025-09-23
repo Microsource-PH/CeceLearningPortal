@@ -28,6 +28,18 @@ namespace CeceLearningPortal.Api.Data
         public DbSet<PasswordHistory> PasswordHistories { get; set; }
         public DbSet<InstructorApproval> InstructorApprovals { get; set; }
         public DbSet<CourseApproval> CourseApprovals { get; set; }
+        
+        // Resource Hub DbSets
+        public DbSet<ResourceSection> ResourceSections { get; set; }
+        public DbSet<ResourceTag> ResourceTags { get; set; }
+        public DbSet<Resource> Resources { get; set; }
+        public DbSet<ResourceResourceTag> ResourceResourceTags { get; set; }
+        public DbSet<StudentProfile> StudentProfiles { get; set; }
+        public DbSet<ResourceBookmark> ResourceBookmarks { get; set; }
+        public DbSet<FileAsset> FileAssets { get; set; }
+        public DbSet<ResourceActivityLog> ResourceActivityLogs { get; set; }
+        public DbSet<ResourceHubAbout> ResourceHubAbout { get; set; }
+        public DbSet<ResourceComment> ResourceComments { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -212,6 +224,18 @@ namespace CeceLearningPortal.Api.Data
             builder.Entity<PasswordHistory>().ToTable("sessions");
             builder.Entity<InstructorApproval>().ToTable("instructor_approvals");
             builder.Entity<CourseApproval>().ToTable("course_approvals");
+            
+            // Resource Hub table mappings
+            builder.Entity<ResourceSection>().ToTable("resource_sections");
+            builder.Entity<ResourceTag>().ToTable("resource_tags");
+            builder.Entity<Resource>().ToTable("resources");
+            builder.Entity<ResourceResourceTag>().ToTable("resource_resource_tags");
+            builder.Entity<StudentProfile>().ToTable("student_profiles");
+            builder.Entity<ResourceBookmark>().ToTable("resource_bookmarks");
+            builder.Entity<FileAsset>().ToTable("file_assets");
+            builder.Entity<ResourceActivityLog>().ToTable("resource_activity_logs");
+            builder.Entity<ResourceHubAbout>().ToTable("resource_hub_about");
+            builder.Entity<ResourceComment>().ToTable("resource_comments");
 
             // Configure string enums
             builder.Entity<ApplicationUser>()
@@ -427,6 +451,162 @@ namespace CeceLearningPortal.Api.Data
 
             builder.Entity<RefreshToken>()
                 .HasIndex(rt => rt.ExpiresAt);
+                
+            // Resource Hub configurations
+            
+            // Configure ResourceSection
+            builder.Entity<ResourceSection>()
+                .HasIndex(rs => rs.Slug)
+                .IsUnique();
+                
+            // Configure ResourceTag
+            builder.Entity<ResourceTag>()
+                .HasIndex(rt => rt.Slug)
+                .IsUnique();
+                
+            // Configure Resource
+            builder.Entity<Resource>()
+                .HasIndex(r => r.Slug)
+                .IsUnique();
+                
+            builder.Entity<Resource>()
+                .HasOne(r => r.Section)
+                .WithMany(s => s.Resources)
+                .HasForeignKey(r => r.SectionId)
+                .OnDelete(DeleteBehavior.Cascade);
+                
+            builder.Entity<Resource>()
+                .HasOne(r => r.Owner)
+                .WithMany(u => u.OwnedResources)
+                .HasForeignKey(r => r.OwnerUserId)
+                .OnDelete(DeleteBehavior.SetNull);
+                
+            builder.Entity<Resource>()
+                .HasOne(r => r.ReplacesResource)
+                .WithMany()
+                .HasForeignKey(r => r.ReplacesResourceId)
+                .OnDelete(DeleteBehavior.SetNull);
+                
+                
+            // Configure ResourceResourceTag (many-to-many)
+            builder.Entity<ResourceResourceTag>()
+                .HasKey(rrt => new { rrt.ResourceId, rrt.TagId });
+                
+            builder.Entity<ResourceResourceTag>()
+                .HasOne(rrt => rrt.Resource)
+                .WithMany(r => r.ResourceResourceTags)
+                .HasForeignKey(rrt => rrt.ResourceId)
+                .OnDelete(DeleteBehavior.Cascade);
+                
+            builder.Entity<ResourceResourceTag>()
+                .HasOne(rrt => rrt.Tag)
+                .WithMany(t => t.ResourceResourceTags)
+                .HasForeignKey(rrt => rrt.TagId)
+                .OnDelete(DeleteBehavior.Cascade);
+                
+            // Configure StudentProfile
+            builder.Entity<StudentProfile>()
+                .HasIndex(sp => sp.UserId)
+                .IsUnique();
+                
+            builder.Entity<StudentProfile>()
+                .HasOne(sp => sp.User)
+                .WithOne(u => u.StudentProfile)
+                .HasForeignKey<StudentProfile>(sp => sp.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+                
+            builder.Entity<StudentProfile>()
+                .HasOne(sp => sp.ApprovedBy)
+                .WithMany()
+                .HasForeignKey(sp => sp.ApprovedById)
+                .OnDelete(DeleteBehavior.SetNull);
+                
+            builder.Entity<StudentProfile>()
+                .Property(sp => sp.Skills)
+                .HasConversion(
+                    v => JsonSerializer.Serialize(v, (JsonSerializerOptions)null),
+                    v => JsonSerializer.Deserialize<List<string>>(v, (JsonSerializerOptions)null))
+                .Metadata.SetValueComparer(stringListComparer);
+                
+            builder.Entity<StudentProfile>()
+                .Property(sp => sp.Languages)
+                .HasConversion(
+                    v => JsonSerializer.Serialize(v, (JsonSerializerOptions)null),
+                    v => JsonSerializer.Deserialize<List<string>>(v, (JsonSerializerOptions)null))
+                .Metadata.SetValueComparer(stringListComparer);
+                
+            builder.Entity<StudentProfile>()
+                .Property(sp => sp.Services)
+                .HasConversion(
+                    v => JsonSerializer.Serialize(v, (JsonSerializerOptions)null),
+                    v => JsonSerializer.Deserialize<List<string>>(v, (JsonSerializerOptions)null))
+                .Metadata.SetValueComparer(stringListComparer);
+                
+            // Configure ResourceBookmark
+            builder.Entity<ResourceBookmark>()
+                .HasKey(rb => new { rb.UserId, rb.ResourceId });
+                
+            builder.Entity<ResourceBookmark>()
+                .HasOne(rb => rb.User)
+                .WithMany(u => u.ResourceBookmarks)
+                .HasForeignKey(rb => rb.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+                
+            builder.Entity<ResourceBookmark>()
+                .HasOne(rb => rb.Resource)
+                .WithMany(r => r.ResourceBookmarks)
+                .HasForeignKey(rb => rb.ResourceId)
+                .OnDelete(DeleteBehavior.Cascade);
+                
+            // Configure FileAsset
+            builder.Entity<FileAsset>()
+                .HasIndex(fa => fa.StorageKey)
+                .IsUnique();
+                
+            builder.Entity<FileAsset>()
+                .HasOne(fa => fa.Owner)
+                .WithMany(u => u.FileAssets)
+                .HasForeignKey(fa => fa.OwnerUserId)
+                .OnDelete(DeleteBehavior.SetNull);
+                
+            builder.Entity<FileAsset>()
+                .HasOne(fa => fa.Resource)
+                .WithMany(r => r.FileAssets)
+                .HasForeignKey(fa => fa.ResourceId)
+                .OnDelete(DeleteBehavior.Cascade);
+                
+            // Configure ResourceActivityLog
+            builder.Entity<ResourceActivityLog>()
+                .HasOne(ral => ral.ActorUser)
+                .WithMany(u => u.ResourceActivityLogs)
+                .HasForeignKey(ral => ral.ActorUserId)
+                .OnDelete(DeleteBehavior.SetNull);
+                
+            // Configure ResourceHubAbout (singleton)
+            builder.Entity<ResourceHubAbout>()
+                .HasOne(rha => rha.LastEditedBy)
+                .WithMany()
+                .HasForeignKey(rha => rha.LastEditedById)
+                .OnDelete(DeleteBehavior.SetNull);
+                
+            // Configure ResourceComment
+            builder.Entity<ResourceComment>()
+                .HasOne(rc => rc.Resource)
+                .WithMany(r => r.Comments)
+                .HasForeignKey(rc => rc.ResourceId)
+                .OnDelete(DeleteBehavior.Cascade);
+                
+            builder.Entity<ResourceComment>()
+                .HasOne(rc => rc.User)
+                .WithMany(u => u.ResourceComments)
+                .HasForeignKey(rc => rc.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+                
+            builder.Entity<ResourceComment>()
+                .HasOne(rc => rc.ParentComment)
+                .WithMany(rc => rc.Replies)
+                .HasForeignKey(rc => rc.ParentCommentId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             // Seed roles
             var roles = new List<IdentityRole>

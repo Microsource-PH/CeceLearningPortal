@@ -82,8 +82,10 @@
       "Bash(./seed-lessons.sh:*)",
       "Bash(open http://localhost:5173/instructor/courses)",
       "Bash(set FORCE_RESEED=true)",
-      "Bash($env:FORCE_RESEED=\"true\")"
+      "Bash($env:FORCE_RESEED=\"true\")",
+      "Bash(net stop:*)"
     ],
-    "deny": []
+    "deny": [],
+    "defaultMode": "acceptEdits"
   }
 }

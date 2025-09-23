@@ -1,31 +1,32 @@
-import React, { useState, useEffect } from 'react';
-import { 
-  Card, 
-  CardContent, 
-  CardDescription, 
-  CardHeader, 
-  CardTitle 
-} from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
-import { 
-  Select, 
-  SelectContent, 
-  SelectItem, 
-  SelectTrigger, 
-  SelectValue 
-} from '@/components/ui/select';
-import { Switch } from '@/components/ui/switch';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Badge } from '@/components/ui/badge';
-import { 
-  BookOpen, 
-  Clock, 
-  DollarSign, 
-  Users, 
-  Zap, 
+import React, { useState, useEffect } from "react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Switch } from "@/components/ui/switch";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Badge } from "@/components/ui/badge";
+import FileUpload from "@/components/ui/FileUpload";
+import {
+  BookOpen,
+  Clock,
+  DollarSign,
+  Users,
+  Zap,
   Calendar,
   Award,
   MessageSquare,
@@ -42,10 +43,10 @@ import {
   Settings,
   Plus,
   Trash,
-  GraduationCap
-} from 'lucide-react';
-import { useToast } from '@/components/ui/use-toast';
-import courseService from '@/services/courseService';
+  GraduationCap,
+} from "lucide-react";
+import { useToast } from "@/components/ui/use-toast";
+import courseService, { CreateCourseDto } from "@/services/courseService";
 
 interface CourseFormData {
   // Basic Info
@@ -58,23 +59,23 @@ interface CourseFormData {
   duration?: string;
   thumbnailUrl?: string;
   promoVideoUrl?: string;
-  
+
   // GHL Course Type
-  courseType: 'Sprint' | 'Marathon' | 'Membership' | 'Custom';
-  
+  courseType: "Sprint" | "Marathon" | "Membership" | "Custom";
+
   // Pricing
-  pricingModel: 'Free' | 'OneTime' | 'Subscription' | 'PaymentPlan';
+  pricingModel: "Free" | "OneTime" | "Subscription" | "PaymentPlan";
   price: number;
   originalPrice?: number;
   currency: string;
-  subscriptionPeriod?: 'Monthly' | 'Yearly';
+  subscriptionPeriod?: "Monthly" | "Yearly";
   paymentPlanDetailsJson?: string; // JSON string for payment plan
-  
+
   // Access
-  accessType: 'Lifetime' | 'Limited';
+  accessType: "Lifetime" | "Limited";
   accessDuration?: number;
   enrollmentLimit?: number;
-  
+
   // Features (boolean flags in backend)
   hasCertificate: boolean;
   hasCommunity: boolean;
@@ -82,17 +83,17 @@ interface CourseFormData {
   hasDownloadableResources: boolean;
   hasAssignments: boolean;
   hasQuizzes: boolean;
-  
+
   // Drip Content
   dripContent: boolean;
   dripScheduleJson?: string; // JSON string for drip schedule
-  
+
   // Automation
   automationWelcomeEmail: boolean;
   automationCompletionCertificate: boolean;
   automationProgressReminders: boolean;
   automationAbandonmentSequence: boolean;
-  
+
   // Content
   modules: Array<{
     title: string;
@@ -100,7 +101,7 @@ interface CourseFormData {
     order: number;
     lessons: Array<{
       title: string;
-      type: 'Video' | 'Text' | 'Quiz' | 'Assignment';
+      type: "Video" | "Text" | "Quiz" | "Assignment";
       duration?: string;
       content?: string;
       videoUrl?: string;
@@ -112,70 +113,70 @@ interface CourseFormData {
 const courseTypeConfig = {
   Sprint: {
     icon: Zap,
-    color: 'bg-orange-500',
-    description: '7-30 day intensive courses with daily commitments',
-    defaultDuration: '7 days',
+    color: "bg-orange-500",
+    description: "7-30 day intensive courses with daily commitments",
+    defaultDuration: "7 days",
     features: {
       hasCertificate: true,
       hasCommunity: false,
       hasLiveSessions: false,
       hasDownloadableResources: true,
       hasAssignments: true,
-      hasQuizzes: true
-    }
+      hasQuizzes: true,
+    },
   },
   Marathon: {
     icon: TrendingUp,
-    color: 'bg-purple-500',
-    description: '3-6 month comprehensive programs with live sessions',
-    defaultDuration: '6 months',
+    color: "bg-purple-500",
+    description: "3-6 month comprehensive programs with live sessions",
+    defaultDuration: "6 months",
     features: {
       hasCertificate: true,
       hasCommunity: true,
       hasLiveSessions: true,
       hasDownloadableResources: true,
       hasAssignments: true,
-      hasQuizzes: true
-    }
+      hasQuizzes: true,
+    },
   },
   Membership: {
     icon: Crown,
-    color: 'bg-blue-500',
-    description: 'Ongoing access to course library with monthly updates',
-    defaultDuration: 'Ongoing',
+    color: "bg-blue-500",
+    description: "Ongoing access to course library with monthly updates",
+    defaultDuration: "Ongoing",
     features: {
       hasCertificate: false,
       hasCommunity: true,
       hasLiveSessions: true,
       hasDownloadableResources: true,
       hasAssignments: false,
-      hasQuizzes: false
-    }
+      hasQuizzes: false,
+    },
   },
   Custom: {
     icon: Settings,
-    color: 'bg-green-500',
-    description: 'Flexible course structure tailored to your needs',
-    defaultDuration: 'Self-paced',
+    color: "bg-green-500",
+    description: "Flexible course structure tailored to your needs",
+    defaultDuration: "Self-paced",
     features: {
       hasCertificate: true,
       hasCommunity: true,
       hasLiveSessions: false,
       hasDownloadableResources: true,
       hasAssignments: true,
-      hasQuizzes: true
-    }
-  }
+      hasQuizzes: true,
+    },
+  },
 };
 
 const steps = [
-  { id: 'type', name: 'Course Type', icon: BookOpen },
-  { id: 'basic', name: 'Basic Info', icon: FileText },
-  { id: 'pricing', name: 'Pricing', icon: DollarSign },
-  { id: 'content', name: 'Content', icon: GraduationCap },
-  { id: 'features', name: 'Features', icon: Star },
-  { id: 'automation', name: 'Automation', icon: Zap },
-  { id: 'review', name: 'Review', icon: Check }
+  { id: "type", name: "Course Type", icon: BookOpen },
+  { id: "basic", name: "Basic Info", icon: FileText },
+  { id: "pricing", name: "Pricing", icon: DollarSign },
+  { id: "content", name: "Content", icon: GraduationCap },
+  { id: "features", name: "Features", icon: Star },
+  { id: "automation", name: "Automation", icon: Zap },
+  { id: "review", name: "Review", icon: Check },
 ];
 
 interface CourseCreatorGHLProps {
@@ -183,26 +184,32 @@ interface CourseCreatorGHLProps {
   onCancel: () => void;
 }
 
-export const CourseCreatorGHL = ({ onComplete, onCancel }: CourseCreatorGHLProps) => {
+export const CourseCreatorGHL = ({
+  onComplete,
+  onCancel,
+}: CourseCreatorGHLProps) => {
   const { toast } = useToast();
   const [currentStep, setCurrentStep] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
-  const [validationErrors, setValidationErrors] = useState<Record<string, string>>({});
-  
-  console.log('CourseCreatorGHL component initialized');
-  
+  const [validationErrors, setValidationErrors] = useState<
+    Record<string, string>
+  >({});
+  const [createdCourseId, setCreatedCourseId] = useState<number | null>(null);
+
+  console.log("CourseCreatorGHL component initialized");
+
   const [formData, setFormData] = useState<CourseFormData>({
-    title: '',
-    description: '',
-    shortDescription: '',
-    category: '',
-    level: 'Beginner',
-    language: 'en',
-    courseType: 'Sprint',
-    pricingModel: 'OneTime',
+    title: "",
+    description: "",
+    shortDescription: "",
+    category: "",
+    level: "Beginner",
+    language: "en",
+    courseType: "Sprint",
+    pricingModel: "OneTime",
     price: 0,
-    currency: 'PHP',
-    accessType: 'Lifetime',
+    currency: "PHP",
+    accessType: "Lifetime",
     modules: [],
     hasCertificate: true,
     hasCommunity: false,
@@ -214,12 +221,12 @@ export const CourseCreatorGHL = ({ onComplete, onCancel }: CourseCreatorGHLProps
     automationWelcomeEmail: true,
     automationCompletionCertificate: true,
     automationProgressReminders: true,
-    automationAbandonmentSequence: false
+    automationAbandonmentSequence: false,
   });
 
   // Track if this is the initial mount
   const [isInitialMount, setIsInitialMount] = useState(true);
-  
+
   // Update form defaults based on course type
   useEffect(() => {
     // Skip on initial mount
@@ -227,29 +234,41 @@ export const CourseCreatorGHL = ({ onComplete, onCancel }: CourseCreatorGHLProps
       setIsInitialMount(false);
       return;
     }
-    
+
     const config = courseTypeConfig[formData.courseType];
-    console.log('Course type changed to:', formData.courseType);
-    console.log('Config:', config);
-    
+    console.log("Course type changed to:", formData.courseType);
+    console.log("Config:", config);
+
     if (config) {
-      setFormData(prev => {
-        const newData = {
+      setFormData((prev) => {
+        const newData: CourseFormData = {
           ...prev,
           duration: config.defaultDuration,
           ...config.features,
           // Set pricing model defaults
-          pricingModel: formData.courseType === 'Membership' ? 'Subscription' : 
-                        formData.courseType === 'Marathon' ? 'PaymentPlan' : 'OneTime',
+          pricingModel:
+            formData.courseType === "Membership"
+              ? ("Subscription" as const)
+              : formData.courseType === "Marathon"
+                ? ("PaymentPlan" as const)
+                : ("OneTime" as const),
           // Set drip content defaults
-          dripContent: formData.courseType === 'Marathon' || formData.courseType === 'Membership',
+          dripContent:
+            formData.courseType === "Marathon" ||
+            formData.courseType === "Membership",
           // Set subscription period for membership
-          subscriptionPeriod: formData.courseType === 'Membership' ? 'Monthly' : undefined,
+          subscriptionPeriod:
+            formData.courseType === "Membership"
+              ? ("Monthly" as const)
+              : undefined,
           // Set access type
-          accessType: formData.courseType === 'Membership' ? 'Limited' : 'Lifetime',
-          accessDuration: formData.courseType === 'Membership' ? 30 : undefined
+          accessType:
+            formData.courseType === "Membership"
+              ? ("Limited" as const)
+              : ("Lifetime" as const),
+          accessDuration: formData.courseType === "Membership" ? 30 : undefined,
         };
-        console.log('New form data:', newData);
+        console.log("New form data:", newData);
         return newData;
       });
     }
@@ -260,72 +279,85 @@ export const CourseCreatorGHL = ({ onComplete, onCancel }: CourseCreatorGHLProps
 
     switch (step) {
       case 0: // Course Type
-        if (!formData.courseType) errors.courseType = 'Please select a course type';
+        if (!formData.courseType)
+          errors.courseType = "Please select a course type";
         break;
       case 1: // Basic Info
-        if (!formData.title) errors.title = 'Title is required';
-        if (!formData.description) errors.description = 'Description is required';
-        if (!formData.category) errors.category = 'Category is required';
-        
+        if (!formData.title) errors.title = "Title is required";
+        if (!formData.description)
+          errors.description = "Description is required";
+        if (!formData.category) errors.category = "Category is required";
+
         // Course type specific validation
-        if (formData.courseType === 'Sprint' && formData.duration) {
+        if (formData.courseType === "Sprint" && formData.duration) {
           const durationMatch = formData.duration.match(/(\d+)/);
           if (durationMatch) {
             const days = parseInt(durationMatch[1]);
-            if (formData.duration.includes('day') && days > 30) {
-              errors.duration = 'Sprint courses should be 30 days or less';
-            } else if (formData.duration.includes('week') && days > 4) {
-              errors.duration = 'Sprint courses should be 4 weeks or less';
+            if (formData.duration.includes("day") && days > 30) {
+              errors.duration = "Sprint courses should be 30 days or less";
+            } else if (formData.duration.includes("week") && days > 4) {
+              errors.duration = "Sprint courses should be 4 weeks or less";
             }
           }
         }
         break;
       case 2: // Pricing
-        if (formData.pricingModel !== 'Free' && formData.price <= 0) {
-          errors.price = 'Price must be greater than 0';
+        if (formData.pricingModel !== "Free" && formData.price <= 0) {
+          errors.price = "Price must be greater than 0";
         }
-        if (formData.pricingModel === 'PaymentPlan' && !formData.paymentPlanDetailsJson) {
-          errors.paymentPlan = 'Payment plan details are required';
+        if (
+          formData.pricingModel === "PaymentPlan" &&
+          !formData.paymentPlanDetailsJson
+        ) {
+          errors.paymentPlan = "Payment plan details are required";
         }
-        
+
         // Membership must be subscription
-        if (formData.courseType === 'Membership' && formData.pricingModel !== 'Subscription') {
-          errors.pricingModel = 'Membership courses must use subscription pricing';
+        if (
+          formData.courseType === "Membership" &&
+          formData.pricingModel !== "Subscription"
+        ) {
+          errors.pricingModel =
+            "Membership courses must use subscription pricing";
         }
         break;
       case 3: // Content
         if (formData.modules.length === 0) {
-          errors.modules = 'At least one module is required';
+          errors.modules = "At least one module is required";
         }
-        
+
         // Validate each module and its lessons
         formData.modules.forEach((module, index) => {
           if (!module.title.trim()) {
-            errors[`module${index}`] = 'Module title is required';
+            errors[`module${index}`] = "Module title is required";
           }
           if (module.lessons.length === 0) {
-            errors[`module${index}lessons`] = 'At least one lesson is required per module';
+            errors[`module${index}lessons`] =
+              "At least one lesson is required per module";
           }
-          
+
           // Validate each lesson
           module.lessons.forEach((lesson, lessonIndex) => {
             if (!lesson.title.trim()) {
-              errors[`module${index}lesson${lessonIndex}title`] = 'Lesson title is required';
+              errors[`module${index}lesson${lessonIndex}title`] =
+                "Lesson title is required";
             }
             if (!lesson.duration || !lesson.duration.trim()) {
-              errors[`module${index}lesson${lessonIndex}duration`] = 'Lesson duration is required';
+              errors[`module${index}lesson${lessonIndex}duration`] =
+                "Lesson duration is required";
             }
           });
         });
-        
+
         // Sprint courses should have focused content
-        if (formData.courseType === 'Sprint' && formData.modules.length > 5) {
-          errors.modules = 'Sprint courses should have 5 or fewer modules for focused learning';
+        if (formData.courseType === "Sprint" && formData.modules.length > 5) {
+          errors.modules =
+            "Sprint courses should have 5 or fewer modules for focused learning";
         }
-        
+
         // Marathon courses need substantial content
-        if (formData.courseType === 'Marathon' && formData.modules.length < 3) {
-          errors.modules = 'Marathon courses should have at least 3 modules';
+        if (formData.courseType === "Marathon" && formData.modules.length < 3) {
+          errors.modules = "Marathon courses should have at least 3 modules";
         }
         break;
     }
@@ -336,60 +368,62 @@ export const CourseCreatorGHL = ({ onComplete, onCancel }: CourseCreatorGHLProps
 
   const handleNext = () => {
     if (validateStep(currentStep)) {
-      setCurrentStep(prev => Math.min(prev + 1, steps.length - 1));
+      setCurrentStep((prev) => Math.min(prev + 1, steps.length - 1));
     }
   };
 
   const handlePrevious = () => {
-    setCurrentStep(prev => Math.max(prev - 1, 0));
+    setCurrentStep((prev) => Math.max(prev - 1, 0));
   };
 
   const handleSubmit = async () => {
-    console.log('handleSubmit called');
-    console.log('Current form data:', formData);
-    
+    console.log("handleSubmit called");
+    console.log("Current form data:", formData);
+
     // Collect all validation errors from all steps
     let allErrors: Record<string, string> = {};
     let failedSteps: number[] = [];
-    
+
     // Validate each step and collect errors
     for (let i = 0; i < 6; i++) {
       const errors: Record<string, string> = {};
-      
+
       // Inline validation to collect errors immediately
       switch (i) {
         case 0: // Course Type
           if (!formData.courseType) {
-            errors.courseType = 'Please select a course type';
+            errors.courseType = "Please select a course type";
             failedSteps.push(i);
           }
           break;
         case 1: // Basic Info
-          if (!formData.title) errors.title = 'Title is required';
-          if (!formData.description) errors.description = 'Description is required';
-          if (!formData.category) errors.category = 'Category is required';
+          if (!formData.title) errors.title = "Title is required";
+          if (!formData.description)
+            errors.description = "Description is required";
+          if (!formData.category) errors.category = "Category is required";
           if (Object.keys(errors).length > 0) failedSteps.push(i);
           break;
         case 2: // Pricing
-          if (formData.pricingModel !== 'Free' && formData.price <= 0) {
-            errors.price = 'Price must be greater than 0';
+          if (formData.pricingModel !== "Free" && formData.price <= 0) {
+            errors.price = "Price must be greater than 0";
           }
           if (Object.keys(errors).length > 0) failedSteps.push(i);
           break;
         case 3: // Content
           if (formData.modules.length === 0) {
-            errors.modules = 'At least one module is required';
+            errors.modules = "At least one module is required";
             failedSteps.push(i);
           } else {
             // Check each module
             let hasContentErrors = false;
             formData.modules.forEach((module, index) => {
               if (!module.title.trim()) {
-                errors[`module${index}`] = 'Module title is required';
+                errors[`module${index}`] = "Module title is required";
                 hasContentErrors = true;
               }
               if (module.lessons.length === 0) {
-                errors[`module${index}lessons`] = 'At least one lesson is required per module';
+                errors[`module${index}lessons`] =
+                  "At least one lesson is required per module";
                 hasContentErrors = true;
               }
             });
@@ -397,57 +431,79 @@ export const CourseCreatorGHL = ({ onComplete, onCancel }: CourseCreatorGHLProps
           }
           break;
       }
-      
+
       Object.assign(allErrors, errors);
     }
-    
+
     if (failedSteps.length > 0) {
-      console.log('Validation failed for steps:', failedSteps);
-      console.log('All errors:', allErrors);
-      
-      const stepNames = ['Course Type', 'Basic Info', 'Pricing', 'Content', 'Features', 'Automation'];
-      const failedStepNames = failedSteps.map(i => stepNames[i]).join(', ');
-      
+      console.log("Validation failed for steps:", failedSteps);
+      console.log("All errors:", allErrors);
+
+      const stepNames = [
+        "Course Type",
+        "Basic Info",
+        "Pricing",
+        "Content",
+        "Features",
+        "Automation",
+      ];
+      const failedStepNames = failedSteps.map((i) => stepNames[i]).join(", ");
+
       const errorMessages = Object.values(allErrors)
         .filter((v, i, a) => a.indexOf(v) === i)
-        .join('\n');
-      
+        .join("\n");
+
       toast({
         title: `Validation Error in: ${failedStepNames}`,
-        description: errorMessages || "Please check all required fields are filled correctly",
-        variant: "destructive"
+        description:
+          errorMessages ||
+          "Please check all required fields are filled correctly",
+        variant: "destructive",
       });
-      
+
       return;
     }
 
-    console.log('Validation passed! Proceeding with course creation...');
-    
+    console.log("Validation passed! Proceeding with course creation...");
+
     setIsLoading(true);
     try {
       // Prepare data for backend - map to match backend DTO structure
-      const courseData = {
+      const courseData: CreateCourseDto = {
         title: formData.title,
         description: formData.description,
         shortDescription: formData.shortDescription,
         category: formData.category,
-        level: formData.level.charAt(0).toUpperCase() + formData.level.slice(1), // Ensure proper casing
+        level: formData.level, // Keep original casing - should be Beginner/Intermediate/Advanced
         duration: formData.duration,
         language: formData.language,
         thumbnailUrl: formData.thumbnailUrl,
         features: [], // Add empty features array as backend expects it
-        
-        // GHL specific fields
-        courseType: formData.courseType,
-        pricingModel: formData.pricingModel,
+
+        // GHL specific fields - send proper enum values as expected by backend
+        courseType: formData.courseType as
+          | "Sprint"
+          | "Marathon"
+          | "Membership"
+          | "Custom",
+        pricingModel: formData.pricingModel
+          .replace("OneTime", "OneTime")
+          .replace("PaymentPlan", "PaymentPlan") as
+          | "Free"
+          | "OneTime"
+          | "Subscription"
+          | "PaymentPlan",
         price: formData.price,
         currency: formData.currency,
-        subscriptionPeriod: formData.subscriptionPeriod,
-        accessType: formData.accessType,
+        subscriptionPeriod: formData.subscriptionPeriod as
+          | "Monthly"
+          | "Yearly"
+          | undefined,
+        accessType: formData.accessType as "Lifetime" | "Limited",
         accessDuration: formData.accessDuration,
         enrollmentLimit: formData.enrollmentLimit,
-        
-        // Features object - map individual booleans to nested object
+
+        // Feature flags - map to CourseFeatures object as expected by backend
         courseFeatures: {
           certificate: formData.hasCertificate || false,
           community: formData.hasCommunity || false,
@@ -456,10 +512,10 @@ export const CourseCreatorGHL = ({ onComplete, onCancel }: CourseCreatorGHLProps
           assignments: formData.hasAssignments || false,
           quizzes: formData.hasQuizzes || false,
         },
-        
-        // Drip content
+
+        // Drip content settings
         dripContent: formData.dripContent,
-        dripSchedule: formData.dripContent && formData.dripScheduleJson
+        dripSchedule: formData.dripScheduleJson
           ? (() => {
               try {
                 return JSON.parse(formData.dripScheduleJson);
@@ -468,74 +524,80 @@ export const CourseCreatorGHL = ({ onComplete, onCancel }: CourseCreatorGHLProps
               }
             })()
           : undefined,
-        
+
         // Payment plan details
-        paymentPlanDetails: formData.pricingModel === 'PaymentPlan' && formData.paymentPlanDetailsJson
-          ? (() => {
-              try {
-                return JSON.parse(formData.paymentPlanDetailsJson);
-              } catch {
-                return undefined;
-              }
-            })()
-          : undefined,
-        
-        // Automation settings object
+        paymentPlanDetails:
+          formData.pricingModel === "PaymentPlan" &&
+          formData.paymentPlanDetailsJson
+            ? (() => {
+                try {
+                  return JSON.parse(formData.paymentPlanDetailsJson);
+                } catch {
+                  return undefined;
+                }
+              })()
+            : undefined,
+
+        // Automation settings - map to Automations object as expected by backend
         automations: {
           welcomeEmail: formData.automationWelcomeEmail || false,
-          completionCertificate: formData.automationCompletionCertificate || false,
+          completionCertificate:
+            formData.automationCompletionCertificate || false,
           progressReminders: formData.automationProgressReminders || false,
           abandonmentSequence: formData.automationAbandonmentSequence || false,
         },
-        
-        // Modules
-        modules: formData.modules
+
+        // Modules - will be created after course creation
+        modules: formData.modules as any,
       };
 
-      // Remove undefined values
-      const cleanedData = Object.fromEntries(
-        Object.entries(courseData).filter(([_, value]) => value !== undefined)
-      );
-      
-      console.log('Sending course data:', cleanedData);
-      
+      console.log("Sending course data:", courseData);
+
       // Log modules to debug
-      if (cleanedData.modules) {
-        console.log('Modules being sent:', JSON.stringify(cleanedData.modules, null, 2));
+      if (courseData.modules) {
+        console.log(
+          "Modules being sent:",
+          JSON.stringify(courseData.modules, null, 2)
+        );
       }
-      
-      const response = await courseService.createCourse(cleanedData);
-      
+
+      const response = await courseService.createCourse(courseData);
+
       if (response.data) {
+        // Store the created course ID for file uploads
+        setCreatedCourseId((response.data as any).id);
+
         toast({
           title: "Success!",
-          description: "Course created successfully"
+          description: "Course created successfully! You can now upload files.",
         });
-        
+
         onComplete(response.data);
       } else {
-        throw new Error(response.error || 'Failed to create course');
+        throw new Error(response.error || "Failed to create course");
       }
     } catch (error: any) {
-      console.error('Error creating course:', error);
-      
+      console.error("Error creating course:", error);
+
       // Check if it's a validation error with details
       let errorMessage = "Failed to create course. Please try again.";
-      
+
       if (error.response && error.response.errors) {
         // Format validation errors
         const validationErrors = Object.entries(error.response.errors)
-          .map(([field, errors]) => `${field}: ${(errors as string[]).join(', ')}`)
-          .join('\n');
+          .map(
+            ([field, errors]) => `${field}: ${(errors as string[]).join(", ")}`
+          )
+          .join("\n");
         errorMessage = validationErrors;
       } else if (error.message) {
         errorMessage = error.message;
       }
-      
+
       toast({
         title: "Error",
         description: errorMessage,
-        variant: "destructive"
+        variant: "destructive",
       });
     } finally {
       setIsLoading(false);
@@ -543,41 +605,46 @@ export const CourseCreatorGHL = ({ onComplete, onCancel }: CourseCreatorGHLProps
   };
 
   const addModule = () => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      modules: [...prev.modules, {
-        title: '',
-        description: '',
-        order: prev.modules.length + 1,
-        lessons: []
-      }]
+      modules: [
+        ...prev.modules,
+        {
+          title: "",
+          description: "",
+          order: prev.modules.length + 1,
+          lessons: [],
+        },
+      ],
     }));
   };
 
   const addLesson = (moduleIndex: number) => {
     const newModules = [...formData.modules];
     newModules[moduleIndex].lessons.push({
-      title: '',
-      type: 'Video',
-      duration: '10:00', // Default duration
-      content: '',
-      videoUrl: '',
-      order: newModules[moduleIndex].lessons.length + 1
+      title: "",
+      type: "Video",
+      duration: "10:00", // Default duration
+      content: "",
+      videoUrl: "",
+      order: newModules[moduleIndex].lessons.length + 1,
     });
-    setFormData(prev => ({ ...prev, modules: newModules }));
+    setFormData((prev) => ({ ...prev, modules: newModules }));
   };
 
   const removeModule = (index: number) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      modules: prev.modules.filter((_, i) => i !== index)
+      modules: prev.modules.filter((_, i) => i !== index),
     }));
   };
 
   const removeLesson = (moduleIndex: number, lessonIndex: number) => {
     const newModules = [...formData.modules];
-    newModules[moduleIndex].lessons = newModules[moduleIndex].lessons.filter((_, i) => i !== lessonIndex);
-    setFormData(prev => ({ ...prev, modules: newModules }));
+    newModules[moduleIndex].lessons = newModules[moduleIndex].lessons.filter(
+      (_, i) => i !== lessonIndex
+    );
+    setFormData((prev) => ({ ...prev, modules: newModules }));
   };
 
   const renderStepContent = () => {
@@ -589,23 +656,34 @@ export const CourseCreatorGHL = ({ onComplete, onCancel }: CourseCreatorGHLProps
               {Object.entries(courseTypeConfig).map(([type, config]) => {
                 const Icon = config.icon;
                 const isSelected = formData.courseType === type;
-                
+
                 return (
-                  <Card 
+                  <Card
                     key={type}
                     className={`cursor-pointer transition-all ${
-                      isSelected ? 'ring-2 ring-primary' : 'hover:shadow-lg'
+                      isSelected ? "ring-2 ring-primary" : "hover:shadow-lg"
                     }`}
                     onClick={() => {
-                      console.log('Setting course type to:', type);
-                      setFormData(prev => ({ ...prev, courseType: type as 'Sprint' | 'Marathon' | 'Membership' | 'Custom' }));
+                      console.log("Setting course type to:", type);
+                      setFormData((prev) => ({
+                        ...prev,
+                        courseType: type as
+                          | "Sprint"
+                          | "Marathon"
+                          | "Membership"
+                          | "Custom",
+                      }));
                     }}
                   >
                     <CardHeader>
                       <div className="flex items-center justify-between">
-                        <Icon className={`h-8 w-8 ${isSelected ? 'text-primary' : 'text-gray-400'}`} />
+                        <Icon
+                          className={`h-8 w-8 ${isSelected ? "text-primary" : "text-gray-400"}`}
+                        />
                         {isSelected && (
-                          <Badge className="bg-primary text-white">Selected</Badge>
+                          <Badge className="bg-primary text-white">
+                            Selected
+                          </Badge>
                         )}
                       </div>
                       <CardTitle className="text-xl">{type}</CardTitle>
@@ -627,12 +705,16 @@ export const CourseCreatorGHL = ({ onComplete, onCancel }: CourseCreatorGHLProps
                 <Input
                   id="title"
                   value={formData.title}
-                  onChange={(e) => setFormData(prev => ({ ...prev, title: e.target.value }))}
+                  onChange={(e) =>
+                    setFormData((prev) => ({ ...prev, title: e.target.value }))
+                  }
                   placeholder="Enter course title"
-                  className={validationErrors.title ? 'border-red-500' : ''}
+                  className={validationErrors.title ? "border-red-500" : ""}
                 />
                 {validationErrors.title && (
-                  <p className="text-sm text-red-500 mt-1">{validationErrors.title}</p>
+                  <p className="text-sm text-red-500 mt-1">
+                    {validationErrors.title}
+                  </p>
                 )}
               </div>
 
@@ -641,7 +723,12 @@ export const CourseCreatorGHL = ({ onComplete, onCancel }: CourseCreatorGHLProps
                 <Input
                   id="shortDescription"
                   value={formData.shortDescription}
-                  onChange={(e) => setFormData(prev => ({ ...prev, shortDescription: e.target.value }))}
+                  onChange={(e) =>
+                    setFormData((prev) => ({
+                      ...prev,
+                      shortDescription: e.target.value,
+                    }))
+                  }
                   placeholder="Brief description for course cards"
                   maxLength={150}
                 />
@@ -652,13 +739,22 @@ export const CourseCreatorGHL = ({ onComplete, onCancel }: CourseCreatorGHLProps
                 <Textarea
                   id="description"
                   value={formData.description}
-                  onChange={(e) => setFormData(prev => ({ ...prev, description: e.target.value }))}
+                  onChange={(e) =>
+                    setFormData((prev) => ({
+                      ...prev,
+                      description: e.target.value,
+                    }))
+                  }
                   placeholder="Detailed course description"
                   rows={5}
-                  className={validationErrors.description ? 'border-red-500' : ''}
+                  className={
+                    validationErrors.description ? "border-red-500" : ""
+                  }
                 />
                 {validationErrors.description && (
-                  <p className="text-sm text-red-500 mt-1">{validationErrors.description}</p>
+                  <p className="text-sm text-red-500 mt-1">
+                    {validationErrors.description}
+                  </p>
                 )}
               </div>
 
@@ -668,12 +764,21 @@ export const CourseCreatorGHL = ({ onComplete, onCancel }: CourseCreatorGHLProps
                   <Input
                     id="category"
                     value={formData.category}
-                    onChange={(e) => setFormData(prev => ({ ...prev, category: e.target.value }))}
+                    onChange={(e) =>
+                      setFormData((prev) => ({
+                        ...prev,
+                        category: e.target.value,
+                      }))
+                    }
                     placeholder="e.g., Programming, Design"
-                    className={validationErrors.category ? 'border-red-500' : ''}
+                    className={
+                      validationErrors.category ? "border-red-500" : ""
+                    }
                   />
                   {validationErrors.category && (
-                    <p className="text-sm text-red-500 mt-1">{validationErrors.category}</p>
+                    <p className="text-sm text-red-500 mt-1">
+                      {validationErrors.category}
+                    </p>
                   )}
                 </div>
 
@@ -681,7 +786,9 @@ export const CourseCreatorGHL = ({ onComplete, onCancel }: CourseCreatorGHLProps
                   <Label htmlFor="level">Level</Label>
                   <Select
                     value={formData.level}
-                    onValueChange={(value) => setFormData(prev => ({ ...prev, level: value }))}
+                    onValueChange={(value) =>
+                      setFormData((prev) => ({ ...prev, level: value }))
+                    }
                   >
                     <SelectTrigger>
                       <SelectValue />
@@ -700,21 +807,31 @@ export const CourseCreatorGHL = ({ onComplete, onCancel }: CourseCreatorGHLProps
                 <div>
                   <Label htmlFor="duration">
                     Duration
-                    {formData.courseType === 'Sprint' && ' (7-30 days recommended)'}
-                    {formData.courseType === 'Marathon' && ' (3-12 months recommended)'}
-                    {formData.courseType === 'Membership' && ' (Ongoing)'}
+                    {formData.courseType === "Sprint" &&
+                      " (7-30 days recommended)"}
+                    {formData.courseType === "Marathon" &&
+                      " (3-12 months recommended)"}
+                    {formData.courseType === "Membership" && " (Ongoing)"}
                   </Label>
                   <Input
                     id="duration"
                     value={formData.duration}
-                    onChange={(e) => setFormData(prev => ({ ...prev, duration: e.target.value }))}
-                    placeholder={
-                      formData.courseType === 'Sprint' ? 'e.g., 7 days, 2 weeks' :
-                      formData.courseType === 'Marathon' ? 'e.g., 6 months, 1 year' :
-                      formData.courseType === 'Membership' ? 'Ongoing' :
-                      'e.g., 4 weeks, 6 months'
+                    onChange={(e) =>
+                      setFormData((prev) => ({
+                        ...prev,
+                        duration: e.target.value,
+                      }))
                     }
-                    disabled={formData.courseType === 'Membership'}
+                    placeholder={
+                      formData.courseType === "Sprint"
+                        ? "e.g., 7 days, 2 weeks"
+                        : formData.courseType === "Marathon"
+                          ? "e.g., 6 months, 1 year"
+                          : formData.courseType === "Membership"
+                            ? "Ongoing"
+                            : "e.g., 4 weeks, 6 months"
+                    }
+                    disabled={formData.courseType === "Membership"}
                   />
                 </div>
 
@@ -722,7 +839,9 @@ export const CourseCreatorGHL = ({ onComplete, onCancel }: CourseCreatorGHLProps
                   <Label htmlFor="language">Language</Label>
                   <Select
                     value={formData.language}
-                    onValueChange={(value) => setFormData(prev => ({ ...prev, language: value }))}
+                    onValueChange={(value) =>
+                      setFormData((prev) => ({ ...prev, language: value }))
+                    }
                   >
                     <SelectTrigger>
                       <SelectValue />
@@ -737,14 +856,103 @@ export const CourseCreatorGHL = ({ onComplete, onCancel }: CourseCreatorGHLProps
                 </div>
               </div>
 
+              {/* File Upload Sections */}
               <div>
-                <Label htmlFor="thumbnailUrl">Thumbnail URL</Label>
-                <Input
-                  id="thumbnailUrl"
-                  value={formData.thumbnailUrl}
-                  onChange={(e) => setFormData(prev => ({ ...prev, thumbnailUrl: e.target.value }))}
-                  placeholder="https://example.com/image.jpg"
-                />
+                <Label htmlFor="thumbnailUrl">Course Thumbnail</Label>
+                <div className="space-y-3">
+                  <Input
+                    id="thumbnailUrl"
+                    value={formData.thumbnailUrl || ""}
+                    onChange={(e) =>
+                      setFormData((prev) => ({
+                        ...prev,
+                        thumbnailUrl: e.target.value,
+                      }))
+                    }
+                    placeholder="https://example.com/image.jpg or upload below"
+                  />
+                  {createdCourseId && (
+                    <FileUpload
+                      courseId={createdCourseId}
+                      attachType="thumbnail"
+                      accept="image"
+                      label="Upload Thumbnail Image"
+                      helperText="Upload a course thumbnail (JPEG, PNG, WebP). Max 500MB."
+                      onUploadComplete={(response) => {
+                        setFormData((prev) => ({
+                          ...prev,
+                          thumbnailUrl: response.url,
+                        }));
+                        toast({
+                          title: "Thumbnail uploaded successfully!",
+                          description: "Course thumbnail has been set.",
+                        });
+                      }}
+                      onUploadError={(error) => {
+                        toast({
+                          title: "Upload failed",
+                          description: error,
+                          variant: "destructive",
+                        });
+                      }}
+                      className="mt-2"
+                    />
+                  )}
+                  {!createdCourseId && (
+                    <p className="text-sm text-gray-500">
+                      Save the course first to enable file uploads
+                    </p>
+                  )}
+                </div>
+              </div>
+
+              <div>
+                <Label htmlFor="promoVideoUrl">Promo Video</Label>
+                <div className="space-y-3">
+                  <Input
+                    id="promoVideoUrl"
+                    value={formData.promoVideoUrl || ""}
+                    onChange={(e) =>
+                      setFormData((prev) => ({
+                        ...prev,
+                        promoVideoUrl: e.target.value,
+                      }))
+                    }
+                    placeholder="https://youtube.com/watch?v=... or upload below"
+                  />
+                  {createdCourseId && (
+                    <FileUpload
+                      courseId={createdCourseId}
+                      attachType="promoVideo"
+                      accept="video"
+                      label="Upload Promo Video"
+                      helperText="Upload a promotional video for your course (MP4, WebM, QuickTime). Max 500MB."
+                      onUploadComplete={(response) => {
+                        setFormData((prev) => ({
+                          ...prev,
+                          promoVideoUrl: response.url,
+                        }));
+                        toast({
+                          title: "Promo video uploaded successfully!",
+                          description: "Course promo video has been set.",
+                        });
+                      }}
+                      onUploadError={(error) => {
+                        toast({
+                          title: "Upload failed",
+                          description: error,
+                          variant: "destructive",
+                        });
+                      }}
+                      className="mt-2"
+                    />
+                  )}
+                  {!createdCourseId && (
+                    <p className="text-sm text-gray-500">
+                      Save the course first to enable file uploads
+                    </p>
+                  )}
+                </div>
               </div>
             </div>
           </div>
@@ -754,28 +962,31 @@ export const CourseCreatorGHL = ({ onComplete, onCancel }: CourseCreatorGHLProps
         return (
           <div className="space-y-6">
             {/* Sprint courses - typically one-time payment */}
-            {formData.courseType === 'Sprint' && (
+            {formData.courseType === "Sprint" && (
               <div className="bg-orange-50 p-4 rounded-lg mb-4">
                 <p className="text-sm text-orange-800">
-                  Sprint courses are intensive, short-duration programs typically offered as one-time payments.
+                  Sprint courses are intensive, short-duration programs
+                  typically offered as one-time payments.
                 </p>
               </div>
             )}
-            
+
             {/* Marathon courses - typically payment plans */}
-            {formData.courseType === 'Marathon' && (
+            {formData.courseType === "Marathon" && (
               <div className="bg-purple-50 p-4 rounded-lg mb-4">
                 <p className="text-sm text-purple-800">
-                  Marathon courses are long-term programs often offered with payment plans for accessibility.
+                  Marathon courses are long-term programs often offered with
+                  payment plans for accessibility.
                 </p>
               </div>
             )}
-            
+
             {/* Membership courses - always subscription */}
-            {formData.courseType === 'Membership' && (
+            {formData.courseType === "Membership" && (
               <div className="bg-blue-50 p-4 rounded-lg mb-4">
                 <p className="text-sm text-blue-800">
-                  Membership courses provide ongoing access and are subscription-based.
+                  Membership courses provide ongoing access and are
+                  subscription-based.
                 </p>
               </div>
             )}
@@ -784,32 +995,34 @@ export const CourseCreatorGHL = ({ onComplete, onCancel }: CourseCreatorGHLProps
               <Label>Pricing Model</Label>
               <Select
                 value={formData.pricingModel}
-                onValueChange={(value: any) => setFormData(prev => ({ ...prev, pricingModel: value }))}
+                onValueChange={(value: any) =>
+                  setFormData((prev) => ({ ...prev, pricingModel: value }))
+                }
               >
                 <SelectTrigger>
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
                   {/* Show different pricing options based on course type */}
-                  {formData.courseType === 'Sprint' && (
+                  {formData.courseType === "Sprint" && (
                     <>
                       <SelectItem value="OneTime">One-Time Payment</SelectItem>
                       <SelectItem value="Free">Free</SelectItem>
                     </>
                   )}
-                  {formData.courseType === 'Marathon' && (
+                  {formData.courseType === "Marathon" && (
                     <>
                       <SelectItem value="PaymentPlan">Payment Plan</SelectItem>
                       <SelectItem value="OneTime">One-Time Payment</SelectItem>
                       <SelectItem value="Free">Free</SelectItem>
                     </>
                   )}
-                  {formData.courseType === 'Membership' && (
+                  {formData.courseType === "Membership" && (
                     <>
                       <SelectItem value="Subscription">Subscription</SelectItem>
                     </>
                   )}
-                  {formData.courseType === 'Custom' && (
+                  {formData.courseType === "Custom" && (
                     <>
                       <SelectItem value="Free">Free</SelectItem>
                       <SelectItem value="OneTime">One-Time Payment</SelectItem>
@@ -821,7 +1034,7 @@ export const CourseCreatorGHL = ({ onComplete, onCancel }: CourseCreatorGHLProps
               </Select>
             </div>
 
-            {formData.pricingModel !== 'Free' && (
+            {formData.pricingModel !== "Free" && (
               <>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
@@ -830,33 +1043,53 @@ export const CourseCreatorGHL = ({ onComplete, onCancel }: CourseCreatorGHLProps
                       id="price"
                       type="number"
                       value={formData.price}
-                      onChange={(e) => setFormData(prev => ({ ...prev, price: parseFloat(e.target.value) || 0 }))}
+                      onChange={(e) =>
+                        setFormData((prev) => ({
+                          ...prev,
+                          price: parseFloat(e.target.value) || 0,
+                        }))
+                      }
                       placeholder="0.00"
-                      className={validationErrors.price ? 'border-red-500' : ''}
+                      className={validationErrors.price ? "border-red-500" : ""}
                     />
                     {validationErrors.price && (
-                      <p className="text-sm text-red-500 mt-1">{validationErrors.price}</p>
+                      <p className="text-sm text-red-500 mt-1">
+                        {validationErrors.price}
+                      </p>
                     )}
                   </div>
 
                   <div>
-                    <Label htmlFor="originalPrice">Original Price (for discount)</Label>
+                    <Label htmlFor="originalPrice">
+                      Original Price (for discount)
+                    </Label>
                     <Input
                       id="originalPrice"
                       type="number"
-                      value={formData.originalPrice || ''}
-                      onChange={(e) => setFormData(prev => ({ ...prev, originalPrice: parseFloat(e.target.value) || undefined }))}
+                      value={formData.originalPrice || ""}
+                      onChange={(e) =>
+                        setFormData((prev) => ({
+                          ...prev,
+                          originalPrice:
+                            parseFloat(e.target.value) || undefined,
+                        }))
+                      }
                       placeholder="0.00"
                     />
                   </div>
                 </div>
 
-                {formData.pricingModel === 'Subscription' && (
+                {formData.pricingModel === "Subscription" && (
                   <div>
                     <Label>Subscription Period</Label>
                     <Select
                       value={formData.subscriptionPeriod}
-                      onValueChange={(value: any) => setFormData(prev => ({ ...prev, subscriptionPeriod: value }))}
+                      onValueChange={(value: any) =>
+                        setFormData((prev) => ({
+                          ...prev,
+                          subscriptionPeriod: value,
+                        }))
+                      }
                     >
                       <SelectTrigger>
                         <SelectValue />
@@ -869,15 +1102,22 @@ export const CourseCreatorGHL = ({ onComplete, onCancel }: CourseCreatorGHLProps
                   </div>
                 )}
 
-                {formData.pricingModel === 'PaymentPlan' && (
+                {formData.pricingModel === "PaymentPlan" && (
                   <Card>
                     <CardHeader>
-                      <CardTitle className="text-lg">Payment Plan Details</CardTitle>
+                      <CardTitle className="text-lg">
+                        Payment Plan Details
+                      </CardTitle>
                     </CardHeader>
                     <CardContent className="space-y-4">
                       <PaymentPlanEditor
                         value={formData.paymentPlanDetailsJson}
-                        onChange={(json) => setFormData(prev => ({ ...prev, paymentPlanDetailsJson: json }))}
+                        onChange={(json) =>
+                          setFormData((prev) => ({
+                            ...prev,
+                            paymentPlanDetailsJson: json,
+                          }))
+                        }
                       />
                     </CardContent>
                   </Card>
@@ -890,7 +1130,9 @@ export const CourseCreatorGHL = ({ onComplete, onCancel }: CourseCreatorGHLProps
                 <Label>Access Type</Label>
                 <Select
                   value={formData.accessType}
-                  onValueChange={(value: any) => setFormData(prev => ({ ...prev, accessType: value }))}
+                  onValueChange={(value: any) =>
+                    setFormData((prev) => ({ ...prev, accessType: value }))
+                  }
                 >
                   <SelectTrigger>
                     <SelectValue />
@@ -902,26 +1144,38 @@ export const CourseCreatorGHL = ({ onComplete, onCancel }: CourseCreatorGHLProps
                 </Select>
               </div>
 
-              {formData.accessType === 'Limited' && (
+              {formData.accessType === "Limited" && (
                 <div>
                   <Label htmlFor="accessDuration">Access Duration (days)</Label>
                   <Input
                     id="accessDuration"
                     type="number"
-                    value={formData.accessDuration || ''}
-                    onChange={(e) => setFormData(prev => ({ ...prev, accessDuration: parseInt(e.target.value) || undefined }))}
+                    value={formData.accessDuration || ""}
+                    onChange={(e) =>
+                      setFormData((prev) => ({
+                        ...prev,
+                        accessDuration: parseInt(e.target.value) || undefined,
+                      }))
+                    }
                     placeholder="30"
                   />
                 </div>
               )}
 
               <div>
-                <Label htmlFor="enrollmentLimit">Enrollment Limit (optional)</Label>
+                <Label htmlFor="enrollmentLimit">
+                  Enrollment Limit (optional)
+                </Label>
                 <Input
                   id="enrollmentLimit"
                   type="number"
-                  value={formData.enrollmentLimit || ''}
-                  onChange={(e) => setFormData(prev => ({ ...prev, enrollmentLimit: parseInt(e.target.value) || undefined }))}
+                  value={formData.enrollmentLimit || ""}
+                  onChange={(e) =>
+                    setFormData((prev) => ({
+                      ...prev,
+                      enrollmentLimit: parseInt(e.target.value) || undefined,
+                    }))
+                  }
                   placeholder="Unlimited"
                 />
               </div>
@@ -954,7 +1208,10 @@ export const CourseCreatorGHL = ({ onComplete, onCancel }: CourseCreatorGHLProps
                         onChange={(e) => {
                           const newModules = [...formData.modules];
                           newModules[moduleIndex].title = e.target.value;
-                          setFormData(prev => ({ ...prev, modules: newModules }));
+                          setFormData((prev) => ({
+                            ...prev,
+                            modules: newModules,
+                          }));
                         }}
                         placeholder="Module title"
                       />
@@ -963,7 +1220,10 @@ export const CourseCreatorGHL = ({ onComplete, onCancel }: CourseCreatorGHLProps
                         onChange={(e) => {
                           const newModules = [...formData.modules];
                           newModules[moduleIndex].description = e.target.value;
-                          setFormData(prev => ({ ...prev, modules: newModules }));
+                          setFormData((prev) => ({
+                            ...prev,
+                            modules: newModules,
+                          }));
                         }}
                         placeholder="Module description"
                         rows={2}
@@ -1001,19 +1261,35 @@ export const CourseCreatorGHL = ({ onComplete, onCancel }: CourseCreatorGHLProps
                               value={lesson.title}
                               onChange={(e) => {
                                 const newModules = [...formData.modules];
-                                newModules[moduleIndex].lessons[lessonIndex].title = e.target.value;
-                                setFormData(prev => ({ ...prev, modules: newModules }));
+                                newModules[moduleIndex].lessons[
+                                  lessonIndex
+                                ].title = e.target.value;
+                                setFormData((prev) => ({
+                                  ...prev,
+                                  modules: newModules,
+                                }));
                               }}
                               placeholder="Lesson title"
-                              className={validationErrors[`module${moduleIndex}lesson${lessonIndex}title`] ? 'border-red-500' : ''}
+                              className={
+                                validationErrors[
+                                  `module${moduleIndex}lesson${lessonIndex}title`
+                                ]
+                                  ? "border-red-500"
+                                  : ""
+                              }
                               required
                             />
                             <Select
                               value={lesson.type}
                               onValueChange={(value: any) => {
                                 const newModules = [...formData.modules];
-                                newModules[moduleIndex].lessons[lessonIndex].type = value;
-                                setFormData(prev => ({ ...prev, modules: newModules }));
+                                newModules[moduleIndex].lessons[
+                                  lessonIndex
+                                ].type = value;
+                                setFormData((prev) => ({
+                                  ...prev,
+                                  modules: newModules,
+                                }));
                               }}
                             >
                               <SelectTrigger>
@@ -1023,51 +1299,113 @@ export const CourseCreatorGHL = ({ onComplete, onCancel }: CourseCreatorGHLProps
                                 <SelectItem value="Video">Video</SelectItem>
                                 <SelectItem value="Text">Text</SelectItem>
                                 <SelectItem value="Quiz">Quiz</SelectItem>
-                                <SelectItem value="Assignment">Assignment</SelectItem>
+                                <SelectItem value="Assignment">
+                                  Assignment
+                                </SelectItem>
                               </SelectContent>
                             </Select>
                             <Input
                               value={lesson.duration}
                               onChange={(e) => {
                                 const newModules = [...formData.modules];
-                                newModules[moduleIndex].lessons[lessonIndex].duration = e.target.value;
-                                setFormData(prev => ({ ...prev, modules: newModules }));
+                                newModules[moduleIndex].lessons[
+                                  lessonIndex
+                                ].duration = e.target.value;
+                                setFormData((prev) => ({
+                                  ...prev,
+                                  modules: newModules,
+                                }));
                               }}
                               placeholder="Duration (e.g., 15:00)"
-                              className={validationErrors[`module${moduleIndex}lesson${lessonIndex}duration`] ? 'border-red-500' : ''}
+                              className={
+                                validationErrors[
+                                  `module${moduleIndex}lesson${lessonIndex}duration`
+                                ]
+                                  ? "border-red-500"
+                                  : ""
+                              }
                               required
                             />
                           </div>
                           <Button
                             variant="ghost"
                             size="sm"
-                            onClick={() => removeLesson(moduleIndex, lessonIndex)}
+                            onClick={() =>
+                              removeLesson(moduleIndex, lessonIndex)
+                            }
                           >
                             <Trash className="h-4 w-4" />
                           </Button>
                         </div>
-                        {lesson.type === 'Video' && (
-                          <div className="ml-0">
+                        {lesson.type === "Video" && (
+                          <div className="ml-0 space-y-3">
                             <Input
-                              value={lesson.videoUrl || ''}
+                              value={lesson.videoUrl || ""}
                               onChange={(e) => {
                                 const newModules = [...formData.modules];
-                                newModules[moduleIndex].lessons[lessonIndex].videoUrl = e.target.value;
-                                setFormData(prev => ({ ...prev, modules: newModules }));
+                                newModules[moduleIndex].lessons[
+                                  lessonIndex
+                                ].videoUrl = e.target.value;
+                                setFormData((prev) => ({
+                                  ...prev,
+                                  modules: newModules,
+                                }));
                               }}
-                              placeholder="Video URL (YouTube, Vimeo, or direct link)"
+                              placeholder="Video URL (YouTube, Vimeo, direct link) or upload below"
                               className="w-full"
                             />
+                            {createdCourseId && (
+                              <FileUpload
+                                courseId={createdCourseId}
+                                lessonId={moduleIndex * 1000 + lessonIndex} // Generate unique lesson ID
+                                attachType="lessonVideo"
+                                accept="video"
+                                label={`Upload Video for: ${lesson.title || "Lesson " + (lessonIndex + 1)}`}
+                                helperText="Upload lesson video (MP4, WebM, QuickTime). Max 500MB."
+                                onUploadComplete={(response) => {
+                                  const newModules = [...formData.modules];
+                                  newModules[moduleIndex].lessons[
+                                    lessonIndex
+                                  ].videoUrl = response.url;
+                                  setFormData((prev) => ({
+                                    ...prev,
+                                    modules: newModules,
+                                  }));
+                                  toast({
+                                    title: "Video uploaded successfully!",
+                                    description: `Lesson video for "${lesson.title}" has been uploaded.`,
+                                  });
+                                }}
+                                onUploadError={(error) => {
+                                  toast({
+                                    title: "Upload failed",
+                                    description: error,
+                                    variant: "destructive",
+                                  });
+                                }}
+                                className="mt-2"
+                              />
+                            )}
+                            {!createdCourseId && (
+                              <p className="text-xs text-gray-500">
+                                Save the course first to enable video uploads
+                              </p>
+                            )}
                           </div>
                         )}
-                        {lesson.type === 'Text' && (
+                        {lesson.type === "Text" && (
                           <div className="ml-0">
                             <Textarea
-                              value={lesson.content || ''}
+                              value={lesson.content || ""}
                               onChange={(e) => {
                                 const newModules = [...formData.modules];
-                                newModules[moduleIndex].lessons[lessonIndex].content = e.target.value;
-                                setFormData(prev => ({ ...prev, modules: newModules }));
+                                newModules[moduleIndex].lessons[
+                                  lessonIndex
+                                ].content = e.target.value;
+                                setFormData((prev) => ({
+                                  ...prev,
+                                  modules: newModules,
+                                }));
                               }}
                               placeholder="Lesson content (supports HTML)"
                               className="w-full"
@@ -1088,11 +1426,13 @@ export const CourseCreatorGHL = ({ onComplete, onCancel }: CourseCreatorGHLProps
         return (
           <div className="space-y-6">
             <h3 className="text-lg font-semibold">Course Features</h3>
-            
+
             {/* Course type specific feature recommendations */}
-            {formData.courseType === 'Sprint' && (
+            {formData.courseType === "Sprint" && (
               <div className="bg-orange-50 p-4 rounded-lg">
-                <p className="text-sm text-orange-800 mb-2">Sprint courses typically include:</p>
+                <p className="text-sm text-orange-800 mb-2">
+                  Sprint courses typically include:
+                </p>
                 <ul className="text-sm text-orange-700 list-disc list-inside">
                   <li>Certificate of completion</li>
                   <li>Downloadable resources</li>
@@ -1101,10 +1441,12 @@ export const CourseCreatorGHL = ({ onComplete, onCancel }: CourseCreatorGHLProps
                 </ul>
               </div>
             )}
-            
-            {formData.courseType === 'Marathon' && (
+
+            {formData.courseType === "Marathon" && (
               <div className="bg-purple-50 p-4 rounded-lg">
-                <p className="text-sm text-purple-800 mb-2">Marathon courses typically include:</p>
+                <p className="text-sm text-purple-800 mb-2">
+                  Marathon courses typically include:
+                </p>
                 <ul className="text-sm text-purple-700 list-disc list-inside">
                   <li>Certificate of completion</li>
                   <li>Community access for peer support</li>
@@ -1114,10 +1456,12 @@ export const CourseCreatorGHL = ({ onComplete, onCancel }: CourseCreatorGHLProps
                 </ul>
               </div>
             )}
-            
-            {formData.courseType === 'Membership' && (
+
+            {formData.courseType === "Membership" && (
               <div className="bg-blue-50 p-4 rounded-lg">
-                <p className="text-sm text-blue-800 mb-2">Membership courses typically include:</p>
+                <p className="text-sm text-blue-800 mb-2">
+                  Membership courses typically include:
+                </p>
                 <ul className="text-sm text-blue-700 list-disc list-inside">
                   <li>Exclusive community access</li>
                   <li>Regular live sessions</li>
@@ -1126,13 +1470,17 @@ export const CourseCreatorGHL = ({ onComplete, onCancel }: CourseCreatorGHLProps
                 </ul>
               </div>
             )}
-            
+
             {/* Sprint-specific features */}
-            {formData.courseType === 'Sprint' && (
+            {formData.courseType === "Sprint" && (
               <Card className="bg-orange-50 border-orange-200 mb-6">
                 <CardHeader>
-                  <CardTitle className="text-lg">Sprint Intensity Settings</CardTitle>
-                  <CardDescription>Configure the intensive nature of your sprint course</CardDescription>
+                  <CardTitle className="text-lg">
+                    Sprint Intensity Settings
+                  </CardTitle>
+                  <CardDescription>
+                    Configure the intensive nature of your sprint course
+                  </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="flex items-center justify-between">
@@ -1156,13 +1504,17 @@ export const CourseCreatorGHL = ({ onComplete, onCancel }: CourseCreatorGHLProps
                 </CardContent>
               </Card>
             )}
-            
+
             {/* Marathon-specific features */}
-            {formData.courseType === 'Marathon' && (
+            {formData.courseType === "Marathon" && (
               <Card className="bg-purple-50 border-purple-200 mb-6">
                 <CardHeader>
-                  <CardTitle className="text-lg">Marathon Pacing Settings</CardTitle>
-                  <CardDescription>Configure the long-term structure of your marathon course</CardDescription>
+                  <CardTitle className="text-lg">
+                    Marathon Pacing Settings
+                  </CardTitle>
+                  <CardDescription>
+                    Configure the long-term structure of your marathon course
+                  </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="flex items-center justify-between">
@@ -1180,13 +1532,15 @@ export const CourseCreatorGHL = ({ onComplete, onCancel }: CourseCreatorGHLProps
                 </CardContent>
               </Card>
             )}
-            
+
             {/* Membership-specific features */}
-            {formData.courseType === 'Membership' && (
+            {formData.courseType === "Membership" && (
               <Card className="bg-blue-50 border-blue-200 mb-6">
                 <CardHeader>
                   <CardTitle className="text-lg">Membership Benefits</CardTitle>
-                  <CardDescription>Configure exclusive benefits for your members</CardDescription>
+                  <CardDescription>
+                    Configure exclusive benefits for your members
+                  </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="flex items-center justify-between">
@@ -1208,7 +1562,7 @@ export const CourseCreatorGHL = ({ onComplete, onCancel }: CourseCreatorGHLProps
                 </CardContent>
               </Card>
             )}
-            
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-2">
@@ -1218,7 +1572,12 @@ export const CourseCreatorGHL = ({ onComplete, onCancel }: CourseCreatorGHLProps
                 <Switch
                   id="certificate"
                   checked={formData.hasCertificate}
-                  onCheckedChange={(checked) => setFormData(prev => ({ ...prev, hasCertificate: checked }))}
+                  onCheckedChange={(checked) =>
+                    setFormData((prev) => ({
+                      ...prev,
+                      hasCertificate: checked,
+                    }))
+                  }
                 />
               </div>
 
@@ -1230,7 +1589,9 @@ export const CourseCreatorGHL = ({ onComplete, onCancel }: CourseCreatorGHLProps
                 <Switch
                   id="community"
                   checked={formData.hasCommunity}
-                  onCheckedChange={(checked) => setFormData(prev => ({ ...prev, hasCommunity: checked }))}
+                  onCheckedChange={(checked) =>
+                    setFormData((prev) => ({ ...prev, hasCommunity: checked }))
+                  }
                 />
               </div>
 
@@ -1242,7 +1603,12 @@ export const CourseCreatorGHL = ({ onComplete, onCancel }: CourseCreatorGHLProps
                 <Switch
                   id="liveSessions"
                   checked={formData.hasLiveSessions}
-                  onCheckedChange={(checked) => setFormData(prev => ({ ...prev, hasLiveSessions: checked }))}
+                  onCheckedChange={(checked) =>
+                    setFormData((prev) => ({
+                      ...prev,
+                      hasLiveSessions: checked,
+                    }))
+                  }
                 />
               </div>
 
@@ -1254,7 +1620,12 @@ export const CourseCreatorGHL = ({ onComplete, onCancel }: CourseCreatorGHLProps
                 <Switch
                   id="downloadable"
                   checked={formData.hasDownloadableResources}
-                  onCheckedChange={(checked) => setFormData(prev => ({ ...prev, hasDownloadableResources: checked }))}
+                  onCheckedChange={(checked) =>
+                    setFormData((prev) => ({
+                      ...prev,
+                      hasDownloadableResources: checked,
+                    }))
+                  }
                 />
               </div>
 
@@ -1266,7 +1637,12 @@ export const CourseCreatorGHL = ({ onComplete, onCancel }: CourseCreatorGHLProps
                 <Switch
                   id="assignments"
                   checked={formData.hasAssignments}
-                  onCheckedChange={(checked) => setFormData(prev => ({ ...prev, hasAssignments: checked }))}
+                  onCheckedChange={(checked) =>
+                    setFormData((prev) => ({
+                      ...prev,
+                      hasAssignments: checked,
+                    }))
+                  }
                 />
               </div>
 
@@ -1278,7 +1654,9 @@ export const CourseCreatorGHL = ({ onComplete, onCancel }: CourseCreatorGHLProps
                 <Switch
                   id="quizzes"
                   checked={formData.hasQuizzes}
-                  onCheckedChange={(checked) => setFormData(prev => ({ ...prev, hasQuizzes: checked }))}
+                  onCheckedChange={(checked) =>
+                    setFormData((prev) => ({ ...prev, hasQuizzes: checked }))
+                  }
                 />
               </div>
             </div>
@@ -1287,12 +1665,16 @@ export const CourseCreatorGHL = ({ onComplete, onCancel }: CourseCreatorGHLProps
               <div className="flex items-center justify-between">
                 <div>
                   <Label htmlFor="dripContent">Drip Content</Label>
-                  <p className="text-sm text-gray-500">Release content on a schedule</p>
+                  <p className="text-sm text-gray-500">
+                    Release content on a schedule
+                  </p>
                 </div>
                 <Switch
                   id="dripContent"
                   checked={formData.dripContent}
-                  onCheckedChange={(checked) => setFormData(prev => ({ ...prev, dripContent: checked }))}
+                  onCheckedChange={(checked) =>
+                    setFormData((prev) => ({ ...prev, dripContent: checked }))
+                  }
                 />
               </div>
 
@@ -1304,11 +1686,56 @@ export const CourseCreatorGHL = ({ onComplete, onCancel }: CourseCreatorGHLProps
                   <CardContent>
                     <DripScheduleEditor
                       value={formData.dripScheduleJson}
-                      onChange={(json) => setFormData(prev => ({ ...prev, dripScheduleJson: json }))}
+                      onChange={(json) =>
+                        setFormData((prev) => ({
+                          ...prev,
+                          dripScheduleJson: json,
+                        }))
+                      }
                     />
                   </CardContent>
                 </Card>
               )}
+            </div>
+
+            {/* Course Resources Upload Section */}
+            <div className="space-y-4">
+              <div className="border-t pt-6">
+                <h4 className="text-md font-semibold mb-4">Course Resources</h4>
+                <p className="text-sm text-gray-600 mb-4">
+                  Upload additional materials for your students (PDFs,
+                  documents, spreadsheets, etc.)
+                </p>
+
+                {createdCourseId ? (
+                  <FileUpload
+                    courseId={createdCourseId}
+                    accept="document"
+                    multiple={true}
+                    label="Upload Course Documents"
+                    helperText="Upload course materials like PDFs, Word docs, Excel files, etc. Max 25MB each."
+                    onUploadComplete={(response) => {
+                      toast({
+                        title: "Resource uploaded successfully!",
+                        description: `File uploaded: ${response.url}`,
+                      });
+                    }}
+                    onUploadError={(error) => {
+                      toast({
+                        title: "Upload failed",
+                        description: error,
+                        variant: "destructive",
+                      });
+                    }}
+                  />
+                ) : (
+                  <div className="p-4 bg-gray-50 rounded-lg">
+                    <p className="text-sm text-gray-600">
+                      Save the course first to enable resource uploads
+                    </p>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         );
@@ -1317,53 +1744,85 @@ export const CourseCreatorGHL = ({ onComplete, onCancel }: CourseCreatorGHLProps
         return (
           <div className="space-y-6">
             <h3 className="text-lg font-semibold">Automation Settings</h3>
-            
+
             <div className="space-y-4">
               <div className="flex items-center justify-between">
                 <div>
                   <Label htmlFor="welcomeEmail">Welcome Email</Label>
-                  <p className="text-sm text-gray-500">Send automated welcome email to new students</p>
+                  <p className="text-sm text-gray-500">
+                    Send automated welcome email to new students
+                  </p>
                 </div>
                 <Switch
                   id="welcomeEmail"
                   checked={formData.automationWelcomeEmail}
-                  onCheckedChange={(checked) => setFormData(prev => ({ ...prev, automationWelcomeEmail: checked }))}
+                  onCheckedChange={(checked) =>
+                    setFormData((prev) => ({
+                      ...prev,
+                      automationWelcomeEmail: checked,
+                    }))
+                  }
                 />
               </div>
 
               <div className="flex items-center justify-between">
                 <div>
-                  <Label htmlFor="completionCertificate">Completion Certificate</Label>
-                  <p className="text-sm text-gray-500">Automatically issue certificate upon course completion</p>
+                  <Label htmlFor="completionCertificate">
+                    Completion Certificate
+                  </Label>
+                  <p className="text-sm text-gray-500">
+                    Automatically issue certificate upon course completion
+                  </p>
                 </div>
                 <Switch
                   id="completionCertificate"
                   checked={formData.automationCompletionCertificate}
-                  onCheckedChange={(checked) => setFormData(prev => ({ ...prev, automationCompletionCertificate: checked }))}
+                  onCheckedChange={(checked) =>
+                    setFormData((prev) => ({
+                      ...prev,
+                      automationCompletionCertificate: checked,
+                    }))
+                  }
                 />
               </div>
 
               <div className="flex items-center justify-between">
                 <div>
                   <Label htmlFor="progressReminders">Progress Reminders</Label>
-                  <p className="text-sm text-gray-500">Send periodic reminders to encourage course progress</p>
+                  <p className="text-sm text-gray-500">
+                    Send periodic reminders to encourage course progress
+                  </p>
                 </div>
                 <Switch
                   id="progressReminders"
                   checked={formData.automationProgressReminders}
-                  onCheckedChange={(checked) => setFormData(prev => ({ ...prev, automationProgressReminders: checked }))}
+                  onCheckedChange={(checked) =>
+                    setFormData((prev) => ({
+                      ...prev,
+                      automationProgressReminders: checked,
+                    }))
+                  }
                 />
               </div>
 
               <div className="flex items-center justify-between">
                 <div>
-                  <Label htmlFor="abandonmentSequence">Abandonment Sequence</Label>
-                  <p className="text-sm text-gray-500">Re-engage students who haven't accessed course recently</p>
+                  <Label htmlFor="abandonmentSequence">
+                    Abandonment Sequence
+                  </Label>
+                  <p className="text-sm text-gray-500">
+                    Re-engage students who haven't accessed course recently
+                  </p>
                 </div>
                 <Switch
                   id="abandonmentSequence"
                   checked={formData.automationAbandonmentSequence}
-                  onCheckedChange={(checked) => setFormData(prev => ({ ...prev, automationAbandonmentSequence: checked }))}
+                  onCheckedChange={(checked) =>
+                    setFormData((prev) => ({
+                      ...prev,
+                      automationAbandonmentSequence: checked,
+                    }))
+                  }
                 />
               </div>
             </div>
@@ -1374,7 +1833,7 @@ export const CourseCreatorGHL = ({ onComplete, onCancel }: CourseCreatorGHLProps
         return (
           <div className="space-y-6">
             <h3 className="text-lg font-semibold">Review Your Course</h3>
-            
+
             <div className="space-y-4">
               <Card>
                 <CardHeader>
@@ -1382,20 +1841,24 @@ export const CourseCreatorGHL = ({ onComplete, onCancel }: CourseCreatorGHLProps
                 </CardHeader>
                 <CardContent className="space-y-2">
                   <div>
-                    <span className="text-sm font-medium">Title:</span> {formData.title}
+                    <span className="text-sm font-medium">Title:</span>{" "}
+                    {formData.title}
                   </div>
                   <div>
-                    <span className="text-sm font-medium">Type:</span> 
+                    <span className="text-sm font-medium">Type:</span>
                     <Badge className="ml-2">{formData.courseType}</Badge>
                   </div>
                   <div>
-                    <span className="text-sm font-medium">Category:</span> {formData.category}
+                    <span className="text-sm font-medium">Category:</span>{" "}
+                    {formData.category}
                   </div>
                   <div>
-                    <span className="text-sm font-medium">Level:</span> {formData.level}
+                    <span className="text-sm font-medium">Level:</span>{" "}
+                    {formData.level}
                   </div>
                   <div>
-                    <span className="text-sm font-medium">Duration:</span> {formData.duration}
+                    <span className="text-sm font-medium">Duration:</span>{" "}
+                    {formData.duration}
                   </div>
                 </CardContent>
               </Card>
@@ -1406,16 +1869,20 @@ export const CourseCreatorGHL = ({ onComplete, onCancel }: CourseCreatorGHLProps
                 </CardHeader>
                 <CardContent className="space-y-2">
                   <div>
-                    <span className="text-sm font-medium">Model:</span> {formData.pricingModel}
+                    <span className="text-sm font-medium">Model:</span>{" "}
+                    {formData.pricingModel}
                   </div>
-                  {formData.pricingModel !== 'Free' && (
+                  {formData.pricingModel !== "Free" && (
                     <div>
-                      <span className="text-sm font-medium">Price:</span> {formData.currency} {formData.price}
+                      <span className="text-sm font-medium">Price:</span>{" "}
+                      {formData.currency} {formData.price}
                     </div>
                   )}
                   <div>
-                    <span className="text-sm font-medium">Access:</span> {formData.accessType}
-                    {formData.accessType === 'Limited' && ` (${formData.accessDuration} days)`}
+                    <span className="text-sm font-medium">Access:</span>{" "}
+                    {formData.accessType}
+                    {formData.accessType === "Limited" &&
+                      ` (${formData.accessDuration} days)`}
                   </div>
                 </CardContent>
               </Card>
@@ -1426,12 +1893,15 @@ export const CourseCreatorGHL = ({ onComplete, onCancel }: CourseCreatorGHLProps
                 </CardHeader>
                 <CardContent>
                   <div>
-                    <span className="text-sm font-medium">Modules:</span> {formData.modules.length}
+                    <span className="text-sm font-medium">Modules:</span>{" "}
+                    {formData.modules.length}
                   </div>
                   <div>
-                    <span className="text-sm font-medium">Total Lessons:</span> {
-                      formData.modules.reduce((acc, module) => acc + module.lessons.length, 0)
-                    }
+                    <span className="text-sm font-medium">Total Lessons:</span>{" "}
+                    {formData.modules.reduce(
+                      (acc, module) => acc + module.lessons.length,
+                      0
+                    )}
                   </div>
                 </CardContent>
               </Card>
@@ -1442,13 +1912,27 @@ export const CourseCreatorGHL = ({ onComplete, onCancel }: CourseCreatorGHLProps
                 </CardHeader>
                 <CardContent>
                   <div className="flex flex-wrap gap-2">
-                    {formData.hasCertificate && <Badge variant="secondary">Certificate</Badge>}
-                    {formData.hasCommunity && <Badge variant="secondary">Community</Badge>}
-                    {formData.hasLiveSessions && <Badge variant="secondary">Live Sessions</Badge>}
-                    {formData.hasDownloadableResources && <Badge variant="secondary">Resources</Badge>}
-                    {formData.hasAssignments && <Badge variant="secondary">Assignments</Badge>}
-                    {formData.hasQuizzes && <Badge variant="secondary">Quizzes</Badge>}
-                    {formData.dripContent && <Badge variant="secondary">Drip Content</Badge>}
+                    {formData.hasCertificate && (
+                      <Badge variant="secondary">Certificate</Badge>
+                    )}
+                    {formData.hasCommunity && (
+                      <Badge variant="secondary">Community</Badge>
+                    )}
+                    {formData.hasLiveSessions && (
+                      <Badge variant="secondary">Live Sessions</Badge>
+                    )}
+                    {formData.hasDownloadableResources && (
+                      <Badge variant="secondary">Resources</Badge>
+                    )}
+                    {formData.hasAssignments && (
+                      <Badge variant="secondary">Assignments</Badge>
+                    )}
+                    {formData.hasQuizzes && (
+                      <Badge variant="secondary">Quizzes</Badge>
+                    )}
+                    {formData.dripContent && (
+                      <Badge variant="secondary">Drip Content</Badge>
+                    )}
                   </div>
                 </CardContent>
               </Card>
@@ -1465,28 +1949,28 @@ export const CourseCreatorGHL = ({ onComplete, onCancel }: CourseCreatorGHLProps
     <div className="max-w-4xl mx-auto p-6">
       <div className="mb-8">
         <h2 className="text-2xl font-bold mb-4">Create New Course</h2>
-        
+
         {/* Progress Steps */}
         <div className="flex items-center justify-between mb-8">
           {steps.map((step, index) => {
             const Icon = step.icon;
             const isActive = index === currentStep;
             const isCompleted = index < currentStep;
-            
+
             return (
               <div
                 key={step.id}
                 className={`flex items-center ${
-                  index < steps.length - 1 ? 'flex-1' : ''
+                  index < steps.length - 1 ? "flex-1" : ""
                 }`}
               >
                 <div
                   className={`flex items-center justify-center w-10 h-10 rounded-full ${
                     isActive
-                      ? 'bg-primary text-white'
+                      ? "bg-primary text-white"
                       : isCompleted
-                      ? 'bg-green-500 text-white'
-                      : 'bg-gray-200 text-gray-400'
+                        ? "bg-green-500 text-white"
+                        : "bg-gray-200 text-gray-400"
                   }`}
                 >
                   {isCompleted ? (
@@ -1496,14 +1980,14 @@ export const CourseCreatorGHL = ({ onComplete, onCancel }: CourseCreatorGHLProps
                   )}
                 </div>
                 <div className="ml-2">
-                  <p className={`text-sm ${isActive ? 'font-semibold' : ''}`}>
+                  <p className={`text-sm ${isActive ? "font-semibold" : ""}`}>
                     {step.name}
                   </p>
                 </div>
                 {index < steps.length - 1 && (
                   <div
                     className={`flex-1 h-0.5 mx-4 ${
-                      isCompleted ? 'bg-green-500' : 'bg-gray-200'
+                      isCompleted ? "bg-green-500" : "bg-gray-200"
                     }`}
                   />
                 )}
@@ -1515,9 +1999,7 @@ export const CourseCreatorGHL = ({ onComplete, onCancel }: CourseCreatorGHLProps
 
       {/* Step Content */}
       <Card className="mb-6">
-        <CardContent className="pt-6">
-          {renderStepContent()}
-        </CardContent>
+        <CardContent className="pt-6">{renderStepContent()}</CardContent>
       </Card>
 
       {/* Navigation Buttons */}
@@ -1527,23 +2009,23 @@ export const CourseCreatorGHL = ({ onComplete, onCancel }: CourseCreatorGHLProps
           onClick={currentStep === 0 ? onCancel : handlePrevious}
         >
           <ArrowLeft className="h-4 w-4 mr-2" />
-          {currentStep === 0 ? 'Cancel' : 'Previous'}
+          {currentStep === 0 ? "Cancel" : "Previous"}
         </Button>
-        
+
         {currentStep < steps.length - 1 ? (
           <Button onClick={handleNext}>
             Next
             <ArrowRight className="h-4 w-4 ml-2" />
           </Button>
         ) : (
-          <Button 
+          <Button
             onClick={() => {
-              console.log('Create Course button clicked');
+              console.log("Create Course button clicked");
               handleSubmit();
-            }} 
+            }}
             disabled={isLoading}
           >
-            {isLoading ? 'Creating...' : 'Create Course'}
+            {isLoading ? "Creating..." : "Create Course"}
           </Button>
         )}
       </div>
@@ -1552,12 +2034,20 @@ export const CourseCreatorGHL = ({ onComplete, onCancel }: CourseCreatorGHLProps
 };
 
 // Helper component for payment plan editor
-const PaymentPlanEditor = ({ value, onChange }: { value?: string; onChange: (json: string) => void }) => {
+const PaymentPlanEditor = ({
+  value,
+  onChange,
+}: {
+  value?: string;
+  onChange: (json: string) => void;
+}) => {
   const [plan, setPlan] = useState(() => {
     try {
-      return value ? JSON.parse(value) : { numberOfPayments: 3, paymentAmount: 0, frequency: 'Monthly' };
+      return value
+        ? JSON.parse(value)
+        : { numberOfPayments: 3, paymentAmount: 0, frequency: "Monthly" };
     } catch {
-      return { numberOfPayments: 3, paymentAmount: 0, frequency: 'Monthly' };
+      return { numberOfPayments: 3, paymentAmount: 0, frequency: "Monthly" };
     }
   });
 
@@ -1574,7 +2064,9 @@ const PaymentPlanEditor = ({ value, onChange }: { value?: string; onChange: (jso
         <Input
           type="number"
           value={plan.numberOfPayments}
-          onChange={(e) => updatePlan({ numberOfPayments: parseInt(e.target.value) || 1 })}
+          onChange={(e) =>
+            updatePlan({ numberOfPayments: parseInt(e.target.value) || 1 })
+          }
           min="2"
           max="12"
         />
@@ -1584,7 +2076,9 @@ const PaymentPlanEditor = ({ value, onChange }: { value?: string; onChange: (jso
         <Input
           type="number"
           value={plan.paymentAmount}
-          onChange={(e) => updatePlan({ paymentAmount: parseFloat(e.target.value) || 0 })}
+          onChange={(e) =>
+            updatePlan({ paymentAmount: parseFloat(e.target.value) || 0 })
+          }
           placeholder="0.00"
         />
       </div>
@@ -1609,12 +2103,18 @@ const PaymentPlanEditor = ({ value, onChange }: { value?: string; onChange: (jso
 };
 
 // Helper component for drip schedule editor
-const DripScheduleEditor = ({ value, onChange }: { value?: string; onChange: (json: string) => void }) => {
+const DripScheduleEditor = ({
+  value,
+  onChange,
+}: {
+  value?: string;
+  onChange: (json: string) => void;
+}) => {
   const [schedule, setSchedule] = useState(() => {
     try {
-      return value ? JSON.parse(value) : { type: 'sequential', delayDays: 7 };
+      return value ? JSON.parse(value) : { type: "sequential", delayDays: 7 };
     } catch {
-      return { type: 'sequential', delayDays: 7 };
+      return { type: "sequential", delayDays: 7 };
     }
   });
 
@@ -1642,13 +2142,15 @@ const DripScheduleEditor = ({ value, onChange }: { value?: string; onChange: (js
           </SelectContent>
         </Select>
       </div>
-      {schedule.type !== 'immediate' && (
+      {schedule.type !== "immediate" && (
         <div>
           <Label>Delay (days)</Label>
           <Input
             type="number"
             value={schedule.delayDays}
-            onChange={(e) => updateSchedule({ delayDays: parseInt(e.target.value) || 0 })}
+            onChange={(e) =>
+              updateSchedule({ delayDays: parseInt(e.target.value) || 0 })
+            }
             min="0"
           />
         </div>

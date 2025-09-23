@@ -21,6 +21,14 @@ namespace CeceLearningPortal.Api.Models
         public virtual ICollection<RefreshToken> RefreshTokens { get; set; } = new List<RefreshToken>();
         public virtual ICollection<PasswordHistory> PasswordHistories { get; set; } = new List<PasswordHistory>();
         public virtual InstructorApproval? InstructorApproval { get; set; }
+        
+        // Resource Hub Navigation properties
+        public virtual ICollection<Resource> OwnedResources { get; set; } = new List<Resource>();
+        public virtual StudentProfile? StudentProfile { get; set; }
+        public virtual ICollection<ResourceBookmark> ResourceBookmarks { get; set; } = new List<ResourceBookmark>();
+        public virtual ICollection<FileAsset> FileAssets { get; set; } = new List<FileAsset>();
+        public virtual ICollection<ResourceComment> ResourceComments { get; set; } = new List<ResourceComment>();
+        public virtual ICollection<ResourceActivityLog> ResourceActivityLogs { get; set; } = new List<ResourceActivityLog>();
     }
 
     public enum UserRole

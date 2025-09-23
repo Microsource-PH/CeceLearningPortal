@@ -62,42 +62,49 @@ export interface CreateCourseDto {
   enrollmentType?: string;
   status?: 'draft' | 'active' | 'inactive';
   modules?: CourseModule[];
-  
-  // Go High Level specific fields
-  courseType?: 'sprint' | 'marathon' | 'membership' | 'custom';
-  pricingModel?: 'free' | 'one-time' | 'subscription' | 'payment-plan';
+
+  // Go High Level specific fields - match backend enum values exactly
+  courseType?: 'Sprint' | 'Marathon' | 'Membership' | 'Custom';
+  pricingModel?: 'Free' | 'OneTime' | 'Subscription' | 'PaymentPlan';
   currency?: string;
-  subscriptionPeriod?: 'monthly' | 'yearly';
+  subscriptionPeriod?: 'Monthly' | 'Yearly';
   paymentPlanDetails?: {
     numberOfPayments: number;
     paymentAmount: number;
-    frequency: 'weekly' | 'biweekly' | 'monthly';
+    frequency: 'Weekly' | 'Biweekly' | 'Monthly';
   };
-  accessType?: 'lifetime' | 'limited';
+  accessType?: 'Lifetime' | 'Limited';
   accessDuration?: number;
   enrollmentLimit?: number;
   language?: string;
-  
-  // Feature flags - matches backend boolean fields
-  hasCertificate?: boolean;
-  hasCommunity?: boolean;
-  hasLiveSessions?: boolean;
-  hasDownloadableResources?: boolean;
-  hasAssignments?: boolean;
-  hasQuizzes?: boolean;
-  
-  // Drip content settings
+
+  // Feature flags - matches backend CourseFeatures object structure
+  courseFeatures?: {
+    certificate: boolean;
+    community: boolean;
+    liveSessions: boolean;
+    downloadableResources: boolean;
+    assignments: boolean;
+    quizzes: boolean;
+  };
+
+  // Drip content settings - matches backend DripSchedule object structure  
   dripContent?: boolean;
-  dripScheduleJson?: string; // Store as JSON string
-  
-  // Automation settings - matches backend boolean fields
-  automationWelcomeEmail?: boolean;
-  automationCompletionCertificate?: boolean;
-  automationProgressReminders?: boolean;
-  automationAbandonmentSequence?: boolean;
+  dripSchedule?: {
+    type: string; // immediate, scheduled, sequential
+    delayDays?: number;
+  };
+
+  // Automation settings - matches backend Automations object structure
+  automations?: {
+    welcomeEmail: boolean;
+    completionCertificate: boolean;
+    progressReminders: boolean;
+    abandonmentSequence: boolean;
+  };
 }
 
-export interface UpdateCourseDto extends Partial<CreateCourseDto> {}
+export interface UpdateCourseDto extends Partial<CreateCourseDto> { }
 
 export interface CourseFilters {
   category?: string;
@@ -119,7 +126,7 @@ class CourseService {
         }
       });
     }
-    
+
     const response = await api.request(`/courses${params.toString() ? `?${params.toString()}` : ''}`, {
       method: 'GET'
     });

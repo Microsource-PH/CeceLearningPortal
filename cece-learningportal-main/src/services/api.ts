@@ -7,9 +7,78 @@ interface ApiResponse<T> {
 
 class ApiService {
   private token: string | null = null;
+  private refreshToken: string | null = null;
+  private isRefreshing = false;
+  private failedQueue: Array<{
+    resolve: (value: any) => void;
+    reject: (error: any) => void;
+  }> = [];
 
   setToken(token: string | null) {
     this.token = token;
+  }
+
+  setRefreshToken(refreshToken: string | null) {
+    this.refreshToken = refreshToken;
+  }
+
+  private processQueue(error: any, token: string | null = null) {
+    this.failedQueue.forEach(({ resolve, reject }) => {
+      if (error) {
+        reject(error);
+      } else {
+        resolve(token);
+      }
+    });
+
+    this.failedQueue = [];
+  }
+
+  private async refreshAccessToken(): Promise<string | null> {
+    if (!this.refreshToken) {
+      return null;
+    }
+
+    try {
+      const response = await fetch(`${API_BASE_URL}/auth/refresh`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          accessToken: this.token,
+          refreshToken: this.refreshToken,
+        }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        this.setToken(data.accessToken);
+        this.setRefreshToken(data.refreshToken);
+
+        // Update localStorage
+        const savedAuth = localStorage.getItem('auth');
+        if (savedAuth) {
+          const authData = JSON.parse(savedAuth);
+          authData.accessToken = data.accessToken;
+          authData.refreshToken = data.refreshToken;
+          localStorage.setItem('auth', JSON.stringify(authData));
+        }
+
+        return data.accessToken;
+      } else {
+        // Refresh failed, user needs to log in again
+        this.setToken(null);
+        this.setRefreshToken(null);
+        localStorage.removeItem('auth');
+        // Redirect to login or emit an event for the AuthContext to handle
+        window.dispatchEvent(new CustomEvent('auth:token-expired'));
+        return null;
+      }
+    } catch (error) {
+      console.error('Token refresh failed:', error);
+      return null;
+    }
   }
 
   async request<T>(
@@ -31,6 +100,38 @@ class ApiService {
         headers,
       });
 
+      // Handle 401 Unauthorized - attempt token refresh
+      if (response.status === 401 && this.refreshToken && !this.isRefreshing) {
+        if (this.isRefreshing) {
+          // If already refreshing, wait for it to complete
+          return new Promise((resolve, reject) => {
+            this.failedQueue.push({ resolve, reject });
+          }).then(() => {
+            // Retry the original request with new token
+            return this.request(url, options);
+          });
+        }
+
+        this.isRefreshing = true;
+
+        try {
+          const newToken = await this.refreshAccessToken();
+          this.isRefreshing = false;
+          this.processQueue(null, newToken);
+
+          if (newToken) {
+            // Retry the original request with new token
+            return this.request(url, options);
+          } else {
+            return { error: 'Authentication failed. Please log in again.' };
+          }
+        } catch (refreshError) {
+          this.isRefreshing = false;
+          this.processQueue(refreshError, null);
+          return { error: 'Authentication failed. Please log in again.' };
+        }
+      }
+
       if (!response.ok) {
         let error = `HTTP error! status: ${response.status}`;
         let errorResponse: any = { error };
@@ -46,13 +147,13 @@ class ApiService {
                 innerError: errorData.innerError,
                 allData: errorData
               });
-              
+
               // Handle validation errors specifically
               if (errorData.errors) {
                 console.error('Validation errors:', errorData.errors);
-                errorResponse = { 
-                  error: 'Validation failed', 
-                  response: errorData 
+                errorResponse = {
+                  error: 'Validation failed',
+                  response: errorData
                 };
               } else {
                 error = errorData.message || errorData.error || error;

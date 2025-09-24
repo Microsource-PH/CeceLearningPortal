@@ -55,7 +55,7 @@ namespace CeceLearningPortal.Api.Controllers
             catch (Exception ex)
             {
                 _logger.LogError(ex, $"Error retrieving course {id}");
-                
+
                 // Return hardcoded test data for course 28 to test the frontend
                 if (id == 28)
                 {
@@ -93,7 +93,7 @@ namespace CeceLearningPortal.Api.Controllers
                         }
                     });
                 }
-                
+
                 return StatusCode(500, new { message = "An error occurred while retrieving the course" });
             }
         }
@@ -105,6 +105,10 @@ namespace CeceLearningPortal.Api.Controllers
             try
             {
                 var instructorId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+                if (string.IsNullOrEmpty(instructorId))
+                {
+                    return Unauthorized(new { message = "User is not authenticated" });
+                }
                 var courses = await _courseService.GetCoursesByInstructorAsync(instructorId);
                 return Ok(courses);
             }
@@ -122,21 +126,25 @@ namespace CeceLearningPortal.Api.Controllers
             if (!ModelState.IsValid)
             {
                 var errors = ModelState
-                    .Where(x => x.Value.Errors.Count > 0)
+                    .Where(x => x.Value != null && x.Value.Errors.Count > 0)
                     .ToDictionary(
                         kvp => kvp.Key,
-                        kvp => kvp.Value.Errors.Select(e => e.ErrorMessage).ToArray()
+                        kvp => (kvp.Value?.Errors ?? new Microsoft.AspNetCore.Mvc.ModelBinding.ModelErrorCollection()).Select(e => e.ErrorMessage).ToArray()
                     );
-                
-                _logger.LogWarning("CreateCourse validation failed: {Errors}", 
+
+                _logger.LogWarning("CreateCourse validation failed: {Errors}",
                     string.Join(", ", errors.Select(kvp => $"{kvp.Key}: {string.Join("; ", kvp.Value)}")));
-                
+
                 return BadRequest(new ValidationProblemDetails(ModelState));
             }
-            
+
             try
             {
                 var instructorId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+                if (string.IsNullOrEmpty(instructorId))
+                {
+                    return Unauthorized(new { message = "User is not authenticated" });
+                }
                 var course = await _courseService.CreateCourseAsync(courseDto, instructorId);
                 return CreatedAtAction(nameof(GetCourse), new { id = course.Id }, course);
             }
@@ -154,13 +162,13 @@ namespace CeceLearningPortal.Api.Controllers
             try
             {
                 _logger.LogInformation($"UpdateCourseDirect called for ID: {id}");
-                
+
                 // Use direct SQL update to bypass all EF Core issues
                 var loggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
                 var directLogger = loggerFactory.CreateLogger<CourseServiceDirect>();
                 var directService = new CourseServiceDirect(_configuration, directLogger);
                 var success = await directService.UpdateCourseDirect(id, courseDto);
-                
+
                 if (success)
                 {
                     return Ok(new { message = "Course updated successfully", courseId = id });
@@ -186,36 +194,40 @@ namespace CeceLearningPortal.Api.Controllers
                 // Log the incoming data
                 _logger.LogInformation($"UpdateCourse called for ID: {id}");
                 _logger.LogInformation($"Received data: {System.Text.Json.JsonSerializer.Serialize(courseDto)}");
-                
+
                 // Log specific fields to verify they're being received
                 _logger.LogInformation($"CourseType: {courseDto.CourseType}");
                 _logger.LogInformation($"PricingModel: {courseDto.PricingModel}");
                 _logger.LogInformation($"Language: {courseDto.Language}");
                 _logger.LogInformation($"CourseFeatures: {System.Text.Json.JsonSerializer.Serialize(courseDto.CourseFeatures)}");
-                
+
                 if (!ModelState.IsValid)
                 {
                     _logger.LogError($"Invalid model state: {string.Join(", ", ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage))}");
                     return BadRequest(ModelState);
                 }
-                
+
                 var instructorId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+                if (string.IsNullOrEmpty(instructorId))
+                {
+                    return Unauthorized(new { message = "User is not authenticated" });
+                }
                 var course = await _courseService.UpdateCourseAsync(id, courseDto, instructorId);
-                
+
                 if (course == null)
                 {
                     return NotFound(new { message = "Course not found or you don't have permission to update it" });
                 }
-                
+
                 // Log the returned course data to verify it includes all fields
                 _logger.LogInformation($"Update successful. Returned course: {System.Text.Json.JsonSerializer.Serialize(course)}");
-                
+
                 return Ok(course);
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, $"Error updating course {id}. Details: {ex.Message}");
-                
+
                 // Ensure we're capturing all error details
                 var errorResponse = new
                 {
@@ -225,10 +237,10 @@ namespace CeceLearningPortal.Api.Controllers
                     stackTrace = ex.StackTrace,
                     type = ex.GetType().Name
                 };
-                
+
                 // Log to console for debugging
                 Console.WriteLine($"UpdateCourse Error Response: {System.Text.Json.JsonSerializer.Serialize(errorResponse)}");
-                
+
                 return StatusCode(500, errorResponse);
             }
         }
@@ -240,13 +252,17 @@ namespace CeceLearningPortal.Api.Controllers
             try
             {
                 var instructorId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+                if (string.IsNullOrEmpty(instructorId))
+                {
+                    return Unauthorized(new { message = "User is not authenticated" });
+                }
                 var result = await _courseService.DeleteCourseAsync(id, instructorId);
-                
+
                 if (!result)
                 {
                     return NotFound(new { message = "Course not found or you don't have permission to delete it" });
                 }
-                
+
                 return NoContent();
             }
             catch (Exception ex)
@@ -264,13 +280,17 @@ namespace CeceLearningPortal.Api.Controllers
             try
             {
                 var instructorId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+                if (string.IsNullOrEmpty(instructorId))
+                {
+                    return Unauthorized(new { message = "User is not authenticated" });
+                }
                 var result = await _courseService.UnpublishCourseAsync(id, instructorId);
-                
+
                 if (!result)
                 {
                     return NotFound(new { message = "Course not found or you don't have permission to unpublish it" });
                 }
-                
+
                 return Ok(new { message = "Course unpublished successfully" });
             }
             catch (Exception ex)
@@ -302,13 +322,17 @@ namespace CeceLearningPortal.Api.Controllers
             try
             {
                 var instructorId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+                if (string.IsNullOrEmpty(instructorId))
+                {
+                    return Unauthorized(new { message = "User is not authenticated" });
+                }
                 var module = await _courseService.CreateModuleAsync(id, moduleDto, instructorId);
-                
+
                 if (module == null)
                 {
                     return NotFound(new { message = "Course not found or you don't have permission to add modules" });
                 }
-                
+
                 return Ok(module);
             }
             catch (Exception ex)
@@ -325,13 +349,17 @@ namespace CeceLearningPortal.Api.Controllers
             try
             {
                 var instructorId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+                if (string.IsNullOrEmpty(instructorId))
+                {
+                    return Unauthorized(new { message = "User is not authenticated" });
+                }
                 var lesson = await _courseService.CreateLessonAsync(moduleId, lessonDto, instructorId);
-                
+
                 if (lesson == null)
                 {
                     return NotFound(new { message = "Module not found or you don't have permission to add lessons" });
                 }
-                
+
                 return Ok(lesson);
             }
             catch (Exception ex)
@@ -348,13 +376,17 @@ namespace CeceLearningPortal.Api.Controllers
             try
             {
                 var instructorId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+                if (string.IsNullOrEmpty(instructorId))
+                {
+                    return Unauthorized(new { message = "User is not authenticated" });
+                }
                 var stats = await _courseService.GetCourseStatsAsync(id, instructorId);
-                
+
                 if (stats == null)
                 {
                     return NotFound(new { message = "Course not found or you don't have permission to view its stats" });
                 }
-                
+
                 return Ok(stats);
             }
             catch (Exception ex)
@@ -374,11 +406,11 @@ namespace CeceLearningPortal.Api.Controllers
                 {
                     return NotFound(new { message = "Course not found" });
                 }
-                
+
                 _logger.LogInformation($"GetCourseStatus: Course {id} has status {course.Status} (numeric: {(int)course.Status})");
-                
-                return Ok(new 
-                { 
+
+                return Ok(new
+                {
                     id = course.Id,
                     title = course.Title,
                     status = course.Status.ToString(),
@@ -393,7 +425,7 @@ namespace CeceLearningPortal.Api.Controllers
                 return StatusCode(500, new { message = "An error occurred" });
             }
         }
-        
+
         [Authorize(Policy = "InstructorOnly")]
         [HttpPost("{id}/publish")]
         public async Task<IActionResult> PublishCourse(int id)
@@ -401,15 +433,20 @@ namespace CeceLearningPortal.Api.Controllers
             try
             {
                 var instructorId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+                if (string.IsNullOrEmpty(instructorId))
+                {
+                    return Unauthorized(new { message = "User is not authenticated" });
+                }
                 var course = await _courseService.PublishCourseAsync(id, instructorId);
-                
+
                 if (course == null)
                 {
                     return NotFound(new { message = "Course not found or you don't have permission to publish it" });
                 }
-                
-                return Ok(new { 
-                    message = "Course submitted for approval", 
+
+                return Ok(new
+                {
+                    message = "Course submitted for approval",
                     courseId = course.Id,
                     status = course.Status.ToString()
                 });

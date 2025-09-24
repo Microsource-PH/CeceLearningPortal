@@ -1,2 +1,0 @@
-$env:PGPASSWORD = "P@ssword!@"
-& "C:\Program Files\PostgreSQL\17\bin\psql.exe" -U postgres -d CeceLearningPortal -c "SELECT tablename FROM pg_tables WHERE schemaname = 'public' AND tablename LIKE 'AspNet%' ORDER BY tablename;"

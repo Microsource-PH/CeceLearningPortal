@@ -88,7 +88,7 @@ namespace CeceLearningPortal.Api.Controllers
             var items = await q.Skip(skip).Take(size).ToListAsync();
 
             // Determine bookmarks for current user
-            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? "system";
             var bookmarkedSet = new HashSet<Guid>();
             if (!string.IsNullOrEmpty(userId))
             {
@@ -213,7 +213,7 @@ namespace CeceLearningPortal.Api.Controllers
                 ThumbnailUrl = dto.ThumbnailUrl,
                 SectionId = dto.SectionId,
                 Access = dto.Access ?? "students",
-                OwnerUserId = userId,
+                OwnerUserId = userId ?? "system",
                 Status = "draft",
                 Version = 1,
                 MetaTitle = dto.MetaTitle,

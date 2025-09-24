@@ -1,6 +1,0 @@
-@echo off
-echo Stopping frontend...
-cd /d "D:\ProductDevelopment\Cece\cece-learningportal-main"
-echo Starting frontend...
-start "Frontend Dev Server" npm run dev
-echo Frontend restarting. The proxy will now strip /api prefix when forwarding to backend.

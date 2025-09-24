@@ -60,7 +60,10 @@ namespace CeceLearningPortal.Api.Controllers
                 HourlyRate = dto.HourlyRate,
                 CertificationsJson = JsonSerializer.Serialize(dto.Certifications ?? new List<CertificationDto>()),
                 ConsentPublicListing = dto.ConsentPublicListing,
-                Status = "pending",
+                // Auto-approve so profiles appear immediately in public directory
+                Status = "approved",
+                ApprovedById = "system",
+                ApprovedAt = DateTime.UtcNow,
                 CreatedAt = DateTime.UtcNow,
                 UpdatedAt = DateTime.UtcNow
             };
@@ -80,8 +83,8 @@ namespace CeceLearningPortal.Api.Controllers
                 return BadRequest(new { message = "Invalid status" });
             }
             p.Status = dto.Status;
-            p.RejectionReason = dto.Status == "rejected" ? dto.RejectionReason : null;
-            p.ApprovedById = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            p.RejectionReason = dto.Status == "rejected" ? (dto.RejectionReason ?? string.Empty) : string.Empty;
+            p.ApprovedById = User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? "system";
             p.ApprovedAt = DateTime.UtcNow;
             p.UpdatedAt = DateTime.UtcNow;
             await _context.SaveChangesAsync();

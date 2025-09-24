@@ -1,0 +1,1385 @@
+2025-09-24 08:55:00.325 +08:00 [INF] Checking database connection...
+2025-09-24 08:55:02.686 +08:00 [INF] Database connection successful.
+2025-09-24 08:55:02.688 +08:00 [INF] Attempting to apply migrations...
+2025-09-24 08:55:03.014 +08:00 [INF] Executed DbCommand (31ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2025-09-24 08:55:03.782 +08:00 [INF] Executed DbCommand (13ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE IF NOT EXISTS "__EFMigrationsHistory" (
+    "MigrationId" character varying(150) NOT NULL,
+    "ProductVersion" character varying(32) NOT NULL,
+    CONSTRAINT "PK___EFMigrationsHistory" PRIMARY KEY ("MigrationId")
+);
+2025-09-24 08:55:03.812 +08:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+LOCK TABLE "__EFMigrationsHistory" IN ACCESS EXCLUSIVE MODE
+2025-09-24 08:55:03.821 +08:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2025-09-24 08:55:03.836 +08:00 [INF] No migrations were applied. The database is already up to date.
+2025-09-24 08:55:03.858 +08:00 [INF] Migrations applied successfully.
+2025-09-24 08:55:03.861 +08:00 [INF] Starting data seeding...
+2025-09-24 08:55:03.906 +08:00 [INF] User profile is available. Using 'C:\Users\Win11\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-09-24 08:55:04.296 +08:00 [INF] Executed DbCommand (6ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM courses AS c)
+2025-09-24 08:55:04.313 +08:00 [INF] Database already contains data. Checking if data cleanup is needed...
+2025-09-24 08:55:04.314 +08:00 [INF] Checking for missing data components...
+2025-09-24 08:55:04.327 +08:00 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM subscriptions AS s)
+2025-09-24 08:55:04.333 +08:00 [INF] Data seeding completed.
+2025-09-24 08:55:04.476 +08:00 [INF] Now listening on: http://localhost:5296
+2025-09-24 08:55:04.480 +08:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-09-24 08:55:04.483 +08:00 [INF] Hosting environment: Development
+2025-09-24 08:55:04.486 +08:00 [INF] Content root path: C:\Users\Win11\Downloads\Cece-20250805T084305Z-1-001\Cece\Cece-master\Cece-master\CeceLearningPortal.Backend\CeceLearningPortal.Api
+2025-09-24 09:01:10.038 +08:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5296/api/courses - null null
+2025-09-24 09:01:10.038 +08:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5296/api/analytics/platform - null null
+2025-09-24 09:01:10.118 +08:00 [WRN] Failed to determine the https port for redirect.
+2025-09-24 09:01:10.121 +08:00 [INF] CORS policy execution successful.
+2025-09-24 09:01:10.121 +08:00 [INF] CORS policy execution successful.
+2025-09-24 09:01:10.134 +08:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5296/api/analytics/platform - 204 null null 98.6734ms
+2025-09-24 09:01:10.134 +08:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5296/api/courses - 204 null null 98.6788ms
+2025-09-24 09:01:10.149 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5296/api/courses - application/json null
+2025-09-24 09:01:10.152 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5296/api/analytics/platform - application/json null
+2025-09-24 09:01:10.169 +08:00 [INF] CORS policy execution successful.
+2025-09-24 09:01:10.169 +08:00 [INF] CORS policy execution successful.
+2025-09-24 09:01:10.235 +08:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5296/api/courses - null null
+2025-09-24 09:01:10.240 +08:00 [INF] CORS policy execution successful.
+2025-09-24 09:01:10.243 +08:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5296/api/courses - 204 null null 7.813ms
+2025-09-24 09:01:10.263 +08:00 [INF] Executing endpoint 'CeceLearningPortal.Api.Controllers.CoursesController.GetCourses (CeceLearningPortal.Api)'
+2025-09-24 09:01:10.269 +08:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (Admin)
+2025-09-24 09:01:10.279 +08:00 [INF] AuthenticationScheme: Bearer was challenged.
+2025-09-24 09:01:10.291 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost:5296/api/analytics/platform - 401 0 null 138.3718ms
+2025-09-24 09:01:10.313 +08:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5296/api/auth/refresh - null null
+2025-09-24 09:01:10.319 +08:00 [INF] Route matched with {action = "GetCourses", controller = "Courses"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetCourses(CeceLearningPortal.Api.DTOs.CourseFilterDto) on controller CeceLearningPortal.Api.Controllers.CoursesController (CeceLearningPortal.Api).
+2025-09-24 09:01:10.319 +08:00 [INF] CORS policy execution successful.
+2025-09-24 09:01:10.324 +08:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5296/api/auth/refresh - 204 null null 11.0397ms
+2025-09-24 09:01:10.331 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:5296/api/auth/refresh - application/json 557
+2025-09-24 09:01:10.340 +08:00 [INF] CORS policy execution successful.
+2025-09-24 09:01:10.344 +08:00 [INF] Executing endpoint 'CeceLearningPortal.Api.Controllers.AuthController.RefreshToken (CeceLearningPortal.Api)'
+2025-09-24 09:01:10.355 +08:00 [INF] Route matched with {action = "RefreshToken", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] RefreshToken(CeceLearningPortal.Api.DTOs.RefreshTokenDto) on controller CeceLearningPortal.Api.Controllers.AuthController (CeceLearningPortal.Api).
+2025-09-24 09:01:10.681 +08:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2025-09-24 09:01:10.829 +08:00 [INF] Executed DbCommand (25ms) [Parameters=[@__userId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a0."Id", a0."AccessFailedCount", a0."Avatar", a0."ConcurrencyStamp", a0."CreatedAt", a0."Email", a0."EmailConfirmed", a0."FullName", a0."LastLoginAt", a0."LockoutEnabled", a0."LockoutEnd", a0."NormalizedEmail", a0."NormalizedUserName", a0."NotificationPreferences", a0."PasswordHash", a0."PhoneNumber", a0."PhoneNumberConfirmed", a0."RefreshToken", a0."RefreshTokenExpiryTime", a0."Role", a0."SecurityStamp", a0."Status", a0."TwoFactorEnabled", a0."UserName", r.id, r.created_at, r.created_by_ip, r.expires_at, r.replaced_by_token, r.revoked_at, r.revoked_by_ip, r.token, r.user_id
+FROM (
+    SELECT a."Id", a."AccessFailedCount", a."Avatar", a."ConcurrencyStamp", a."CreatedAt", a."Email", a."EmailConfirmed", a."FullName", a."LastLoginAt", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."NotificationPreferences", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."RefreshToken", a."RefreshTokenExpiryTime", a."Role", a."SecurityStamp", a."Status", a."TwoFactorEnabled", a."UserName"
+    FROM "AspNetUsers" AS a
+    WHERE a."Id" = @__userId_0
+    LIMIT 1
+) AS a0
+LEFT JOIN refresh_tokens AS r ON a0."Id" = r.user_id
+ORDER BY a0."Id"
+2025-09-24 09:01:10.881 +08:00 [INF] Executed DbCommand (24ms) [Parameters=[@__p_1='?' (DbType = Int32), @__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT c0.id, c0."AccessDuration", c0."AccessType", c0."AutomationAbandonmentSequence", c0."AutomationCompletionCertificate", c0."AutomationProgressReminders", c0."AutomationWelcomeEmail", c0.category, c0."CourseType", c0.created_at, c0."Currency", c0.description, c0.discount, c0."DripContent", c0."DripScheduleJson", c0.duration, c0."EnrollmentLimit", c0.enrollment_type, c0.features, c0."HasAssignments", c0."HasCertificate", c0."HasCommunity", c0."HasDownloadableResources", c0."HasLiveSessions", c0."HasQuizzes", c0.instructor_id, c0.is_bestseller, c0."IsPublished", c0."Language", c0.level, c0.original_price, c0."PaymentPlanDetailsJson", c0.preview_url, c0.price, c0."PricingModel", c0."PromoVideoUrl", c0."PublishedAt", c0."ShortDescription", c0.status, c0."SubscriptionPeriod", c0.thumbnail, c0.thumbnail_url, c0.title, c0.updated_at, a."Id", a."AccessFailedCount", a."Avatar", a."ConcurrencyStamp", a."CreatedAt", a."Email", a."EmailConfirmed", a."FullName", a."LastLoginAt", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."NotificationPreferences", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."RefreshToken", a."RefreshTokenExpiryTime", a."Role", a."SecurityStamp", a."Status", a."TwoFactorEnabled", a."UserName", s.id, s.course_id, s.created_at, s.description, s."order", s.title, s.updated_at, s.id0, s.content, s.created_at0, s.duration, s.module_id, s.order0, s.title0, s.type, s.updated_at0, s.video_url, c3.id, c3.approved_at, c3.approved_by, c3.comment, c3.course_id, c3.created_at, c3.is_flagged, c3.rating, c3.status, c3.student_id, e.id, e.average_quiz_score, e.certificate_issued, e.certificate_url, e.completed_at, e.completed_lessons, e.course_id, e.enrolled_at, e.last_accessed_date, e.progress_percentage, e.quiz_count, e.student_id, e.total_time_spent
+FROM (
+    SELECT c.id, c."AccessDuration", c."AccessType", c."AutomationAbandonmentSequence", c."AutomationCompletionCertificate", c."AutomationProgressReminders", c."AutomationWelcomeEmail", c.category, c."CourseType", c.created_at, c."Currency", c.description, c.discount, c."DripContent", c."DripScheduleJson", c.duration, c."EnrollmentLimit", c.enrollment_type, c.features, c."HasAssignments", c."HasCertificate", c."HasCommunity", c."HasDownloadableResources", c."HasLiveSessions", c."HasQuizzes", c.instructor_id, c.is_bestseller, c."IsPublished", c."Language", c.level, c.original_price, c."PaymentPlanDetailsJson", c.preview_url, c.price, c."PricingModel", c."PromoVideoUrl", c."PublishedAt", c."ShortDescription", c.status, c."SubscriptionPeriod", c.thumbnail, c.thumbnail_url, c.title, c.updated_at
+    FROM courses AS c
+    ORDER BY c.created_at DESC
+    LIMIT @__p_1 OFFSET @__p_0
+) AS c0
+INNER JOIN "AspNetUsers" AS a ON c0.instructor_id = a."Id"
+LEFT JOIN (
+    SELECT c1.id, c1.course_id, c1.created_at, c1.description, c1."order", c1.title, c1.updated_at, c2.id AS id0, c2.content, c2.created_at AS created_at0, c2.duration, c2.module_id, c2."order" AS order0, c2.title AS title0, c2.type, c2.updated_at AS updated_at0, c2.video_url
+    FROM course_modules AS c1
+    LEFT JOIN course_lessons AS c2 ON c1.id = c2.module_id
+) AS s ON c0.id = s.course_id
+LEFT JOIN course_reviews AS c3 ON c0.id = c3.course_id
+LEFT JOIN enrollments AS e ON c0.id = e.course_id
+ORDER BY c0.created_at DESC, c0.id, a."Id", s.id, s.id0, c3.id
+2025-09-24 09:01:11.221 +08:00 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+ListSelectIterator`2[[CeceLearningPortal.Api.Models.Course, CeceLearningPortal.Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[CeceLearningPortal.Api.DTOs.CourseDto, CeceLearningPortal.Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-09-24 09:01:11.283 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5296/api/courses - application/json null
+2025-09-24 09:01:11.287 +08:00 [INF] Executed action CeceLearningPortal.Api.Controllers.CoursesController.GetCourses (CeceLearningPortal.Api) in 958.0986ms
+2025-09-24 09:01:11.292 +08:00 [INF] Executed DbCommand (15ms) [Parameters=[@p2='?' (DbType = Int32), @p0='?', @p1='?' (DbType = DateTime), @p3='?' (DbType = DateTime), @p4='?', @p5='?' (DbType = DateTime), @p6='?', @p7='?' (DbType = DateTime), @p8='?', @p9='?', @p10='?'], CommandType='"Text"', CommandTimeout='30']
+UPDATE refresh_tokens SET replaced_by_token = @p0, revoked_at = @p1
+WHERE id = @p2;
+INSERT INTO refresh_tokens (created_at, created_by_ip, expires_at, replaced_by_token, revoked_at, revoked_by_ip, token, user_id)
+VALUES (@p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10)
+RETURNING id;
+2025-09-24 09:01:11.292 +08:00 [INF] CORS policy execution successful.
+2025-09-24 09:01:11.297 +08:00 [INF] Executed endpoint 'CeceLearningPortal.Api.Controllers.CoursesController.GetCourses (CeceLearningPortal.Api)'
+2025-09-24 09:01:11.312 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost:5296/api/courses - 200 null application/json; charset=utf-8 1162.5088ms
+2025-09-24 09:01:11.334 +08:00 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '9/19/2025 4:14:31 AM', Current time (UTC): '9/24/2025 1:01:11 AM'.
+   at Microsoft.IdentityModel.Tokens.ValidatorUtilities.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateTokenPayloadAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateJWSAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+2025-09-24 09:01:11.344 +08:00 [INF] Executing OkObjectResult, writing value of type 'CeceLearningPortal.Api.DTOs.AuthResponseDto'.
+2025-09-24 09:01:11.353 +08:00 [INF] Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '9/19/2025 4:14:31 AM', Current time (UTC): '9/24/2025 1:01:11 AM'.
+2025-09-24 09:01:11.360 +08:00 [INF] Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '9/19/2025 4:14:31 AM', Current time (UTC): '9/24/2025 1:01:11 AM'.
+2025-09-24 09:01:11.362 +08:00 [INF] Executed action CeceLearningPortal.Api.Controllers.AuthController.RefreshToken (CeceLearningPortal.Api) in 1003.5282ms
+2025-09-24 09:01:11.366 +08:00 [INF] Executed endpoint 'CeceLearningPortal.Api.Controllers.AuthController.RefreshToken (CeceLearningPortal.Api)'
+2025-09-24 09:01:11.416 +08:00 [INF] Executed DbCommand (6ms) [Parameters=[@__userId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM refresh_tokens AS r
+    WHERE r.user_id = @__userId_0 AND r.revoked_at IS NULL AND now() < r.expires_at)
+2025-09-24 09:01:11.421 +08:00 [INF] Request finished HTTP/1.1 POST http://localhost:5296/api/auth/refresh - 200 null application/json; charset=utf-8 1090.4469ms
+2025-09-24 09:01:11.426 +08:00 [INF] Executing endpoint 'CeceLearningPortal.Api.Controllers.CoursesController.GetCourses (CeceLearningPortal.Api)'
+2025-09-24 09:01:11.459 +08:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5296/api/analytics/platform - null null
+2025-09-24 09:01:11.465 +08:00 [INF] Route matched with {action = "GetCourses", controller = "Courses"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetCourses(CeceLearningPortal.Api.DTOs.CourseFilterDto) on controller CeceLearningPortal.Api.Controllers.CoursesController (CeceLearningPortal.Api).
+2025-09-24 09:01:11.470 +08:00 [INF] CORS policy execution successful.
+2025-09-24 09:01:11.481 +08:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5296/api/analytics/platform - 204 null null 21.1139ms
+2025-09-24 09:01:11.506 +08:00 [INF] Executed DbCommand (19ms) [Parameters=[@__p_1='?' (DbType = Int32), @__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT c0.id, c0."AccessDuration", c0."AccessType", c0."AutomationAbandonmentSequence", c0."AutomationCompletionCertificate", c0."AutomationProgressReminders", c0."AutomationWelcomeEmail", c0.category, c0."CourseType", c0.created_at, c0."Currency", c0.description, c0.discount, c0."DripContent", c0."DripScheduleJson", c0.duration, c0."EnrollmentLimit", c0.enrollment_type, c0.features, c0."HasAssignments", c0."HasCertificate", c0."HasCommunity", c0."HasDownloadableResources", c0."HasLiveSessions", c0."HasQuizzes", c0.instructor_id, c0.is_bestseller, c0."IsPublished", c0."Language", c0.level, c0.original_price, c0."PaymentPlanDetailsJson", c0.preview_url, c0.price, c0."PricingModel", c0."PromoVideoUrl", c0."PublishedAt", c0."ShortDescription", c0.status, c0."SubscriptionPeriod", c0.thumbnail, c0.thumbnail_url, c0.title, c0.updated_at, a."Id", a."AccessFailedCount", a."Avatar", a."ConcurrencyStamp", a."CreatedAt", a."Email", a."EmailConfirmed", a."FullName", a."LastLoginAt", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."NotificationPreferences", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."RefreshToken", a."RefreshTokenExpiryTime", a."Role", a."SecurityStamp", a."Status", a."TwoFactorEnabled", a."UserName", s.id, s.course_id, s.created_at, s.description, s."order", s.title, s.updated_at, s.id0, s.content, s.created_at0, s.duration, s.module_id, s.order0, s.title0, s.type, s.updated_at0, s.video_url, c3.id, c3.approved_at, c3.approved_by, c3.comment, c3.course_id, c3.created_at, c3.is_flagged, c3.rating, c3.status, c3.student_id, e.id, e.average_quiz_score, e.certificate_issued, e.certificate_url, e.completed_at, e.completed_lessons, e.course_id, e.enrolled_at, e.last_accessed_date, e.progress_percentage, e.quiz_count, e.student_id, e.total_time_spent
+FROM (
+    SELECT c.id, c."AccessDuration", c."AccessType", c."AutomationAbandonmentSequence", c."AutomationCompletionCertificate", c."AutomationProgressReminders", c."AutomationWelcomeEmail", c.category, c."CourseType", c.created_at, c."Currency", c.description, c.discount, c."DripContent", c."DripScheduleJson", c.duration, c."EnrollmentLimit", c.enrollment_type, c.features, c."HasAssignments", c."HasCertificate", c."HasCommunity", c."HasDownloadableResources", c."HasLiveSessions", c."HasQuizzes", c.instructor_id, c.is_bestseller, c."IsPublished", c."Language", c.level, c.original_price, c."PaymentPlanDetailsJson", c.preview_url, c.price, c."PricingModel", c."PromoVideoUrl", c."PublishedAt", c."ShortDescription", c.status, c."SubscriptionPeriod", c.thumbnail, c.thumbnail_url, c.title, c.updated_at
+    FROM courses AS c
+    ORDER BY c.created_at DESC
+    LIMIT @__p_1 OFFSET @__p_0
+) AS c0
+INNER JOIN "AspNetUsers" AS a ON c0.instructor_id = a."Id"
+LEFT JOIN (
+    SELECT c1.id, c1.course_id, c1.created_at, c1.description, c1."order", c1.title, c1.updated_at, c2.id AS id0, c2.content, c2.created_at AS created_at0, c2.duration, c2.module_id, c2."order" AS order0, c2.title AS title0, c2.type, c2.updated_at AS updated_at0, c2.video_url
+    FROM course_modules AS c1
+    LEFT JOIN course_lessons AS c2 ON c1.id = c2.module_id
+) AS s ON c0.id = s.course_id
+LEFT JOIN course_reviews AS c3 ON c0.id = c3.course_id
+LEFT JOIN enrollments AS e ON c0.id = e.course_id
+ORDER BY c0.created_at DESC, c0.id, a."Id", s.id, s.id0, c3.id
+2025-09-24 09:01:11.512 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5296/api/analytics/platform - application/json null
+2025-09-24 09:01:11.533 +08:00 [INF] CORS policy execution successful.
+2025-09-24 09:01:11.544 +08:00 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+ListSelectIterator`2[[CeceLearningPortal.Api.Models.Course, CeceLearningPortal.Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[CeceLearningPortal.Api.DTOs.CourseDto, CeceLearningPortal.Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-09-24 09:01:11.572 +08:00 [INF] Executed DbCommand (2ms) [Parameters=[@__userId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM refresh_tokens AS r
+    WHERE r.user_id = @__userId_0 AND r.revoked_at IS NULL AND now() < r.expires_at)
+2025-09-24 09:01:11.577 +08:00 [INF] Executed action CeceLearningPortal.Api.Controllers.CoursesController.GetCourses (CeceLearningPortal.Api) in 98.6565ms
+2025-09-24 09:01:11.591 +08:00 [INF] Executed endpoint 'CeceLearningPortal.Api.Controllers.CoursesController.GetCourses (CeceLearningPortal.Api)'
+2025-09-24 09:01:11.594 +08:00 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (Admin)
+2025-09-24 09:01:11.594 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost:5296/api/courses - 200 null application/json; charset=utf-8 310.8692ms
+2025-09-24 09:01:11.600 +08:00 [INF] AuthenticationScheme: Bearer was forbidden.
+2025-09-24 09:01:11.609 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost:5296/api/analytics/platform - 403 0 null 96.5037ms
+2025-09-24 09:01:11.612 +08:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5296/api/users/bee889a2-efca-471d-807c-a7674a945612/instructor-stats - null null
+2025-09-24 09:01:11.621 +08:00 [INF] CORS policy execution successful.
+2025-09-24 09:01:11.623 +08:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5296/api/users/bee889a2-efca-471d-807c-a7674a945612/instructor-stats - 204 null null 11.6322ms
+2025-09-24 09:01:11.630 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5296/api/users/bee889a2-efca-471d-807c-a7674a945612/instructor-stats - application/json null
+2025-09-24 09:01:11.637 +08:00 [INF] CORS policy execution successful.
+2025-09-24 09:01:11.644 +08:00 [INF] Executed DbCommand (2ms) [Parameters=[@__userId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM refresh_tokens AS r
+    WHERE r.user_id = @__userId_0 AND r.revoked_at IS NULL AND now() < r.expires_at)
+2025-09-24 09:01:11.648 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost:5296/api/users/bee889a2-efca-471d-807c-a7674a945612/instructor-stats - 404 0 null 17.8448ms
+2025-09-24 09:01:11.657 +08:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5296/api/users/bee889a2-efca-471d-807c-a7674a945612/instructor-stats, Response status code: 404
+2025-09-24 09:01:11.717 +08:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5296/api/courses?instructorId=bee889a2-efca-471d-807c-a7674a945612 - null null
+2025-09-24 09:01:11.724 +08:00 [INF] CORS policy execution successful.
+2025-09-24 09:01:11.727 +08:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5296/api/courses?instructorId=bee889a2-efca-471d-807c-a7674a945612 - 204 null null 9.8498ms
+2025-09-24 09:01:11.742 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5296/api/courses?instructorId=bee889a2-efca-471d-807c-a7674a945612 - application/json null
+2025-09-24 09:01:11.748 +08:00 [INF] CORS policy execution successful.
+2025-09-24 09:01:11.760 +08:00 [INF] Executed DbCommand (1ms) [Parameters=[@__userId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM refresh_tokens AS r
+    WHERE r.user_id = @__userId_0 AND r.revoked_at IS NULL AND now() < r.expires_at)
+2025-09-24 09:01:11.766 +08:00 [INF] Executing endpoint 'CeceLearningPortal.Api.Controllers.CoursesController.GetCourses (CeceLearningPortal.Api)'
+2025-09-24 09:01:11.768 +08:00 [INF] Route matched with {action = "GetCourses", controller = "Courses"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetCourses(CeceLearningPortal.Api.DTOs.CourseFilterDto) on controller CeceLearningPortal.Api.Controllers.CoursesController (CeceLearningPortal.Api).
+2025-09-24 09:01:11.783 +08:00 [INF] Executed DbCommand (5ms) [Parameters=[@__p_1='?' (DbType = Int32), @__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT c0.id, c0."AccessDuration", c0."AccessType", c0."AutomationAbandonmentSequence", c0."AutomationCompletionCertificate", c0."AutomationProgressReminders", c0."AutomationWelcomeEmail", c0.category, c0."CourseType", c0.created_at, c0."Currency", c0.description, c0.discount, c0."DripContent", c0."DripScheduleJson", c0.duration, c0."EnrollmentLimit", c0.enrollment_type, c0.features, c0."HasAssignments", c0."HasCertificate", c0."HasCommunity", c0."HasDownloadableResources", c0."HasLiveSessions", c0."HasQuizzes", c0.instructor_id, c0.is_bestseller, c0."IsPublished", c0."Language", c0.level, c0.original_price, c0."PaymentPlanDetailsJson", c0.preview_url, c0.price, c0."PricingModel", c0."PromoVideoUrl", c0."PublishedAt", c0."ShortDescription", c0.status, c0."SubscriptionPeriod", c0.thumbnail, c0.thumbnail_url, c0.title, c0.updated_at, a."Id", a."AccessFailedCount", a."Avatar", a."ConcurrencyStamp", a."CreatedAt", a."Email", a."EmailConfirmed", a."FullName", a."LastLoginAt", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."NotificationPreferences", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."RefreshToken", a."RefreshTokenExpiryTime", a."Role", a."SecurityStamp", a."Status", a."TwoFactorEnabled", a."UserName", s.id, s.course_id, s.created_at, s.description, s."order", s.title, s.updated_at, s.id0, s.content, s.created_at0, s.duration, s.module_id, s.order0, s.title0, s.type, s.updated_at0, s.video_url, c3.id, c3.approved_at, c3.approved_by, c3.comment, c3.course_id, c3.created_at, c3.is_flagged, c3.rating, c3.status, c3.student_id, e.id, e.average_quiz_score, e.certificate_issued, e.certificate_url, e.completed_at, e.completed_lessons, e.course_id, e.enrolled_at, e.last_accessed_date, e.progress_percentage, e.quiz_count, e.student_id, e.total_time_spent
+FROM (
+    SELECT c.id, c."AccessDuration", c."AccessType", c."AutomationAbandonmentSequence", c."AutomationCompletionCertificate", c."AutomationProgressReminders", c."AutomationWelcomeEmail", c.category, c."CourseType", c.created_at, c."Currency", c.description, c.discount, c."DripContent", c."DripScheduleJson", c.duration, c."EnrollmentLimit", c.enrollment_type, c.features, c."HasAssignments", c."HasCertificate", c."HasCommunity", c."HasDownloadableResources", c."HasLiveSessions", c."HasQuizzes", c.instructor_id, c.is_bestseller, c."IsPublished", c."Language", c.level, c.original_price, c."PaymentPlanDetailsJson", c.preview_url, c.price, c."PricingModel", c."PromoVideoUrl", c."PublishedAt", c."ShortDescription", c.status, c."SubscriptionPeriod", c.thumbnail, c.thumbnail_url, c.title, c.updated_at
+    FROM courses AS c
+    ORDER BY c.created_at DESC
+    LIMIT @__p_1 OFFSET @__p_0
+) AS c0
+INNER JOIN "AspNetUsers" AS a ON c0.instructor_id = a."Id"
+LEFT JOIN (
+    SELECT c1.id, c1.course_id, c1.created_at, c1.description, c1."order", c1.title, c1.updated_at, c2.id AS id0, c2.content, c2.created_at AS created_at0, c2.duration, c2.module_id, c2."order" AS order0, c2.title AS title0, c2.type, c2.updated_at AS updated_at0, c2.video_url
+    FROM course_modules AS c1
+    LEFT JOIN course_lessons AS c2 ON c1.id = c2.module_id
+) AS s ON c0.id = s.course_id
+LEFT JOIN course_reviews AS c3 ON c0.id = c3.course_id
+LEFT JOIN enrollments AS e ON c0.id = e.course_id
+ORDER BY c0.created_at DESC, c0.id, a."Id", s.id, s.id0, c3.id
+2025-09-24 09:01:11.801 +08:00 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+ListSelectIterator`2[[CeceLearningPortal.Api.Models.Course, CeceLearningPortal.Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[CeceLearningPortal.Api.DTOs.CourseDto, CeceLearningPortal.Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-09-24 09:01:11.805 +08:00 [INF] Executed action CeceLearningPortal.Api.Controllers.CoursesController.GetCourses (CeceLearningPortal.Api) in 32.0862ms
+2025-09-24 09:01:11.811 +08:00 [INF] Executed endpoint 'CeceLearningPortal.Api.Controllers.CoursesController.GetCourses (CeceLearningPortal.Api)'
+2025-09-24 09:01:11.814 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost:5296/api/courses?instructorId=bee889a2-efca-471d-807c-a7674a945612 - 200 null application/json; charset=utf-8 72.6052ms
+2025-09-24 09:02:07.074 +08:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5296/api/courses - null null
+2025-09-24 09:02:07.085 +08:00 [INF] CORS policy execution successful.
+2025-09-24 09:02:07.090 +08:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5296/api/courses - 204 null null 15.5951ms
+2025-09-24 09:02:07.102 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:5296/api/courses - application/json 757
+2025-09-24 09:02:07.113 +08:00 [INF] CORS policy execution successful.
+2025-09-24 09:02:07.124 +08:00 [INF] Executed DbCommand (2ms) [Parameters=[@__userId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM refresh_tokens AS r
+    WHERE r.user_id = @__userId_0 AND r.revoked_at IS NULL AND now() < r.expires_at)
+2025-09-24 09:02:07.138 +08:00 [INF] Executing endpoint 'CeceLearningPortal.Api.Controllers.CoursesController.CreateCourse (CeceLearningPortal.Api)'
+2025-09-24 09:02:07.154 +08:00 [INF] Route matched with {action = "CreateCourse", controller = "Courses"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] CreateCourse(CeceLearningPortal.Api.DTOs.CreateCourseDto) on controller CeceLearningPortal.Api.Controllers.CoursesController (CeceLearningPortal.Api).
+2025-09-24 09:02:07.490 +08:00 [INF] Executed DbCommand (23ms) [Parameters=[@p0='?' (DbType = Int32), @p1='?' (DbType = Int32), @p2='?' (DbType = Boolean), @p3='?' (DbType = Boolean), @p4='?' (DbType = Boolean), @p5='?' (DbType = Boolean), @p6='?', @p7='?' (DbType = Int32), @p8='?' (DbType = DateTime), @p9='?', @p10='?', @p11='?' (DbType = Int32), @p12='?' (DbType = Boolean), @p13='?', @p14='?', @p15='?' (DbType = Int32), @p16='?', @p17='?', @p18='?' (DbType = Boolean), @p19='?' (DbType = Boolean), @p20='?' (DbType = Boolean), @p21='?' (DbType = Boolean), @p22='?' (DbType = Boolean), @p23='?' (DbType = Boolean), @p24='?', @p25='?' (DbType = Boolean), @p26='?' (DbType = Boolean), @p27='?', @p28='?', @p29='?' (DbType = Decimal), @p30='?', @p31='?', @p32='?' (DbType = Decimal), @p33='?' (DbType = Int32), @p34='?', @p35='?' (DbType = DateTime), @p36='?', @p37='?', @p38='?' (DbType = Int32), @p39='?', @p40='?', @p41='?', @p42='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO courses ("AccessDuration", "AccessType", "AutomationAbandonmentSequence", "AutomationCompletionCertificate", "AutomationProgressReminders", "AutomationWelcomeEmail", category, "CourseType", created_at, "Currency", description, discount, "DripContent", "DripScheduleJson", duration, "EnrollmentLimit", enrollment_type, features, "HasAssignments", "HasCertificate", "HasCommunity", "HasDownloadableResources", "HasLiveSessions", "HasQuizzes", instructor_id, is_bestseller, "IsPublished", "Language", level, original_price, "PaymentPlanDetailsJson", preview_url, price, "PricingModel", "PromoVideoUrl", "PublishedAt", "ShortDescription", status, "SubscriptionPeriod", thumbnail, thumbnail_url, title, updated_at)
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15, @p16, @p17, @p18, @p19, @p20, @p21, @p22, @p23, @p24, @p25, @p26, @p27, @p28, @p29, @p30, @p31, @p32, @p33, @p34, @p35, @p36, @p37, @p38, @p39, @p40, @p41, @p42)
+RETURNING id;
+2025-09-24 09:02:07.563 +08:00 [INF] Executed DbCommand (8ms) [Parameters=[@p0='?' (DbType = Int32), @p1='?' (DbType = DateTime), @p2='?', @p3='?' (DbType = Int32), @p4='?', @p5='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO course_modules (course_id, created_at, description, "order", title, updated_at)
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5)
+RETURNING id;
+2025-09-24 09:02:07.624 +08:00 [INF] Executed DbCommand (5ms) [Parameters=[@p0='?', @p1='?' (DbType = DateTime), @p2='?', @p3='?' (DbType = Int32), @p4='?' (DbType = Int32), @p5='?', @p6='?', @p7='?' (DbType = DateTime), @p8='?', @p9='?', @p10='?' (DbType = DateTime), @p11='?', @p12='?' (DbType = Int32), @p13='?' (DbType = Int32), @p14='?', @p15='?', @p16='?' (DbType = DateTime), @p17='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO course_lessons (content, created_at, duration, module_id, "order", title, type, updated_at, video_url)
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8)
+RETURNING id;
+INSERT INTO course_lessons (content, created_at, duration, module_id, "order", title, type, updated_at, video_url)
+VALUES (@p9, @p10, @p11, @p12, @p13, @p14, @p15, @p16, @p17)
+RETURNING id;
+2025-09-24 09:02:07.674 +08:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2025-09-24 09:02:07.765 +08:00 [INF] Executed DbCommand (7ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT s.id, s."AccessDuration", s."AccessType", s."AutomationAbandonmentSequence", s."AutomationCompletionCertificate", s."AutomationProgressReminders", s."AutomationWelcomeEmail", s.category, s."CourseType", s.created_at, s."Currency", s.description, s.discount, s."DripContent", s."DripScheduleJson", s.duration, s."EnrollmentLimit", s.enrollment_type, s.features, s."HasAssignments", s."HasCertificate", s."HasCommunity", s."HasDownloadableResources", s."HasLiveSessions", s."HasQuizzes", s.instructor_id, s.is_bestseller, s."IsPublished", s."Language", s.level, s.original_price, s."PaymentPlanDetailsJson", s.preview_url, s.price, s."PricingModel", s."PromoVideoUrl", s."PublishedAt", s."ShortDescription", s.status, s."SubscriptionPeriod", s.thumbnail, s.thumbnail_url, s.title, s.updated_at, s."Id0", s."AccessFailedCount", s."Avatar", s."ConcurrencyStamp", s."CreatedAt", s."Email", s."EmailConfirmed", s."FullName", s."LastLoginAt", s."LockoutEnabled", s."LockoutEnd", s."NormalizedEmail", s."NormalizedUserName", s."NotificationPreferences", s."PasswordHash", s."PhoneNumber", s."PhoneNumberConfirmed", s."RefreshToken", s."RefreshTokenExpiryTime", s."Role", s."SecurityStamp", s."Status0", s."TwoFactorEnabled", s."UserName", s0.id, s0.course_id, s0.created_at, s0.description, s0."order", s0.title, s0.updated_at, s0.id0, s0.content, s0.created_at0, s0.duration, s0.module_id, s0.order0, s0.title0, s0.type, s0.updated_at0, s0.video_url, s1.id, s1.approved_at, s1.approved_by, s1.comment, s1.course_id, s1.created_at, s1.is_flagged, s1.rating, s1.status, s1.student_id, s1."Id0", s1."AccessFailedCount", s1."Avatar", s1."ConcurrencyStamp", s1."CreatedAt", s1."Email", s1."EmailConfirmed", s1."FullName", s1."LastLoginAt", s1."LockoutEnabled", s1."LockoutEnd", s1."NormalizedEmail", s1."NormalizedUserName", s1."NotificationPreferences", s1."PasswordHash", s1."PhoneNumber", s1."PhoneNumberConfirmed", s1."RefreshToken", s1."RefreshTokenExpiryTime", s1."Role", s1."SecurityStamp", s1."Status0", s1."TwoFactorEnabled", s1."UserName", e.id, e.average_quiz_score, e.certificate_issued, e.certificate_url, e.completed_at, e.completed_lessons, e.course_id, e.enrolled_at, e.last_accessed_date, e.progress_percentage, e.quiz_count, e.student_id, e.total_time_spent
+FROM (
+    SELECT c.id, c."AccessDuration", c."AccessType", c."AutomationAbandonmentSequence", c."AutomationCompletionCertificate", c."AutomationProgressReminders", c."AutomationWelcomeEmail", c.category, c."CourseType", c.created_at, c."Currency", c.description, c.discount, c."DripContent", c."DripScheduleJson", c.duration, c."EnrollmentLimit", c.enrollment_type, c.features, c."HasAssignments", c."HasCertificate", c."HasCommunity", c."HasDownloadableResources", c."HasLiveSessions", c."HasQuizzes", c.instructor_id, c.is_bestseller, c."IsPublished", c."Language", c.level, c.original_price, c."PaymentPlanDetailsJson", c.preview_url, c.price, c."PricingModel", c."PromoVideoUrl", c."PublishedAt", c."ShortDescription", c.status, c."SubscriptionPeriod", c.thumbnail, c.thumbnail_url, c.title, c.updated_at, a."Id" AS "Id0", a."AccessFailedCount", a."Avatar", a."ConcurrencyStamp", a."CreatedAt", a."Email", a."EmailConfirmed", a."FullName", a."LastLoginAt", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."NotificationPreferences", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."RefreshToken", a."RefreshTokenExpiryTime", a."Role", a."SecurityStamp", a."Status" AS "Status0", a."TwoFactorEnabled", a."UserName"
+    FROM courses AS c
+    INNER JOIN "AspNetUsers" AS a ON c.instructor_id = a."Id"
+    WHERE c.id = @__id_0
+    LIMIT 1
+) AS s
+LEFT JOIN (
+    SELECT c0.id, c0.course_id, c0.created_at, c0.description, c0."order", c0.title, c0.updated_at, c1.id AS id0, c1.content, c1.created_at AS created_at0, c1.duration, c1.module_id, c1."order" AS order0, c1.title AS title0, c1.type, c1.updated_at AS updated_at0, c1.video_url
+    FROM course_modules AS c0
+    LEFT JOIN course_lessons AS c1 ON c0.id = c1.module_id
+) AS s0 ON s.id = s0.course_id
+LEFT JOIN (
+    SELECT c2.id, c2.approved_at, c2.approved_by, c2.comment, c2.course_id, c2.created_at, c2.is_flagged, c2.rating, c2.status, c2.student_id, a0."Id" AS "Id0", a0."AccessFailedCount", a0."Avatar", a0."ConcurrencyStamp", a0."CreatedAt", a0."Email", a0."EmailConfirmed", a0."FullName", a0."LastLoginAt", a0."LockoutEnabled", a0."LockoutEnd", a0."NormalizedEmail", a0."NormalizedUserName", a0."NotificationPreferences", a0."PasswordHash", a0."PhoneNumber", a0."PhoneNumberConfirmed", a0."RefreshToken", a0."RefreshTokenExpiryTime", a0."Role", a0."SecurityStamp", a0."Status" AS "Status0", a0."TwoFactorEnabled", a0."UserName"
+    FROM course_reviews AS c2
+    INNER JOIN "AspNetUsers" AS a0 ON c2.student_id = a0."Id"
+) AS s1 ON s.id = s1.course_id
+LEFT JOIN enrollments AS e ON s.id = e.course_id
+ORDER BY s.id, s."Id0", s0.id, s0.id0, s1.id, s1."Id0"
+2025-09-24 09:02:07.808 +08:00 [INF] Executing CreatedAtActionResult, writing value of type 'CeceLearningPortal.Api.DTOs.CourseDetailDto'.
+2025-09-24 09:02:07.854 +08:00 [INF] Executed action CeceLearningPortal.Api.Controllers.CoursesController.CreateCourse (CeceLearningPortal.Api) in 692.526ms
+2025-09-24 09:02:07.858 +08:00 [INF] Executed endpoint 'CeceLearningPortal.Api.Controllers.CoursesController.CreateCourse (CeceLearningPortal.Api)'
+2025-09-24 09:02:07.862 +08:00 [INF] Request finished HTTP/1.1 POST http://localhost:5296/api/courses - 201 null application/json; charset=utf-8 759.4687ms
+2025-09-24 09:02:07.872 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5296/api/courses - application/json null
+2025-09-24 09:02:07.879 +08:00 [INF] CORS policy execution successful.
+2025-09-24 09:02:07.886 +08:00 [INF] Executed DbCommand (1ms) [Parameters=[@__userId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM refresh_tokens AS r
+    WHERE r.user_id = @__userId_0 AND r.revoked_at IS NULL AND now() < r.expires_at)
+2025-09-24 09:02:07.894 +08:00 [INF] Executing endpoint 'CeceLearningPortal.Api.Controllers.CoursesController.GetCourses (CeceLearningPortal.Api)'
+2025-09-24 09:02:07.896 +08:00 [INF] Route matched with {action = "GetCourses", controller = "Courses"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetCourses(CeceLearningPortal.Api.DTOs.CourseFilterDto) on controller CeceLearningPortal.Api.Controllers.CoursesController (CeceLearningPortal.Api).
+2025-09-24 09:02:07.908 +08:00 [INF] Executed DbCommand (5ms) [Parameters=[@__p_1='?' (DbType = Int32), @__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT c0.id, c0."AccessDuration", c0."AccessType", c0."AutomationAbandonmentSequence", c0."AutomationCompletionCertificate", c0."AutomationProgressReminders", c0."AutomationWelcomeEmail", c0.category, c0."CourseType", c0.created_at, c0."Currency", c0.description, c0.discount, c0."DripContent", c0."DripScheduleJson", c0.duration, c0."EnrollmentLimit", c0.enrollment_type, c0.features, c0."HasAssignments", c0."HasCertificate", c0."HasCommunity", c0."HasDownloadableResources", c0."HasLiveSessions", c0."HasQuizzes", c0.instructor_id, c0.is_bestseller, c0."IsPublished", c0."Language", c0.level, c0.original_price, c0."PaymentPlanDetailsJson", c0.preview_url, c0.price, c0."PricingModel", c0."PromoVideoUrl", c0."PublishedAt", c0."ShortDescription", c0.status, c0."SubscriptionPeriod", c0.thumbnail, c0.thumbnail_url, c0.title, c0.updated_at, a."Id", a."AccessFailedCount", a."Avatar", a."ConcurrencyStamp", a."CreatedAt", a."Email", a."EmailConfirmed", a."FullName", a."LastLoginAt", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."NotificationPreferences", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."RefreshToken", a."RefreshTokenExpiryTime", a."Role", a."SecurityStamp", a."Status", a."TwoFactorEnabled", a."UserName", s.id, s.course_id, s.created_at, s.description, s."order", s.title, s.updated_at, s.id0, s.content, s.created_at0, s.duration, s.module_id, s.order0, s.title0, s.type, s.updated_at0, s.video_url, c3.id, c3.approved_at, c3.approved_by, c3.comment, c3.course_id, c3.created_at, c3.is_flagged, c3.rating, c3.status, c3.student_id, e.id, e.average_quiz_score, e.certificate_issued, e.certificate_url, e.completed_at, e.completed_lessons, e.course_id, e.enrolled_at, e.last_accessed_date, e.progress_percentage, e.quiz_count, e.student_id, e.total_time_spent
+FROM (
+    SELECT c.id, c."AccessDuration", c."AccessType", c."AutomationAbandonmentSequence", c."AutomationCompletionCertificate", c."AutomationProgressReminders", c."AutomationWelcomeEmail", c.category, c."CourseType", c.created_at, c."Currency", c.description, c.discount, c."DripContent", c."DripScheduleJson", c.duration, c."EnrollmentLimit", c.enrollment_type, c.features, c."HasAssignments", c."HasCertificate", c."HasCommunity", c."HasDownloadableResources", c."HasLiveSessions", c."HasQuizzes", c.instructor_id, c.is_bestseller, c."IsPublished", c."Language", c.level, c.original_price, c."PaymentPlanDetailsJson", c.preview_url, c.price, c."PricingModel", c."PromoVideoUrl", c."PublishedAt", c."ShortDescription", c.status, c."SubscriptionPeriod", c.thumbnail, c.thumbnail_url, c.title, c.updated_at
+    FROM courses AS c
+    ORDER BY c.created_at DESC
+    LIMIT @__p_1 OFFSET @__p_0
+) AS c0
+INNER JOIN "AspNetUsers" AS a ON c0.instructor_id = a."Id"
+LEFT JOIN (
+    SELECT c1.id, c1.course_id, c1.created_at, c1.description, c1."order", c1.title, c1.updated_at, c2.id AS id0, c2.content, c2.created_at AS created_at0, c2.duration, c2.module_id, c2."order" AS order0, c2.title AS title0, c2.type, c2.updated_at AS updated_at0, c2.video_url
+    FROM course_modules AS c1
+    LEFT JOIN course_lessons AS c2 ON c1.id = c2.module_id
+) AS s ON c0.id = s.course_id
+LEFT JOIN course_reviews AS c3 ON c0.id = c3.course_id
+LEFT JOIN enrollments AS e ON c0.id = e.course_id
+ORDER BY c0.created_at DESC, c0.id, a."Id", s.id, s.id0, c3.id
+2025-09-24 09:02:07.930 +08:00 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+ListSelectIterator`2[[CeceLearningPortal.Api.Models.Course, CeceLearningPortal.Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[CeceLearningPortal.Api.DTOs.CourseDto, CeceLearningPortal.Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-09-24 09:02:07.935 +08:00 [INF] Executed action CeceLearningPortal.Api.Controllers.CoursesController.GetCourses (CeceLearningPortal.Api) in 34.4884ms
+2025-09-24 09:02:07.939 +08:00 [INF] Executed endpoint 'CeceLearningPortal.Api.Controllers.CoursesController.GetCourses (CeceLearningPortal.Api)'
+2025-09-24 09:02:07.943 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost:5296/api/courses - 200 null application/json; charset=utf-8 70.5821ms
+2025-09-24 09:02:07.968 +08:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5296/api/analytics/platform - null null
+2025-09-24 09:02:07.976 +08:00 [INF] CORS policy execution successful.
+2025-09-24 09:02:07.979 +08:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5296/api/analytics/platform - 204 null null 11.2716ms
+2025-09-24 09:02:08.023 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5296/api/analytics/platform - application/json null
+2025-09-24 09:02:08.027 +08:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5296/api/users/bee889a2-efca-471d-807c-a7674a945612/instructor-stats - null null
+2025-09-24 09:02:08.032 +08:00 [INF] CORS policy execution successful.
+2025-09-24 09:02:08.040 +08:00 [INF] CORS policy execution successful.
+2025-09-24 09:02:08.052 +08:00 [INF] Executed DbCommand (3ms) [Parameters=[@__userId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM refresh_tokens AS r
+    WHERE r.user_id = @__userId_0 AND r.revoked_at IS NULL AND now() < r.expires_at)
+2025-09-24 09:02:08.052 +08:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5296/api/users/bee889a2-efca-471d-807c-a7674a945612/instructor-stats - 204 null null 25.1728ms
+2025-09-24 09:02:08.058 +08:00 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (Admin)
+2025-09-24 09:02:08.090 +08:00 [INF] AuthenticationScheme: Bearer was forbidden.
+2025-09-24 09:02:08.098 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost:5296/api/analytics/platform - 403 0 null 74.4663ms
+2025-09-24 09:02:08.152 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5296/api/users/bee889a2-efca-471d-807c-a7674a945612/instructor-stats - application/json null
+2025-09-24 09:02:08.170 +08:00 [INF] CORS policy execution successful.
+2025-09-24 09:02:08.176 +08:00 [INF] Executed DbCommand (1ms) [Parameters=[@__userId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM refresh_tokens AS r
+    WHERE r.user_id = @__userId_0 AND r.revoked_at IS NULL AND now() < r.expires_at)
+2025-09-24 09:02:08.182 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost:5296/api/users/bee889a2-efca-471d-807c-a7674a945612/instructor-stats - 404 0 null 29.5628ms
+2025-09-24 09:02:08.199 +08:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5296/api/users/bee889a2-efca-471d-807c-a7674a945612/instructor-stats, Response status code: 404
+2025-09-24 09:02:08.203 +08:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5296/api/courses?instructorId=bee889a2-efca-471d-807c-a7674a945612 - null null
+2025-09-24 09:02:08.210 +08:00 [INF] CORS policy execution successful.
+2025-09-24 09:02:08.214 +08:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5296/api/courses?instructorId=bee889a2-efca-471d-807c-a7674a945612 - 204 null null 11.0419ms
+2025-09-24 09:02:08.232 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5296/api/courses?instructorId=bee889a2-efca-471d-807c-a7674a945612 - application/json null
+2025-09-24 09:02:08.243 +08:00 [INF] CORS policy execution successful.
+2025-09-24 09:02:08.261 +08:00 [INF] Executed DbCommand (1ms) [Parameters=[@__userId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM refresh_tokens AS r
+    WHERE r.user_id = @__userId_0 AND r.revoked_at IS NULL AND now() < r.expires_at)
+2025-09-24 09:02:08.269 +08:00 [INF] Executing endpoint 'CeceLearningPortal.Api.Controllers.CoursesController.GetCourses (CeceLearningPortal.Api)'
+2025-09-24 09:02:08.272 +08:00 [INF] Route matched with {action = "GetCourses", controller = "Courses"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetCourses(CeceLearningPortal.Api.DTOs.CourseFilterDto) on controller CeceLearningPortal.Api.Controllers.CoursesController (CeceLearningPortal.Api).
+2025-09-24 09:02:08.305 +08:00 [INF] Executed DbCommand (27ms) [Parameters=[@__p_1='?' (DbType = Int32), @__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT c0.id, c0."AccessDuration", c0."AccessType", c0."AutomationAbandonmentSequence", c0."AutomationCompletionCertificate", c0."AutomationProgressReminders", c0."AutomationWelcomeEmail", c0.category, c0."CourseType", c0.created_at, c0."Currency", c0.description, c0.discount, c0."DripContent", c0."DripScheduleJson", c0.duration, c0."EnrollmentLimit", c0.enrollment_type, c0.features, c0."HasAssignments", c0."HasCertificate", c0."HasCommunity", c0."HasDownloadableResources", c0."HasLiveSessions", c0."HasQuizzes", c0.instructor_id, c0.is_bestseller, c0."IsPublished", c0."Language", c0.level, c0.original_price, c0."PaymentPlanDetailsJson", c0.preview_url, c0.price, c0."PricingModel", c0."PromoVideoUrl", c0."PublishedAt", c0."ShortDescription", c0.status, c0."SubscriptionPeriod", c0.thumbnail, c0.thumbnail_url, c0.title, c0.updated_at, a."Id", a."AccessFailedCount", a."Avatar", a."ConcurrencyStamp", a."CreatedAt", a."Email", a."EmailConfirmed", a."FullName", a."LastLoginAt", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."NotificationPreferences", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."RefreshToken", a."RefreshTokenExpiryTime", a."Role", a."SecurityStamp", a."Status", a."TwoFactorEnabled", a."UserName", s.id, s.course_id, s.created_at, s.description, s."order", s.title, s.updated_at, s.id0, s.content, s.created_at0, s.duration, s.module_id, s.order0, s.title0, s.type, s.updated_at0, s.video_url, c3.id, c3.approved_at, c3.approved_by, c3.comment, c3.course_id, c3.created_at, c3.is_flagged, c3.rating, c3.status, c3.student_id, e.id, e.average_quiz_score, e.certificate_issued, e.certificate_url, e.completed_at, e.completed_lessons, e.course_id, e.enrolled_at, e.last_accessed_date, e.progress_percentage, e.quiz_count, e.student_id, e.total_time_spent
+FROM (
+    SELECT c.id, c."AccessDuration", c."AccessType", c."AutomationAbandonmentSequence", c."AutomationCompletionCertificate", c."AutomationProgressReminders", c."AutomationWelcomeEmail", c.category, c."CourseType", c.created_at, c."Currency", c.description, c.discount, c."DripContent", c."DripScheduleJson", c.duration, c."EnrollmentLimit", c.enrollment_type, c.features, c."HasAssignments", c."HasCertificate", c."HasCommunity", c."HasDownloadableResources", c."HasLiveSessions", c."HasQuizzes", c.instructor_id, c.is_bestseller, c."IsPublished", c."Language", c.level, c.original_price, c."PaymentPlanDetailsJson", c.preview_url, c.price, c."PricingModel", c."PromoVideoUrl", c."PublishedAt", c."ShortDescription", c.status, c."SubscriptionPeriod", c.thumbnail, c.thumbnail_url, c.title, c.updated_at
+    FROM courses AS c
+    ORDER BY c.created_at DESC
+    LIMIT @__p_1 OFFSET @__p_0
+) AS c0
+INNER JOIN "AspNetUsers" AS a ON c0.instructor_id = a."Id"
+LEFT JOIN (
+    SELECT c1.id, c1.course_id, c1.created_at, c1.description, c1."order", c1.title, c1.updated_at, c2.id AS id0, c2.content, c2.created_at AS created_at0, c2.duration, c2.module_id, c2."order" AS order0, c2.title AS title0, c2.type, c2.updated_at AS updated_at0, c2.video_url
+    FROM course_modules AS c1
+    LEFT JOIN course_lessons AS c2 ON c1.id = c2.module_id
+) AS s ON c0.id = s.course_id
+LEFT JOIN course_reviews AS c3 ON c0.id = c3.course_id
+LEFT JOIN enrollments AS e ON c0.id = e.course_id
+ORDER BY c0.created_at DESC, c0.id, a."Id", s.id, s.id0, c3.id
+2025-09-24 09:02:08.321 +08:00 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+ListSelectIterator`2[[CeceLearningPortal.Api.Models.Course, CeceLearningPortal.Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[CeceLearningPortal.Api.DTOs.CourseDto, CeceLearningPortal.Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-09-24 09:02:08.324 +08:00 [INF] Executed action CeceLearningPortal.Api.Controllers.CoursesController.GetCourses (CeceLearningPortal.Api) in 49.1765ms
+2025-09-24 09:02:08.327 +08:00 [INF] Executed endpoint 'CeceLearningPortal.Api.Controllers.CoursesController.GetCourses (CeceLearningPortal.Api)'
+2025-09-24 09:02:08.329 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost:5296/api/courses?instructorId=bee889a2-efca-471d-807c-a7674a945612 - 200 null application/json; charset=utf-8 97.3ms
+2025-09-24 09:44:54.156 +08:00 [INF] Application is shutting down...
+2025-09-24 10:54:30.288 +08:00 [INF] Checking database connection...
+2025-09-24 10:54:32.306 +08:00 [INF] Database connection successful.
+2025-09-24 10:54:32.309 +08:00 [INF] Attempting to apply migrations...
+2025-09-24 10:54:32.488 +08:00 [INF] Executed DbCommand (32ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2025-09-24 10:54:33.281 +08:00 [INF] Executed DbCommand (12ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE IF NOT EXISTS "__EFMigrationsHistory" (
+    "MigrationId" character varying(150) NOT NULL,
+    "ProductVersion" character varying(32) NOT NULL,
+    CONSTRAINT "PK___EFMigrationsHistory" PRIMARY KEY ("MigrationId")
+);
+2025-09-24 10:54:33.307 +08:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+LOCK TABLE "__EFMigrationsHistory" IN ACCESS EXCLUSIVE MODE
+2025-09-24 10:54:33.317 +08:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2025-09-24 10:54:33.332 +08:00 [INF] No migrations were applied. The database is already up to date.
+2025-09-24 10:54:33.349 +08:00 [INF] Migrations applied successfully.
+2025-09-24 10:54:33.351 +08:00 [INF] Starting data seeding...
+2025-09-24 10:54:33.379 +08:00 [INF] User profile is available. Using 'C:\Users\Win11\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-09-24 10:54:33.679 +08:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM courses AS c)
+2025-09-24 10:54:33.692 +08:00 [INF] Database already contains data. Checking if data cleanup is needed...
+2025-09-24 10:54:33.693 +08:00 [INF] Checking for missing data components...
+2025-09-24 10:54:33.702 +08:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM subscriptions AS s)
+2025-09-24 10:54:33.707 +08:00 [INF] Data seeding completed.
+2025-09-24 10:54:33.801 +08:00 [INF] Now listening on: http://localhost:5296
+2025-09-24 10:54:33.803 +08:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-09-24 10:54:33.804 +08:00 [INF] Hosting environment: Development
+2025-09-24 10:54:33.806 +08:00 [INF] Content root path: C:\Users\Win11\Downloads\Cece-20250805T084305Z-1-001\Cece\Cece-master\Cece-master\CeceLearningPortal.Backend\CeceLearningPortal.Api
+2025-09-24 10:54:47.553 +08:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5296/api/courses - null null
+2025-09-24 10:54:47.632 +08:00 [WRN] Failed to determine the https port for redirect.
+2025-09-24 10:54:47.636 +08:00 [INF] CORS policy execution successful.
+2025-09-24 10:54:47.646 +08:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5296/api/courses - 204 null null 95.3573ms
+2025-09-24 10:54:47.664 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5296/api/courses - application/json null
+2025-09-24 10:54:47.683 +08:00 [INF] CORS policy execution successful.
+2025-09-24 10:54:47.810 +08:00 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '9/24/2025 2:01:11 AM', Current time (UTC): '9/24/2025 2:54:47 AM'.
+   at Microsoft.IdentityModel.Tokens.ValidatorUtilities.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateTokenPayloadAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateJWSAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+2025-09-24 10:54:47.829 +08:00 [INF] Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '9/24/2025 2:01:11 AM', Current time (UTC): '9/24/2025 2:54:47 AM'.
+2025-09-24 10:54:47.835 +08:00 [INF] Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '9/24/2025 2:01:11 AM', Current time (UTC): '9/24/2025 2:54:47 AM'.
+2025-09-24 10:54:47.986 +08:00 [INF] Executed DbCommand (14ms) [Parameters=[@__userId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM refresh_tokens AS r
+    WHERE r.user_id = @__userId_0 AND r.revoked_at IS NULL AND now() < r.expires_at)
+2025-09-24 10:54:47.994 +08:00 [INF] Executing endpoint 'CeceLearningPortal.Api.Controllers.CoursesController.GetCourses (CeceLearningPortal.Api)'
+2025-09-24 10:54:48.022 +08:00 [INF] Route matched with {action = "GetCourses", controller = "Courses"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetCourses(CeceLearningPortal.Api.DTOs.CourseFilterDto) on controller CeceLearningPortal.Api.Controllers.CoursesController (CeceLearningPortal.Api).
+2025-09-24 10:54:48.362 +08:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2025-09-24 10:54:48.463 +08:00 [INF] Executed DbCommand (14ms) [Parameters=[@__p_1='?' (DbType = Int32), @__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT c0.id, c0."AccessDuration", c0."AccessType", c0."AutomationAbandonmentSequence", c0."AutomationCompletionCertificate", c0."AutomationProgressReminders", c0."AutomationWelcomeEmail", c0.category, c0."CourseType", c0.created_at, c0."Currency", c0.description, c0.discount, c0."DripContent", c0."DripScheduleJson", c0.duration, c0."EnrollmentLimit", c0.enrollment_type, c0.features, c0."HasAssignments", c0."HasCertificate", c0."HasCommunity", c0."HasDownloadableResources", c0."HasLiveSessions", c0."HasQuizzes", c0.instructor_id, c0.is_bestseller, c0."IsPublished", c0."Language", c0.level, c0.original_price, c0."PaymentPlanDetailsJson", c0.preview_url, c0.price, c0."PricingModel", c0."PromoVideoUrl", c0."PublishedAt", c0."ShortDescription", c0.status, c0."SubscriptionPeriod", c0.thumbnail, c0.thumbnail_url, c0.title, c0.updated_at, a."Id", a."AccessFailedCount", a."Avatar", a."ConcurrencyStamp", a."CreatedAt", a."Email", a."EmailConfirmed", a."FullName", a."LastLoginAt", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."NotificationPreferences", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."RefreshToken", a."RefreshTokenExpiryTime", a."Role", a."SecurityStamp", a."Status", a."TwoFactorEnabled", a."UserName", s.id, s.course_id, s.created_at, s.description, s."order", s.title, s.updated_at, s.id0, s.content, s.created_at0, s.duration, s.module_id, s.order0, s.title0, s.type, s.updated_at0, s.video_url, c3.id, c3.approved_at, c3.approved_by, c3.comment, c3.course_id, c3.created_at, c3.is_flagged, c3.rating, c3.status, c3.student_id, e.id, e.average_quiz_score, e.certificate_issued, e.certificate_url, e.completed_at, e.completed_lessons, e.course_id, e.enrolled_at, e.last_accessed_date, e.progress_percentage, e.quiz_count, e.student_id, e.total_time_spent
+FROM (
+    SELECT c.id, c."AccessDuration", c."AccessType", c."AutomationAbandonmentSequence", c."AutomationCompletionCertificate", c."AutomationProgressReminders", c."AutomationWelcomeEmail", c.category, c."CourseType", c.created_at, c."Currency", c.description, c.discount, c."DripContent", c."DripScheduleJson", c.duration, c."EnrollmentLimit", c.enrollment_type, c.features, c."HasAssignments", c."HasCertificate", c."HasCommunity", c."HasDownloadableResources", c."HasLiveSessions", c."HasQuizzes", c.instructor_id, c.is_bestseller, c."IsPublished", c."Language", c.level, c.original_price, c."PaymentPlanDetailsJson", c.preview_url, c.price, c."PricingModel", c."PromoVideoUrl", c."PublishedAt", c."ShortDescription", c.status, c."SubscriptionPeriod", c.thumbnail, c.thumbnail_url, c.title, c.updated_at
+    FROM courses AS c
+    ORDER BY c.created_at DESC
+    LIMIT @__p_1 OFFSET @__p_0
+) AS c0
+INNER JOIN "AspNetUsers" AS a ON c0.instructor_id = a."Id"
+LEFT JOIN (
+    SELECT c1.id, c1.course_id, c1.created_at, c1.description, c1."order", c1.title, c1.updated_at, c2.id AS id0, c2.content, c2.created_at AS created_at0, c2.duration, c2.module_id, c2."order" AS order0, c2.title AS title0, c2.type, c2.updated_at AS updated_at0, c2.video_url
+    FROM course_modules AS c1
+    LEFT JOIN course_lessons AS c2 ON c1.id = c2.module_id
+) AS s ON c0.id = s.course_id
+LEFT JOIN course_reviews AS c3 ON c0.id = c3.course_id
+LEFT JOIN enrollments AS e ON c0.id = e.course_id
+ORDER BY c0.created_at DESC, c0.id, a."Id", s.id, s.id0, c3.id
+2025-09-24 10:54:48.990 +08:00 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+ListSelectIterator`2[[CeceLearningPortal.Api.Models.Course, CeceLearningPortal.Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[CeceLearningPortal.Api.DTOs.CourseDto, CeceLearningPortal.Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-09-24 10:54:49.051 +08:00 [INF] Executed action CeceLearningPortal.Api.Controllers.CoursesController.GetCourses (CeceLearningPortal.Api) in 1020.8531ms
+2025-09-24 10:54:49.054 +08:00 [INF] Executed endpoint 'CeceLearningPortal.Api.Controllers.CoursesController.GetCourses (CeceLearningPortal.Api)'
+2025-09-24 10:54:49.064 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost:5296/api/courses - 200 null application/json; charset=utf-8 1399.9686ms
+2025-09-24 10:54:49.071 +08:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5296/api/analytics/platform - null null
+2025-09-24 10:54:49.080 +08:00 [INF] CORS policy execution successful.
+2025-09-24 10:54:49.082 +08:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5296/api/analytics/platform - 204 null null 10.3623ms
+2025-09-24 10:54:49.089 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5296/api/analytics/platform - application/json null
+2025-09-24 10:54:49.096 +08:00 [INF] CORS policy execution successful.
+2025-09-24 10:54:49.104 +08:00 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '9/24/2025 2:01:11 AM', Current time (UTC): '9/24/2025 2:54:49 AM'.
+   at Microsoft.IdentityModel.Tokens.ValidatorUtilities.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateTokenPayloadAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateJWSAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+2025-09-24 10:54:49.109 +08:00 [INF] Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '9/24/2025 2:01:11 AM', Current time (UTC): '9/24/2025 2:54:49 AM'.
+2025-09-24 10:54:49.112 +08:00 [INF] Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '9/24/2025 2:01:11 AM', Current time (UTC): '9/24/2025 2:54:49 AM'.
+2025-09-24 10:54:49.127 +08:00 [INF] Executed DbCommand (2ms) [Parameters=[@__userId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM refresh_tokens AS r
+    WHERE r.user_id = @__userId_0 AND r.revoked_at IS NULL AND now() < r.expires_at)
+2025-09-24 10:54:49.150 +08:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (Admin)
+2025-09-24 10:54:49.172 +08:00 [INF] AuthenticationScheme: Bearer was challenged.
+2025-09-24 10:54:49.189 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost:5296/api/analytics/platform - 401 0 null 100.8001ms
+2025-09-24 10:54:49.203 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5296/api/analytics/platform - application/json null
+2025-09-24 10:54:49.206 +08:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5296/api/auth/refresh - null null
+2025-09-24 10:54:49.210 +08:00 [INF] CORS policy execution successful.
+2025-09-24 10:54:49.215 +08:00 [INF] CORS policy execution successful.
+2025-09-24 10:54:49.219 +08:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5296/api/auth/refresh - 204 null null 12.8972ms
+2025-09-24 10:54:49.224 +08:00 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '9/24/2025 2:01:11 AM', Current time (UTC): '9/24/2025 2:54:49 AM'.
+   at Microsoft.IdentityModel.Tokens.ValidatorUtilities.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateTokenPayloadAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateJWSAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+2025-09-24 10:54:49.233 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:5296/api/auth/refresh - application/json 557
+2025-09-24 10:54:49.237 +08:00 [INF] Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '9/24/2025 2:01:11 AM', Current time (UTC): '9/24/2025 2:54:49 AM'.
+2025-09-24 10:54:49.246 +08:00 [INF] Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '9/24/2025 2:01:11 AM', Current time (UTC): '9/24/2025 2:54:49 AM'.
+2025-09-24 10:54:49.247 +08:00 [INF] CORS policy execution successful.
+2025-09-24 10:54:49.250 +08:00 [INF] Executing endpoint 'CeceLearningPortal.Api.Controllers.AuthController.RefreshToken (CeceLearningPortal.Api)'
+2025-09-24 10:54:49.252 +08:00 [INF] Executed DbCommand (1ms) [Parameters=[@__userId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM refresh_tokens AS r
+    WHERE r.user_id = @__userId_0 AND r.revoked_at IS NULL AND now() < r.expires_at)
+2025-09-24 10:54:49.259 +08:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (Admin)
+2025-09-24 10:54:49.262 +08:00 [INF] Route matched with {action = "RefreshToken", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] RefreshToken(CeceLearningPortal.Api.DTOs.RefreshTokenDto) on controller CeceLearningPortal.Api.Controllers.AuthController (CeceLearningPortal.Api).
+2025-09-24 10:54:49.262 +08:00 [INF] AuthenticationScheme: Bearer was challenged.
+2025-09-24 10:54:49.268 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost:5296/api/analytics/platform - 401 0 null 64.4694ms
+2025-09-24 10:54:49.382 +08:00 [INF] Executed DbCommand (2ms) [Parameters=[@__userId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a0."Id", a0."AccessFailedCount", a0."Avatar", a0."ConcurrencyStamp", a0."CreatedAt", a0."Email", a0."EmailConfirmed", a0."FullName", a0."LastLoginAt", a0."LockoutEnabled", a0."LockoutEnd", a0."NormalizedEmail", a0."NormalizedUserName", a0."NotificationPreferences", a0."PasswordHash", a0."PhoneNumber", a0."PhoneNumberConfirmed", a0."RefreshToken", a0."RefreshTokenExpiryTime", a0."Role", a0."SecurityStamp", a0."Status", a0."TwoFactorEnabled", a0."UserName", r.id, r.created_at, r.created_by_ip, r.expires_at, r.replaced_by_token, r.revoked_at, r.revoked_by_ip, r.token, r.user_id
+FROM (
+    SELECT a."Id", a."AccessFailedCount", a."Avatar", a."ConcurrencyStamp", a."CreatedAt", a."Email", a."EmailConfirmed", a."FullName", a."LastLoginAt", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."NotificationPreferences", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."RefreshToken", a."RefreshTokenExpiryTime", a."Role", a."SecurityStamp", a."Status", a."TwoFactorEnabled", a."UserName"
+    FROM "AspNetUsers" AS a
+    WHERE a."Id" = @__userId_0
+    LIMIT 1
+) AS a0
+LEFT JOIN refresh_tokens AS r ON a0."Id" = r.user_id
+ORDER BY a0."Id"
+2025-09-24 10:54:49.622 +08:00 [INF] Executed DbCommand (6ms) [Parameters=[@p2='?' (DbType = Int32), @p0='?', @p1='?' (DbType = DateTime), @p3='?' (DbType = DateTime), @p4='?', @p5='?' (DbType = DateTime), @p6='?', @p7='?' (DbType = DateTime), @p8='?', @p9='?', @p10='?'], CommandType='"Text"', CommandTimeout='30']
+UPDATE refresh_tokens SET replaced_by_token = @p0, revoked_at = @p1
+WHERE id = @p2;
+INSERT INTO refresh_tokens (created_at, created_by_ip, expires_at, replaced_by_token, revoked_at, revoked_by_ip, token, user_id)
+VALUES (@p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10)
+RETURNING id;
+2025-09-24 10:54:49.667 +08:00 [INF] Executing OkObjectResult, writing value of type 'CeceLearningPortal.Api.DTOs.AuthResponseDto'.
+2025-09-24 10:54:49.673 +08:00 [INF] Executed action CeceLearningPortal.Api.Controllers.AuthController.RefreshToken (CeceLearningPortal.Api) in 407.7644ms
+2025-09-24 10:54:49.676 +08:00 [INF] Executed endpoint 'CeceLearningPortal.Api.Controllers.AuthController.RefreshToken (CeceLearningPortal.Api)'
+2025-09-24 10:54:49.679 +08:00 [INF] Request finished HTTP/1.1 POST http://localhost:5296/api/auth/refresh - 200 null application/json; charset=utf-8 445.8075ms
+2025-09-24 10:54:49.685 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5296/api/analytics/platform - application/json null
+2025-09-24 10:54:49.690 +08:00 [INF] CORS policy execution successful.
+2025-09-24 10:54:49.700 +08:00 [INF] Executed DbCommand (1ms) [Parameters=[@__userId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM refresh_tokens AS r
+    WHERE r.user_id = @__userId_0 AND r.revoked_at IS NULL AND now() < r.expires_at)
+2025-09-24 10:54:49.707 +08:00 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (Admin)
+2025-09-24 10:54:49.711 +08:00 [INF] AuthenticationScheme: Bearer was forbidden.
+2025-09-24 10:54:49.714 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost:5296/api/analytics/platform - 403 0 null 28.5897ms
+2025-09-24 10:54:49.724 +08:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5296/api/analytics/instructor/bee889a2-efca-471d-807c-a7674a945612 - null null
+2025-09-24 10:54:49.724 +08:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5296/api/revenue/instructor/bee889a2-efca-471d-807c-a7674a945612 - null null
+2025-09-24 10:54:49.729 +08:00 [INF] CORS policy execution successful.
+2025-09-24 10:54:49.733 +08:00 [INF] CORS policy execution successful.
+2025-09-24 10:54:49.735 +08:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5296/api/analytics/instructor/bee889a2-efca-471d-807c-a7674a945612 - 204 null null 10.5342ms
+2025-09-24 10:54:49.736 +08:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5296/api/revenue/instructor/bee889a2-efca-471d-807c-a7674a945612 - 204 null null 11.9274ms
+2025-09-24 10:54:49.745 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5296/api/revenue/instructor/bee889a2-efca-471d-807c-a7674a945612 - application/json null
+2025-09-24 10:54:49.750 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5296/api/analytics/instructor/bee889a2-efca-471d-807c-a7674a945612 - application/json null
+2025-09-24 10:54:49.755 +08:00 [INF] CORS policy execution successful.
+2025-09-24 10:54:49.758 +08:00 [INF] CORS policy execution successful.
+2025-09-24 10:54:49.764 +08:00 [INF] Executed DbCommand (1ms) [Parameters=[@__userId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM refresh_tokens AS r
+    WHERE r.user_id = @__userId_0 AND r.revoked_at IS NULL AND now() < r.expires_at)
+2025-09-24 10:54:49.768 +08:00 [INF] Executing endpoint 'CeceLearningPortal.Api.Controllers.RevenueController.GetInstructorRevenue (CeceLearningPortal.Api)'
+2025-09-24 10:54:49.781 +08:00 [INF] Route matched with {action = "GetInstructorRevenue", controller = "Revenue"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetInstructorRevenue(System.String) on controller CeceLearningPortal.Api.Controllers.RevenueController (CeceLearningPortal.Api).
+2025-09-24 10:54:49.825 +08:00 [INF] Executed DbCommand (1ms) [Parameters=[@__p_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."Avatar", a."ConcurrencyStamp", a."CreatedAt", a."Email", a."EmailConfirmed", a."FullName", a."LastLoginAt", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."NotificationPreferences", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."RefreshToken", a."RefreshTokenExpiryTime", a."Role", a."SecurityStamp", a."Status", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."Id" = @__p_0
+LIMIT 1
+2025-09-24 10:54:49.829 +08:00 [INF] Executed DbCommand (3ms) [Parameters=[@__userId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM refresh_tokens AS r
+    WHERE r.user_id = @__userId_0 AND r.revoked_at IS NULL AND now() < r.expires_at)
+2025-09-24 10:54:49.834 +08:00 [INF] Executing endpoint 'CeceLearningPortal.Api.Controllers.AnalyticsController.GetInstructorAnalytics (CeceLearningPortal.Api)'
+2025-09-24 10:54:49.841 +08:00 [INF] Route matched with {action = "GetInstructorAnalytics", controller = "Analytics"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetInstructorAnalytics(System.String) on controller CeceLearningPortal.Api.Controllers.AnalyticsController (CeceLearningPortal.Api).
+2025-09-24 10:54:49.906 +08:00 [INF] Executed DbCommand (1ms) [Parameters=[@__instructorId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT c.id, c."AccessDuration", c."AccessType", c."AutomationAbandonmentSequence", c."AutomationCompletionCertificate", c."AutomationProgressReminders", c."AutomationWelcomeEmail", c.category, c."CourseType", c.created_at, c."Currency", c.description, c.discount, c."DripContent", c."DripScheduleJson", c.duration, c."EnrollmentLimit", c.enrollment_type, c.features, c."HasAssignments", c."HasCertificate", c."HasCommunity", c."HasDownloadableResources", c."HasLiveSessions", c."HasQuizzes", c.instructor_id, c.is_bestseller, c."IsPublished", c."Language", c.level, c.original_price, c."PaymentPlanDetailsJson", c.preview_url, c.price, c."PricingModel", c."PromoVideoUrl", c."PublishedAt", c."ShortDescription", c.status, c."SubscriptionPeriod", c.thumbnail, c.thumbnail_url, c.title, c.updated_at
+FROM courses AS c
+WHERE c.instructor_id = @__instructorId_0
+2025-09-24 10:54:49.932 +08:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2025-09-24 10:54:49.961 +08:00 [INF] Executed DbCommand (11ms) [Parameters=[@__courseId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM enrollments AS e
+WHERE e.course_id = @__courseId_0
+2025-09-24 10:54:49.986 +08:00 [INF] Executed DbCommand (3ms) [Parameters=[@__courseId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM enrollments AS e
+WHERE e.course_id = @__courseId_0 AND NOT EXISTS (
+    SELECT 1
+    FROM subscriptions AS s
+    WHERE s.user_id = e.student_id AND s.status = 'Active' AND s.start_date <= e.enrolled_at)
+2025-09-24 10:54:49.986 +08:00 [INF] Executed DbCommand (3ms) [Parameters=[@__instructorId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT c.id, c."AccessDuration", c."AccessType", c."AutomationAbandonmentSequence", c."AutomationCompletionCertificate", c."AutomationProgressReminders", c."AutomationWelcomeEmail", c.category, c."CourseType", c.created_at, c."Currency", c.description, c.discount, c."DripContent", c."DripScheduleJson", c.duration, c."EnrollmentLimit", c.enrollment_type, c.features, c."HasAssignments", c."HasCertificate", c."HasCommunity", c."HasDownloadableResources", c."HasLiveSessions", c."HasQuizzes", c.instructor_id, c.is_bestseller, c."IsPublished", c."Language", c.level, c.original_price, c."PaymentPlanDetailsJson", c.preview_url, c.price, c."PricingModel", c."PromoVideoUrl", c."PublishedAt", c."ShortDescription", c.status, c."SubscriptionPeriod", c.thumbnail, c.thumbnail_url, c.title, c.updated_at, s.id, s.average_quiz_score, s.certificate_issued, s.certificate_url, s.completed_at, s.completed_lessons, s.course_id, s.enrolled_at, s.last_accessed_date, s.progress_percentage, s.quiz_count, s.student_id, s.total_time_spent, s."Id0", s."AccessFailedCount", s."Avatar", s."ConcurrencyStamp", s."CreatedAt", s."Email", s."EmailConfirmed", s."FullName", s."LastLoginAt", s."LockoutEnabled", s."LockoutEnd", s."NormalizedEmail", s."NormalizedUserName", s."NotificationPreferences", s."PasswordHash", s."PhoneNumber", s."PhoneNumberConfirmed", s."RefreshToken", s."RefreshTokenExpiryTime", s."Role", s."SecurityStamp", s."Status", s."TwoFactorEnabled", s."UserName", c0.id, c0.approved_at, c0.approved_by, c0.comment, c0.course_id, c0.created_at, c0.is_flagged, c0.rating, c0.status, c0.student_id
+FROM courses AS c
+LEFT JOIN (
+    SELECT e.id, e.average_quiz_score, e.certificate_issued, e.certificate_url, e.completed_at, e.completed_lessons, e.course_id, e.enrolled_at, e.last_accessed_date, e.progress_percentage, e.quiz_count, e.student_id, e.total_time_spent, a."Id" AS "Id0", a."AccessFailedCount", a."Avatar", a."ConcurrencyStamp", a."CreatedAt", a."Email", a."EmailConfirmed", a."FullName", a."LastLoginAt", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."NotificationPreferences", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."RefreshToken", a."RefreshTokenExpiryTime", a."Role", a."SecurityStamp", a."Status", a."TwoFactorEnabled", a."UserName"
+    FROM enrollments AS e
+    INNER JOIN "AspNetUsers" AS a ON e.student_id = a."Id"
+) AS s ON c.id = s.course_id
+LEFT JOIN course_reviews AS c0 ON c.id = c0.course_id
+WHERE c.instructor_id = @__instructorId_0
+ORDER BY c.id, s.id, s."Id0"
+2025-09-24 10:54:50.001 +08:00 [INF] Executed DbCommand (1ms) [Parameters=[@__courseId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM enrollments AS e
+WHERE e.course_id = @__courseId_0 AND EXISTS (
+    SELECT 1
+    FROM subscriptions AS s
+    WHERE s.user_id = e.student_id AND s.status = 'Active' AND s.start_date <= e.enrolled_at)
+2025-09-24 10:54:50.010 +08:00 [INF] Executed DbCommand (1ms) [Parameters=[@__courseId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM enrollments AS e
+WHERE e.course_id = @__courseId_0
+2025-09-24 10:54:50.016 +08:00 [INF] Executed DbCommand (2ms) [Parameters=[@__courseId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM enrollments AS e
+WHERE e.course_id = @__courseId_0 AND NOT EXISTS (
+    SELECT 1
+    FROM subscriptions AS s
+    WHERE s.user_id = e.student_id AND s.status = 'Active' AND s.start_date <= e.enrolled_at)
+2025-09-24 10:54:50.024 +08:00 [INF] Executed DbCommand (1ms) [Parameters=[@__courseId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM enrollments AS e
+WHERE e.course_id = @__courseId_0 AND EXISTS (
+    SELECT 1
+    FROM subscriptions AS s
+    WHERE s.user_id = e.student_id AND s.status = 'Active' AND s.start_date <= e.enrolled_at)
+2025-09-24 10:54:50.030 +08:00 [INF] Executed DbCommand (1ms) [Parameters=[@__courseId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM enrollments AS e
+WHERE e.course_id = @__courseId_0
+2025-09-24 10:54:50.036 +08:00 [INF] Executed DbCommand (1ms) [Parameters=[@__courseId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM enrollments AS e
+WHERE e.course_id = @__courseId_0 AND NOT EXISTS (
+    SELECT 1
+    FROM subscriptions AS s
+    WHERE s.user_id = e.student_id AND s.status = 'Active' AND s.start_date <= e.enrolled_at)
+2025-09-24 10:54:50.043 +08:00 [INF] Executed DbCommand (1ms) [Parameters=[@__courseId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM enrollments AS e
+WHERE e.course_id = @__courseId_0 AND EXISTS (
+    SELECT 1
+    FROM subscriptions AS s
+    WHERE s.user_id = e.student_id AND s.status = 'Active' AND s.start_date <= e.enrolled_at)
+2025-09-24 10:54:50.050 +08:00 [INF] Executed DbCommand (1ms) [Parameters=[@__courseId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM enrollments AS e
+WHERE e.course_id = @__courseId_0
+2025-09-24 10:54:50.051 +08:00 [INF] Executed DbCommand (13ms) [Parameters=[@__instructorId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT COALESCE(sum(t.amount), 0.0)
+FROM transactions AS t
+LEFT JOIN courses AS c ON t.course_id = c.id
+WHERE c.instructor_id = @__instructorId_0 AND t.status = 'Completed'
+2025-09-24 10:54:50.056 +08:00 [INF] Executed DbCommand (1ms) [Parameters=[@__courseId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM enrollments AS e
+WHERE e.course_id = @__courseId_0 AND NOT EXISTS (
+    SELECT 1
+    FROM subscriptions AS s
+    WHERE s.user_id = e.student_id AND s.status = 'Active' AND s.start_date <= e.enrolled_at)
+2025-09-24 10:54:50.065 +08:00 [INF] Executed DbCommand (1ms) [Parameters=[@__courseId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM enrollments AS e
+WHERE e.course_id = @__courseId_0 AND EXISTS (
+    SELECT 1
+    FROM subscriptions AS s
+    WHERE s.user_id = e.student_id AND s.status = 'Active' AND s.start_date <= e.enrolled_at)
+2025-09-24 10:54:50.071 +08:00 [INF] Executed DbCommand (1ms) [Parameters=[@__courseId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM enrollments AS e
+WHERE e.course_id = @__courseId_0
+2025-09-24 10:54:50.078 +08:00 [INF] Executed DbCommand (1ms) [Parameters=[@__courseId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM enrollments AS e
+WHERE e.course_id = @__courseId_0 AND NOT EXISTS (
+    SELECT 1
+    FROM subscriptions AS s
+    WHERE s.user_id = e.student_id AND s.status = 'Active' AND s.start_date <= e.enrolled_at)
+2025-09-24 10:54:50.085 +08:00 [INF] Executed DbCommand (1ms) [Parameters=[@__courseId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM enrollments AS e
+WHERE e.course_id = @__courseId_0 AND EXISTS (
+    SELECT 1
+    FROM subscriptions AS s
+    WHERE s.user_id = e.student_id AND s.status = 'Active' AND s.start_date <= e.enrolled_at)
+2025-09-24 10:54:50.091 +08:00 [INF] Executed DbCommand (1ms) [Parameters=[@__courseId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM enrollments AS e
+WHERE e.course_id = @__courseId_0
+2025-09-24 10:54:50.097 +08:00 [INF] Executed DbCommand (1ms) [Parameters=[@__courseId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM enrollments AS e
+WHERE e.course_id = @__courseId_0 AND NOT EXISTS (
+    SELECT 1
+    FROM subscriptions AS s
+    WHERE s.user_id = e.student_id AND s.status = 'Active' AND s.start_date <= e.enrolled_at)
+2025-09-24 10:54:50.104 +08:00 [INF] Executed DbCommand (1ms) [Parameters=[@__courseId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM enrollments AS e
+WHERE e.course_id = @__courseId_0 AND EXISTS (
+    SELECT 1
+    FROM subscriptions AS s
+    WHERE s.user_id = e.student_id AND s.status = 'Active' AND s.start_date <= e.enrolled_at)
+2025-09-24 10:54:50.110 +08:00 [INF] Executed DbCommand (1ms) [Parameters=[@__courseId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM enrollments AS e
+WHERE e.course_id = @__courseId_0
+2025-09-24 10:54:50.117 +08:00 [INF] Executed DbCommand (2ms) [Parameters=[@__courseId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM enrollments AS e
+WHERE e.course_id = @__courseId_0 AND NOT EXISTS (
+    SELECT 1
+    FROM subscriptions AS s
+    WHERE s.user_id = e.student_id AND s.status = 'Active' AND s.start_date <= e.enrolled_at)
+2025-09-24 10:54:50.123 +08:00 [INF] Executed DbCommand (1ms) [Parameters=[@__courseId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM enrollments AS e
+WHERE e.course_id = @__courseId_0 AND EXISTS (
+    SELECT 1
+    FROM subscriptions AS s
+    WHERE s.user_id = e.student_id AND s.status = 'Active' AND s.start_date <= e.enrolled_at)
+2025-09-24 10:54:50.129 +08:00 [INF] Executed DbCommand (1ms) [Parameters=[@__courseId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM enrollments AS e
+WHERE e.course_id = @__courseId_0
+2025-09-24 10:54:50.134 +08:00 [INF] Executed DbCommand (7ms) [Parameters=[@__instructorId_0='?', @__twelveMonthsAgo_1='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SELECT s."Year", s."Month", COALESCE(sum(s.amount), 0.0) AS "Revenue"
+FROM (
+    SELECT t.amount, date_part('year', t.created_at AT TIME ZONE 'UTC')::int AS "Year", date_part('month', t.created_at AT TIME ZONE 'UTC')::int AS "Month"
+    FROM transactions AS t
+    LEFT JOIN courses AS c ON t.course_id = c.id
+    WHERE c.instructor_id = @__instructorId_0 AND t.status = 'Completed' AND t.created_at >= @__twelveMonthsAgo_1
+) AS s
+GROUP BY s."Year", s."Month"
+ORDER BY s."Year", s."Month"
+2025-09-24 10:54:50.135 +08:00 [INF] Executed DbCommand (1ms) [Parameters=[@__courseId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM enrollments AS e
+WHERE e.course_id = @__courseId_0 AND NOT EXISTS (
+    SELECT 1
+    FROM subscriptions AS s
+    WHERE s.user_id = e.student_id AND s.status = 'Active' AND s.start_date <= e.enrolled_at)
+2025-09-24 10:54:50.145 +08:00 [INF] Executed DbCommand (1ms) [Parameters=[@__courseId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM enrollments AS e
+WHERE e.course_id = @__courseId_0 AND EXISTS (
+    SELECT 1
+    FROM subscriptions AS s
+    WHERE s.user_id = e.student_id AND s.status = 'Active' AND s.start_date <= e.enrolled_at)
+2025-09-24 10:54:50.151 +08:00 [INF] Executed DbCommand (1ms) [Parameters=[@__courseId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM enrollments AS e
+WHERE e.course_id = @__courseId_0
+2025-09-24 10:54:50.158 +08:00 [INF] Executed DbCommand (2ms) [Parameters=[@__courseId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM enrollments AS e
+WHERE e.course_id = @__courseId_0 AND NOT EXISTS (
+    SELECT 1
+    FROM subscriptions AS s
+    WHERE s.user_id = e.student_id AND s.status = 'Active' AND s.start_date <= e.enrolled_at)
+2025-09-24 10:54:50.163 +08:00 [INF] Executed DbCommand (4ms) [Parameters=[@__c_Id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT COALESCE(sum(t.amount), 0.0)
+FROM transactions AS t
+WHERE t.course_id = @__c_Id_0 AND t.status = 'Completed'
+2025-09-24 10:54:50.166 +08:00 [INF] Executed DbCommand (1ms) [Parameters=[@__courseId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM enrollments AS e
+WHERE e.course_id = @__courseId_0 AND EXISTS (
+    SELECT 1
+    FROM subscriptions AS s
+    WHERE s.user_id = e.student_id AND s.status = 'Active' AND s.start_date <= e.enrolled_at)
+2025-09-24 10:54:50.172 +08:00 [INF] Executed DbCommand (1ms) [Parameters=[@__c_Id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT COALESCE(sum(t.amount), 0.0)
+FROM transactions AS t
+WHERE t.course_id = @__c_Id_0 AND t.status = 'Completed'
+2025-09-24 10:54:50.173 +08:00 [INF] Executed DbCommand (1ms) [Parameters=[@__courseId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM enrollments AS e
+WHERE e.course_id = @__courseId_0
+2025-09-24 10:54:50.178 +08:00 [INF] Executed DbCommand (1ms) [Parameters=[@__c_Id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT COALESCE(sum(t.amount), 0.0)
+FROM transactions AS t
+WHERE t.course_id = @__c_Id_0 AND t.status = 'Completed'
+2025-09-24 10:54:50.182 +08:00 [INF] Executed DbCommand (1ms) [Parameters=[@__courseId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM enrollments AS e
+WHERE e.course_id = @__courseId_0 AND NOT EXISTS (
+    SELECT 1
+    FROM subscriptions AS s
+    WHERE s.user_id = e.student_id AND s.status = 'Active' AND s.start_date <= e.enrolled_at)
+2025-09-24 10:54:50.185 +08:00 [INF] Executed DbCommand (1ms) [Parameters=[@__c_Id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT COALESCE(sum(t.amount), 0.0)
+FROM transactions AS t
+WHERE t.course_id = @__c_Id_0 AND t.status = 'Completed'
+2025-09-24 10:54:50.190 +08:00 [INF] Executed DbCommand (1ms) [Parameters=[@__courseId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM enrollments AS e
+WHERE e.course_id = @__courseId_0 AND EXISTS (
+    SELECT 1
+    FROM subscriptions AS s
+    WHERE s.user_id = e.student_id AND s.status = 'Active' AND s.start_date <= e.enrolled_at)
+2025-09-24 10:54:50.193 +08:00 [INF] Executed DbCommand (1ms) [Parameters=[@__c_Id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT COALESCE(sum(t.amount), 0.0)
+FROM transactions AS t
+WHERE t.course_id = @__c_Id_0 AND t.status = 'Completed'
+2025-09-24 10:54:50.196 +08:00 [INF] Executing OkObjectResult, writing value of type 'CeceLearningPortal.Api.DTOs.InstructorRevenueDto'.
+2025-09-24 10:54:50.200 +08:00 [INF] Executed DbCommand (1ms) [Parameters=[@__c_Id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT COALESCE(sum(t.amount), 0.0)
+FROM transactions AS t
+WHERE t.course_id = @__c_Id_0 AND t.status = 'Completed'
+2025-09-24 10:54:50.206 +08:00 [INF] Executed DbCommand (1ms) [Parameters=[@__c_Id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT COALESCE(sum(t.amount), 0.0)
+FROM transactions AS t
+WHERE t.course_id = @__c_Id_0 AND t.status = 'Completed'
+2025-09-24 10:54:50.210 +08:00 [INF] Executed action CeceLearningPortal.Api.Controllers.RevenueController.GetInstructorRevenue (CeceLearningPortal.Api) in 422.6071ms
+2025-09-24 10:54:50.211 +08:00 [INF] Executed DbCommand (1ms) [Parameters=[@__c_Id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT COALESCE(sum(t.amount), 0.0)
+FROM transactions AS t
+WHERE t.course_id = @__c_Id_0 AND t.status = 'Completed'
+2025-09-24 10:54:50.213 +08:00 [INF] Executed endpoint 'CeceLearningPortal.Api.Controllers.RevenueController.GetInstructorRevenue (CeceLearningPortal.Api)'
+2025-09-24 10:54:50.218 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost:5296/api/revenue/instructor/bee889a2-efca-471d-807c-a7674a945612 - 200 null application/json; charset=utf-8 473.4881ms
+2025-09-24 10:54:50.218 +08:00 [INF] Executed DbCommand (1ms) [Parameters=[@__c_Id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT COALESCE(sum(t.amount), 0.0)
+FROM transactions AS t
+WHERE t.course_id = @__c_Id_0 AND t.status = 'Completed'
+2025-09-24 10:54:50.244 +08:00 [INF] Executed DbCommand (1ms) [Parameters=[@__c_Id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT COALESCE(sum(t.amount), 0.0)
+FROM transactions AS t
+WHERE t.course_id = @__c_Id_0 AND t.status = 'Completed'
+2025-09-24 10:54:50.310 +08:00 [INF] Executed DbCommand (7ms) [Parameters=[@__instructorId_0='?', @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT a."FullName", s.title, s.enrolled_at
+FROM (
+    SELECT e.enrolled_at, e.student_id, c.title
+    FROM enrollments AS e
+    INNER JOIN courses AS c ON e.course_id = c.id
+    WHERE c.instructor_id = @__instructorId_0
+    ORDER BY e.enrolled_at DESC
+    LIMIT @__p_1
+) AS s
+INNER JOIN "AspNetUsers" AS a ON s.student_id = a."Id"
+ORDER BY s.enrolled_at DESC
+2025-09-24 10:54:50.334 +08:00 [INF] Executed DbCommand (2ms) [Parameters=[@__instructorId_0='?', @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT a."FullName", s.title, s.created_at, s.rating
+FROM (
+    SELECT c.created_at, c.rating, c.student_id, c0.title
+    FROM course_reviews AS c
+    INNER JOIN courses AS c0 ON c.course_id = c0.id
+    WHERE c0.instructor_id = @__instructorId_0
+    ORDER BY c.created_at DESC
+    LIMIT @__p_1
+) AS s
+INNER JOIN "AspNetUsers" AS a ON s.student_id = a."Id"
+ORDER BY s.created_at DESC
+2025-09-24 10:54:50.344 +08:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType18`5[[<>f__AnonymousType19`6[[System.Decimal, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Double, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Double, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], CeceLearningPortal.Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Collections.Generic.List`1[[System.Object, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Collections.Generic.List`1[[System.Object, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Object, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Collections.Generic.List`1[[System.Object, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-09-24 10:54:50.372 +08:00 [INF] Executed action CeceLearningPortal.Api.Controllers.AnalyticsController.GetInstructorAnalytics (CeceLearningPortal.Api) in 475.0742ms
+2025-09-24 10:54:50.377 +08:00 [INF] Executed endpoint 'CeceLearningPortal.Api.Controllers.AnalyticsController.GetInstructorAnalytics (CeceLearningPortal.Api)'
+2025-09-24 10:54:50.380 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost:5296/api/analytics/instructor/bee889a2-efca-471d-807c-a7674a945612 - 200 null application/json; charset=utf-8 629.9052ms
+2025-09-24 10:54:51.937 +08:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5296/api/courses/35 - null null
+2025-09-24 10:54:51.948 +08:00 [INF] CORS policy execution successful.
+2025-09-24 10:54:51.951 +08:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5296/api/courses/35 - 204 null null 13.4949ms
+2025-09-24 10:54:51.960 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5296/api/courses/35 - application/json null
+2025-09-24 10:54:51.966 +08:00 [INF] CORS policy execution successful.
+2025-09-24 10:54:51.976 +08:00 [INF] Executed DbCommand (1ms) [Parameters=[@__userId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM refresh_tokens AS r
+    WHERE r.user_id = @__userId_0 AND r.revoked_at IS NULL AND now() < r.expires_at)
+2025-09-24 10:54:51.980 +08:00 [INF] Executing endpoint 'CeceLearningPortal.Api.Controllers.CoursesController.GetCourse (CeceLearningPortal.Api)'
+2025-09-24 10:54:51.990 +08:00 [INF] Route matched with {action = "GetCourse", controller = "Courses"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetCourse(Int32) on controller CeceLearningPortal.Api.Controllers.CoursesController (CeceLearningPortal.Api).
+2025-09-24 10:54:52.054 +08:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2025-09-24 10:54:52.159 +08:00 [INF] Executed DbCommand (6ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT s.id, s."AccessDuration", s."AccessType", s."AutomationAbandonmentSequence", s."AutomationCompletionCertificate", s."AutomationProgressReminders", s."AutomationWelcomeEmail", s.category, s."CourseType", s.created_at, s."Currency", s.description, s.discount, s."DripContent", s."DripScheduleJson", s.duration, s."EnrollmentLimit", s.enrollment_type, s.features, s."HasAssignments", s."HasCertificate", s."HasCommunity", s."HasDownloadableResources", s."HasLiveSessions", s."HasQuizzes", s.instructor_id, s.is_bestseller, s."IsPublished", s."Language", s.level, s.original_price, s."PaymentPlanDetailsJson", s.preview_url, s.price, s."PricingModel", s."PromoVideoUrl", s."PublishedAt", s."ShortDescription", s.status, s."SubscriptionPeriod", s.thumbnail, s.thumbnail_url, s.title, s.updated_at, s."Id0", s."AccessFailedCount", s."Avatar", s."ConcurrencyStamp", s."CreatedAt", s."Email", s."EmailConfirmed", s."FullName", s."LastLoginAt", s."LockoutEnabled", s."LockoutEnd", s."NormalizedEmail", s."NormalizedUserName", s."NotificationPreferences", s."PasswordHash", s."PhoneNumber", s."PhoneNumberConfirmed", s."RefreshToken", s."RefreshTokenExpiryTime", s."Role", s."SecurityStamp", s."Status0", s."TwoFactorEnabled", s."UserName", s0.id, s0.course_id, s0.created_at, s0.description, s0."order", s0.title, s0.updated_at, s0.id0, s0.content, s0.created_at0, s0.duration, s0.module_id, s0.order0, s0.title0, s0.type, s0.updated_at0, s0.video_url, s1.id, s1.approved_at, s1.approved_by, s1.comment, s1.course_id, s1.created_at, s1.is_flagged, s1.rating, s1.status, s1.student_id, s1."Id0", s1."AccessFailedCount", s1."Avatar", s1."ConcurrencyStamp", s1."CreatedAt", s1."Email", s1."EmailConfirmed", s1."FullName", s1."LastLoginAt", s1."LockoutEnabled", s1."LockoutEnd", s1."NormalizedEmail", s1."NormalizedUserName", s1."NotificationPreferences", s1."PasswordHash", s1."PhoneNumber", s1."PhoneNumberConfirmed", s1."RefreshToken", s1."RefreshTokenExpiryTime", s1."Role", s1."SecurityStamp", s1."Status0", s1."TwoFactorEnabled", s1."UserName", e.id, e.average_quiz_score, e.certificate_issued, e.certificate_url, e.completed_at, e.completed_lessons, e.course_id, e.enrolled_at, e.last_accessed_date, e.progress_percentage, e.quiz_count, e.student_id, e.total_time_spent
+FROM (
+    SELECT c.id, c."AccessDuration", c."AccessType", c."AutomationAbandonmentSequence", c."AutomationCompletionCertificate", c."AutomationProgressReminders", c."AutomationWelcomeEmail", c.category, c."CourseType", c.created_at, c."Currency", c.description, c.discount, c."DripContent", c."DripScheduleJson", c.duration, c."EnrollmentLimit", c.enrollment_type, c.features, c."HasAssignments", c."HasCertificate", c."HasCommunity", c."HasDownloadableResources", c."HasLiveSessions", c."HasQuizzes", c.instructor_id, c.is_bestseller, c."IsPublished", c."Language", c.level, c.original_price, c."PaymentPlanDetailsJson", c.preview_url, c.price, c."PricingModel", c."PromoVideoUrl", c."PublishedAt", c."ShortDescription", c.status, c."SubscriptionPeriod", c.thumbnail, c.thumbnail_url, c.title, c.updated_at, a."Id" AS "Id0", a."AccessFailedCount", a."Avatar", a."ConcurrencyStamp", a."CreatedAt", a."Email", a."EmailConfirmed", a."FullName", a."LastLoginAt", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."NotificationPreferences", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."RefreshToken", a."RefreshTokenExpiryTime", a."Role", a."SecurityStamp", a."Status" AS "Status0", a."TwoFactorEnabled", a."UserName"
+    FROM courses AS c
+    INNER JOIN "AspNetUsers" AS a ON c.instructor_id = a."Id"
+    WHERE c.id = @__id_0
+    LIMIT 1
+) AS s
+LEFT JOIN (
+    SELECT c0.id, c0.course_id, c0.created_at, c0.description, c0."order", c0.title, c0.updated_at, c1.id AS id0, c1.content, c1.created_at AS created_at0, c1.duration, c1.module_id, c1."order" AS order0, c1.title AS title0, c1.type, c1.updated_at AS updated_at0, c1.video_url
+    FROM course_modules AS c0
+    LEFT JOIN course_lessons AS c1 ON c0.id = c1.module_id
+) AS s0 ON s.id = s0.course_id
+LEFT JOIN (
+    SELECT c2.id, c2.approved_at, c2.approved_by, c2.comment, c2.course_id, c2.created_at, c2.is_flagged, c2.rating, c2.status, c2.student_id, a0."Id" AS "Id0", a0."AccessFailedCount", a0."Avatar", a0."ConcurrencyStamp", a0."CreatedAt", a0."Email", a0."EmailConfirmed", a0."FullName", a0."LastLoginAt", a0."LockoutEnabled", a0."LockoutEnd", a0."NormalizedEmail", a0."NormalizedUserName", a0."NotificationPreferences", a0."PasswordHash", a0."PhoneNumber", a0."PhoneNumberConfirmed", a0."RefreshToken", a0."RefreshTokenExpiryTime", a0."Role", a0."SecurityStamp", a0."Status" AS "Status0", a0."TwoFactorEnabled", a0."UserName"
+    FROM course_reviews AS c2
+    INNER JOIN "AspNetUsers" AS a0 ON c2.student_id = a0."Id"
+) AS s1 ON s.id = s1.course_id
+LEFT JOIN enrollments AS e ON s.id = e.course_id
+ORDER BY s.id, s."Id0", s0.id, s0.id0, s1.id, s1."Id0"
+2025-09-24 10:54:52.212 +08:00 [INF] Executing OkObjectResult, writing value of type 'CeceLearningPortal.Api.DTOs.CourseDetailDto'.
+2025-09-24 10:54:52.238 +08:00 [INF] Executed action CeceLearningPortal.Api.Controllers.CoursesController.GetCourse (CeceLearningPortal.Api) in 243.9974ms
+2025-09-24 10:54:52.243 +08:00 [INF] Executed endpoint 'CeceLearningPortal.Api.Controllers.CoursesController.GetCourse (CeceLearningPortal.Api)'
+2025-09-24 10:54:52.245 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost:5296/api/courses/35 - 200 null application/json; charset=utf-8 285.3116ms
+2025-09-24 10:55:13.355 +08:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5296/api/users/bee889a2-efca-471d-807c-a7674a945612/profile - null null
+2025-09-24 10:55:13.364 +08:00 [INF] CORS policy execution successful.
+2025-09-24 10:55:13.366 +08:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5296/api/users/bee889a2-efca-471d-807c-a7674a945612/profile - 204 null null 11.3004ms
+2025-09-24 10:55:13.374 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5296/api/users/bee889a2-efca-471d-807c-a7674a945612/profile - application/json null
+2025-09-24 10:55:13.381 +08:00 [INF] CORS policy execution successful.
+2025-09-24 10:55:13.387 +08:00 [INF] Executed DbCommand (1ms) [Parameters=[@__userId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM refresh_tokens AS r
+    WHERE r.user_id = @__userId_0 AND r.revoked_at IS NULL AND now() < r.expires_at)
+2025-09-24 10:55:13.393 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost:5296/api/users/bee889a2-efca-471d-807c-a7674a945612/profile - 404 0 null 18.3642ms
+2025-09-24 10:55:13.400 +08:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5296/api/users/bee889a2-efca-471d-807c-a7674a945612/profile, Response status code: 404
+2025-09-24 10:55:13.404 +08:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5296/api/users/bee889a2-efca-471d-807c-a7674a945612 - null null
+2025-09-24 10:55:13.409 +08:00 [INF] CORS policy execution successful.
+2025-09-24 10:55:13.411 +08:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5296/api/users/bee889a2-efca-471d-807c-a7674a945612 - 204 null null 6.3589ms
+2025-09-24 10:55:13.416 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5296/api/users/bee889a2-efca-471d-807c-a7674a945612 - application/json null
+2025-09-24 10:55:13.421 +08:00 [INF] CORS policy execution successful.
+2025-09-24 10:55:13.426 +08:00 [INF] Executed DbCommand (1ms) [Parameters=[@__userId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM refresh_tokens AS r
+    WHERE r.user_id = @__userId_0 AND r.revoked_at IS NULL AND now() < r.expires_at)
+2025-09-24 10:55:13.430 +08:00 [INF] Executing endpoint 'CeceLearningPortal.Api.Controllers.UsersController.GetUser (CeceLearningPortal.Api)'
+2025-09-24 10:55:13.438 +08:00 [INF] Route matched with {action = "GetUser", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetUser(System.String) on controller CeceLearningPortal.Api.Controllers.UsersController (CeceLearningPortal.Api).
+2025-09-24 10:55:13.448 +08:00 [INF] Executed DbCommand (1ms) [Parameters=[@__p_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."Avatar", a."ConcurrencyStamp", a."CreatedAt", a."Email", a."EmailConfirmed", a."FullName", a."LastLoginAt", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."NotificationPreferences", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."RefreshToken", a."RefreshTokenExpiryTime", a."Role", a."SecurityStamp", a."Status", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."Id" = @__p_0
+LIMIT 1
+2025-09-24 10:55:13.454 +08:00 [INF] Executing OkObjectResult, writing value of type 'CeceLearningPortal.Api.DTOs.UserDto'.
+2025-09-24 10:55:13.459 +08:00 [INF] Executed action CeceLearningPortal.Api.Controllers.UsersController.GetUser (CeceLearningPortal.Api) in 18.2963ms
+2025-09-24 10:55:13.462 +08:00 [INF] Executed endpoint 'CeceLearningPortal.Api.Controllers.UsersController.GetUser (CeceLearningPortal.Api)'
+2025-09-24 10:55:13.464 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost:5296/api/users/bee889a2-efca-471d-807c-a7674a945612 - 200 null application/json; charset=utf-8 48.129ms
+2025-09-24 10:55:13.473 +08:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5296/api/users/bee889a2-efca-471d-807c-a7674a945612/stats - null null
+2025-09-24 10:55:13.477 +08:00 [INF] CORS policy execution successful.
+2025-09-24 10:55:13.479 +08:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5296/api/users/bee889a2-efca-471d-807c-a7674a945612/stats - 204 null null 5.6635ms
+2025-09-24 10:55:13.486 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5296/api/users/bee889a2-efca-471d-807c-a7674a945612/stats - application/json null
+2025-09-24 10:55:13.490 +08:00 [INF] CORS policy execution successful.
+2025-09-24 10:55:13.494 +08:00 [INF] Executed DbCommand (1ms) [Parameters=[@__userId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM refresh_tokens AS r
+    WHERE r.user_id = @__userId_0 AND r.revoked_at IS NULL AND now() < r.expires_at)
+2025-09-24 10:55:13.497 +08:00 [INF] Executing endpoint 'CeceLearningPortal.Api.Controllers.UsersController.GetUserStats (CeceLearningPortal.Api)'
+2025-09-24 10:55:13.504 +08:00 [INF] Route matched with {action = "GetUserStats", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetUserStats(System.String) on controller CeceLearningPortal.Api.Controllers.UsersController (CeceLearningPortal.Api).
+2025-09-24 10:55:13.528 +08:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2025-09-24 10:55:13.591 +08:00 [INF] Executed DbCommand (7ms) [Parameters=[@__userId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a0."Id", a0."AccessFailedCount", a0."Avatar", a0."ConcurrencyStamp", a0."CreatedAt", a0."Email", a0."EmailConfirmed", a0."FullName", a0."LastLoginAt", a0."LockoutEnabled", a0."LockoutEnd", a0."NormalizedEmail", a0."NormalizedUserName", a0."NotificationPreferences", a0."PasswordHash", a0."PhoneNumber", a0."PhoneNumberConfirmed", a0."RefreshToken", a0."RefreshTokenExpiryTime", a0."Role", a0."SecurityStamp", a0."Status", a0."TwoFactorEnabled", a0."UserName", s.id, s."AccessDuration", s."AccessType", s."AutomationAbandonmentSequence", s."AutomationCompletionCertificate", s."AutomationProgressReminders", s."AutomationWelcomeEmail", s.category, s."CourseType", s.created_at, s."Currency", s.description, s.discount, s."DripContent", s."DripScheduleJson", s.duration, s."EnrollmentLimit", s.enrollment_type, s.features, s."HasAssignments", s."HasCertificate", s."HasCommunity", s."HasDownloadableResources", s."HasLiveSessions", s."HasQuizzes", s.instructor_id, s.is_bestseller, s."IsPublished", s."Language", s.level, s.original_price, s."PaymentPlanDetailsJson", s.preview_url, s.price, s."PricingModel", s."PromoVideoUrl", s."PublishedAt", s."ShortDescription", s.status, s."SubscriptionPeriod", s.thumbnail, s.thumbnail_url, s.title, s.updated_at, s.id0, s.average_quiz_score, s.certificate_issued, s.certificate_url, s.completed_at, s.completed_lessons, s.course_id, s.enrolled_at, s.last_accessed_date, s.progress_percentage, s.quiz_count, s.student_id, s.total_time_spent, s.id1, s.approved_at, s.approved_by, s.comment, s.course_id0, s.created_at0, s.is_flagged, s.rating, s.status0, s.student_id0
+FROM (
+    SELECT a."Id", a."AccessFailedCount", a."Avatar", a."ConcurrencyStamp", a."CreatedAt", a."Email", a."EmailConfirmed", a."FullName", a."LastLoginAt", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."NotificationPreferences", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."RefreshToken", a."RefreshTokenExpiryTime", a."Role", a."SecurityStamp", a."Status", a."TwoFactorEnabled", a."UserName"
+    FROM "AspNetUsers" AS a
+    WHERE a."Id" = @__userId_0
+    LIMIT 1
+) AS a0
+LEFT JOIN (
+    SELECT c.id, c."AccessDuration", c."AccessType", c."AutomationAbandonmentSequence", c."AutomationCompletionCertificate", c."AutomationProgressReminders", c."AutomationWelcomeEmail", c.category, c."CourseType", c.created_at, c."Currency", c.description, c.discount, c."DripContent", c."DripScheduleJson", c.duration, c."EnrollmentLimit", c.enrollment_type, c.features, c."HasAssignments", c."HasCertificate", c."HasCommunity", c."HasDownloadableResources", c."HasLiveSessions", c."HasQuizzes", c.instructor_id, c.is_bestseller, c."IsPublished", c."Language", c.level, c.original_price, c."PaymentPlanDetailsJson", c.preview_url, c.price, c."PricingModel", c."PromoVideoUrl", c."PublishedAt", c."ShortDescription", c.status, c."SubscriptionPeriod", c.thumbnail, c.thumbnail_url, c.title, c.updated_at, e.id AS id0, e.average_quiz_score, e.certificate_issued, e.certificate_url, e.completed_at, e.completed_lessons, e.course_id, e.enrolled_at, e.last_accessed_date, e.progress_percentage, e.quiz_count, e.student_id, e.total_time_spent, c0.id AS id1, c0.approved_at, c0.approved_by, c0.comment, c0.course_id AS course_id0, c0.created_at AS created_at0, c0.is_flagged, c0.rating, c0.status AS status0, c0.student_id AS student_id0
+    FROM courses AS c
+    LEFT JOIN enrollments AS e ON c.id = e.course_id
+    LEFT JOIN course_reviews AS c0 ON c.id = c0.course_id
+) AS s ON a0."Id" = s.instructor_id
+ORDER BY a0."Id", s.id, s.id0
+2025-09-24 10:55:13.743 +08:00 [INF] Executing OkObjectResult, writing value of type 'CeceLearningPortal.Api.DTOs.UserStatsDto'.
+2025-09-24 10:55:13.756 +08:00 [INF] Executed action CeceLearningPortal.Api.Controllers.UsersController.GetUserStats (CeceLearningPortal.Api) in 248.3901ms
+2025-09-24 10:55:13.758 +08:00 [INF] Executed endpoint 'CeceLearningPortal.Api.Controllers.UsersController.GetUserStats (CeceLearningPortal.Api)'
+2025-09-24 10:55:13.760 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost:5296/api/users/bee889a2-efca-471d-807c-a7674a945612/stats - 200 null application/json; charset=utf-8 274.7483ms
+2025-09-24 10:55:13.767 +08:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5296/api/users/bee889a2-efca-471d-807c-a7674a945612/certificates - null null
+2025-09-24 10:55:13.772 +08:00 [INF] CORS policy execution successful.
+2025-09-24 10:55:13.774 +08:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5296/api/users/bee889a2-efca-471d-807c-a7674a945612/certificates - 204 null null 6.0759ms
+2025-09-24 10:55:13.781 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5296/api/users/bee889a2-efca-471d-807c-a7674a945612/certificates - application/json null
+2025-09-24 10:55:13.785 +08:00 [INF] CORS policy execution successful.
+2025-09-24 10:55:13.790 +08:00 [INF] Executed DbCommand (1ms) [Parameters=[@__userId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM refresh_tokens AS r
+    WHERE r.user_id = @__userId_0 AND r.revoked_at IS NULL AND now() < r.expires_at)
+2025-09-24 10:55:13.795 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost:5296/api/users/bee889a2-efca-471d-807c-a7674a945612/certificates - 404 0 null 13.811ms
+2025-09-24 10:55:13.802 +08:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5296/api/users/bee889a2-efca-471d-807c-a7674a945612/certificates, Response status code: 404
+2025-09-24 10:55:13.808 +08:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5296/api/users/bee889a2-efca-471d-807c-a7674a945612/activity - null null
+2025-09-24 10:55:13.812 +08:00 [INF] CORS policy execution successful.
+2025-09-24 10:55:13.815 +08:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5296/api/users/bee889a2-efca-471d-807c-a7674a945612/activity - 204 null null 7.1076ms
+2025-09-24 10:55:13.821 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5296/api/users/bee889a2-efca-471d-807c-a7674a945612/activity - application/json null
+2025-09-24 10:55:13.828 +08:00 [INF] CORS policy execution successful.
+2025-09-24 10:55:13.835 +08:00 [INF] Executed DbCommand (3ms) [Parameters=[@__userId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM refresh_tokens AS r
+    WHERE r.user_id = @__userId_0 AND r.revoked_at IS NULL AND now() < r.expires_at)
+2025-09-24 10:55:13.839 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost:5296/api/users/bee889a2-efca-471d-807c-a7674a945612/activity - 404 0 null 17.8124ms
+2025-09-24 10:55:13.847 +08:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5296/api/users/bee889a2-efca-471d-807c-a7674a945612/activity, Response status code: 404
+2025-09-24 10:55:13.852 +08:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5296/api/users/bee889a2-efca-471d-807c-a7674a945612/instructor-stats - null null
+2025-09-24 10:55:13.857 +08:00 [INF] CORS policy execution successful.
+2025-09-24 10:55:13.858 +08:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5296/api/users/bee889a2-efca-471d-807c-a7674a945612/instructor-stats - 204 null null 6.2947ms
+2025-09-24 10:55:13.865 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5296/api/users/bee889a2-efca-471d-807c-a7674a945612/instructor-stats - application/json null
+2025-09-24 10:55:13.870 +08:00 [INF] CORS policy execution successful.
+2025-09-24 10:55:13.874 +08:00 [INF] Executed DbCommand (1ms) [Parameters=[@__userId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM refresh_tokens AS r
+    WHERE r.user_id = @__userId_0 AND r.revoked_at IS NULL AND now() < r.expires_at)
+2025-09-24 10:55:13.878 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost:5296/api/users/bee889a2-efca-471d-807c-a7674a945612/instructor-stats - 404 0 null 12.5134ms
+2025-09-24 10:55:13.884 +08:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5296/api/users/bee889a2-efca-471d-807c-a7674a945612/instructor-stats, Response status code: 404
+2025-09-24 10:55:19.147 +08:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5296/api/auth/logout - null null
+2025-09-24 10:55:19.152 +08:00 [INF] CORS policy execution successful.
+2025-09-24 10:55:19.154 +08:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5296/api/auth/logout - 204 null null 6.8771ms
+2025-09-24 10:55:19.160 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:5296/api/auth/logout - application/json 0
+2025-09-24 10:55:19.165 +08:00 [INF] CORS policy execution successful.
+2025-09-24 10:55:19.172 +08:00 [INF] Executed DbCommand (1ms) [Parameters=[@__userId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM refresh_tokens AS r
+    WHERE r.user_id = @__userId_0 AND r.revoked_at IS NULL AND now() < r.expires_at)
+2025-09-24 10:55:19.176 +08:00 [INF] Executing endpoint 'CeceLearningPortal.Api.Controllers.AuthController.Logout (CeceLearningPortal.Api)'
+2025-09-24 10:55:19.185 +08:00 [INF] Route matched with {action = "Logout", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Logout() on controller CeceLearningPortal.Api.Controllers.AuthController (CeceLearningPortal.Api).
+2025-09-24 10:55:19.201 +08:00 [INF] Executed DbCommand (3ms) [Parameters=[@__userId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a0."Id", a0."AccessFailedCount", a0."Avatar", a0."ConcurrencyStamp", a0."CreatedAt", a0."Email", a0."EmailConfirmed", a0."FullName", a0."LastLoginAt", a0."LockoutEnabled", a0."LockoutEnd", a0."NormalizedEmail", a0."NormalizedUserName", a0."NotificationPreferences", a0."PasswordHash", a0."PhoneNumber", a0."PhoneNumberConfirmed", a0."RefreshToken", a0."RefreshTokenExpiryTime", a0."Role", a0."SecurityStamp", a0."Status", a0."TwoFactorEnabled", a0."UserName", r.id, r.created_at, r.created_by_ip, r.expires_at, r.replaced_by_token, r.revoked_at, r.revoked_by_ip, r.token, r.user_id
+FROM (
+    SELECT a."Id", a."AccessFailedCount", a."Avatar", a."ConcurrencyStamp", a."CreatedAt", a."Email", a."EmailConfirmed", a."FullName", a."LastLoginAt", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."NotificationPreferences", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."RefreshToken", a."RefreshTokenExpiryTime", a."Role", a."SecurityStamp", a."Status", a."TwoFactorEnabled", a."UserName"
+    FROM "AspNetUsers" AS a
+    WHERE a."Id" = @__userId_0
+    LIMIT 1
+) AS a0
+LEFT JOIN refresh_tokens AS r ON a0."Id" = r.user_id
+ORDER BY a0."Id"
+2025-09-24 10:55:19.217 +08:00 [INF] Executed DbCommand (3ms) [Parameters=[@p1='?' (DbType = Int32), @p0='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+UPDATE refresh_tokens SET revoked_at = @p0
+WHERE id = @p1;
+2025-09-24 10:55:19.223 +08:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType0`1[[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-09-24 10:55:19.226 +08:00 [INF] Executed action CeceLearningPortal.Api.Controllers.AuthController.Logout (CeceLearningPortal.Api) in 37.0412ms
+2025-09-24 10:55:19.229 +08:00 [INF] Executed endpoint 'CeceLearningPortal.Api.Controllers.AuthController.Logout (CeceLearningPortal.Api)'
+2025-09-24 10:55:19.233 +08:00 [INF] Request finished HTTP/1.1 POST http://localhost:5296/api/auth/logout - 200 null application/json; charset=utf-8 72.6109ms
+2025-09-24 10:55:21.557 +08:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5296/api/auth/login - null null
+2025-09-24 10:55:21.780 +08:00 [INF] CORS policy execution successful.
+2025-09-24 10:55:21.782 +08:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5296/api/auth/login - 204 null null 225.7537ms
+2025-09-24 10:55:21.793 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:5296/api/auth/login - application/json 51
+2025-09-24 10:55:21.800 +08:00 [INF] CORS policy execution successful.
+2025-09-24 10:55:21.802 +08:00 [INF] Executing endpoint 'CeceLearningPortal.Api.Controllers.AuthController.Login (CeceLearningPortal.Api)'
+2025-09-24 10:55:21.810 +08:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(CeceLearningPortal.Api.DTOs.LoginDto) on controller CeceLearningPortal.Api.Controllers.AuthController (CeceLearningPortal.Api).
+2025-09-24 10:55:21.893 +08:00 [INF] Executed DbCommand (2ms) [Parameters=[@__normalizedEmail_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."Avatar", a."ConcurrencyStamp", a."CreatedAt", a."Email", a."EmailConfirmed", a."FullName", a."LastLoginAt", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."NotificationPreferences", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."RefreshToken", a."RefreshTokenExpiryTime", a."Role", a."SecurityStamp", a."Status", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedEmail" = @__normalizedEmail_0
+LIMIT 2
+2025-09-24 10:55:22.059 +08:00 [INF] Executed DbCommand (3ms) [Parameters=[@p1='?', @p2='?', @p0='?' (DbType = DateTime), @p3='?' (DbType = DateTime), @p4='?', @p5='?' (DbType = DateTime), @p6='?', @p7='?' (DbType = DateTime), @p8='?', @p9='?', @p10='?'], CommandType='"Text"', CommandTimeout='30']
+UPDATE "AspNetUsers" SET "LastLoginAt" = @p0
+WHERE "Id" = @p1 AND "ConcurrencyStamp" = @p2;
+INSERT INTO refresh_tokens (created_at, created_by_ip, expires_at, replaced_by_token, revoked_at, revoked_by_ip, token, user_id)
+VALUES (@p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10)
+RETURNING id;
+2025-09-24 10:55:22.066 +08:00 [INF] Executing OkObjectResult, writing value of type 'CeceLearningPortal.Api.DTOs.AuthResponseDto'.
+2025-09-24 10:55:22.069 +08:00 [INF] Executed action CeceLearningPortal.Api.Controllers.AuthController.Login (CeceLearningPortal.Api) in 253.7505ms
+2025-09-24 10:55:22.071 +08:00 [INF] Executed endpoint 'CeceLearningPortal.Api.Controllers.AuthController.Login (CeceLearningPortal.Api)'
+2025-09-24 10:55:22.073 +08:00 [INF] Request finished HTTP/1.1 POST http://localhost:5296/api/auth/login - 200 null application/json; charset=utf-8 280.6667ms
+2025-09-24 10:55:22.136 +08:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5296/api/courses - null null
+2025-09-24 10:55:22.138 +08:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5296/api/analytics/platform - null null
+2025-09-24 10:55:22.145 +08:00 [INF] CORS policy execution successful.
+2025-09-24 10:55:22.154 +08:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5296/api/courses - 204 null null 18.315ms
+2025-09-24 10:55:22.152 +08:00 [INF] CORS policy execution successful.
+2025-09-24 10:55:22.167 +08:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5296/api/analytics/platform - 204 null null 28.567ms
+2025-09-24 10:55:22.168 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5296/api/courses - application/json null
+2025-09-24 10:55:22.174 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5296/api/analytics/platform - application/json null
+2025-09-24 10:55:22.180 +08:00 [INF] CORS policy execution successful.
+2025-09-24 10:55:22.185 +08:00 [INF] CORS policy execution successful.
+2025-09-24 10:55:22.190 +08:00 [INF] Executed DbCommand (1ms) [Parameters=[@__userId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM refresh_tokens AS r
+    WHERE r.user_id = @__userId_0 AND r.revoked_at IS NULL AND now() < r.expires_at)
+2025-09-24 10:55:22.191 +08:00 [INF] Executed DbCommand (1ms) [Parameters=[@__userId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM refresh_tokens AS r
+    WHERE r.user_id = @__userId_0 AND r.revoked_at IS NULL AND now() < r.expires_at)
+2025-09-24 10:55:22.194 +08:00 [INF] Executing endpoint 'CeceLearningPortal.Api.Controllers.CoursesController.GetCourses (CeceLearningPortal.Api)'
+2025-09-24 10:55:22.198 +08:00 [INF] Executing endpoint 'CeceLearningPortal.Api.Controllers.AnalyticsController.GetPlatformAnalytics (CeceLearningPortal.Api)'
+2025-09-24 10:55:22.199 +08:00 [INF] Route matched with {action = "GetCourses", controller = "Courses"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetCourses(CeceLearningPortal.Api.DTOs.CourseFilterDto) on controller CeceLearningPortal.Api.Controllers.CoursesController (CeceLearningPortal.Api).
+2025-09-24 10:55:22.214 +08:00 [INF] Route matched with {action = "GetPlatformAnalytics", controller = "Analytics"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetPlatformAnalytics() on controller CeceLearningPortal.Api.Controllers.AnalyticsController (CeceLearningPortal.Api).
+2025-09-24 10:55:22.224 +08:00 [INF] Executed DbCommand (6ms) [Parameters=[@__p_1='?' (DbType = Int32), @__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT c0.id, c0."AccessDuration", c0."AccessType", c0."AutomationAbandonmentSequence", c0."AutomationCompletionCertificate", c0."AutomationProgressReminders", c0."AutomationWelcomeEmail", c0.category, c0."CourseType", c0.created_at, c0."Currency", c0.description, c0.discount, c0."DripContent", c0."DripScheduleJson", c0.duration, c0."EnrollmentLimit", c0.enrollment_type, c0.features, c0."HasAssignments", c0."HasCertificate", c0."HasCommunity", c0."HasDownloadableResources", c0."HasLiveSessions", c0."HasQuizzes", c0.instructor_id, c0.is_bestseller, c0."IsPublished", c0."Language", c0.level, c0.original_price, c0."PaymentPlanDetailsJson", c0.preview_url, c0.price, c0."PricingModel", c0."PromoVideoUrl", c0."PublishedAt", c0."ShortDescription", c0.status, c0."SubscriptionPeriod", c0.thumbnail, c0.thumbnail_url, c0.title, c0.updated_at, a."Id", a."AccessFailedCount", a."Avatar", a."ConcurrencyStamp", a."CreatedAt", a."Email", a."EmailConfirmed", a."FullName", a."LastLoginAt", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."NotificationPreferences", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."RefreshToken", a."RefreshTokenExpiryTime", a."Role", a."SecurityStamp", a."Status", a."TwoFactorEnabled", a."UserName", s.id, s.course_id, s.created_at, s.description, s."order", s.title, s.updated_at, s.id0, s.content, s.created_at0, s.duration, s.module_id, s.order0, s.title0, s.type, s.updated_at0, s.video_url, c3.id, c3.approved_at, c3.approved_by, c3.comment, c3.course_id, c3.created_at, c3.is_flagged, c3.rating, c3.status, c3.student_id, e.id, e.average_quiz_score, e.certificate_issued, e.certificate_url, e.completed_at, e.completed_lessons, e.course_id, e.enrolled_at, e.last_accessed_date, e.progress_percentage, e.quiz_count, e.student_id, e.total_time_spent
+FROM (
+    SELECT c.id, c."AccessDuration", c."AccessType", c."AutomationAbandonmentSequence", c."AutomationCompletionCertificate", c."AutomationProgressReminders", c."AutomationWelcomeEmail", c.category, c."CourseType", c.created_at, c."Currency", c.description, c.discount, c."DripContent", c."DripScheduleJson", c.duration, c."EnrollmentLimit", c.enrollment_type, c.features, c."HasAssignments", c."HasCertificate", c."HasCommunity", c."HasDownloadableResources", c."HasLiveSessions", c."HasQuizzes", c.instructor_id, c.is_bestseller, c."IsPublished", c."Language", c.level, c.original_price, c."PaymentPlanDetailsJson", c.preview_url, c.price, c."PricingModel", c."PromoVideoUrl", c."PublishedAt", c."ShortDescription", c.status, c."SubscriptionPeriod", c.thumbnail, c.thumbnail_url, c.title, c.updated_at
+    FROM courses AS c
+    ORDER BY c.created_at DESC
+    LIMIT @__p_1 OFFSET @__p_0
+) AS c0
+INNER JOIN "AspNetUsers" AS a ON c0.instructor_id = a."Id"
+LEFT JOIN (
+    SELECT c1.id, c1.course_id, c1.created_at, c1.description, c1."order", c1.title, c1.updated_at, c2.id AS id0, c2.content, c2.created_at AS created_at0, c2.duration, c2.module_id, c2."order" AS order0, c2.title AS title0, c2.type, c2.updated_at AS updated_at0, c2.video_url
+    FROM course_modules AS c1
+    LEFT JOIN course_lessons AS c2 ON c1.id = c2.module_id
+) AS s ON c0.id = s.course_id
+LEFT JOIN course_reviews AS c3 ON c0.id = c3.course_id
+LEFT JOIN enrollments AS e ON c0.id = e.course_id
+ORDER BY c0.created_at DESC, c0.id, a."Id", s.id, s.id0, c3.id
+2025-09-24 10:55:22.234 +08:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM "AspNetUsers" AS a
+2025-09-24 10:55:22.237 +08:00 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+ListSelectIterator`2[[CeceLearningPortal.Api.Models.Course, CeceLearningPortal.Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[CeceLearningPortal.Api.DTOs.CourseDto, CeceLearningPortal.Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-09-24 10:55:22.240 +08:00 [INF] Executed action CeceLearningPortal.Api.Controllers.CoursesController.GetCourses (CeceLearningPortal.Api) in 27.0484ms
+2025-09-24 10:55:22.243 +08:00 [INF] Executed endpoint 'CeceLearningPortal.Api.Controllers.CoursesController.GetCourses (CeceLearningPortal.Api)'
+2025-09-24 10:55:22.244 +08:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM courses AS c
+2025-09-24 10:55:22.246 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost:5296/api/courses - 200 null application/json; charset=utf-8 78.0254ms
+2025-09-24 10:55:22.258 +08:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COALESCE(sum(t.amount), 0.0)
+FROM transactions AS t
+WHERE t.status = 'Completed'
+2025-09-24 10:55:22.268 +08:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM enrollments AS e
+2025-09-24 10:55:22.324 +08:00 [INF] Executed DbCommand (9ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id" AS "instructorId", a."FullName" AS "instructorName", (
+    SELECT count(*)::int
+    FROM courses AS c0
+    WHERE c0.instructor_id = a."Id") AS "totalCourses", (
+    SELECT count(*)::int
+    FROM enrollments AS e
+    INNER JOIN courses AS c1 ON e.course_id = c1.id
+    WHERE c1.instructor_id = a."Id") AS "totalStudents", (
+    SELECT COALESCE(sum(t0.amount), 0.0)
+    FROM transactions AS t0
+    LEFT JOIN courses AS c2 ON t0.course_id = c2.id
+    WHERE c2.instructor_id = a."Id" AND t0.status = 'Completed') AS "totalRevenue", COALESCE((
+    SELECT avg(c3.rating::double precision)
+    FROM course_reviews AS c3
+    INNER JOIN courses AS c4 ON c3.course_id = c4.id
+    WHERE c4.instructor_id = a."Id"), 0.0) AS "averageRating"
+FROM "AspNetUsers" AS a
+WHERE a."Role" = 'Instructor'
+ORDER BY (
+    SELECT COALESCE(sum(t.amount), 0.0)
+    FROM transactions AS t
+    LEFT JOIN courses AS c ON t.course_id = c.id
+    WHERE c.instructor_id = a."Id" AND t.status = 'Completed') DESC
+LIMIT @__p_0
+2025-09-24 10:55:22.348 +08:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT c.category, count(*)::int AS "courseCount", COALESCE(sum((
+    SELECT count(*)::int
+    FROM enrollments AS e
+    WHERE c.id = e.course_id)), 0)::int AS "enrollmentCount", (
+    SELECT COALESCE(sum(t.amount), 0.0)
+    FROM transactions AS t
+    LEFT JOIN courses AS c0 ON t.course_id = c0.id
+    WHERE c0.category = c.category AND t.status = 'Completed') AS revenue
+FROM courses AS c
+GROUP BY c.category
+ORDER BY COALESCE(sum((
+    SELECT count(*)::int
+    FROM enrollments AS e
+    WHERE c.id = e.course_id)), 0)::int DESC
+2025-09-24 10:55:22.368 +08:00 [INF] Executed DbCommand (3ms) [Parameters=[@__sixMonthsAgo_0='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SELECT t0."Year", t0."Month", COALESCE(sum(t0.amount), 0.0) AS "Revenue", count(*)::int AS "TransactionCount"
+FROM (
+    SELECT t.amount, date_part('year', t.created_at AT TIME ZONE 'UTC')::int AS "Year", date_part('month', t.created_at AT TIME ZONE 'UTC')::int AS "Month"
+    FROM transactions AS t
+    WHERE t.status = 'Completed' AND t.created_at >= @__sixMonthsAgo_0
+) AS t0
+GROUP BY t0."Year", t0."Month"
+2025-09-24 10:55:22.394 +08:00 [INF] Executed DbCommand (2ms) [Parameters=[@__sixMonthsAgo_0='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SELECT a0."Year", a0."Month", count(*)::int AS "NewUsers"
+FROM (
+    SELECT date_part('year', a."CreatedAt" AT TIME ZONE 'UTC')::int AS "Year", date_part('month', a."CreatedAt" AT TIME ZONE 'UTC')::int AS "Month"
+    FROM "AspNetUsers" AS a
+    WHERE a."CreatedAt" >= @__sixMonthsAgo_0
+) AS a0
+GROUP BY a0."Year", a0."Month"
+2025-09-24 10:55:22.413 +08:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM subscriptions AS s
+WHERE s.status = 'Active'
+2025-09-24 10:55:22.432 +08:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT s.plan_name AS plan, count(*)::int AS count, COALESCE(sum(s.price), 0.0) AS "monthlyRevenue"
+FROM subscriptions AS s
+WHERE s.status = 'Active'
+GROUP BY s.plan_name
+2025-09-24 10:55:22.438 +08:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType20`6[[<>f__AnonymousType21`5[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Decimal, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], CeceLearningPortal.Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Collections.Generic.List`1[[System.Object, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Collections.Generic.List`1[[System.Object, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Collections.Generic.List`1[[System.Object, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Object, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Object, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-09-24 10:55:22.463 +08:00 [INF] Executed action CeceLearningPortal.Api.Controllers.AnalyticsController.GetPlatformAnalytics (CeceLearningPortal.Api) in 243.2851ms
+2025-09-24 10:55:22.466 +08:00 [INF] Executed endpoint 'CeceLearningPortal.Api.Controllers.AnalyticsController.GetPlatformAnalytics (CeceLearningPortal.Api)'
+2025-09-24 10:55:22.468 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost:5296/api/analytics/platform - 200 null application/json; charset=utf-8 293.5407ms
+2025-09-24 10:55:23.942 +08:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5296/api/users/718ad447-829b-4170-973a-87a1da659b51/profile - null null
+2025-09-24 10:55:23.947 +08:00 [INF] CORS policy execution successful.
+2025-09-24 10:55:23.951 +08:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5296/api/users/718ad447-829b-4170-973a-87a1da659b51/profile - 204 null null 9.4722ms
+2025-09-24 10:55:23.960 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5296/api/users/718ad447-829b-4170-973a-87a1da659b51/profile - application/json null
+2025-09-24 10:55:23.965 +08:00 [INF] CORS policy execution successful.
+2025-09-24 10:55:23.969 +08:00 [INF] Executed DbCommand (1ms) [Parameters=[@__userId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM refresh_tokens AS r
+    WHERE r.user_id = @__userId_0 AND r.revoked_at IS NULL AND now() < r.expires_at)
+2025-09-24 10:55:23.973 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost:5296/api/users/718ad447-829b-4170-973a-87a1da659b51/profile - 404 0 null 13.6332ms
+2025-09-24 10:55:23.982 +08:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5296/api/users/718ad447-829b-4170-973a-87a1da659b51/profile, Response status code: 404
+2025-09-24 10:55:23.985 +08:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5296/api/users/718ad447-829b-4170-973a-87a1da659b51 - null null
+2025-09-24 10:55:23.990 +08:00 [INF] CORS policy execution successful.
+2025-09-24 10:55:23.992 +08:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5296/api/users/718ad447-829b-4170-973a-87a1da659b51 - 204 null null 6.4074ms
+2025-09-24 10:55:23.998 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5296/api/users/718ad447-829b-4170-973a-87a1da659b51 - application/json null
+2025-09-24 10:55:24.002 +08:00 [INF] CORS policy execution successful.
+2025-09-24 10:55:24.006 +08:00 [INF] Executed DbCommand (1ms) [Parameters=[@__userId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM refresh_tokens AS r
+    WHERE r.user_id = @__userId_0 AND r.revoked_at IS NULL AND now() < r.expires_at)
+2025-09-24 10:55:24.011 +08:00 [INF] Executing endpoint 'CeceLearningPortal.Api.Controllers.UsersController.GetUser (CeceLearningPortal.Api)'
+2025-09-24 10:55:24.013 +08:00 [INF] Route matched with {action = "GetUser", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetUser(System.String) on controller CeceLearningPortal.Api.Controllers.UsersController (CeceLearningPortal.Api).
+2025-09-24 10:55:24.020 +08:00 [INF] Executed DbCommand (1ms) [Parameters=[@__p_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."Avatar", a."ConcurrencyStamp", a."CreatedAt", a."Email", a."EmailConfirmed", a."FullName", a."LastLoginAt", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."NotificationPreferences", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."RefreshToken", a."RefreshTokenExpiryTime", a."Role", a."SecurityStamp", a."Status", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."Id" = @__p_0
+LIMIT 1
+2025-09-24 10:55:24.025 +08:00 [INF] Executing OkObjectResult, writing value of type 'CeceLearningPortal.Api.DTOs.UserDto'.
+2025-09-24 10:55:24.028 +08:00 [INF] Executed action CeceLearningPortal.Api.Controllers.UsersController.GetUser (CeceLearningPortal.Api) in 11.5959ms
+2025-09-24 10:55:24.030 +08:00 [INF] Executed endpoint 'CeceLearningPortal.Api.Controllers.UsersController.GetUser (CeceLearningPortal.Api)'
+2025-09-24 10:55:24.032 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost:5296/api/users/718ad447-829b-4170-973a-87a1da659b51 - 200 null application/json; charset=utf-8 34.4381ms
+2025-09-24 10:55:24.039 +08:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5296/api/users/718ad447-829b-4170-973a-87a1da659b51/stats - null null
+2025-09-24 10:55:24.051 +08:00 [INF] CORS policy execution successful.
+2025-09-24 10:55:24.057 +08:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5296/api/users/718ad447-829b-4170-973a-87a1da659b51/stats - 204 null null 16.8452ms
+2025-09-24 10:55:24.066 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5296/api/users/718ad447-829b-4170-973a-87a1da659b51/stats - application/json null
+2025-09-24 10:55:24.070 +08:00 [INF] CORS policy execution successful.
+2025-09-24 10:55:24.074 +08:00 [INF] Executed DbCommand (1ms) [Parameters=[@__userId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM refresh_tokens AS r
+    WHERE r.user_id = @__userId_0 AND r.revoked_at IS NULL AND now() < r.expires_at)
+2025-09-24 10:55:24.078 +08:00 [INF] Executing endpoint 'CeceLearningPortal.Api.Controllers.UsersController.GetUserStats (CeceLearningPortal.Api)'
+2025-09-24 10:55:24.079 +08:00 [INF] Route matched with {action = "GetUserStats", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetUserStats(System.String) on controller CeceLearningPortal.Api.Controllers.UsersController (CeceLearningPortal.Api).
+2025-09-24 10:55:24.087 +08:00 [INF] Executed DbCommand (3ms) [Parameters=[@__userId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a0."Id", a0."AccessFailedCount", a0."Avatar", a0."ConcurrencyStamp", a0."CreatedAt", a0."Email", a0."EmailConfirmed", a0."FullName", a0."LastLoginAt", a0."LockoutEnabled", a0."LockoutEnd", a0."NormalizedEmail", a0."NormalizedUserName", a0."NotificationPreferences", a0."PasswordHash", a0."PhoneNumber", a0."PhoneNumberConfirmed", a0."RefreshToken", a0."RefreshTokenExpiryTime", a0."Role", a0."SecurityStamp", a0."Status", a0."TwoFactorEnabled", a0."UserName", s.id, s."AccessDuration", s."AccessType", s."AutomationAbandonmentSequence", s."AutomationCompletionCertificate", s."AutomationProgressReminders", s."AutomationWelcomeEmail", s.category, s."CourseType", s.created_at, s."Currency", s.description, s.discount, s."DripContent", s."DripScheduleJson", s.duration, s."EnrollmentLimit", s.enrollment_type, s.features, s."HasAssignments", s."HasCertificate", s."HasCommunity", s."HasDownloadableResources", s."HasLiveSessions", s."HasQuizzes", s.instructor_id, s.is_bestseller, s."IsPublished", s."Language", s.level, s.original_price, s."PaymentPlanDetailsJson", s.preview_url, s.price, s."PricingModel", s."PromoVideoUrl", s."PublishedAt", s."ShortDescription", s.status, s."SubscriptionPeriod", s.thumbnail, s.thumbnail_url, s.title, s.updated_at, s.id0, s.average_quiz_score, s.certificate_issued, s.certificate_url, s.completed_at, s.completed_lessons, s.course_id, s.enrolled_at, s.last_accessed_date, s.progress_percentage, s.quiz_count, s.student_id, s.total_time_spent, s.id1, s.approved_at, s.approved_by, s.comment, s.course_id0, s.created_at0, s.is_flagged, s.rating, s.status0, s.student_id0
+FROM (
+    SELECT a."Id", a."AccessFailedCount", a."Avatar", a."ConcurrencyStamp", a."CreatedAt", a."Email", a."EmailConfirmed", a."FullName", a."LastLoginAt", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."NotificationPreferences", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."RefreshToken", a."RefreshTokenExpiryTime", a."Role", a."SecurityStamp", a."Status", a."TwoFactorEnabled", a."UserName"
+    FROM "AspNetUsers" AS a
+    WHERE a."Id" = @__userId_0
+    LIMIT 1
+) AS a0
+LEFT JOIN (
+    SELECT c.id, c."AccessDuration", c."AccessType", c."AutomationAbandonmentSequence", c."AutomationCompletionCertificate", c."AutomationProgressReminders", c."AutomationWelcomeEmail", c.category, c."CourseType", c.created_at, c."Currency", c.description, c.discount, c."DripContent", c."DripScheduleJson", c.duration, c."EnrollmentLimit", c.enrollment_type, c.features, c."HasAssignments", c."HasCertificate", c."HasCommunity", c."HasDownloadableResources", c."HasLiveSessions", c."HasQuizzes", c.instructor_id, c.is_bestseller, c."IsPublished", c."Language", c.level, c.original_price, c."PaymentPlanDetailsJson", c.preview_url, c.price, c."PricingModel", c."PromoVideoUrl", c."PublishedAt", c."ShortDescription", c.status, c."SubscriptionPeriod", c.thumbnail, c.thumbnail_url, c.title, c.updated_at, e.id AS id0, e.average_quiz_score, e.certificate_issued, e.certificate_url, e.completed_at, e.completed_lessons, e.course_id, e.enrolled_at, e.last_accessed_date, e.progress_percentage, e.quiz_count, e.student_id, e.total_time_spent, c0.id AS id1, c0.approved_at, c0.approved_by, c0.comment, c0.course_id AS course_id0, c0.created_at AS created_at0, c0.is_flagged, c0.rating, c0.status AS status0, c0.student_id AS student_id0
+    FROM courses AS c
+    LEFT JOIN enrollments AS e ON c.id = e.course_id
+    LEFT JOIN course_reviews AS c0 ON c.id = c0.course_id
+) AS s ON a0."Id" = s.instructor_id
+ORDER BY a0."Id", s.id, s.id0
+2025-09-24 10:55:24.093 +08:00 [INF] Executing OkObjectResult, writing value of type 'CeceLearningPortal.Api.DTOs.UserStatsDto'.
+2025-09-24 10:55:24.095 +08:00 [INF] Executed action CeceLearningPortal.Api.Controllers.UsersController.GetUserStats (CeceLearningPortal.Api) in 12.6943ms
+2025-09-24 10:55:24.097 +08:00 [INF] Executed endpoint 'CeceLearningPortal.Api.Controllers.UsersController.GetUserStats (CeceLearningPortal.Api)'
+2025-09-24 10:55:24.099 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost:5296/api/users/718ad447-829b-4170-973a-87a1da659b51/stats - 200 null application/json; charset=utf-8 33.6197ms
+2025-09-24 10:55:24.107 +08:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5296/api/users/718ad447-829b-4170-973a-87a1da659b51/certificates - null null
+2025-09-24 10:55:24.111 +08:00 [INF] CORS policy execution successful.
+2025-09-24 10:55:24.113 +08:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5296/api/users/718ad447-829b-4170-973a-87a1da659b51/certificates - 204 null null 6.1416ms
+2025-09-24 10:55:24.119 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5296/api/users/718ad447-829b-4170-973a-87a1da659b51/certificates - application/json null
+2025-09-24 10:55:24.124 +08:00 [INF] CORS policy execution successful.
+2025-09-24 10:55:24.128 +08:00 [INF] Executed DbCommand (1ms) [Parameters=[@__userId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM refresh_tokens AS r
+    WHERE r.user_id = @__userId_0 AND r.revoked_at IS NULL AND now() < r.expires_at)
+2025-09-24 10:55:24.132 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost:5296/api/users/718ad447-829b-4170-973a-87a1da659b51/certificates - 404 0 null 12.5289ms
+2025-09-24 10:55:24.139 +08:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5296/api/users/718ad447-829b-4170-973a-87a1da659b51/certificates, Response status code: 404
+2025-09-24 10:55:24.144 +08:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5296/api/users/718ad447-829b-4170-973a-87a1da659b51/activity - null null
+2025-09-24 10:55:24.148 +08:00 [INF] CORS policy execution successful.
+2025-09-24 10:55:24.150 +08:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5296/api/users/718ad447-829b-4170-973a-87a1da659b51/activity - 204 null null 5.998ms
+2025-09-24 10:55:24.155 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5296/api/users/718ad447-829b-4170-973a-87a1da659b51/activity - application/json null
+2025-09-24 10:55:24.159 +08:00 [INF] CORS policy execution successful.
+2025-09-24 10:55:24.163 +08:00 [INF] Executed DbCommand (1ms) [Parameters=[@__userId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM refresh_tokens AS r
+    WHERE r.user_id = @__userId_0 AND r.revoked_at IS NULL AND now() < r.expires_at)
+2025-09-24 10:55:24.167 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost:5296/api/users/718ad447-829b-4170-973a-87a1da659b51/activity - 404 0 null 12.3282ms
+2025-09-24 10:55:24.173 +08:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5296/api/users/718ad447-829b-4170-973a-87a1da659b51/activity, Response status code: 404
+2025-09-24 10:55:24.177 +08:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5296/api/admin/stats - null null
+2025-09-24 10:55:24.182 +08:00 [INF] CORS policy execution successful.
+2025-09-24 10:55:24.184 +08:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5296/api/admin/stats - 204 null null 6.601ms
+2025-09-24 10:55:24.189 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5296/api/admin/stats - application/json null
+2025-09-24 10:55:24.199 +08:00 [INF] CORS policy execution successful.
+2025-09-24 10:55:24.203 +08:00 [INF] Executed DbCommand (1ms) [Parameters=[@__userId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM refresh_tokens AS r
+    WHERE r.user_id = @__userId_0 AND r.revoked_at IS NULL AND now() < r.expires_at)
+2025-09-24 10:55:24.207 +08:00 [INF] Executing endpoint 'CeceLearningPortal.Api.Controllers.AdminController.GetAdminStats (CeceLearningPortal.Api)'
+2025-09-24 10:55:24.215 +08:00 [INF] Route matched with {action = "GetAdminStats", controller = "Admin"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAdminStats() on controller CeceLearningPortal.Api.Controllers.AdminController (CeceLearningPortal.Api).
+2025-09-24 10:55:24.225 +08:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM "AspNetUsers" AS a
+2025-09-24 10:55:24.237 +08:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM "AspNetUsers" AS a
+WHERE date_trunc('day', a."CreatedAt", 'UTC') = date_trunc('day', now(), 'UTC')
+2025-09-24 10:55:24.248 +08:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM courses AS c
+WHERE c.status = 'Active'
+2025-09-24 10:55:24.256 +08:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM courses AS c
+WHERE c.status = 'Draft'
+2025-09-24 10:55:24.262 +08:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COALESCE(sum(t.amount), 0.0)
+FROM transactions AS t
+WHERE t.status = 'Completed'
+2025-09-24 10:55:24.275 +08:00 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM "AspNetUsers" AS a
+WHERE a."LastLoginAt" > now() + INTERVAL '-30 mins'
+2025-09-24 10:55:24.280 +08:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType7`7[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Decimal, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[<>f__AnonymousType8`4[[System.Double, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Double, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], CeceLearningPortal.Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-09-24 10:55:24.287 +08:00 [INF] Executed action CeceLearningPortal.Api.Controllers.AdminController.GetAdminStats (CeceLearningPortal.Api) in 69.0792ms
+2025-09-24 10:55:24.292 +08:00 [INF] Executed endpoint 'CeceLearningPortal.Api.Controllers.AdminController.GetAdminStats (CeceLearningPortal.Api)'
+2025-09-24 10:55:24.294 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost:5296/api/admin/stats - 200 null application/json; charset=utf-8 104.8262ms
+2025-09-24 10:55:25.797 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5296/api/analytics/platform - application/json null
+2025-09-24 10:55:25.806 +08:00 [INF] CORS policy execution successful.
+2025-09-24 10:55:25.813 +08:00 [INF] Executed DbCommand (1ms) [Parameters=[@__userId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM refresh_tokens AS r
+    WHERE r.user_id = @__userId_0 AND r.revoked_at IS NULL AND now() < r.expires_at)
+2025-09-24 10:55:25.818 +08:00 [INF] Executing endpoint 'CeceLearningPortal.Api.Controllers.AnalyticsController.GetPlatformAnalytics (CeceLearningPortal.Api)'
+2025-09-24 10:55:25.820 +08:00 [INF] Route matched with {action = "GetPlatformAnalytics", controller = "Analytics"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetPlatformAnalytics() on controller CeceLearningPortal.Api.Controllers.AnalyticsController (CeceLearningPortal.Api).
+2025-09-24 10:55:25.826 +08:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM "AspNetUsers" AS a
+2025-09-24 10:55:25.830 +08:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM courses AS c
+2025-09-24 10:55:25.835 +08:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COALESCE(sum(t.amount), 0.0)
+FROM transactions AS t
+WHERE t.status = 'Completed'
+2025-09-24 10:55:25.841 +08:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM enrollments AS e
+2025-09-24 10:55:25.851 +08:00 [INF] Executed DbCommand (4ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id" AS "instructorId", a."FullName" AS "instructorName", (
+    SELECT count(*)::int
+    FROM courses AS c0
+    WHERE c0.instructor_id = a."Id") AS "totalCourses", (
+    SELECT count(*)::int
+    FROM enrollments AS e
+    INNER JOIN courses AS c1 ON e.course_id = c1.id
+    WHERE c1.instructor_id = a."Id") AS "totalStudents", (
+    SELECT COALESCE(sum(t0.amount), 0.0)
+    FROM transactions AS t0
+    LEFT JOIN courses AS c2 ON t0.course_id = c2.id
+    WHERE c2.instructor_id = a."Id" AND t0.status = 'Completed') AS "totalRevenue", COALESCE((
+    SELECT avg(c3.rating::double precision)
+    FROM course_reviews AS c3
+    INNER JOIN courses AS c4 ON c3.course_id = c4.id
+    WHERE c4.instructor_id = a."Id"), 0.0) AS "averageRating"
+FROM "AspNetUsers" AS a
+WHERE a."Role" = 'Instructor'
+ORDER BY (
+    SELECT COALESCE(sum(t.amount), 0.0)
+    FROM transactions AS t
+    LEFT JOIN courses AS c ON t.course_id = c.id
+    WHERE c.instructor_id = a."Id" AND t.status = 'Completed') DESC
+LIMIT @__p_0
+2025-09-24 10:55:25.859 +08:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT c.category, count(*)::int AS "courseCount", COALESCE(sum((
+    SELECT count(*)::int
+    FROM enrollments AS e
+    WHERE c.id = e.course_id)), 0)::int AS "enrollmentCount", (
+    SELECT COALESCE(sum(t.amount), 0.0)
+    FROM transactions AS t
+    LEFT JOIN courses AS c0 ON t.course_id = c0.id
+    WHERE c0.category = c.category AND t.status = 'Completed') AS revenue
+FROM courses AS c
+GROUP BY c.category
+ORDER BY COALESCE(sum((
+    SELECT count(*)::int
+    FROM enrollments AS e
+    WHERE c.id = e.course_id)), 0)::int DESC
+2025-09-24 10:55:25.865 +08:00 [INF] Executed DbCommand (1ms) [Parameters=[@__sixMonthsAgo_0='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SELECT t0."Year", t0."Month", COALESCE(sum(t0.amount), 0.0) AS "Revenue", count(*)::int AS "TransactionCount"
+FROM (
+    SELECT t.amount, date_part('year', t.created_at AT TIME ZONE 'UTC')::int AS "Year", date_part('month', t.created_at AT TIME ZONE 'UTC')::int AS "Month"
+    FROM transactions AS t
+    WHERE t.status = 'Completed' AND t.created_at >= @__sixMonthsAgo_0
+) AS t0
+GROUP BY t0."Year", t0."Month"
+2025-09-24 10:55:25.871 +08:00 [INF] Executed DbCommand (1ms) [Parameters=[@__sixMonthsAgo_0='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SELECT a0."Year", a0."Month", count(*)::int AS "NewUsers"
+FROM (
+    SELECT date_part('year', a."CreatedAt" AT TIME ZONE 'UTC')::int AS "Year", date_part('month', a."CreatedAt" AT TIME ZONE 'UTC')::int AS "Month"
+    FROM "AspNetUsers" AS a
+    WHERE a."CreatedAt" >= @__sixMonthsAgo_0
+) AS a0
+GROUP BY a0."Year", a0."Month"
+2025-09-24 10:55:25.876 +08:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM subscriptions AS s
+WHERE s.status = 'Active'
+2025-09-24 10:55:25.881 +08:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT s.plan_name AS plan, count(*)::int AS count, COALESCE(sum(s.price), 0.0) AS "monthlyRevenue"
+FROM subscriptions AS s
+WHERE s.status = 'Active'
+GROUP BY s.plan_name
+2025-09-24 10:55:25.886 +08:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType20`6[[<>f__AnonymousType21`5[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Decimal, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], CeceLearningPortal.Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Collections.Generic.List`1[[System.Object, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Collections.Generic.List`1[[System.Object, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Collections.Generic.List`1[[System.Object, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Object, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Object, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-09-24 10:55:25.889 +08:00 [INF] Executed action CeceLearningPortal.Api.Controllers.AnalyticsController.GetPlatformAnalytics (CeceLearningPortal.Api) in 65.1989ms
+2025-09-24 10:55:25.892 +08:00 [INF] Executed endpoint 'CeceLearningPortal.Api.Controllers.AnalyticsController.GetPlatformAnalytics (CeceLearningPortal.Api)'
+2025-09-24 10:55:25.894 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost:5296/api/analytics/platform - 200 null application/json; charset=utf-8 96.3603ms
+2025-09-24 10:55:25.901 +08:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5296/api/admin/course-completions - null null
+2025-09-24 10:55:25.905 +08:00 [INF] CORS policy execution successful.
+2025-09-24 10:55:25.907 +08:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5296/api/admin/course-completions - 204 null null 6.5867ms
+2025-09-24 10:55:25.915 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5296/api/admin/course-completions - application/json null
+2025-09-24 10:55:25.922 +08:00 [INF] CORS policy execution successful.
+2025-09-24 10:55:25.927 +08:00 [INF] Executed DbCommand (1ms) [Parameters=[@__userId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM refresh_tokens AS r
+    WHERE r.user_id = @__userId_0 AND r.revoked_at IS NULL AND now() < r.expires_at)
+2025-09-24 10:55:25.930 +08:00 [INF] Executing endpoint 'CeceLearningPortal.Api.Controllers.AdminController.GetCourseCompletions (CeceLearningPortal.Api)'
+2025-09-24 10:55:25.937 +08:00 [INF] Route matched with {action = "GetCourseCompletions", controller = "Admin"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetCourseCompletions(Int32) on controller CeceLearningPortal.Api.Controllers.AdminController (CeceLearningPortal.Api).
+2025-09-24 10:55:25.970 +08:00 [INF] Executed DbCommand (6ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT e0.id, a."FullName", a."Avatar", a."Email", c.title, e0.course_id::text, e0.completed_at, COALESCE(e0.average_quiz_score, 0.0), e0.certificate_issued, e0.certificate_url
+FROM (
+    SELECT e.id, e.average_quiz_score, e.certificate_issued, e.certificate_url, e.completed_at, e.course_id, e.student_id
+    FROM enrollments AS e
+    WHERE e.completed_at IS NOT NULL
+    ORDER BY e.completed_at DESC
+    LIMIT @__p_0
+) AS e0
+INNER JOIN "AspNetUsers" AS a ON e0.student_id = a."Id"
+INNER JOIN courses AS c ON e0.course_id = c.id
+ORDER BY e0.completed_at DESC
+2025-09-24 10:55:25.975 +08:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[<>f__AnonymousType9`10[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Double, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], CeceLearningPortal.Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-09-24 10:55:25.980 +08:00 [INF] Executed action CeceLearningPortal.Api.Controllers.AdminController.GetCourseCompletions (CeceLearningPortal.Api) in 38.7834ms
+2025-09-24 10:55:25.983 +08:00 [INF] Executed endpoint 'CeceLearningPortal.Api.Controllers.AdminController.GetCourseCompletions (CeceLearningPortal.Api)'
+2025-09-24 10:55:25.985 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost:5296/api/admin/course-completions - 200 null application/json; charset=utf-8 69.9156ms

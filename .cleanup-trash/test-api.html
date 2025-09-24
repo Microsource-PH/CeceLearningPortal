@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>API Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        button { margin: 5px; padding: 10px; }
+        pre { background: #f0f0f0; padding: 10px; overflow: auto; }
+        .error { color: red; }
+        .success { color: green; }
+    </style>
+</head>
+<body>
+    <h1>Frontend-Backend Connection Test</h1>
+    
+    <h2>Backend Direct (Port 5295)</h2>
+    <button onclick="testBackend('/WeatherForecast')">Test WeatherForecast</button>
+    <button onclick="testBackend('/api/courses')">Test Courses</button>
+    <button onclick="testBackend('/api/auth/login', 'POST', {email:'admin@example.com',password:'Admin123'})">Test Login</button>
+    
+    <h2>Frontend Proxy (Port 8080)</h2>
+    <button onclick="testFrontend('/api/WeatherForecast')">Test WeatherForecast via Proxy</button>
+    <button onclick="testFrontend('/api/courses')">Test Courses via Proxy</button>
+    <button onclick="testFrontend('/api/auth/login', 'POST', {email:'admin@example.com',password:'Admin123'})">Test Login via Proxy</button>
+    
+    <h3>Results:</h3>
+    <pre id="result"></pre>
+
+    <script>
+        async function testBackend(endpoint, method = 'GET', body = null) {
+            const resultEl = document.getElementById('result');
+            try {
+                const options = {
+                    method: method,
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    }
+                };
+                
+                if (body) {
+                    options.body = JSON.stringify(body);
+                }
+                
+                const response = await fetch(`http://localhost:5295${endpoint}`, options);
+                const data = await response.text();
+                
+                resultEl.innerHTML = `<div class="${response.ok ? 'success' : 'error'}">
+Backend Direct ${endpoint}:
+Status: ${response.status}
+Response: ${data}
+</div>`;
+            } catch (error) {
+                resultEl.innerHTML = `<div class="error">Backend Direct ${endpoint} Error: ${error.message}</div>`;
+            }
+        }
+
+        async function testFrontend(endpoint, method = 'GET', body = null) {
+            const resultEl = document.getElementById('result');
+            try {
+                const options = {
+                    method: method,
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    }
+                };
+                
+                if (body) {
+                    options.body = JSON.stringify(body);
+                }
+                
+                const response = await fetch(`http://localhost:8080${endpoint}`, options);
+                const data = await response.text();
+                
+                resultEl.innerHTML = `<div class="${response.ok ? 'success' : 'error'}">
+Frontend Proxy ${endpoint}:
+Status: ${response.status}
+Response: ${data}
+</div>`;
+            } catch (error) {
+                resultEl.innerHTML = `<div class="error">Frontend Proxy ${endpoint} Error: ${error.message}</div>`;
+            }
+        }
+    </script>
+</body>
+</html>

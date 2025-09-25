@@ -13,6 +13,12 @@ const SectionListing: React.FC = () => {
         ? null
         : (await resourceHubService.getSectionBySlug(sectionSlug!)).data,
   });
+  const { data: allSections } = useQuery<any[]>({
+    queryKey: ["sections-all"],
+    queryFn: async () =>
+      (await resourceHubService.getSections(false)).data as any[],
+    enabled: sectionSlug === "all",
+  });
   const { data: resources } = useQuery<any>({
     queryKey: ["resources", sectionSlug],
     queryFn: async () =>
@@ -49,18 +55,37 @@ const SectionListing: React.FC = () => {
           Back to Directory
         </Link>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        {(resources?.items || []).map((r: any) => (
-          <Card key={r.id} className="hover:shadow-lg transition">
-            <CardHeader>
-              <CardTitle>{r.title}</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="text-sm text-muted-foreground">{r.summary}</div>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
+      {sectionSlug === "all" ? (
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          {(allSections || []).map((s: any) => (
+            <Link key={s.id} to={`/hub/sections/${s.slug}`}>
+              <Card className="hover:shadow-lg transition">
+                <CardHeader>
+                  <CardTitle>{s.name}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="text-sm text-muted-foreground">
+                    {s.description}
+                  </div>
+                </CardContent>
+              </Card>
+            </Link>
+          ))}
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          {(resources?.items || []).map((r: any) => (
+            <Card key={r.id} className="hover:shadow-lg transition">
+              <CardHeader>
+                <CardTitle>{r.title}</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="text-sm text-muted-foreground">{r.summary}</div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

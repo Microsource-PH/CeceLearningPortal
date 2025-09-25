@@ -27,6 +27,8 @@ import ResourceDetail from "./pages/hub/ResourceDetail";
 import AffiliateDashboard from "./pages/AffiliateDashboard";
 import DirectorySubmit from "./pages/hub/DirectorySubmit";
 import HubAboutAdmin from "./pages/hub/HubAboutAdmin";
+import HubSearch from "./pages/hub/HubSearch";
+import { ProtectedRoute } from "./components/Auth/ProtectedRoute";
 
 const queryClient = new QueryClient();
 
@@ -52,16 +54,52 @@ const App = () => (
               element={<CourseLearning />}
             />
             <Route path="/pricing" element={<Pricing />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/admin" element={<Admin />} />
+            <Route
+              path="/profile"
+              element={
+                <ProtectedRoute>
+                  <Profile />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin"
+              element={
+                <ProtectedRoute allowedRoles={["Admin"]}>
+                  <Admin />
+                </ProtectedRoute>
+              }
+            />
             <Route path="/marketplace" element={<Marketplace />} />
-            <Route path="/affiliate" element={<AffiliateDashboard />} />
+            <Route
+              path="/affiliate"
+              element={
+                <ProtectedRoute allowedRoles={["Learner"]}>
+                  <AffiliateDashboard />
+                </ProtectedRoute>
+              }
+            />
             {/* Resource Hub */}
             <Route path="/hub" element={<HubLanding />} />
             <Route path="/hub/about" element={<HubAbout />} />
-            <Route path="/hub/about/admin" element={<HubAboutAdmin />} />
+            <Route path="/hub/search" element={<HubSearch />} />
+            <Route
+              path="/hub/about/admin"
+              element={
+                <ProtectedRoute allowedRoles={["Admin"]}>
+                  <HubAboutAdmin />
+                </ProtectedRoute>
+              }
+            />
             <Route path="/hub/directory" element={<DirectoryList />} />
-            <Route path="/hub/directory/submit" element={<DirectorySubmit />} />
+            <Route
+              path="/hub/directory/submit"
+              element={
+                <ProtectedRoute>
+                  <DirectorySubmit />
+                </ProtectedRoute>
+              }
+            />
             <Route
               path="/hub/sections/:sectionSlug"
               element={<SectionListing />}
@@ -72,8 +110,22 @@ const App = () => (
             />
             <Route path="/payment-success" element={<PaymentSuccess />} />
             <Route path="/payment-failed" element={<PaymentFailed />} />
-            <Route path="/my-courses" element={<MyCourses />} />
-            <Route path="/learning-dashboard" element={<LearningDashboard />} />
+            <Route
+              path="/my-courses"
+              element={
+                <ProtectedRoute>
+                  <MyCourses />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/learning-dashboard"
+              element={
+                <ProtectedRoute>
+                  <LearningDashboard />
+                </ProtectedRoute>
+              }
+            />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

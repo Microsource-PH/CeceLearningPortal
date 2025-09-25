@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useAuth } from "@/contexts/AuthContext";
+import { HeroSection } from "@/components/LearningPortal/HeroSection";
 
 const HubLanding: React.FC = () => {
   const [q, setQ] = React.useState("");
@@ -24,39 +25,12 @@ const HubLanding: React.FC = () => {
   });
 
   return (
-    <div className="max-w-6xl mx-auto p-6 space-y-8">
-      {/* Breadcrumb */}
-      <nav className="text-sm text-muted-foreground">
-        <span className="text-foreground">Hub</span>
-      </nav>
-      <div className="relative rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 text-white p-10 overflow-hidden">
-        <div className="max-w-2xl">
-          <h1 className="text-3xl font-bold mb-2">
-            {about?.title || "Discover. Connect. Grow."}
-          </h1>
-          <p className="text-white/80 mb-4">Your learning, all in one place.</p>
-          <div className="flex gap-2">
-            <Input
-              placeholder="Search resources, templates, profiles…"
-              value={q}
-              onChange={(e) => setQ(e.target.value)}
-              className="bg-white text-black"
-            />
-            <Link to={`/hub/search?q=${encodeURIComponent(q)}`}>
-              <Button variant="secondary">Search</Button>
-            </Link>
-          </div>
-        </div>
-        {about?.heroImageUrl && (
-          <img
-            src={about.heroImageUrl}
-            alt="Hero"
-            className="absolute right-0 top-0 h-full opacity-20"
-          />
-        )}
-      </div>
+    <div className="space-y-10">
+      {/* Use the same global hero used on the root Dashboard */}
+      <HeroSection userName={user?.name} userRole={user?.role} />
 
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+      {/* Hub Quick links (under the same hero) */}
+      <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 sm:grid-cols-3 gap-4 -mt-6">
         <Link to="/hub/about">
           <Card className="hover:shadow-lg transition">
             <CardHeader>
@@ -87,7 +61,20 @@ const HubLanding: React.FC = () => {
         </Link>
       </div>
 
-      <div className="flex items-center gap-3">
+      {/* CTAs */}
+      <div className="max-w-6xl mx-auto px-6 flex items-center gap-3">
+        <div className="flex-1 max-w-md">
+          <div className="flex gap-2">
+            <Input
+              placeholder="Search resources, templates, profiles…"
+              value={q}
+              onChange={(e) => setQ(e.target.value)}
+            />
+            <Link to={`/hub/search?q=${encodeURIComponent(q)}`}>
+              <Button variant="secondary">Search</Button>
+            </Link>
+          </div>
+        </div>
         <Link to="/hub/directory/submit">
           <Button>Create My Directory Profile</Button>
         </Link>
@@ -98,7 +85,8 @@ const HubLanding: React.FC = () => {
         )}
       </div>
 
-      <div>
+      {/* Featured */}
+      <div className="max-w-6xl mx-auto px-6">
         <h2 className="text-xl font-semibold mb-3">Featured Sections</h2>
         {loadingSections ? (
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">

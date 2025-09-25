@@ -1,19 +1,39 @@
-import { useState, useEffect } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
-import { 
-  Search, 
-  Filter, 
+import { useState, useEffect } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import {
+  Search,
+  Filter,
   UserPlus,
   Edit,
   Ban,
@@ -37,13 +57,13 @@ import {
   Eye,
   Download,
   ChevronUp,
-  ChevronDown
-} from 'lucide-react';
-import adminService from '@/services/adminService';
-import subscriptionService from '@/services/subscriptionService';
-import { toast } from '@/hooks/use-toast';
-import { formatCurrency, formatDate } from '@/utils/format';
-import { formatPHP } from '@/utils/currency';
+  ChevronDown,
+} from "lucide-react";
+import adminService from "@/services/adminService";
+import subscriptionService from "@/services/subscriptionService";
+import { toast } from "@/hooks/use-toast";
+import { formatCurrency, formatDate } from "@/utils/format";
+import { formatPHP } from "@/utils/currency";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -83,35 +103,41 @@ interface User {
 }
 
 interface SubscriptionPlan {
-  id: string;
+  id: string | number;
   name: string;
-  type: 'learner' | 'creator';
+  // Some backends return `type`, others `planType`, and sometimes as numeric enums
+  type?: "learner" | "creator" | number;
+  planType?: "learner" | "creator" | number;
   price: number;
   yearlyPrice?: number;
-  billingCycle: string;
+  billingCycle?: string;
   features: string[];
 }
 
 export const UserSubscriptionManagement = () => {
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(true);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [roleFilter, setRoleFilter] = useState('all');
-  const [statusFilter, setStatusFilter] = useState('all');
-  const [subscriptionFilter, setSubscriptionFilter] = useState('all');
+  const [searchQuery, setSearchQuery] = useState("");
+  const [roleFilter, setRoleFilter] = useState("all");
+  const [statusFilter, setStatusFilter] = useState("all");
+  const [subscriptionFilter, setSubscriptionFilter] = useState("all");
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
   const [isDetailsModalOpen, setIsDetailsModalOpen] = useState(false);
   const [isSubscriptionModalOpen, setIsSubscriptionModalOpen] = useState(false);
   const [isApprovalModalOpen, setIsApprovalModalOpen] = useState(false);
   const [isRejectionModalOpen, setIsRejectionModalOpen] = useState(false);
-  const [subscriptionPlans, setSubscriptionPlans] = useState<SubscriptionPlan[]>([]);
-  const [selectedPlan, setSelectedPlan] = useState<string>('');
-  const [billingCycle, setBillingCycle] = useState<'monthly' | 'yearly'>('monthly');
-  const [sortBy, setSortBy] = useState<'name' | 'date' | 'spent'>('date');
-  const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc');
-  const [activeTab, setActiveTab] = useState('overview');
-  const [rejectionReason, setRejectionReason] = useState('');
-  const [approvalNote, setApprovalNote] = useState('');
+  const [subscriptionPlans, setSubscriptionPlans] = useState<
+    SubscriptionPlan[]
+  >([]);
+  const [selectedPlan, setSelectedPlan] = useState<string>("");
+  const [billingCycle, setBillingCycle] = useState<"monthly" | "yearly">(
+    "monthly"
+  );
+  const [sortBy, setSortBy] = useState<"name" | "date" | "spent">("date");
+  const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
+  const [activeTab, setActiveTab] = useState("overview");
+  const [rejectionReason, setRejectionReason] = useState("");
+  const [approvalNote, setApprovalNote] = useState("");
   const [processingUserId, setProcessingUserId] = useState<string | null>(null);
   const [isApproving, setIsApproving] = useState(false);
   const [isRejecting, setIsRejecting] = useState(false);
@@ -123,10 +149,7 @@ export const UserSubscriptionManagement = () => {
   const fetchData = async () => {
     setLoading(true);
     try {
-      await Promise.all([
-        fetchUsers(),
-        fetchSubscriptionPlans()
-      ]);
+      await Promise.all([fetchUsers(), fetchSubscriptionPlans()]);
     } finally {
       setLoading(false);
     }
@@ -140,46 +163,61 @@ export const UserSubscriptionManagement = () => {
         const usersWithSubscriptions = await Promise.all(
           response.data.map(async (user) => {
             try {
-              const subResponse = await adminService.getUserSubscription(user.id);
+              const subResponse = await adminService.getUserSubscription(
+                user.id
+              );
               if (subResponse.data) {
                 console.log(`Subscription for ${user.name}:`, subResponse.data);
                 // Handle the nested subscription structure from backend
-                if (subResponse.data.hasSubscription && subResponse.data.subscription) {
+                if (
+                  subResponse.data.hasSubscription &&
+                  subResponse.data.subscription
+                ) {
                   return {
                     ...user,
                     subscription: {
                       id: subResponse.data.subscription.id?.toString(),
                       plan: subResponse.data.subscription.plan,
                       planId: subResponse.data.subscription.planId?.toString(),
-                      status: typeof subResponse.data.subscription.status === 'number' 
-                        ? ['Active', 'Inactive', 'Cancelled', 'PastDue', 'Trialing'][subResponse.data.subscription.status] || 'Active'
-                        : subResponse.data.subscription.status?.toString() || 'Active',
+                      status:
+                        typeof subResponse.data.subscription.status === "number"
+                          ? [
+                              "Active",
+                              "Inactive",
+                              "Cancelled",
+                              "PastDue",
+                              "Trialing",
+                            ][subResponse.data.subscription.status] || "Active"
+                          : subResponse.data.subscription.status?.toString() ||
+                            "Active",
                       expiresAt: subResponse.data.subscription.expiresAt,
-                      billingCycle: subResponse.data.subscription.billingCycle || 'Monthly',
+                      billingCycle:
+                        subResponse.data.subscription.billingCycle || "Monthly",
                       price: subResponse.data.subscription.amount,
-                      nextBillingDate: subResponse.data.subscription.nextBillingDate,
-                      startDate: subResponse.data.subscription.startDate
-                    }
+                      nextBillingDate:
+                        subResponse.data.subscription.nextBillingDate,
+                      startDate: subResponse.data.subscription.startDate,
+                    },
                   };
                 }
               }
               return {
                 ...user,
-                subscription: undefined
+                subscription: undefined,
               };
             } catch {
               return user;
             }
           })
         );
-        console.log('Users with subscriptions:', usersWithSubscriptions);
+        console.log("Users with subscriptions:", usersWithSubscriptions);
         setUsers(usersWithSubscriptions);
       }
     } catch (error) {
       toast({
-        title: 'Error',
-        description: 'Failed to fetch users',
-        variant: 'destructive'
+        title: "Error",
+        description: "Failed to fetch users",
+        variant: "destructive",
       });
     }
   };
@@ -188,11 +226,11 @@ export const UserSubscriptionManagement = () => {
     try {
       const response = await adminService.getSubscriptionPlans();
       if (response.data) {
-        console.log('Available subscription plans:', response.data);
+        console.log("Available subscription plans:", response.data);
         setSubscriptionPlans(response.data);
       }
     } catch (error) {
-      console.error('Failed to fetch subscription plans:', error);
+      console.error("Failed to fetch subscription plans:", error);
     }
   };
 
@@ -201,16 +239,16 @@ export const UserSubscriptionManagement = () => {
       const response = await adminService.updateUserStatus(userId, newStatus);
       if (response.success) {
         toast({
-          title: 'Success',
-          description: `User status updated to ${newStatus}`
+          title: "Success",
+          description: `User status updated to ${newStatus}`,
         });
         fetchUsers();
       }
     } catch (error) {
       toast({
-        title: 'Error',
-        description: 'Failed to update user status',
-        variant: 'destructive'
+        title: "Error",
+        description: "Failed to update user status",
+        variant: "destructive",
       });
     }
   };
@@ -220,16 +258,16 @@ export const UserSubscriptionManagement = () => {
       const response = await adminService.updateUserRole(userId, newRole);
       if (response.success) {
         toast({
-          title: 'Success',
-          description: `User role updated to ${newRole}`
+          title: "Success",
+          description: `User role updated to ${newRole}`,
         });
         fetchUsers();
       }
     } catch (error) {
       toast({
-        title: 'Error',
-        description: 'Failed to update user role',
-        variant: 'destructive'
+        title: "Error",
+        description: "Failed to update user role",
+        variant: "destructive",
       });
     }
   };
@@ -238,47 +276,50 @@ export const UserSubscriptionManagement = () => {
     if (!selectedUser || !selectedPlan) return;
 
     try {
-      const plan = subscriptionPlans.find(p => p.id === selectedPlan);
+      const plan = subscriptionPlans.find(
+        (p) => p.id?.toString() === selectedPlan
+      );
       if (!plan) return;
 
       const response = await adminService.updateUserSubscription(
-        selectedUser.id, 
+        selectedUser.id,
         selectedPlan,
-        billingCycle === 'yearly'
+        billingCycle === "yearly"
       );
-      
+
       if (response.success) {
         toast({
-          title: 'Success',
-          description: 'Subscription updated successfully'
+          title: "Success",
+          description: "Subscription updated successfully",
         });
         setIsSubscriptionModalOpen(false);
         fetchUsers();
       }
     } catch (error) {
       toast({
-        title: 'Error',
-        description: 'Failed to update subscription',
-        variant: 'destructive'
+        title: "Error",
+        description: "Failed to update subscription",
+        variant: "destructive",
       });
     }
   };
 
-  const handleCancelSubscription = async (userId: string) => {
+  const handleCancelSubscription = async (subscriptionId: string) => {
     try {
-      const response = await subscriptionService.cancelSubscription(userId);
-      if (response.success) {
+      const response =
+        await subscriptionService.cancelSubscription(subscriptionId);
+      if (response.data) {
         toast({
-          title: 'Success',
-          description: 'Subscription cancelled successfully'
+          title: "Success",
+          description: "Subscription cancelled successfully",
         });
         fetchUsers();
       }
     } catch (error) {
       toast({
-        title: 'Error',
-        description: 'Failed to cancel subscription',
-        variant: 'destructive'
+        title: "Error",
+        description: "Failed to cancel subscription",
+        variant: "destructive",
       });
     }
   };
@@ -292,23 +333,23 @@ export const UserSubscriptionManagement = () => {
       const response = await adminService.approveUser({
         userId: selectedUser.id,
         approve: true,
-        reason: approvalNote || 'Welcome to the platform!'
+        reason: approvalNote || "Welcome to the platform!",
       });
 
       if (response.success) {
         toast({
-          title: 'Success',
-          description: `${selectedUser.name} has been approved successfully`
+          title: "Success",
+          description: `${selectedUser.name} has been approved successfully`,
         });
         setIsApprovalModalOpen(false);
-        setApprovalNote('');
+        setApprovalNote("");
         fetchUsers();
       }
     } catch (error) {
       toast({
-        title: 'Error',
-        description: 'Failed to approve user',
-        variant: 'destructive'
+        title: "Error",
+        description: "Failed to approve user",
+        variant: "destructive",
       });
     } finally {
       setProcessingUserId(null);
@@ -319,9 +360,9 @@ export const UserSubscriptionManagement = () => {
   const handleReject = async () => {
     if (!selectedUser || !rejectionReason.trim()) {
       toast({
-        title: 'Error',
-        description: 'Please provide a reason for rejection',
-        variant: 'destructive'
+        title: "Error",
+        description: "Please provide a reason for rejection",
+        variant: "destructive",
       });
       return;
     }
@@ -332,23 +373,23 @@ export const UserSubscriptionManagement = () => {
       const response = await adminService.approveUser({
         userId: selectedUser.id,
         approve: false,
-        reason: rejectionReason
+        reason: rejectionReason,
       });
 
       if (response.success) {
         toast({
-          title: 'Success',
-          description: `${selectedUser.name}'s registration has been rejected`
+          title: "Success",
+          description: `${selectedUser.name}'s registration has been rejected`,
         });
         setIsRejectionModalOpen(false);
-        setRejectionReason('');
+        setRejectionReason("");
         fetchUsers();
       }
     } catch (error) {
       toast({
-        title: 'Error',
-        description: 'Failed to reject user',
-        variant: 'destructive'
+        title: "Error",
+        description: "Failed to reject user",
+        variant: "destructive",
       });
     } finally {
       setProcessingUserId(null);
@@ -363,8 +404,10 @@ export const UserSubscriptionManagement = () => {
 
   const openSubscriptionModal = (user: User) => {
     setSelectedUser(user);
-    setSelectedPlan(user.subscription?.planId || '');
-    setBillingCycle(user.subscription?.billingCycle === 'Yearly' ? 'yearly' : 'monthly');
+    setSelectedPlan(user.subscription?.planId || "");
+    setBillingCycle(
+      user.subscription?.billingCycle === "Yearly" ? "yearly" : "monthly"
+    );
     setIsSubscriptionModalOpen(true);
   };
 
@@ -378,84 +421,107 @@ export const UserSubscriptionManagement = () => {
     setIsRejectionModalOpen(true);
   };
 
-  const handleSort = (column: 'name' | 'date' | 'spent') => {
+  const handleSort = (column: "name" | "date" | "spent") => {
     if (sortBy === column) {
-      setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
+      setSortOrder(sortOrder === "asc" ? "desc" : "asc");
     } else {
       setSortBy(column);
-      setSortOrder('desc');
+      setSortOrder("desc");
     }
   };
 
-  const filteredUsers = users.filter(user => {
-    const matchesSearch = user.name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         user.email?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         user.company?.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesRole = roleFilter === 'all' || user.role === roleFilter;
-    const matchesStatus = statusFilter === 'all' || user.status === statusFilter;
-    const matchesSubscription = subscriptionFilter === 'all' || 
-                               (subscriptionFilter === 'active' && user.subscription?.status?.toLowerCase() === 'active') ||
-                               (subscriptionFilter === 'inactive' && (!user.subscription || user.subscription.status?.toLowerCase() !== 'active')) ||
-                               (subscriptionFilter === 'cancelled' && user.subscription?.status?.toLowerCase() === 'cancelled');
-    
-    return matchesSearch && matchesRole && matchesStatus && matchesSubscription;
-  }).sort((a, b) => {
-    let comparison = 0;
-    
-    switch (sortBy) {
-      case 'name':
-        comparison = a.name.localeCompare(b.name);
-        break;
-      case 'date':
-        comparison = new Date(a.joinedDate).getTime() - new Date(b.joinedDate).getTime();
-        break;
-      case 'spent':
-        comparison = a.totalSpent - b.totalSpent;
-        break;
-    }
-    
-    return sortOrder === 'asc' ? comparison : -comparison;
-  });
+  const filteredUsers = users
+    .filter((user) => {
+      const matchesSearch =
+        user.name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        user.email?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        user.company?.toLowerCase().includes(searchQuery.toLowerCase());
+      const matchesRole = roleFilter === "all" || user.role === roleFilter;
+      const matchesStatus =
+        statusFilter === "all" || user.status === statusFilter;
+      const matchesSubscription =
+        subscriptionFilter === "all" ||
+        (subscriptionFilter === "active" &&
+          user.subscription?.status?.toLowerCase() === "active") ||
+        (subscriptionFilter === "inactive" &&
+          (!user.subscription ||
+            user.subscription.status?.toLowerCase() !== "active")) ||
+        (subscriptionFilter === "cancelled" &&
+          user.subscription?.status?.toLowerCase() === "cancelled");
+
+      return (
+        matchesSearch && matchesRole && matchesStatus && matchesSubscription
+      );
+    })
+    .sort((a, b) => {
+      let comparison = 0;
+
+      switch (sortBy) {
+        case "name":
+          comparison = a.name.localeCompare(b.name);
+          break;
+        case "date":
+          comparison =
+            new Date(a.joinedDate).getTime() - new Date(b.joinedDate).getTime();
+          break;
+        case "spent":
+          comparison = a.totalSpent - b.totalSpent;
+          break;
+      }
+
+      return sortOrder === "asc" ? comparison : -comparison;
+    });
 
   // Calculate statistics
   const totalUsers = users.length;
-  const activeUsers = users.filter(u => u.status === 'Active').length;
-  const pendingUsers = users.filter(u => u.status === 'PendingApproval').length;
-  const activeSubscribers = users.filter(u => u.subscription?.status?.toLowerCase() === 'active').length;
+  const activeUsers = users.filter((u) => u.status === "Active").length;
+  const pendingUsers = users.filter(
+    (u) => u.status === "PendingApproval"
+  ).length;
+  const activeSubscribers = users.filter(
+    (u) => u.subscription?.status?.toLowerCase() === "active"
+  ).length;
   const totalRevenue = users.reduce((sum, user) => sum + user.totalSpent, 0);
   const monthlyRecurring = users
-    .filter(u => u.subscription?.status?.toLowerCase() === 'active' && u.subscription?.billingCycle === 'Monthly')
+    .filter(
+      (u) =>
+        u.subscription?.status?.toLowerCase() === "active" &&
+        u.subscription?.billingCycle === "Monthly"
+    )
     .reduce((sum, user) => sum + (user.subscription?.price || 0), 0);
 
   const getStatusBadge = (status: string) => {
     const statusConfig = {
-      Active: { icon: CheckCircle, class: 'bg-green-100 text-green-800' },
-      Inactive: { icon: XCircle, class: 'bg-gray-100 text-gray-800' },
-      Suspended: { icon: Ban, class: 'bg-red-100 text-red-800' },
-      PendingApproval: { icon: Clock, class: 'bg-yellow-100 text-yellow-800' }
+      Active: { icon: CheckCircle, class: "bg-green-100 text-green-800" },
+      Inactive: { icon: XCircle, class: "bg-gray-100 text-gray-800" },
+      Suspended: { icon: Ban, class: "bg-red-100 text-red-800" },
+      PendingApproval: { icon: Clock, class: "bg-yellow-100 text-yellow-800" },
     };
-    
-    const config = statusConfig[status as keyof typeof statusConfig] || statusConfig.Inactive;
+
+    const config =
+      statusConfig[status as keyof typeof statusConfig] ||
+      statusConfig.Inactive;
     const Icon = config.icon;
-    
+
     return (
       <Badge className={config.class}>
         <Icon className="w-3 h-3 mr-1" />
-        {status === 'PendingApproval' ? 'Pending' : status}
+        {status === "PendingApproval" ? "Pending" : status}
       </Badge>
     );
   };
 
   const getRoleBadge = (role: string) => {
     const roleConfig = {
-      Admin: { icon: Shield, class: 'bg-purple-100 text-purple-800' },
-      Creator: { icon: Award, class: 'bg-blue-100 text-blue-800' },
-      Learner: { icon: BookOpen, class: 'bg-orange-100 text-orange-800' }
+      Admin: { icon: Shield, class: "bg-purple-100 text-purple-800" },
+      Creator: { icon: Award, class: "bg-blue-100 text-blue-800" },
+      Learner: { icon: BookOpen, class: "bg-orange-100 text-orange-800" },
     };
-    
-    const config = roleConfig[role as keyof typeof roleConfig] || roleConfig.Learner;
+
+    const config =
+      roleConfig[role as keyof typeof roleConfig] || roleConfig.Learner;
     const Icon = config.icon;
-    
+
     return (
       <Badge className={config.class}>
         <Icon className="w-3 h-3 mr-1" />
@@ -464,20 +530,26 @@ export const UserSubscriptionManagement = () => {
     );
   };
 
-  const getSubscriptionBadge = (subscription?: User['subscription']) => {
-    if (!subscription || subscription.status?.toLowerCase() !== 'active') {
+  const getSubscriptionBadge = (subscription?: User["subscription"]) => {
+    if (!subscription || subscription.status?.toLowerCase() !== "active") {
       return <Badge variant="outline">No Subscription</Badge>;
     }
-    
+
     const statusColors = {
-      active: 'bg-green-100 text-green-800',
-      cancelled: 'bg-gray-100 text-gray-800',
-      past_due: 'bg-red-100 text-red-800',
-      trialing: 'bg-blue-100 text-blue-800'
+      active: "bg-green-100 text-green-800",
+      cancelled: "bg-gray-100 text-gray-800",
+      past_due: "bg-red-100 text-red-800",
+      trialing: "bg-blue-100 text-blue-800",
     };
-    
+
     return (
-      <Badge className={statusColors[subscription.status.toLowerCase() as keyof typeof statusColors] || ''}>
+      <Badge
+        className={
+          statusColors[
+            subscription.status.toLowerCase() as keyof typeof statusColors
+          ] || ""
+        }
+      >
         <CreditCard className="w-3 h-3 mr-1" />
         {subscription.plan} ({subscription.billingCycle})
       </Badge>
@@ -503,7 +575,8 @@ export const UserSubscriptionManagement = () => {
           <AlertCircle className="h-4 w-4 text-yellow-600" />
           <AlertTitle>Pending Approvals</AlertTitle>
           <AlertDescription>
-            You have {pendingUsers} user registration{pendingUsers !== 1 ? 's' : ''} waiting for approval.
+            You have {pendingUsers} user registration
+            {pendingUsers !== 1 ? "s" : ""} waiting for approval.
           </AlertDescription>
         </Alert>
       )}
@@ -575,7 +648,9 @@ export const UserSubscriptionManagement = () => {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-xs text-muted-foreground">MRR</p>
-                <p className="text-xl font-bold">{formatPHP(monthlyRecurring)}</p>
+                <p className="text-xl font-bold">
+                  {formatPHP(monthlyRecurring)}
+                </p>
               </div>
               <Calendar className="w-6 h-6 text-learning-warning/60" />
             </div>
@@ -607,7 +682,10 @@ export const UserSubscriptionManagement = () => {
               <TabsTrigger value="pending">
                 Pending Approval
                 {pendingUsers > 0 && (
-                  <Badge className="ml-2 bg-yellow-100 text-yellow-800" variant="secondary">
+                  <Badge
+                    className="ml-2 bg-yellow-100 text-yellow-800"
+                    variant="secondary"
+                  >
                     {pendingUsers}
                   </Badge>
                 )}
@@ -651,7 +729,10 @@ export const UserSubscriptionManagement = () => {
                   <SelectItem value="Suspended">Suspended</SelectItem>
                 </SelectContent>
               </Select>
-              <Select value={subscriptionFilter} onValueChange={setSubscriptionFilter}>
+              <Select
+                value={subscriptionFilter}
+                onValueChange={setSubscriptionFilter}
+              >
                 <SelectTrigger className="w-[180px]">
                   <SelectValue placeholder="Subscription status" />
                 </SelectTrigger>
@@ -671,16 +752,19 @@ export const UserSubscriptionManagement = () => {
                   <TableHeader>
                     <TableRow>
                       <TableHead>
-                        <Button 
-                          variant="ghost" 
-                          size="sm" 
-                          onClick={() => handleSort('name')}
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={() => handleSort("name")}
                           className="h-auto p-0 font-semibold"
                         >
                           User
-                          {sortBy === 'name' && (
-                            sortOrder === 'asc' ? <ChevronUp className="w-4 h-4 ml-1" /> : <ChevronDown className="w-4 h-4 ml-1" />
-                          )}
+                          {sortBy === "name" &&
+                            (sortOrder === "asc" ? (
+                              <ChevronUp className="w-4 h-4 ml-1" />
+                            ) : (
+                              <ChevronDown className="w-4 h-4 ml-1" />
+                            ))}
                         </Button>
                       </TableHead>
                       <TableHead>Role</TableHead>
@@ -688,29 +772,35 @@ export const UserSubscriptionManagement = () => {
                       <TableHead>Subscription</TableHead>
                       <TableHead>Courses</TableHead>
                       <TableHead>
-                        <Button 
-                          variant="ghost" 
-                          size="sm" 
-                          onClick={() => handleSort('spent')}
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={() => handleSort("spent")}
                           className="h-auto p-0 font-semibold"
                         >
                           Total Spent
-                          {sortBy === 'spent' && (
-                            sortOrder === 'asc' ? <ChevronUp className="w-4 h-4 ml-1" /> : <ChevronDown className="w-4 h-4 ml-1" />
-                          )}
+                          {sortBy === "spent" &&
+                            (sortOrder === "asc" ? (
+                              <ChevronUp className="w-4 h-4 ml-1" />
+                            ) : (
+                              <ChevronDown className="w-4 h-4 ml-1" />
+                            ))}
                         </Button>
                       </TableHead>
                       <TableHead>
-                        <Button 
-                          variant="ghost" 
-                          size="sm" 
-                          onClick={() => handleSort('date')}
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={() => handleSort("date")}
                           className="h-auto p-0 font-semibold"
                         >
                           Joined
-                          {sortBy === 'date' && (
-                            sortOrder === 'asc' ? <ChevronUp className="w-4 h-4 ml-1" /> : <ChevronDown className="w-4 h-4 ml-1" />
-                          )}
+                          {sortBy === "date" &&
+                            (sortOrder === "asc" ? (
+                              <ChevronUp className="w-4 h-4 ml-1" />
+                            ) : (
+                              <ChevronDown className="w-4 h-4 ml-1" />
+                            ))}
                         </Button>
                       </TableHead>
                       <TableHead>Actions</TableHead>
@@ -723,31 +813,43 @@ export const UserSubscriptionManagement = () => {
                           <div className="flex items-center gap-3">
                             <Avatar>
                               <AvatarImage src={user.avatar} alt={user.name} />
-                              <AvatarFallback>{user.name?.charAt(0) || 'U'}</AvatarFallback>
+                              <AvatarFallback>
+                                {user.name?.charAt(0) || "U"}
+                              </AvatarFallback>
                             </Avatar>
                             <div>
                               <div className="font-medium">{user.name}</div>
-                              <div className="text-sm text-muted-foreground">{user.email}</div>
+                              <div className="text-sm text-muted-foreground">
+                                {user.email}
+                              </div>
                               {user.company && (
-                                <div className="text-xs text-muted-foreground">{user.company}</div>
+                                <div className="text-xs text-muted-foreground">
+                                  {user.company}
+                                </div>
                               )}
                             </div>
                           </div>
                         </TableCell>
                         <TableCell>{getRoleBadge(user.role)}</TableCell>
                         <TableCell>{getStatusBadge(user.status)}</TableCell>
-                        <TableCell>{getSubscriptionBadge(user.subscription)}</TableCell>
+                        <TableCell>
+                          {getSubscriptionBadge(user.subscription)}
+                        </TableCell>
                         <TableCell>
                           <div className="text-sm">
                             <div>{user.coursesEnrolled} enrolled</div>
-                            <div className="text-muted-foreground">{user.coursesCompleted} completed</div>
+                            <div className="text-muted-foreground">
+                              {user.coursesCompleted} completed
+                            </div>
                           </div>
                         </TableCell>
                         <TableCell>{formatPHP(user.totalSpent)}</TableCell>
                         <TableCell>
                           <div className="text-sm">
                             <div>{formatDate(user.joinedDate)}</div>
-                            <div className="text-muted-foreground">Last: {formatDate(user.lastActive)}</div>
+                            <div className="text-muted-foreground">
+                              Last: {formatDate(user.lastActive)}
+                            </div>
                           </div>
                         </TableCell>
                         <TableCell>
@@ -760,21 +862,23 @@ export const UserSubscriptionManagement = () => {
                             <DropdownMenuContent align="end">
                               <DropdownMenuLabel>Actions</DropdownMenuLabel>
                               <DropdownMenuSeparator />
-                              <DropdownMenuItem onClick={() => openUserDetails(user)}>
+                              <DropdownMenuItem
+                                onClick={() => openUserDetails(user)}
+                              >
                                 <Eye className="w-4 h-4 mr-2" />
                                 View Details
                               </DropdownMenuItem>
-                              {user.status === 'PendingApproval' ? (
+                              {user.status === "PendingApproval" ? (
                                 <>
                                   <DropdownMenuSeparator />
-                                  <DropdownMenuItem 
+                                  <DropdownMenuItem
                                     onClick={() => openApprovalModal(user)}
                                     className="text-green-600"
                                   >
                                     <CheckCircle className="w-4 h-4 mr-2" />
                                     Approve Registration
                                   </DropdownMenuItem>
-                                  <DropdownMenuItem 
+                                  <DropdownMenuItem
                                     onClick={() => openRejectionModal(user)}
                                     className="text-red-600"
                                   >
@@ -784,22 +888,39 @@ export const UserSubscriptionManagement = () => {
                                 </>
                               ) : (
                                 <>
-                                  <DropdownMenuItem onClick={() => openSubscriptionModal(user)}>
+                                  <DropdownMenuItem
+                                    onClick={() => openSubscriptionModal(user)}
+                                  >
                                     <CreditCard className="w-4 h-4 mr-2" />
                                     Manage Subscription
                                   </DropdownMenuItem>
                                   <DropdownMenuSeparator />
-                                  <DropdownMenuItem onClick={() => handleRoleChange(user.id, 'Creator')}>
+                                  <DropdownMenuItem
+                                    onClick={() =>
+                                      handleRoleChange(user.id, "Creator")
+                                    }
+                                  >
                                     <Shield className="w-4 h-4 mr-2" />
                                     Change Role
                                   </DropdownMenuItem>
                                 </>
                               )}
-                              <DropdownMenuItem 
-                                onClick={() => handleStatusChange(user.id, user.status === 'Active' ? 'Suspended' : 'Active')}
-                                className={user.status === 'Active' ? 'text-red-600' : 'text-green-600'}
+                              <DropdownMenuItem
+                                onClick={() =>
+                                  handleStatusChange(
+                                    user.id,
+                                    user.status === "Active"
+                                      ? "Suspended"
+                                      : "Active"
+                                  )
+                                }
+                                className={
+                                  user.status === "Active"
+                                    ? "text-red-600"
+                                    : "text-green-600"
+                                }
                               >
-                                {user.status === 'Active' ? (
+                                {user.status === "Active" ? (
                                   <>
                                     <Ban className="w-4 h-4 mr-2" />
                                     Suspend User
@@ -811,9 +932,13 @@ export const UserSubscriptionManagement = () => {
                                   </>
                                 )}
                               </DropdownMenuItem>
-                              {user.subscription?.status?.toLowerCase() === 'active' && (
-                                <DropdownMenuItem 
-                                  onClick={() => handleCancelSubscription(user.id)}
+                              {user.subscription?.status?.toLowerCase() ===
+                                "active" && (
+                                <DropdownMenuItem
+                                  onClick={() => {
+                                    const sid = user.subscription?.id;
+                                    if (sid) handleCancelSubscription(sid);
+                                  }}
                                   className="text-red-600"
                                 >
                                   <XCircle className="w-4 h-4 mr-2" />
@@ -844,20 +969,29 @@ export const UserSubscriptionManagement = () => {
                   </TableHeader>
                   <TableBody>
                     {filteredUsers
-                      .filter(user => user.status === 'PendingApproval')
+                      .filter((user) => user.status === "PendingApproval")
                       .map((user) => (
                         <TableRow key={user.id}>
                           <TableCell>
                             <div className="flex items-center gap-3">
                               <Avatar>
-                                <AvatarImage src={user.avatar} alt={user.name} />
-                                <AvatarFallback>{user.name?.charAt(0) || 'U'}</AvatarFallback>
+                                <AvatarImage
+                                  src={user.avatar}
+                                  alt={user.name}
+                                />
+                                <AvatarFallback>
+                                  {user.name?.charAt(0) || "U"}
+                                </AvatarFallback>
                               </Avatar>
                               <div>
                                 <div className="font-medium">{user.name}</div>
-                                <div className="text-sm text-muted-foreground">{user.email}</div>
+                                <div className="text-sm text-muted-foreground">
+                                  {user.email}
+                                </div>
                                 {user.company && (
-                                  <div className="text-xs text-muted-foreground">{user.company}</div>
+                                  <div className="text-xs text-muted-foreground">
+                                    {user.company}
+                                  </div>
                                 )}
                               </div>
                             </div>
@@ -897,11 +1031,17 @@ export const UserSubscriptionManagement = () => {
                       ))}
                   </TableBody>
                 </Table>
-                {filteredUsers.filter(user => user.status === 'PendingApproval').length === 0 && (
+                {filteredUsers.filter(
+                  (user) => user.status === "PendingApproval"
+                ).length === 0 && (
                   <div className="text-center py-12">
                     <Users className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
-                    <h3 className="text-lg font-semibold mb-2">No Pending Approvals</h3>
-                    <p className="text-muted-foreground">All user registrations have been processed.</p>
+                    <h3 className="text-lg font-semibold mb-2">
+                      No Pending Approvals
+                    </h3>
+                    <p className="text-muted-foreground">
+                      All user registrations have been processed.
+                    </p>
                   </div>
                 )}
               </div>
@@ -922,18 +1062,28 @@ export const UserSubscriptionManagement = () => {
                   </TableHeader>
                   <TableBody>
                     {filteredUsers
-                      .filter(user => user.subscription?.status?.toLowerCase() === 'active')
+                      .filter(
+                        (user) =>
+                          user.subscription?.status?.toLowerCase() === "active"
+                      )
                       .map((user) => (
                         <TableRow key={user.id}>
                           <TableCell>
                             <div className="flex items-center gap-3">
                               <Avatar>
-                                <AvatarImage src={user.avatar} alt={user.name} />
-                                <AvatarFallback>{user.name?.charAt(0) || 'U'}</AvatarFallback>
+                                <AvatarImage
+                                  src={user.avatar}
+                                  alt={user.name}
+                                />
+                                <AvatarFallback>
+                                  {user.name?.charAt(0) || "U"}
+                                </AvatarFallback>
                               </Avatar>
                               <div>
                                 <div className="font-medium">{user.name}</div>
-                                <div className="text-sm text-muted-foreground">{user.email}</div>
+                                <div className="text-sm text-muted-foreground">
+                                  {user.email}
+                                </div>
                               </div>
                             </div>
                           </TableCell>
@@ -951,14 +1101,18 @@ export const UserSubscriptionManagement = () => {
                             </div>
                           </TableCell>
                           <TableCell>
-                            {user.subscription.nextBillingDate || user.subscription.expiresAt ? 
-                              formatDate(user.subscription.nextBillingDate || user.subscription.expiresAt!) : 
-                              'N/A'}
+                            {user.subscription.nextBillingDate ||
+                            user.subscription.expiresAt
+                              ? formatDate(
+                                  user.subscription.nextBillingDate ||
+                                    user.subscription.expiresAt!
+                                )
+                              : "N/A"}
                           </TableCell>
                           <TableCell>{formatPHP(user.totalSpent)}</TableCell>
                           <TableCell>
-                            <Button 
-                              variant="ghost" 
+                            <Button
+                              variant="ghost"
                               size="sm"
                               onClick={() => openSubscriptionModal(user)}
                             >
@@ -969,11 +1123,18 @@ export const UserSubscriptionManagement = () => {
                       ))}
                   </TableBody>
                 </Table>
-                {filteredUsers.filter(user => user.subscription?.status?.toLowerCase() === 'active').length === 0 && (
+                {filteredUsers.filter(
+                  (user) =>
+                    user.subscription?.status?.toLowerCase() === "active"
+                ).length === 0 && (
                   <div className="text-center py-12">
                     <CreditCard className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
-                    <h3 className="text-lg font-semibold mb-2">No Active Subscribers</h3>
-                    <p className="text-muted-foreground">There are currently no users with active subscriptions.</p>
+                    <h3 className="text-lg font-semibold mb-2">
+                      No Active Subscribers
+                    </h3>
+                    <p className="text-muted-foreground">
+                      There are currently no users with active subscriptions.
+                    </p>
                   </div>
                 )}
               </div>
@@ -993,33 +1154,48 @@ export const UserSubscriptionManagement = () => {
                   </TableHeader>
                   <TableBody>
                     {filteredUsers
-                      .filter(user => !user.subscription || user.subscription.status?.toLowerCase() !== 'active')
+                      .filter(
+                        (user) =>
+                          !user.subscription ||
+                          user.subscription.status?.toLowerCase() !== "active"
+                      )
                       .map((user) => (
                         <TableRow key={user.id}>
                           <TableCell>
                             <div className="flex items-center gap-3">
                               <Avatar>
-                                <AvatarImage src={user.avatar} alt={user.name} />
-                                <AvatarFallback>{user.name?.charAt(0) || 'U'}</AvatarFallback>
+                                <AvatarImage
+                                  src={user.avatar}
+                                  alt={user.name}
+                                />
+                                <AvatarFallback>
+                                  {user.name?.charAt(0) || "U"}
+                                </AvatarFallback>
                               </Avatar>
                               <div>
                                 <div className="font-medium">{user.name}</div>
-                                <div className="text-sm text-muted-foreground">{user.email}</div>
+                                <div className="text-sm text-muted-foreground">
+                                  {user.email}
+                                </div>
                               </div>
                             </div>
                           </TableCell>
                           <TableCell>{formatDate(user.lastActive)}</TableCell>
                           <TableCell>
                             {user.subscription ? (
-                              <Badge variant="outline">{user.subscription.plan}</Badge>
+                              <Badge variant="outline">
+                                {user.subscription.plan}
+                              </Badge>
                             ) : (
-                              <span className="text-muted-foreground">No previous plan</span>
+                              <span className="text-muted-foreground">
+                                No previous plan
+                              </span>
                             )}
                           </TableCell>
                           <TableCell>{formatPHP(user.totalSpent)}</TableCell>
                           <TableCell>
-                            <Button 
-                              variant="ghost" 
+                            <Button
+                              variant="ghost"
                               size="sm"
                               onClick={() => openSubscriptionModal(user)}
                             >
@@ -1046,8 +1222,13 @@ export const UserSubscriptionManagement = () => {
             <div className="space-y-6">
               <div className="flex items-center gap-4">
                 <Avatar className="w-20 h-20">
-                  <AvatarImage src={selectedUser.avatar} alt={selectedUser.name} />
-                  <AvatarFallback>{selectedUser.name?.charAt(0) || 'U'}</AvatarFallback>
+                  <AvatarImage
+                    src={selectedUser.avatar}
+                    alt={selectedUser.name}
+                  />
+                  <AvatarFallback>
+                    {selectedUser.name?.charAt(0) || "U"}
+                  </AvatarFallback>
                 </Avatar>
                 <div>
                   <h3 className="text-xl font-semibold">{selectedUser.name}</h3>
@@ -1062,19 +1243,27 @@ export const UserSubscriptionManagement = () => {
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-1">
                   <p className="text-sm text-muted-foreground">Phone</p>
-                  <p className="font-medium">{selectedUser.phone || 'Not provided'}</p>
+                  <p className="font-medium">
+                    {selectedUser.phone || "Not provided"}
+                  </p>
                 </div>
                 <div className="space-y-1">
                   <p className="text-sm text-muted-foreground">Location</p>
-                  <p className="font-medium">{selectedUser.location || 'Not provided'}</p>
+                  <p className="font-medium">
+                    {selectedUser.location || "Not provided"}
+                  </p>
                 </div>
                 <div className="space-y-1">
                   <p className="text-sm text-muted-foreground">Joined Date</p>
-                  <p className="font-medium">{formatDate(selectedUser.joinedDate)}</p>
+                  <p className="font-medium">
+                    {formatDate(selectedUser.joinedDate)}
+                  </p>
                 </div>
                 <div className="space-y-1">
                   <p className="text-sm text-muted-foreground">Last Active</p>
-                  <p className="font-medium">{formatDate(selectedUser.lastActive)}</p>
+                  <p className="font-medium">
+                    {formatDate(selectedUser.lastActive)}
+                  </p>
                 </div>
               </div>
 
@@ -1083,20 +1272,30 @@ export const UserSubscriptionManagement = () => {
                 <div className="grid grid-cols-3 gap-4">
                   <Card>
                     <CardContent className="p-4">
-                      <div className="text-2xl font-bold">{selectedUser.coursesEnrolled}</div>
-                      <p className="text-sm text-muted-foreground">Courses Enrolled</p>
+                      <div className="text-2xl font-bold">
+                        {selectedUser.coursesEnrolled}
+                      </div>
+                      <p className="text-sm text-muted-foreground">
+                        Courses Enrolled
+                      </p>
                     </CardContent>
                   </Card>
                   <Card>
                     <CardContent className="p-4">
-                      <div className="text-2xl font-bold">{selectedUser.coursesCompleted}</div>
+                      <div className="text-2xl font-bold">
+                        {selectedUser.coursesCompleted}
+                      </div>
                       <p className="text-sm text-muted-foreground">Completed</p>
                     </CardContent>
                   </Card>
                   <Card>
                     <CardContent className="p-4">
-                      <div className="text-2xl font-bold">{formatPHP(selectedUser.totalSpent)}</div>
-                      <p className="text-sm text-muted-foreground">Total Spent</p>
+                      <div className="text-2xl font-bold">
+                        {formatPHP(selectedUser.totalSpent)}
+                      </div>
+                      <p className="text-sm text-muted-foreground">
+                        Total Spent
+                      </p>
                     </CardContent>
                   </Card>
                 </div>
@@ -1109,23 +1308,44 @@ export const UserSubscriptionManagement = () => {
                     <CardContent className="p-4">
                       <div className="space-y-2">
                         <div className="flex justify-between">
-                          <span className="text-sm text-muted-foreground">Plan</span>
-                          <span className="font-medium">{selectedUser.subscription.plan}</span>
+                          <span className="text-sm text-muted-foreground">
+                            Plan
+                          </span>
+                          <span className="font-medium">
+                            {selectedUser.subscription.plan}
+                          </span>
                         </div>
                         <div className="flex justify-between">
-                          <span className="text-sm text-muted-foreground">Status</span>
-                          <Badge className={selectedUser.subscription.status?.toLowerCase() === 'active' ? 'bg-green-100 text-green-800' : ''}>
+                          <span className="text-sm text-muted-foreground">
+                            Status
+                          </span>
+                          <Badge
+                            className={
+                              selectedUser.subscription.status?.toLowerCase() ===
+                              "active"
+                                ? "bg-green-100 text-green-800"
+                                : ""
+                            }
+                          >
                             {selectedUser.subscription.status}
                           </Badge>
                         </div>
                         <div className="flex justify-between">
-                          <span className="text-sm text-muted-foreground">Billing Cycle</span>
-                          <span className="font-medium">{selectedUser.subscription.billingCycle}</span>
+                          <span className="text-sm text-muted-foreground">
+                            Billing Cycle
+                          </span>
+                          <span className="font-medium">
+                            {selectedUser.subscription.billingCycle}
+                          </span>
                         </div>
                         {selectedUser.subscription.expiresAt && (
                           <div className="flex justify-between">
-                            <span className="text-sm text-muted-foreground">Expires</span>
-                            <span className="font-medium">{formatDate(selectedUser.subscription.expiresAt)}</span>
+                            <span className="text-sm text-muted-foreground">
+                              Expires
+                            </span>
+                            <span className="font-medium">
+                              {formatDate(selectedUser.subscription.expiresAt)}
+                            </span>
                           </div>
                         )}
                       </div>
@@ -1136,7 +1356,10 @@ export const UserSubscriptionManagement = () => {
             </div>
           )}
           <DialogFooter>
-            <Button variant="outline" onClick={() => setIsDetailsModalOpen(false)}>
+            <Button
+              variant="outline"
+              onClick={() => setIsDetailsModalOpen(false)}
+            >
               Close
             </Button>
           </DialogFooter>
@@ -1144,7 +1367,10 @@ export const UserSubscriptionManagement = () => {
       </Dialog>
 
       {/* Subscription Management Modal */}
-      <Dialog open={isSubscriptionModalOpen} onOpenChange={setIsSubscriptionModalOpen}>
+      <Dialog
+        open={isSubscriptionModalOpen}
+        onOpenChange={setIsSubscriptionModalOpen}
+      >
         <DialogContent className="sm:max-w-[500px]">
           <DialogHeader>
             <DialogTitle>Manage Subscription</DialogTitle>
@@ -1155,7 +1381,12 @@ export const UserSubscriptionManagement = () => {
           <div className="space-y-4">
             <div className="space-y-2">
               <Label>Billing Cycle</Label>
-              <Select value={billingCycle} onValueChange={(value: 'monthly' | 'yearly') => setBillingCycle(value)}>
+              <Select
+                value={billingCycle}
+                onValueChange={(value: "monthly" | "yearly") =>
+                  setBillingCycle(value)
+                }
+              >
                 <SelectTrigger>
                   <SelectValue />
                 </SelectTrigger>
@@ -1175,49 +1406,69 @@ export const UserSubscriptionManagement = () => {
                 <SelectContent>
                   <SelectItem value="none">No Subscription</SelectItem>
                   {subscriptionPlans
-                    .filter(plan => {
-                      console.log('Filtering plan:', plan, 'for role:', selectedUser?.role);
+                    .filter((plan) => {
+                      console.log(
+                        "Filtering plan:",
+                        plan,
+                        "for role:",
+                        selectedUser?.role
+                      );
                       // Handle both 'type' and 'planType' fields, and handle enum values
                       const planType = plan.type || plan.planType;
-                      const planTypeStr = typeof planType === 'number' 
-                        ? ['learner', 'creator'][planType] 
-                        : planType?.toLowerCase();
-                      
-                      return (selectedUser?.role === 'Creator' && planTypeStr === 'creator') ||
-                             (selectedUser?.role === 'Learner' && planTypeStr === 'learner') ||
-                             (selectedUser?.role === 'Admin'); // Admin can see all plans
+                      const planTypeStr =
+                        typeof planType === "number"
+                          ? ["learner", "creator"][planType]
+                          : planType?.toLowerCase();
+
+                      return (
+                        (selectedUser?.role === "Creator" &&
+                          planTypeStr === "creator") ||
+                        (selectedUser?.role === "Learner" &&
+                          planTypeStr === "learner") ||
+                        selectedUser?.role === "Admin"
+                      ); // Admin can see all plans
                     })
-                    .map(plan => (
+                    .map((plan) => (
                       <SelectItem key={plan.id} value={plan.id.toString()}>
-                        {plan.name} - {formatPHP(billingCycle === 'yearly' ? (plan.yearlyPrice || plan.price * 12) : plan.price)}/{billingCycle}
+                        {plan.name} -{" "}
+                        {formatPHP(
+                          billingCycle === "yearly"
+                            ? plan.yearlyPrice || plan.price * 12
+                            : plan.price
+                        )}
+                        /{billingCycle}
                       </SelectItem>
-                    ))
-                  }
+                    ))}
                 </SelectContent>
               </Select>
             </div>
 
-            {selectedPlan && selectedPlan !== 'none' && (
+            {selectedPlan && selectedPlan !== "none" && (
               <Card>
                 <CardContent className="p-4">
                   <h4 className="font-semibold mb-2">Plan Features</h4>
                   <ul className="space-y-1">
                     {subscriptionPlans
-                      .find(p => p.id === selectedPlan)
+                      .find((p) => p.id?.toString() === selectedPlan)
                       ?.features.map((feature, index) => (
-                        <li key={index} className="text-sm flex items-center gap-2">
+                        <li
+                          key={index}
+                          className="text-sm flex items-center gap-2"
+                        >
                           <CheckCircle className="w-4 h-4 text-green-500" />
                           {feature}
                         </li>
-                      ))
-                    }
+                      ))}
                   </ul>
                 </CardContent>
               </Card>
             )}
           </div>
           <DialogFooter>
-            <Button variant="outline" onClick={() => setIsSubscriptionModalOpen(false)}>
+            <Button
+              variant="outline"
+              onClick={() => setIsSubscriptionModalOpen(false)}
+            >
               Cancel
             </Button>
             <Button onClick={handleSubscriptionUpdate}>
@@ -1240,16 +1491,28 @@ export const UserSubscriptionManagement = () => {
             <div className="bg-blue-50 p-4 rounded-lg">
               <h4 className="font-medium text-blue-900 mb-2">User Details</h4>
               <div className="space-y-1 text-sm text-blue-800">
-                <p><span className="font-medium">Name:</span> {selectedUser?.name}</p>
-                <p><span className="font-medium">Email:</span> {selectedUser?.email}</p>
-                <p><span className="font-medium">Role:</span> {selectedUser?.role}</p>
-                <p><span className="font-medium">Registered:</span> {selectedUser && formatDate(selectedUser.joinedDate)}</p>
+                <p>
+                  <span className="font-medium">Name:</span>{" "}
+                  {selectedUser?.name}
+                </p>
+                <p>
+                  <span className="font-medium">Email:</span>{" "}
+                  {selectedUser?.email}
+                </p>
+                <p>
+                  <span className="font-medium">Role:</span>{" "}
+                  {selectedUser?.role}
+                </p>
+                <p>
+                  <span className="font-medium">Registered:</span>{" "}
+                  {selectedUser && formatDate(selectedUser.joinedDate)}
+                </p>
               </div>
             </div>
-            
+
             <div className="space-y-2">
               <Label htmlFor="approval-note">Welcome Message (Optional)</Label>
-              <Textarea 
+              <Textarea
                 id="approval-note"
                 placeholder="Add a personalized welcome message for the user..."
                 value={approvalNote}
@@ -1259,28 +1522,31 @@ export const UserSubscriptionManagement = () => {
             </div>
           </div>
           <DialogFooter>
-            <Button 
-              variant="outline" 
+            <Button
+              variant="outline"
               onClick={() => {
                 setIsApprovalModalOpen(false);
-                setApprovalNote('');
+                setApprovalNote("");
               }}
             >
               Cancel
             </Button>
-            <Button 
+            <Button
               onClick={handleApprove}
               disabled={isApproving}
               className="bg-green-600 hover:bg-green-700"
             >
-              {isApproving ? 'Approving...' : 'Approve User'}
+              {isApproving ? "Approving..." : "Approve User"}
             </Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
 
       {/* Rejection Modal */}
-      <Dialog open={isRejectionModalOpen} onOpenChange={setIsRejectionModalOpen}>
+      <Dialog
+        open={isRejectionModalOpen}
+        onOpenChange={setIsRejectionModalOpen}
+      >
         <DialogContent className="sm:max-w-[500px]">
           <DialogHeader>
             <DialogTitle>Reject User Registration</DialogTitle>
@@ -1292,22 +1558,34 @@ export const UserSubscriptionManagement = () => {
             <Alert className="border-red-200 bg-red-50">
               <AlertCircle className="h-4 w-4 text-red-600" />
               <AlertDescription className="text-red-800">
-                This action will reject the user's registration. They will be notified via email.
+                This action will reject the user's registration. They will be
+                notified via email.
               </AlertDescription>
             </Alert>
-            
+
             <div className="bg-gray-50 p-4 rounded-lg">
               <h4 className="font-medium text-gray-900 mb-2">User Details</h4>
               <div className="space-y-1 text-sm text-gray-700">
-                <p><span className="font-medium">Name:</span> {selectedUser?.name}</p>
-                <p><span className="font-medium">Email:</span> {selectedUser?.email}</p>
-                <p><span className="font-medium">Role:</span> {selectedUser?.role}</p>
+                <p>
+                  <span className="font-medium">Name:</span>{" "}
+                  {selectedUser?.name}
+                </p>
+                <p>
+                  <span className="font-medium">Email:</span>{" "}
+                  {selectedUser?.email}
+                </p>
+                <p>
+                  <span className="font-medium">Role:</span>{" "}
+                  {selectedUser?.role}
+                </p>
               </div>
             </div>
-            
+
             <div className="space-y-2">
-              <Label htmlFor="rejection-reason">Reason for Rejection <span className="text-red-500">*</span></Label>
-              <Textarea 
+              <Label htmlFor="rejection-reason">
+                Reason for Rejection <span className="text-red-500">*</span>
+              </Label>
+              <Textarea
                 id="rejection-reason"
                 placeholder="Please provide a reason for rejecting this registration..."
                 value={rejectionReason}
@@ -1318,21 +1596,21 @@ export const UserSubscriptionManagement = () => {
             </div>
           </div>
           <DialogFooter>
-            <Button 
-              variant="outline" 
+            <Button
+              variant="outline"
               onClick={() => {
                 setIsRejectionModalOpen(false);
-                setRejectionReason('');
+                setRejectionReason("");
               }}
             >
               Cancel
             </Button>
-            <Button 
+            <Button
               onClick={handleReject}
               disabled={isRejecting || !rejectionReason.trim()}
               variant="destructive"
             >
-              {isRejecting ? 'Rejecting...' : 'Reject User'}
+              {isRejecting ? "Rejecting..." : "Reject User"}
             </Button>
           </DialogFooter>
         </DialogContent>

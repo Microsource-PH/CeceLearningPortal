@@ -74,10 +74,19 @@ export interface CourseData {
   students: number;
   rating: number;
   revenue: number;
-  status: 'active' | 'pending' | 'draft' | 'archived';
+  // Align with UI which uses these case-sensitive strings
+  status: 'Draft' | 'PendingApproval' | 'Active' | 'Inactive' | 'Archived';
   createdDate: string;
   lastUpdated: string;
   completionRate: number;
+  // Optional fields frequently present in API responses and used by UI
+  instructorId?: string;
+  price?: number;
+  originalPrice?: number;
+  description?: string;
+  thumbnail?: string;
+  duration?: string | number;
+  level?: string;
 }
 
 export interface PolicyData {
@@ -159,7 +168,7 @@ class AdminService {
         };
         return { data: metrics, error: null };
       }
-      
+
       // Fallback to mock data if database fails
       await new Promise(resolve => setTimeout(resolve, 100));
       return { data: mockAdminData.metrics, error: null };
@@ -171,15 +180,15 @@ class AdminService {
   async getCourseCompletions(limit: number = 10): Promise<{ data: CourseCompletion[] | null; error: string | null }> {
     try {
       // Try to get real data from API first
-      const response = await api.request('/admin/course-completions', {
-        method: 'GET',
-        params: { limit }
+      const qs = new URLSearchParams({ limit: String(limit) }).toString();
+      const response = await api.request<CourseCompletion[]>(`/admin/course-completions${qs ? `?${qs}` : ''}`, {
+        method: 'GET'
       });
-      
+
       if (response.data) {
         return { data: response.data, error: null };
       }
-      
+
       // Fallback to mock data if API fails
       await new Promise(resolve => setTimeout(resolve, 50));
       return { data: mockAdminData.courseCompletions.slice(0, limit), error: null };
@@ -192,11 +201,12 @@ class AdminService {
     try {
       // Try to get real data from database first
       const creatorsResult = await DatabaseService.getUsers({ role: 'Creator' });
-      if (creatorsResult.data && creatorsResult.data.length > 0) {
-        const mentorsWithStats = await Promise.all(creatorsResult.data.map(async (creator) => {
+      const creators = (creatorsResult.data as any[]) || [];
+      if (creators.length > 0) {
+        const mentorsWithStats = await Promise.all(creators.map(async (creator: any) => {
           const stats = await DatabaseService.getCreatorStats(creator.id);
           const earnings = await DatabaseService.getCreatorEarnings(creator.id);
-          
+
           return {
             id: parseInt(creator.id) || Math.floor(Math.random() * 1000),
             name: creator.full_name,
@@ -211,20 +221,20 @@ class AdminService {
             status: 'Active' as const
           };
         }));
-        
+
         // Sort by revenue (descending) to get top performers
         const sortedMentors = mentorsWithStats.sort((a, b) => b.revenue - a.revenue);
-        
+
         // Ensure Dr. Johnson is at the top if she exists
         const drJohnsonIndex = sortedMentors.findIndex(m => m.name === 'Dr. Sarah Johnson');
         if (drJohnsonIndex > 0) {
           const drJohnson = sortedMentors.splice(drJohnsonIndex, 1)[0];
           sortedMentors.unshift(drJohnson);
         }
-        
+
         return { data: sortedMentors.slice(0, 5), error: null };
       }
-      
+
       // Fallback to mock data
       await new Promise(resolve => setTimeout(resolve, 50));
       return { data: mockAdminData.topMentors, error: null };
@@ -238,8 +248,9 @@ class AdminService {
       // Try to get real data from database first
       const dbUsers = await DatabaseService.getUsers(filters);
       if (dbUsers.data) {
-        console.log('Raw user data from backend:', dbUsers.data);
-        const users: UserData[] = dbUsers.data.map(user => {
+        const rawUsers = dbUsers.data as any[];
+        console.log('Raw user data from backend:', rawUsers);
+        const users: UserData[] = rawUsers.map((user: any) => {
           // Handle status - could be enum number or string
           let status = 'Active';
           if (user.status !== undefined && user.status !== null) {
@@ -251,7 +262,7 @@ class AdminService {
               status = user.status;
             }
           }
-          
+
           // Handle role - could be enum number or string
           let role = 'Learner';
           if (user.role !== undefined && user.role !== null) {
@@ -266,7 +277,7 @@ class AdminService {
               else role = user.role;
             }
           }
-          
+
           return {
             id: user.id,
             name: user.fullName || user.full_name || user.name || 'Unknown User',
@@ -284,18 +295,18 @@ class AdminService {
         });
         return { data: users, error: null };
       }
-      
+
       // Fallback to mock data
       await new Promise(resolve => setTimeout(resolve, 100));
       let users = mockAdminData.users;
-      
+
       if (filters?.role) {
         users = users.filter(user => user.role === filters.role);
       }
       if (filters?.status) {
         users = users.filter(user => user.status === filters.status);
       }
-      
+
       return { data: users, error: null };
     } catch (error) {
       return { data: null, error: 'Failed to fetch users' };
@@ -315,53 +326,85 @@ class AdminService {
   async getAllCourses(filters?: { status?: string; category?: string }): Promise<{ data: CourseData[] | null; error: string | null }> {
     try {
       // Try to get real data from API first
-      const response = await api.request('/admin/courses', {
-        method: 'GET',
-        params: filters
+      const qs = filters ? new URLSearchParams(
+        Object.entries(filters).reduce((acc: Record<string, string>, [k, v]) => {
+          if (v != null && v !== '') acc[k] = String(v);
+          return acc;
+        }, {})
+      ).toString() : '';
+      const response = await api.request<any[]>(`/admin/courses${qs ? `?${qs}` : ''}`, {
+        method: 'GET'
       });
-      
+
       if (response.data) {
         console.log('Admin courses response:', response.data);
-        const courses: CourseData[] = response.data.map((course: any) => {
+        const normalizeStatus = (s: string): CourseData['status'] => {
+          const l = s.toLowerCase();
+          switch (l) {
+            case 'draft': return 'Draft';
+            case 'pending':
+            case 'pendingapproval':
+            case 'pending_approval': return 'PendingApproval';
+            case 'active': return 'Active';
+            case 'inactive': return 'Inactive';
+            case 'archived': return 'Archived';
+            default: return 'Draft';
+          }
+        };
+        const courses: CourseData[] = (response.data as any[]).map((course: any) => {
           console.log('Course status from backend:', course.status, 'Type:', typeof course.status);
           return {
-          id: course.id.toString(),
-          title: course.title,
-          instructor: course.instructorName || 'Unknown',
-          instructorId: course.instructorId,
-          category: course.category,
-          students: course.studentsCount || 0,
-          rating: course.averageRating || 0,
-          revenue: course.totalRevenue || 0,
-          status: (() => {
-            // Handle both string and numeric enum values
-            if (typeof course.status === 'string') {
-              return course.status;
-            } else if (typeof course.status === 'number') {
-              // Map numeric enum values to strings
-              const statusMap = ['Draft', 'PendingApproval', 'Active', 'Inactive', 'Archived'];
-              return statusMap[course.status] || 'Draft';
-            }
-            return 'Draft';
-          })(),
-          createdDate: course.createdAt,
-          lastUpdated: course.updatedAt,
-          completionRate: course.completionRate || 0,
-          price: course.price,
-          originalPrice: course.originalPrice,
-          description: course.description,
-          thumbnail: course.thumbnail,
-          duration: course.duration,
-          level: course.level
-        };
+            id: course.id.toString(),
+            title: course.title,
+            instructor: course.instructorName || 'Unknown',
+            instructorId: course.instructorId,
+            category: course.category,
+            students: course.studentsCount || 0,
+            rating: course.averageRating || 0,
+            revenue: course.totalRevenue || 0,
+            status: (() => {
+              // Handle both string and numeric enum values
+              if (typeof course.status === 'string') {
+                return normalizeStatus(course.status);
+              } else if (typeof course.status === 'number') {
+                // Map numeric enum values to strings
+                const statusMap = ['Draft', 'PendingApproval', 'Active', 'Inactive', 'Archived'] as const;
+                const mapped = statusMap[course.status] ?? 'Draft';
+                return mapped;
+              }
+              return 'Draft';
+            })(),
+            createdDate: course.createdAt,
+            lastUpdated: course.updatedAt,
+            completionRate: course.completionRate || 0,
+            price: course.price,
+            originalPrice: course.originalPrice,
+            description: course.description,
+            thumbnail: course.thumbnail,
+            duration: course.duration,
+            level: course.level
+          };
         });
         return { data: courses, error: null };
       }
-      
+
       // Try database service as fallback
       const dbCourses = await DatabaseService.getCourses(filters);
       if (dbCourses.data) {
-        const courses: CourseData[] = await Promise.all(dbCourses.data.map(async (course) => {
+        const normalizeStatus = (s: string): CourseData['status'] => {
+          const l = s.toLowerCase();
+          switch (l) {
+            case 'draft': return 'Draft';
+            case 'pending':
+            case 'pendingapproval':
+            case 'pending_approval': return 'PendingApproval';
+            case 'active': return 'Active';
+            case 'inactive': return 'Inactive';
+            case 'archived': return 'Archived';
+            default: return 'Draft';
+          }
+        };
+        const courses: CourseData[] = await Promise.all((dbCourses.data as any[]).map(async (course: any) => {
           const stats = await DatabaseService.getCourseStats(course.id);
           return {
             id: course.id.toString(),
@@ -372,16 +415,17 @@ class AdminService {
             rating: course.rating || 4.5,
             revenue: course.totalRevenue || 0,
             status: (() => {
-            // Handle both string and numeric enum values
-            if (typeof course.status === 'string') {
-              return course.status;
-            } else if (typeof course.status === 'number') {
-              // Map numeric enum values to strings
-              const statusMap = ['Draft', 'PendingApproval', 'Active', 'Inactive', 'Archived'];
-              return statusMap[course.status] || 'Draft';
-            }
-            return 'Draft';
-          })(),
+              // Handle both string and numeric enum values
+              if (typeof course.status === 'string') {
+                return normalizeStatus(course.status);
+              } else if (typeof course.status === 'number') {
+                // Map numeric enum values to strings
+                const statusMap = ['Draft', 'PendingApproval', 'Active', 'Inactive', 'Archived'] as const;
+                const mapped = statusMap[course.status] ?? 'Draft';
+                return mapped;
+              }
+              return 'Draft';
+            })(),
             createdDate: course.created_at,
             lastUpdated: course.updated_at,
             completionRate: stats.data?.completion_rate || 0
@@ -389,19 +433,54 @@ class AdminService {
         }));
         return { data: courses, error: null };
       }
-      
+
       // Fallback to mock data
       await new Promise(resolve => setTimeout(resolve, 50));
       let courses = mockAdminData.courses;
-      
       if (filters?.status) {
         courses = courses.filter(course => course.status === filters.status);
       }
       if (filters?.category) {
         courses = courses.filter(course => course.category === filters.category);
       }
-      
-      return { data: courses, error: null };
+      // Normalize mock courses to CourseData shape and status casing
+      const normalizeStatus = (s: string): CourseData['status'] => {
+        const l = s.toLowerCase();
+        switch (l) {
+          case 'draft': return 'Draft';
+          case 'pending':
+          case 'pendingapproval':
+          case 'pending_approval': return 'PendingApproval';
+          case 'active': return 'Active';
+          case 'inactive': return 'Inactive';
+          case 'archived': return 'Archived';
+          default: return 'Draft';
+        }
+      };
+      const normalized: CourseData[] = courses.map((course: any) => ({
+        id: course.id?.toString(),
+        title: course.title,
+        instructor: course.instructor || course.instructorName || 'Unknown',
+        category: course.category,
+        students: course.students || course.studentsCount || 0,
+        rating: course.rating || course.averageRating || 0,
+        revenue: course.revenue || course.totalRevenue || 0,
+        status: typeof course.status === 'number'
+          ? (['Draft', 'PendingApproval', 'Active', 'Inactive', 'Archived'] as const)[course.status] ?? 'Draft'
+          : normalizeStatus(course.status || 'draft'),
+        createdDate: course.createdDate || course.createdAt || new Date().toISOString(),
+        lastUpdated: course.lastUpdated || course.updatedAt || new Date().toISOString(),
+        completionRate: course.completionRate || 0,
+        instructorId: course.instructorId,
+        price: course.price,
+        originalPrice: course.originalPrice,
+        description: course.description,
+        thumbnail: course.thumbnail,
+        duration: course.duration,
+        level: course.level
+      }));
+
+      return { data: normalized, error: null };
     } catch (error) {
       return { data: null, error: 'Failed to fetch courses' };
     }
@@ -412,11 +491,11 @@ class AdminService {
       const response = await api.request(`/admin/courses/${courseId}/approve`, {
         method: 'POST'
       });
-      
+
       if (response.error) {
         throw new Error(response.error);
       }
-      
+
       return { success: true, error: null };
     } catch (error) {
       return { success: false, error: 'Failed to approve course' };
@@ -426,14 +505,14 @@ class AdminService {
   async getPolicies(): Promise<{ data: PolicyData[] | null; error: string | null }> {
     try {
       // Try to get real data from API first
-      const response = await api.request('/admin/policies', {
+      const response = await api.request<PolicyData[]>('/admin/policies', {
         method: 'GET'
       });
-      
+
       if (response.data) {
         return { data: response.data, error: null };
       }
-      
+
       // Fallback to mock data if API fails
       await new Promise(resolve => setTimeout(resolve, 50));
       return { data: mockAdminData.policies, error: null };
@@ -454,23 +533,23 @@ class AdminService {
   async getTasks(status?: string): Promise<{ data: TaskData[] | null; error: string | null }> {
     try {
       // Try to get real data from API first
-      const response = await api.request('/admin/tasks', {
-        method: 'GET',
-        params: status ? { status } : undefined
+      const qs = status ? `?${new URLSearchParams({ status }).toString()}` : '';
+      const response = await api.request<TaskData[]>(`/admin/tasks${qs}`, {
+        method: 'GET'
       });
-      
+
       if (response.data) {
         return { data: response.data, error: null };
       }
-      
+
       // Fallback to mock data if API fails
       await new Promise(resolve => setTimeout(resolve, 50));
       let tasks = mockAdminData.tasks;
-      
+
       if (status) {
         tasks = tasks.filter(task => task.status === status);
       }
-      
+
       return { data: tasks, error: null };
     } catch (error) {
       return { data: null, error: 'Failed to fetch tasks' };
@@ -489,14 +568,14 @@ class AdminService {
   async getOnboardingProgress(): Promise<{ data: OnboardingStep[] | null; error: string | null }> {
     try {
       // Try to get real data from API first
-      const response = await api.request('/admin/onboarding-progress', {
+      const response = await api.request<OnboardingStep[]>('/admin/onboarding-progress', {
         method: 'GET'
       });
-      
+
       if (response.data) {
         return { data: response.data, error: null };
       }
-      
+
       // Fallback to mock data if API fails
       await new Promise(resolve => setTimeout(resolve, 50));
       return { data: mockAdminData.onboardingSteps, error: null };
@@ -508,14 +587,14 @@ class AdminService {
   async getTeamMembers(): Promise<{ data: TeamMember[] | null; error: string | null }> {
     try {
       // Try to get real data from API first
-      const response = await api.request('/admin/team-members', {
+      const response = await api.request<TeamMember[]>('/admin/team-members', {
         method: 'GET'
       });
-      
+
       if (response.data) {
         return { data: response.data, error: null };
       }
-      
+
       // Fallback to mock data if API fails
       await new Promise(resolve => setTimeout(resolve, 50));
       return { data: mockAdminData.teamMembers, error: null };
@@ -527,14 +606,14 @@ class AdminService {
   async getCourseStatistics(): Promise<{ data: CourseStatistics[] | null; error: string | null }> {
     try {
       // Try to get real data from API first
-      const response = await api.request('/admin/course-statistics', {
+      const response = await api.request<CourseStatistics[]>('/admin/course-statistics', {
         method: 'GET'
       });
-      
+
       if (response.data) {
         return { data: response.data, error: null };
       }
-      
+
       // Fallback to mock data if API fails
       await new Promise(resolve => setTimeout(resolve, 50));
       return { data: mockAdminData.courseStatistics, error: null };
@@ -567,15 +646,15 @@ class AdminService {
   async getRecentSignups(limit: number = 10): Promise<{ data: any[] | null; error: string | null }> {
     try {
       // Try to get real data from API first
-      const response = await api.request('/admin/recent-signups', {
-        method: 'GET',
-        params: { limit }
+      const qs = new URLSearchParams({ limit: String(limit) }).toString();
+      const response = await api.request<any[]>(`/admin/recent-signups?${qs}`, {
+        method: 'GET'
       });
-      
+
       if (response.data) {
         return { data: response.data, error: null };
       }
-      
+
       // Fallback to mock data if API fails
       await new Promise(resolve => setTimeout(resolve, 50));
       return { data: mockAdminData.recentSignups.slice(0, limit), error: null };
@@ -587,7 +666,7 @@ class AdminService {
   async getSystemHealth(): Promise<{ data: any | null; error: string | null }> {
     try {
       await new Promise(resolve => setTimeout(resolve, 20));
-      return { 
+      return {
         data: {
           uptime: 99.9,
           apiResponseTime: 145,
@@ -596,8 +675,8 @@ class AdminService {
           serverLoad: 45,
           memoryUsage: 67,
           diskSpace: 78
-        }, 
-        error: null 
+        },
+        error: null
       };
     } catch (error) {
       return { data: null, error: 'Failed to fetch system health' };
@@ -611,11 +690,11 @@ class AdminService {
         method: 'POST',
         body: JSON.stringify(courseData)
       });
-      
+
       if (response.error) {
         throw new Error(response.error);
       }
-      
+
       return { success: true, data: response.data, error: null };
     } catch (error) {
       return { success: false, error: 'Failed to create course' };
@@ -628,11 +707,11 @@ class AdminService {
         method: 'PUT',
         body: JSON.stringify(courseData)
       });
-      
+
       if (response.error) {
         throw new Error(response.error);
       }
-      
+
       return { success: true, error: null };
     } catch (error) {
       return { success: false, error: 'Failed to update course' };
@@ -644,11 +723,11 @@ class AdminService {
       const response = await api.request(`/admin/courses/${courseId}`, {
         method: 'DELETE'
       });
-      
+
       if (response.error) {
         throw new Error(response.error);
       }
-      
+
       return { success: true, error: null };
     } catch (error) {
       return { success: false, error: 'Failed to delete course' };
@@ -661,11 +740,11 @@ class AdminService {
         method: 'POST',
         body: JSON.stringify({ reason })
       });
-      
+
       if (response.error) {
         throw new Error(response.error);
       }
-      
+
       return { success: true, error: null };
     } catch (error) {
       return { success: false, error: 'Failed to reject course' };
@@ -678,11 +757,11 @@ class AdminService {
         method: 'PUT',
         body: JSON.stringify({ role })
       });
-      
+
       if (response.error) {
         throw new Error(response.error);
       }
-      
+
       return { success: true, error: null };
     } catch (error) {
       return { success: false, error: 'Failed to update user role' };
@@ -694,11 +773,11 @@ class AdminService {
       const response = await api.request(`/admin/users/${userId}/subscription`, {
         method: 'GET'
       });
-      
+
       if (response.error) {
         throw new Error(response.error);
       }
-      
+
       return { data: response.data, error: null };
     } catch (error) {
       return { data: null, error: 'Failed to fetch user subscription' };
@@ -711,11 +790,11 @@ class AdminService {
         method: 'PUT',
         body: JSON.stringify({ planId, isBilledYearly })
       });
-      
+
       if (response.error) {
         throw new Error(response.error);
       }
-      
+
       return { success: true, error: null };
     } catch (error) {
       return { success: false, error: 'Failed to update user subscription' };
@@ -724,14 +803,14 @@ class AdminService {
 
   async getSubscriptionPlans(): Promise<{ data: any[] | null; error: string | null }> {
     try {
-      const response = await api.request('/admin/subscription-plans', {
+      const response = await api.request<any[]>('/admin/subscription-plans', {
         method: 'GET'
       });
-      
+
       if (response.error) {
         throw new Error(response.error);
       }
-      
+
       return { data: response.data || [], error: null };
     } catch (error) {
       return { data: null, error: 'Failed to fetch subscription plans' };
@@ -744,12 +823,12 @@ class AdminService {
         method: 'POST',
         body: JSON.stringify(planData)
       });
-      
+
       if (response.error) {
         console.error('Create subscription plan error:', response);
         throw new Error(response.error);
       }
-      
+
       return { success: true, data: response.data, error: null };
     } catch (error: any) {
       console.error('Create subscription plan exception:', error);
@@ -763,12 +842,12 @@ class AdminService {
         method: 'PUT',
         body: JSON.stringify(planData)
       });
-      
+
       if (response.error) {
         console.error('Update subscription plan error:', response);
         throw new Error(response.error);
       }
-      
+
       return { success: true, error: null };
     } catch (error: any) {
       console.error('Update subscription plan exception:', error);
@@ -781,11 +860,11 @@ class AdminService {
       const response = await api.request(`/admin/subscription-plans/${planId}`, {
         method: 'DELETE'
       });
-      
+
       if (response.error) {
         throw new Error(response.error);
       }
-      
+
       return { success: true, error: null };
     } catch (error) {
       return { success: false, error: 'Failed to delete subscription plan' };
@@ -794,17 +873,17 @@ class AdminService {
 
   async getPendingApprovalUsers(page: number = 1, pageSize: number = 10): Promise<{ data: any[] | null; error: string | null }> {
     try {
-      const response = await api.request('/admin/users/pending-approval', {
-        method: 'GET',
-        params: { page, pageSize }
+      const qs = new URLSearchParams({ page: String(page), pageSize: String(pageSize) }).toString();
+      const response = await api.request<any[]>(`/admin/users/pending-approval?${qs}`, {
+        method: 'GET'
       });
-      
+
       if (response.error) {
         throw new Error(response.error);
       }
-      
+
       // Transform the data to match the component structure
-      const transformedUsers = response.data?.map((user: any) => ({
+      const transformedUsers = (response.data as any[] | undefined)?.map((user: any) => ({
         id: user.id,
         name: user.fullName || user.name,
         email: user.email,
@@ -814,7 +893,7 @@ class AdminService {
         fullName: user.fullName,
         requestedRole: user.role === 'Instructor' ? 'Creator' : user.role
       })) || [];
-      
+
       return { data: transformedUsers, error: null };
     } catch (error) {
       return { data: null, error: 'Failed to fetch pending approval users' };
@@ -827,11 +906,11 @@ class AdminService {
         method: 'POST',
         body: JSON.stringify(dto)
       });
-      
+
       if (response.error) {
         throw new Error(response.error);
       }
-      
+
       return { success: true, error: null };
     } catch (error) {
       return { success: false, error: 'Failed to process user approval' };

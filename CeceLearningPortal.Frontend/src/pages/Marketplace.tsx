@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { Navigation } from "@/components/LearningPortal/Navigation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -3248,7 +3247,6 @@ const Marketplace = () => {
   if (showGHLCreator) {
     return (
       <div className="min-h-screen bg-background">
-        <Navigation />
         <div className="container mx-auto px-6 py-8">
           <CourseCreatorGHL
             onComplete={(courseData) => {
@@ -3271,7 +3269,6 @@ const Marketplace = () => {
     );
     return (
       <div className="min-h-screen bg-background">
-        <Navigation />
         <div className="container mx-auto px-6 py-8">
           <CourseEditorWithFeatures
             courseId={editingCourse.id}
@@ -3301,8 +3298,6 @@ const Marketplace = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <Navigation />
-
       <div className="container mx-auto px-6 py-8">
         {/* Admin seed button */}
         {user?.role === "Admin" && (

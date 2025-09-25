@@ -12,16 +12,16 @@ interface Notification {
 }
 
 export function useSignalR() {
-  const { user, token } = useAuth();
+  const { user } = useAuth();
   const { toast } = useToast();
   const [isConnected, setIsConnected] = useState(false);
   const [notifications, setNotifications] = useState<Notification[]>([]);
 
   // Connect to SignalR when user logs in
   useEffect(() => {
-    if (user && token) {
+    if (user?.accessToken) {
       signalRService
-        .connect(token)
+        .connect(user.accessToken)
         .then(() => {
           setIsConnected(true);
         })
@@ -39,7 +39,7 @@ export function useSignalR() {
         setIsConnected(false);
       };
     }
-  }, [user, token, toast]);
+  }, [user, toast]);
 
   // Listen for notifications
   useEffect(() => {

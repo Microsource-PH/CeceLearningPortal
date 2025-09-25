@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Navigation } from "@/components/LearningPortal/Navigation";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+} from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
@@ -11,20 +16,41 @@ import { UserSubscriptionManagement } from "@/components/Admin/UserSubscriptionM
 import { CourseManagement } from "@/components/Admin/CourseManagement";
 import { SubscriptionPlansManagement } from "@/components/Admin/SubscriptionPlansManagement";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import { Progress } from "@/components/ui/progress";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
-import { 
-  Users, 
-  BookOpen, 
-  CreditCard, 
-  Shield, 
+import {
+  Users,
+  BookOpen,
+  CreditCard,
+  Shield,
   Package,
   BarChart,
   Settings,
@@ -51,7 +77,7 @@ import {
   MoreVertical,
   Calendar,
   AlertCircle,
-  XCircle
+  XCircle,
 } from "lucide-react";
 
 const Admin: React.FC = () => {
@@ -71,23 +97,23 @@ const Admin: React.FC = () => {
   // Check authentication
   useEffect(() => {
     if (!isAuthenticated) {
-      navigate('/login');
+      navigate("/login");
       return;
     }
-    
-    if (user?.role !== 'Admin') {
+
+    if (user?.role !== "Admin") {
       toast({
         title: "Access Denied",
         description: "You need admin privileges to access this page.",
         variant: "destructive",
       });
-      navigate('/');
+      navigate("/");
     }
   }, [isAuthenticated, user, navigate, toast]);
 
   // Fetch metrics when dashboard is active
   useEffect(() => {
-    if (activeTab === 'dashboard' && user?.role === 'Admin') {
+    if (activeTab === "dashboard" && user?.role === "Admin") {
       fetchMetrics();
     }
   }, [activeTab, user]);
@@ -99,14 +125,14 @@ const Admin: React.FC = () => {
       if (response.data) {
         setMetrics(response.data);
       }
-      
+
       // Fetch course completions for badges
       const completionsResponse = await adminService.getCourseCompletions();
       if (completionsResponse.data) {
         setCourseCompletions(completionsResponse.data);
       }
     } catch (error) {
-      console.error('Failed to fetch metrics:', error);
+      console.error("Failed to fetch metrics:", error);
     } finally {
       setLoading(false);
     }
@@ -117,33 +143,35 @@ const Admin: React.FC = () => {
     const fetchTabData = async () => {
       try {
         switch (activeTab) {
-          case 'policies':
+          case "policies":
             const policiesResponse = await adminService.getPolicies();
             if (policiesResponse.data) setPolicies(policiesResponse.data);
             break;
-          case 'tasks':
+          case "tasks":
             const tasksResponse = await adminService.getTasks();
             if (tasksResponse.data) setTasks(tasksResponse.data);
             break;
-          case 'onboarding':
-            const onboardingResponse = await adminService.getOnboardingProgress();
-            if (onboardingResponse.data) setOnboardingSteps(onboardingResponse.data);
+          case "onboarding":
+            const onboardingResponse =
+              await adminService.getOnboardingProgress();
+            if (onboardingResponse.data)
+              setOnboardingSteps(onboardingResponse.data);
             break;
-          case 'team':
+          case "team":
             const teamResponse = await adminService.getTeamMembers();
             if (teamResponse.data) setTeamMembers(teamResponse.data);
             break;
-          case 'statistics':
+          case "statistics":
             const statsResponse = await adminService.getCourseStatistics();
             if (statsResponse.data) setCourseStatistics(statsResponse.data);
             break;
         }
       } catch (error) {
-        console.error('Failed to fetch tab data:', error);
+        console.error("Failed to fetch tab data:", error);
       }
     };
 
-    if (activeTab !== 'dashboard') {
+    if (activeTab !== "dashboard") {
       fetchTabData();
     }
   }, [activeTab]);
@@ -152,10 +180,10 @@ const Admin: React.FC = () => {
   const handleIssueBadge = async (completionId: number) => {
     try {
       const response = await adminService.issueBadge(completionId, {
-        type: 'completion',
-        issuedDate: new Date().toISOString()
+        type: "completion",
+        issuedDate: new Date().toISOString(),
       });
-      
+
       if (response.success) {
         toast({
           title: "Badge Issued",
@@ -224,12 +252,14 @@ const Admin: React.FC = () => {
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
     const now = new Date();
-    const diffInDays = Math.floor((now.getTime() - date.getTime()) / (1000 * 60 * 60 * 24));
-    
-    if (diffInDays === 0) return 'Today';
-    if (diffInDays === 1) return 'Yesterday';
+    const diffInDays = Math.floor(
+      (now.getTime() - date.getTime()) / (1000 * 60 * 60 * 24)
+    );
+
+    if (diffInDays === 0) return "Today";
+    if (diffInDays === 1) return "Yesterday";
     if (diffInDays < 7) return `${diffInDays} days ago`;
-    
+
     return date.toLocaleDateString();
   };
 
@@ -250,18 +280,17 @@ const Admin: React.FC = () => {
     </div>
   );
 
-  if (!isAuthenticated || user?.role !== 'Admin') {
+  if (!isAuthenticated || user?.role !== "Admin") {
     return (
       <div className="min-h-screen bg-gradient-subtle">
-        <Navigation />
         <div className="flex items-center justify-center min-h-[600px]">
           <div className="text-center">
             <Shield className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
             <h2 className="text-2xl font-bold mb-2">Access Denied</h2>
-            <p className="text-muted-foreground mb-4">You need admin privileges to access this page.</p>
-            <Button onClick={() => navigate('/')}>
-              Return to Home
-            </Button>
+            <p className="text-muted-foreground mb-4">
+              You need admin privileges to access this page.
+            </p>
+            <Button onClick={() => navigate("/")}>Return to Home</Button>
           </div>
         </div>
       </div>
@@ -270,8 +299,6 @@ const Admin: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gradient-subtle">
-      <Navigation />
-      
       <div className="flex">
         {/* Sidebar */}
         <div className="w-64 bg-gradient-to-b from-blue-900 to-purple-900 text-white min-h-screen p-6">
@@ -279,7 +306,7 @@ const Admin: React.FC = () => {
             <h2 className="font-bold text-lg">Admin Panel</h2>
             <p className="text-blue-200 text-sm">Management Center</p>
           </div>
-          
+
           <div className="space-y-1 overflow-y-auto max-h-[calc(100vh-200px)]">
             <Button
               variant="ghost"
@@ -383,9 +410,8 @@ const Admin: React.FC = () => {
         {/* Main Content */}
         <div className="flex-1 p-8">
           <h1 className="text-3xl font-bold mb-6">Admin Dashboard</h1>
-          
+
           <Tabs value={activeTab} onValueChange={setActiveTab}>
-            
             <TabsContent value="dashboard">
               {/* Dashboard Content */}
               <div className="space-y-6">
@@ -395,8 +421,12 @@ const Admin: React.FC = () => {
                     <CardContent className="p-6">
                       <div className="flex items-center justify-between">
                         <div>
-                          <p className="text-sm text-muted-foreground">Total Active Users</p>
-                          <p className="text-2xl font-bold">{metrics?.totalActiveUsers || 0}</p>
+                          <p className="text-sm text-muted-foreground">
+                            Total Active Users
+                          </p>
+                          <p className="text-2xl font-bold">
+                            {metrics?.totalActiveUsers || 0}
+                          </p>
                           <p className="text-xs text-green-600 mt-1">
                             <TrendingUp className="w-3 h-3 inline mr-1" />
                             +12% from last month
@@ -411,8 +441,12 @@ const Admin: React.FC = () => {
                     <CardContent className="p-6">
                       <div className="flex items-center justify-between">
                         <div>
-                          <p className="text-sm text-muted-foreground">Total Revenue</p>
-                          <p className="text-2xl font-bold">₱{metrics?.totalRevenue?.toLocaleString() || 0}</p>
+                          <p className="text-sm text-muted-foreground">
+                            Total Revenue
+                          </p>
+                          <p className="text-2xl font-bold">
+                            ₱{metrics?.totalRevenue?.toLocaleString() || 0}
+                          </p>
                           <p className="text-xs text-green-600 mt-1">
                             <TrendingUp className="w-3 h-3 inline mr-1" />
                             +8% from last month
@@ -427,8 +461,12 @@ const Admin: React.FC = () => {
                     <CardContent className="p-6">
                       <div className="flex items-center justify-between">
                         <div>
-                          <p className="text-sm text-muted-foreground">Total Courses</p>
-                          <p className="text-2xl font-bold">{metrics?.totalCourses || 0}</p>
+                          <p className="text-sm text-muted-foreground">
+                            Total Courses
+                          </p>
+                          <p className="text-2xl font-bold">
+                            {metrics?.totalCourses || 0}
+                          </p>
                           <p className="text-xs text-muted-foreground mt-1">
                             {metrics?.coursesUnderReview || 0} under review
                           </p>
@@ -442,8 +480,12 @@ const Admin: React.FC = () => {
                     <CardContent className="p-6">
                       <div className="flex items-center justify-between">
                         <div>
-                          <p className="text-sm text-muted-foreground">Completion Rate</p>
-                          <p className="text-2xl font-bold">{metrics?.averageCompletionRate || 0}%</p>
+                          <p className="text-sm text-muted-foreground">
+                            Completion Rate
+                          </p>
+                          <p className="text-2xl font-bold">
+                            {metrics?.averageCompletionRate || 0}%
+                          </p>
                           <p className="text-xs text-green-600 mt-1">
                             <CheckCircle className="w-3 h-3 inline mr-1" />
                             Above target
@@ -460,7 +502,9 @@ const Admin: React.FC = () => {
                   <Card>
                     <CardHeader>
                       <CardTitle>Platform Activity</CardTitle>
-                      <CardDescription>Real-time platform metrics</CardDescription>
+                      <CardDescription>
+                        Real-time platform metrics
+                      </CardDescription>
                     </CardHeader>
                     <CardContent>
                       <div className="space-y-4">
@@ -469,28 +513,36 @@ const Admin: React.FC = () => {
                             <Activity className="w-4 h-4 text-green-500" />
                             <span className="text-sm">Active Now</span>
                           </div>
-                          <span className="font-semibold">{metrics?.activeNow || 0} users</span>
+                          <span className="font-semibold">
+                            {metrics?.activeNow || 0} users
+                          </span>
                         </div>
                         <div className="flex items-center justify-between">
                           <div className="flex items-center gap-2">
                             <Users className="w-4 h-4 text-blue-500" />
                             <span className="text-sm">New Users Today</span>
                           </div>
-                          <span className="font-semibold">{metrics?.newUsersToday || 0}</span>
+                          <span className="font-semibold">
+                            {metrics?.newUsersToday || 0}
+                          </span>
                         </div>
                         <div className="flex items-center justify-between">
                           <div className="flex items-center gap-2">
                             <BookOpen className="w-4 h-4 text-purple-500" />
                             <span className="text-sm">Courses in Progress</span>
                           </div>
-                          <span className="font-semibold">{metrics?.newTrainingsOrganized || 0}</span>
+                          <span className="font-semibold">
+                            {metrics?.newTrainingsOrganized || 0}
+                          </span>
                         </div>
                         <div className="flex items-center justify-between">
                           <div className="flex items-center gap-2">
                             <Bell className="w-4 h-4 text-orange-500" />
                             <span className="text-sm">Support Tickets</span>
                           </div>
-                          <span className="font-semibold">{metrics?.supportTickets || 0}</span>
+                          <span className="font-semibold">
+                            {metrics?.supportTickets || 0}
+                          </span>
                         </div>
                       </div>
                     </CardContent>
@@ -499,30 +551,46 @@ const Admin: React.FC = () => {
                   <Card>
                     <CardHeader>
                       <CardTitle>Learning Satisfaction</CardTitle>
-                      <CardDescription>User feedback and satisfaction metrics</CardDescription>
+                      <CardDescription>
+                        User feedback and satisfaction metrics
+                      </CardDescription>
                     </CardHeader>
                     <CardContent>
                       <div className="space-y-4">
                         <div>
                           <div className="flex items-center justify-between mb-2">
                             <span className="text-sm">Satisfaction Rate</span>
-                            <span className="font-semibold">{metrics?.learningSatisfactionRate?.toFixed(1) || 0}%</span>
+                            <span className="font-semibold">
+                              {metrics?.learningSatisfactionRate?.toFixed(1) ||
+                                0}
+                              %
+                            </span>
                           </div>
                           <div className="w-full bg-gray-200 rounded-full h-2">
-                            <div 
+                            <div
                               className="bg-gradient-to-r from-blue-500 to-purple-500 h-2 rounded-full"
-                              style={{ width: `${metrics?.learningSatisfactionRate || 0}%` }}
+                              style={{
+                                width: `${metrics?.learningSatisfactionRate || 0}%`,
+                              }}
                             />
                           </div>
                         </div>
                         <div className="grid grid-cols-2 gap-4 mt-4">
                           <div className="text-center p-4 bg-green-50 rounded-lg">
-                            <p className="text-2xl font-bold text-green-600">{metrics?.positiveFeedback || 0}</p>
-                            <p className="text-sm text-muted-foreground">Positive Reviews</p>
+                            <p className="text-2xl font-bold text-green-600">
+                              {metrics?.positiveFeedback || 0}
+                            </p>
+                            <p className="text-sm text-muted-foreground">
+                              Positive Reviews
+                            </p>
                           </div>
                           <div className="text-center p-4 bg-red-50 rounded-lg">
-                            <p className="text-2xl font-bold text-red-600">{metrics?.negativeFeedback || 0}</p>
-                            <p className="text-sm text-muted-foreground">Negative Reviews</p>
+                            <p className="text-2xl font-bold text-red-600">
+                              {metrics?.negativeFeedback || 0}
+                            </p>
+                            <p className="text-sm text-muted-foreground">
+                              Negative Reviews
+                            </p>
                           </div>
                         </div>
                       </div>
@@ -531,61 +599,82 @@ const Admin: React.FC = () => {
                 </div>
               </div>
             </TabsContent>
-            
-            
+
             <TabsContent value="users">
               <UserSubscriptionManagement />
             </TabsContent>
-            
+
             <TabsContent value="courses">
               <CourseManagement />
             </TabsContent>
-            
+
             <TabsContent value="subscriptions">
               <SubscriptionPlansManagement />
             </TabsContent>
-            
+
             <TabsContent value="reports">
               <Card>
                 <CardHeader>
                   <CardTitle>Reports</CardTitle>
-                  <CardDescription>Generate and export various reports</CardDescription>
+                  <CardDescription>
+                    Generate and export various reports
+                  </CardDescription>
                 </CardHeader>
                 <CardContent>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <Button variant="outline" className="h-auto p-4 justify-start">
+                    <Button
+                      variant="outline"
+                      className="h-auto p-4 justify-start"
+                    >
                       <FileText className="w-5 h-5 mr-3" />
                       <div className="text-left">
                         <p className="font-medium">User Activity Report</p>
-                        <p className="text-sm text-muted-foreground">Export user engagement data</p>
+                        <p className="text-sm text-muted-foreground">
+                          Export user engagement data
+                        </p>
                       </div>
                     </Button>
-                    <Button variant="outline" className="h-auto p-4 justify-start">
+                    <Button
+                      variant="outline"
+                      className="h-auto p-4 justify-start"
+                    >
                       <DollarSign className="w-5 h-5 mr-3" />
                       <div className="text-left">
                         <p className="font-medium">Revenue Report</p>
-                        <p className="text-sm text-muted-foreground">Financial performance metrics</p>
+                        <p className="text-sm text-muted-foreground">
+                          Financial performance metrics
+                        </p>
                       </div>
                     </Button>
-                    <Button variant="outline" className="h-auto p-4 justify-start">
+                    <Button
+                      variant="outline"
+                      className="h-auto p-4 justify-start"
+                    >
                       <BookOpen className="w-5 h-5 mr-3" />
                       <div className="text-left">
                         <p className="font-medium">Course Performance</p>
-                        <p className="text-sm text-muted-foreground">Course completion and ratings</p>
+                        <p className="text-sm text-muted-foreground">
+                          Course completion and ratings
+                        </p>
                       </div>
                     </Button>
-                    <Button variant="outline" className="h-auto p-4 justify-start">
+                    <Button
+                      variant="outline"
+                      className="h-auto p-4 justify-start"
+                    >
                       <Users className="w-5 h-5 mr-3" />
                       <div className="text-left">
                         <p className="font-medium">Instructor Report</p>
-                        <p className="text-sm text-muted-foreground">Creator performance metrics</p>
+                        <p className="text-sm text-muted-foreground">
+                          Creator performance metrics
+                        </p>
                       </div>
                     </Button>
                   </div>
                 </CardContent>
               </Card>
             </TabsContent>
-            
+
             <TabsContent value="badges">
               <div className="space-y-6">
                 <div className="flex items-center justify-between">
@@ -593,7 +682,9 @@ const Admin: React.FC = () => {
                     <h2 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                       Badge Management
                     </h2>
-                    <p className="text-muted-foreground mt-1">Issue certificates and badges to course completers</p>
+                    <p className="text-muted-foreground mt-1">
+                      Issue certificates and badges to course completers
+                    </p>
                   </div>
                   <Dialog>
                     <DialogTrigger asChild>
@@ -609,7 +700,9 @@ const Admin: React.FC = () => {
                       <div className="space-y-4 p-4">
                         <div className="text-center">
                           <CertificationBadge />
-                          <p className="text-sm text-muted-foreground mt-2">Preview Badge</p>
+                          <p className="text-sm text-muted-foreground mt-2">
+                            Preview Badge
+                          </p>
                         </div>
                         <Input placeholder="Badge Title" />
                         <Input placeholder="Course Name" />
@@ -632,12 +725,20 @@ const Admin: React.FC = () => {
                   <CardContent className="p-6">
                     <div className="space-y-4">
                       {courseCompletions.map((completion) => (
-                        <div key={completion.id} className="flex items-center justify-between p-4 bg-gradient-to-r from-white to-gray-50 rounded-xl border border-gray-200 hover:shadow-md transition-all duration-200">
+                        <div
+                          key={completion.id}
+                          className="flex items-center justify-between p-4 bg-gradient-to-r from-white to-gray-50 rounded-xl border border-gray-200 hover:shadow-md transition-all duration-200"
+                        >
                           <div className="flex items-center gap-4">
                             <div className="relative">
                               <Avatar className="w-12 h-12">
-                                <AvatarImage src={completion.studentAvatar} alt={completion.studentName} />
-                                <AvatarFallback>{completion.studentName?.charAt(0) || 'S'}</AvatarFallback>
+                                <AvatarImage
+                                  src={completion.studentAvatar}
+                                  alt={completion.studentName}
+                                />
+                                <AvatarFallback>
+                                  {completion.studentName?.charAt(0) || "S"}
+                                </AvatarFallback>
                               </Avatar>
                               {completion.score >= 90 && (
                                 <div className="absolute -top-1 -right-1">
@@ -646,26 +747,34 @@ const Admin: React.FC = () => {
                               )}
                             </div>
                             <div>
-                              <h4 className="font-semibold text-gray-800">{completion.studentName}</h4>
-                              <p className="text-sm text-gray-600">{completion.courseName}</p>
+                              <h4 className="font-semibold text-gray-800">
+                                {completion.studentName}
+                              </h4>
+                              <p className="text-sm text-gray-600">
+                                {completion.courseName}
+                              </p>
                               <div className="flex items-center gap-2 mt-1">
                                 <Badge variant="outline" className="text-xs">
                                   Score: {completion.score}%
                                 </Badge>
-                                <span className="text-xs text-gray-500">{formatDate(completion.completionDate)}</span>
+                                <span className="text-xs text-gray-500">
+                                  {formatDate(completion.completionDate)}
+                                </span>
                               </div>
                             </div>
                           </div>
-                          
+
                           <div className="flex items-center gap-2">
                             {completion.badgeIssued ? (
                               <div className="flex items-center gap-2">
                                 <CheckCircle className="w-5 h-5 text-green-500" />
-                                <Badge className="bg-green-100 text-green-700">Badge Issued</Badge>
+                                <Badge className="bg-green-100 text-green-700">
+                                  Badge Issued
+                                </Badge>
                               </div>
                             ) : (
-                              <Button 
-                                size="sm" 
+                              <Button
+                                size="sm"
                                 onClick={() => handleIssueBadge(completion.id)}
                                 className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700"
                               >
@@ -681,12 +790,14 @@ const Admin: React.FC = () => {
                 </Card>
               </div>
             </TabsContent>
-            
+
             <TabsContent value="policies">
               <Card>
                 <CardHeader>
                   <CardTitle>Platform Policies</CardTitle>
-                  <CardDescription>Manage platform rules and guidelines</CardDescription>
+                  <CardDescription>
+                    Manage platform rules and guidelines
+                  </CardDescription>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-4">
@@ -694,14 +805,23 @@ const Admin: React.FC = () => {
                       <div key={policy.id} className="p-4 border rounded-lg">
                         <div className="flex items-center justify-between mb-2">
                           <h4 className="font-semibold">{policy.name}</h4>
-                          <Badge className={policy.status === 'Active' ? 'bg-green-100 text-green-800' : ''}>
+                          <Badge
+                            className={
+                              policy.status === "Active"
+                                ? "bg-green-100 text-green-800"
+                                : ""
+                            }
+                          >
                             {policy.status}
                           </Badge>
                         </div>
-                        <p className="text-sm text-muted-foreground mb-2">{policy.description}</p>
+                        <p className="text-sm text-muted-foreground mb-2">
+                          {policy.description}
+                        </p>
                         <div className="flex items-center justify-between text-sm">
                           <span className="text-muted-foreground">
-                            Last updated by {policy.updatedBy} on {formatDate(policy.lastUpdated)}
+                            Last updated by {policy.updatedBy} on{" "}
+                            {formatDate(policy.lastUpdated)}
                           </span>
                           <Button size="sm" variant="outline">
                             <Edit className="w-3 h-3 mr-1" />
@@ -714,14 +834,16 @@ const Admin: React.FC = () => {
                 </CardContent>
               </Card>
             </TabsContent>
-            
+
             <TabsContent value="tasks">
               <Card>
                 <CardHeader>
                   <div className="flex items-center justify-between">
                     <div>
                       <CardTitle>Task Management</CardTitle>
-                      <CardDescription>Track and manage admin tasks</CardDescription>
+                      <CardDescription>
+                        Track and manage admin tasks
+                      </CardDescription>
                     </div>
                     <Dialog>
                       <DialogTrigger asChild>
@@ -773,26 +895,42 @@ const Admin: React.FC = () => {
                         <div className="flex items-center justify-between mb-2">
                           <h4 className="font-semibold">{task.title}</h4>
                           <div className="flex items-center gap-2">
-                            <Badge className={
-                              task.priority === 'High' ? 'bg-red-100 text-red-800' : 
-                              task.priority === 'Medium' ? 'bg-yellow-100 text-yellow-800' : 
-                              'bg-gray-100 text-gray-800'
-                            }>
+                            <Badge
+                              className={
+                                task.priority === "High"
+                                  ? "bg-red-100 text-red-800"
+                                  : task.priority === "Medium"
+                                    ? "bg-yellow-100 text-yellow-800"
+                                    : "bg-gray-100 text-gray-800"
+                              }
+                            >
                               {task.priority}
                             </Badge>
-                            <Badge className={
-                              task.status === 'completed' ? 'bg-green-100 text-green-800' : 
-                              task.status === 'in_progress' ? 'bg-blue-100 text-blue-800' : 
-                              'bg-gray-100 text-gray-800'
-                            }>
+                            <Badge
+                              className={
+                                task.status === "completed"
+                                  ? "bg-green-100 text-green-800"
+                                  : task.status === "in_progress"
+                                    ? "bg-blue-100 text-blue-800"
+                                    : "bg-gray-100 text-gray-800"
+                              }
+                            >
                               {task.status}
                             </Badge>
                           </div>
                         </div>
-                        <p className="text-sm text-muted-foreground mb-2">{task.description}</p>
+                        <p className="text-sm text-muted-foreground mb-2">
+                          {task.description}
+                        </p>
                         <div className="flex items-center justify-between text-sm">
-                          <span className="text-muted-foreground">Due: {formatDate(task.dueDate)}</span>
-                          {task.assignee && <span className="text-muted-foreground">Assigned to: {task.assignee}</span>}
+                          <span className="text-muted-foreground">
+                            Due: {formatDate(task.dueDate)}
+                          </span>
+                          {task.assignee && (
+                            <span className="text-muted-foreground">
+                              Assigned to: {task.assignee}
+                            </span>
+                          )}
                         </div>
                       </div>
                     ))}
@@ -800,12 +938,14 @@ const Admin: React.FC = () => {
                 </CardContent>
               </Card>
             </TabsContent>
-            
+
             <TabsContent value="onboarding">
               <Card>
                 <CardHeader>
                   <CardTitle>User Onboarding Progress</CardTitle>
-                  <CardDescription>Monitor and optimize the user onboarding experience</CardDescription>
+                  <CardDescription>
+                    Monitor and optimize the user onboarding experience
+                  </CardDescription>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-6">
@@ -827,14 +967,16 @@ const Admin: React.FC = () => {
                 </CardContent>
               </Card>
             </TabsContent>
-            
+
             <TabsContent value="team">
               <Card>
                 <CardHeader>
                   <div className="flex items-center justify-between">
                     <div>
                       <CardTitle>Team Members</CardTitle>
-                      <CardDescription>Manage admin team and permissions</CardDescription>
+                      <CardDescription>
+                        Manage admin team and permissions
+                      </CardDescription>
                     </div>
                     <Button>
                       <UserPlus className="w-4 h-4 mr-2" />
@@ -860,29 +1002,42 @@ const Admin: React.FC = () => {
                           <TableCell>
                             <div className="flex items-center gap-3">
                               <Avatar>
-                                <AvatarImage src={member.avatar} alt={member.name} />
-                                <AvatarFallback>{member.name?.charAt(0) || 'T'}</AvatarFallback>
+                                <AvatarImage
+                                  src={member.avatar}
+                                  alt={member.name}
+                                />
+                                <AvatarFallback>
+                                  {member.name?.charAt(0) || "T"}
+                                </AvatarFallback>
                               </Avatar>
                               <div>
                                 <div className="font-medium">{member.name}</div>
-                                <div className="text-sm text-muted-foreground">{member.email}</div>
+                                <div className="text-sm text-muted-foreground">
+                                  {member.email}
+                                </div>
                               </div>
                             </div>
                           </TableCell>
                           <TableCell>{member.role}</TableCell>
                           <TableCell>
-                            <Badge className={
-                              member.status === 'Online' ? 'bg-green-100 text-green-800' : 
-                              member.status === 'Away' ? 'bg-yellow-100 text-yellow-800' : 
-                              'bg-gray-100 text-gray-800'
-                            }>
+                            <Badge
+                              className={
+                                member.status === "Online"
+                                  ? "bg-green-100 text-green-800"
+                                  : member.status === "Away"
+                                    ? "bg-yellow-100 text-yellow-800"
+                                    : "bg-gray-100 text-gray-800"
+                              }
+                            >
                               {member.status}
                             </Badge>
                           </TableCell>
                           <TableCell>
                             <div className="text-sm">
                               <div>{member.tasksAssigned} assigned</div>
-                              <div className="text-muted-foreground">{member.tasksCompleted} completed</div>
+                              <div className="text-muted-foreground">
+                                {member.tasksCompleted} completed
+                              </div>
                             </div>
                           </TableCell>
                           <TableCell className="text-sm text-muted-foreground">
@@ -900,12 +1055,14 @@ const Admin: React.FC = () => {
                 </CardContent>
               </Card>
             </TabsContent>
-            
+
             <TabsContent value="statistics">
               <Card>
                 <CardHeader>
                   <CardTitle>Course Statistics</CardTitle>
-                  <CardDescription>Detailed analytics for all courses</CardDescription>
+                  <CardDescription>
+                    Detailed analytics for all courses
+                  </CardDescription>
                 </CardHeader>
                 <CardContent>
                   <Table>
@@ -923,7 +1080,9 @@ const Admin: React.FC = () => {
                     <TableBody>
                       {courseStatistics.map((course, index) => (
                         <TableRow key={index}>
-                          <TableCell className="font-medium">{course.name}</TableCell>
+                          <TableCell className="font-medium">
+                            {course.name}
+                          </TableCell>
                           <TableCell>{course.instructor}</TableCell>
                           <TableCell>
                             <Badge variant="secondary">{course.category}</Badge>
@@ -931,14 +1090,21 @@ const Admin: React.FC = () => {
                           <TableCell>{course.students}</TableCell>
                           <TableCell>
                             <div className="flex items-center gap-2">
-                              <Progress value={course.completion} className="w-20 h-2" />
-                              <span className="text-sm">{course.completion}%</span>
+                              <Progress
+                                value={course.completion}
+                                className="w-20 h-2"
+                              />
+                              <span className="text-sm">
+                                {course.completion}%
+                              </span>
                             </div>
                           </TableCell>
                           <TableCell>
                             <div className="flex items-center gap-1">
                               <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                              <span className="font-medium">{course.rating}</span>
+                              <span className="font-medium">
+                                {course.rating}
+                              </span>
                             </div>
                           </TableCell>
                           <TableCell className="font-medium">
@@ -951,31 +1117,47 @@ const Admin: React.FC = () => {
                 </CardContent>
               </Card>
             </TabsContent>
-            
+
             <TabsContent value="settings">
               <Card>
                 <CardHeader>
                   <CardTitle>Admin Settings</CardTitle>
-                  <CardDescription>Configure platform settings and preferences</CardDescription>
+                  <CardDescription>
+                    Configure platform settings and preferences
+                  </CardDescription>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-6">
                     <div>
-                      <h3 className="text-lg font-medium mb-4">Platform Configuration</h3>
+                      <h3 className="text-lg font-medium mb-4">
+                        Platform Configuration
+                      </h3>
                       <div className="space-y-4">
-                        <Button variant="outline" className="w-full justify-start">
+                        <Button
+                          variant="outline"
+                          className="w-full justify-start"
+                        >
                           <Shield className="w-4 h-4 mr-2" />
                           Security Settings
                         </Button>
-                        <Button variant="outline" className="w-full justify-start">
+                        <Button
+                          variant="outline"
+                          className="w-full justify-start"
+                        >
                           <Bell className="w-4 h-4 mr-2" />
                           Notification Preferences
                         </Button>
-                        <Button variant="outline" className="w-full justify-start">
+                        <Button
+                          variant="outline"
+                          className="w-full justify-start"
+                        >
                           <CreditCard className="w-4 h-4 mr-2" />
                           Payment Gateway Configuration
                         </Button>
-                        <Button variant="outline" className="w-full justify-start">
+                        <Button
+                          variant="outline"
+                          className="w-full justify-start"
+                        >
                           <Package className="w-4 h-4 mr-2" />
                           API Settings
                         </Button>
